@@ -1,7 +1,7 @@
 # easylist-pac-privoxy
-EasyList Rules to Proxy Auto Configuration (PAC) File and Privoxy Actions and Filters
+EasyList Tracker and Adblock Rules to Proxy Auto Configuration (PAC) File and Privoxy Actions and Filters
 
-Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rules to efficienct filter blocks in a [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file for automatic proxy network configurations and [Privoxy](http://www.privoxy.org) proxy servers.
+Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rules to efficient filter blocks in a [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file for automatic proxy network configurations and [Privoxy](http://www.privoxy.org) proxy servers.
 
 ## Proxy Auto Configuration (PAC)
 
