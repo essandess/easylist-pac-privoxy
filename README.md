@@ -1,11 +1,11 @@
 # easylist-pac-privoxy
 EasyList Rules to Proxy Auto Configuration (PAC) File and Privoxy Actions and Filters
 
-Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rules to efficienct filter blocks in a `proxy.pac` file for automatic proxy network configurations and [Privoxy](http://www.privoxy.org) proxy servers.
+Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rules to efficienct filter blocks in a [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file for automatic proxy network configurations and [Privoxy](http://www.privoxy.org) proxy servers.
 
 ## Proxy Auto Configuration (PAC)
 
-Using EasyList rules in a in a `proxy.pac` file provides these benefits:
+Using EasyList rules in a in a [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file provides these benefits:
 
 * Tracker and Ad blocking performed in all clients that use PAC files, browsers and non-browsers alike.
 * Tracker and Ad blocking on both desktop and mobile devices, especially via [VPN](../../../essandess/osx-openvpn-server).
@@ -34,7 +34,7 @@ secureprovide1.com/*=tracking
 python3 easylist_pac.py
 ```
 
-The new file `proxy.pac` will be created in the (default `~/Downloads` directory. See `easylist_pac.py -h` for options.
+The new file [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) will be created in the (default `~/Downloads` directory. See `easylist_pac.py -h` for options.
 
 ## Privoxy
 
