@@ -5,6 +5,67 @@ Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rule
 
 ## Proxy Auto Configuration (PAC)
 
+### To Use: GitHub Host
+
+Set your network Proxy Auto Configuration setting to:
+
+> `https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac`
+
+***Advantages***
+
+* Works on any mobile or desktop device on any WiFi network worldwide.
+* GitHub server; private web server not necessary.
+
+***Disadvantages***
+
+* Does not work on mobile data networks.
+* Reliance on a third-party (me) for pass/block rule sets and `proxy.pac` integrity.
+
+### To Use: Localhost
+
+Download the [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file.
+
+On macOS (without Server.app):
+
+```
+sudo cp ~/Downloads/proxy.pac /Library/WebServer/Documents
+sudo apachectl start
+```
+
+Set your network Proxy Auto Configuration setting to:
+
+> `http://localhost/proxy.pac` or `http://host-ip-address/proxy.pac`
+
+***Advantages***
+
+* Works for any mobile or desktop device on your LAN.
+* Works with an upstream proxy if specified in the `proxy.pac` file.
+* Individual control and customization of the `proxy.pac` file and filter rules.
+* Possible internet access if port 80 exposed outside the LAN firewall.
+
+***Disadvantages***
+
+* Does not work on mobile data networks.
+* No internet access unless port forwarding to host is used.
+
+### To Use: VPN
+
+Configure an [OpenVPN](../../../essandess/osx-openvpn-server) to use the `proxy.pac` file hosted on your LAN.
+
+This is the best option.
+
+***Advantages***
+
+* Works on any mobile or desktop device on any mobile data or WiFi network worldwide.
+* Individual control and customization of the `proxy.pac` file and filter rules.
+* Security and privacy benefits of VPNs.
+
+***Disadvantages***
+
+* Necessity of VPN server.
+
+## Details
+
 Using EasyList rules in a in a [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file provides these benefits:
 
 * Tracker and Ad blocking performed in all clients that use PAC files, browsers and non-browsers alike.
