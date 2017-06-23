@@ -19,7 +19,7 @@ Set your network Proxy Auto Configuration setting to:
 ***Disadvantages***
 
 * Does not work on mobile data networks.
-* Reliance on a third-party (me) for pass/block rule sets and `proxy.pac` integrity.
+* Reliance on a third-party (me) for pass/block rule sets, updates, and `proxy.pac` integrity.
 
 ### To Use: Localhost
 
@@ -40,7 +40,7 @@ Set your network Proxy Auto Configuration setting to:
 
 * Works for any mobile or desktop device on your LAN.
 * Works with an upstream proxy if specified in the `proxy.pac` file.
-* Individual control and customization of the `proxy.pac` file and filter rules.
+* Individual update control and customization of the `proxy.pac` file and filter rules.
 * Possible internet access if port 80 exposed outside the LAN firewall.
 
 ***Disadvantages***
@@ -57,7 +57,7 @@ This is the best option.
 ***Advantages***
 
 * Works on any mobile or desktop device on any mobile data or WiFi network worldwide.
-* Individual control and customization of the `proxy.pac` file and filter rules.
+* Individual update control and customization of the `proxy.pac` file and filter rules.
 * Security and privacy benefits of VPNs.
 
 ***Disadvantages***
@@ -89,10 +89,12 @@ online.*/promoredirect?key=
 secureprovide1.com/*=tracking
 ```
 
-### Running
+### EasyList to `proxy.pac` converter
 
 ```
 python3 easylist_pac.py
+python3 easylist_pac.py -h
+python3 easylist_pac.py -b blackhole-ip-address:port -d download_dir -p proxy:port -P proxy.pac.orig
 ```
 
 The new file [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) will be created in the (default `~/Downloads` directory. See `easylist_pac.py -h` for options.
