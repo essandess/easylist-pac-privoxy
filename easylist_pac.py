@@ -37,11 +37,17 @@ parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, def
 parser.add_argument('-d', '--download_dir', help="Download directory", type=str, default='~/Downloads')
 parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
 parser.add_argument('-P', '--PAC_original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
+parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int, default=9999)
+parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int, default=4999)
+parser.add_argument('-@@', '--exceptions_ignore_flag', help="Ignore exception rules", action='store_true')
 args = parser.parse_args()
 blackhole_ip_port = args.blackhole
 easylist_dir = os.path.expanduser(args.download_dir)
 proxy_host_port = args.proxy
 orig_pac_file = os.path.join(easylist_dir,args.PAC_original)
+truncate_hash_max = args.truncate_hash
+truncate_alternatives_max = args.truncate_regex
+exceptions_ignore_flag = args.exceptions_ignore_flag
 
 pac_proxy = 'PROXY {}'.format(proxy_host_port) if proxy_host_port else 'DIRECT'
 
@@ -145,6 +151,58 @@ var blackhole = "PROXY " + blackhole_ip_port;
 '''.format(blackhole_ip_port)
 
 proxy_pac_postamble = '''
+// Add any good networks here. Format is network folowed by a comma and
+// optional white space, and then the netmask.
+// LAN, loopback, Apple (direct and Akamai e.g. e4805.a.akamaiedge.net), Microsoft (updates and services)
+var GoodNetworks_Array = [ "10.0.0.0,     255.0.0.0",
+"172.16.0.0,        255.240.0.0",
+"192.168.0.0,       255.255.0.0",
+"127.0.0.0,         255.0.0.0",
+"17.0.0.0,          255.0.0.0",
+"23.2.8.68,         255.255.255.255",
+"23.39.179.17,      255.255.255.255",
+"23.2.145.78,       255.255.255.255",
+"104.70.71.223,     255.255.255.255",
+"104.96.184.235,    255.255.255.255",
+"65.52.0.0,         255.255.252.0" ];
+
+// Apple iAd, Microsoft telemetry
+var GoodNetworks_Exceptions_Array = [ "17.172.28.11,     255.255.255.255",
+"134.170.30.202,    255.255.255.255",
+"137.116.81.24,     255.255.255.255",
+"157.56.106.189,    255.255.255.255",
+"184.86.53.99,      255.255.255.255",
+"2.22.61.43,        255.255.255.255",
+"2.22.61.66,        255.255.255.255",
+"204.79.197.200,    255.255.255.255",
+"23.218.212.69,     255.255.255.255",
+"65.39.117.230,     255.255.255.255",
+"65.52.108.33,      255.255.255.255",
+"65.55.108.23,      255.255.255.255",
+"64.4.54.254,       255.255.255.255" ];
+
+// Akamai: 23.64.0.0/14, 23.0.0.0/12, 23.32.0.0/11, 104.64.0.0/10
+
+// Add any bad networks here. Format is network folowed by a comma and
+// optional white space, and then the netmask.
+// From securemecca.com: Adobe marketing cloud, 2o7, omtrdc, Sedo domain parking, flyingcroc, accretive
+var BadNetworks_Array = [ "61.139.105.128,    255.255.255.192",
+"63.140.35.160,  255.255.255.248",
+"63.140.35.168,  255.255.255.252",
+"63.140.35.172,  255.255.255.254",
+"63.140.35.174,  255.255.255.255",
+"66.150.161.32,  255.255.255.224",
+"66.235.138.0,   255.255.254.0",
+"66.235.141.0,   255.255.255.0",
+"66.235.143.48,  255.255.255.254",
+"66.235.143.64,  255.255.255.254",
+"66.235.153.16,  255.255.255.240",
+"66.235.153.32,  255.255.255.248",
+"81.31.38.0,     255.255.255.128",
+"82.98.86.0,     255.255.255.0",
+"89.185.224.0,   255.255.224.0",
+"207.66.128.0,   255.255.128.0" ];
+
 // block these schemes; use the command line for ftp, rsync, etc. instead
 var bad_schemes_RegExp = RegExp("^(?:ftp|sftp|tftp|ftp-data|rsync|finger|gopher)", "i")
 
@@ -260,40 +318,40 @@ function easylist2re(pat,offset) {
 // Compile efficient NFA RegExp's
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_host_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var good_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_host_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_hostpath_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var good_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_hostpath_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var good_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_regex_Array.map(easylist2re).join("|") + ")", "i");
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_host_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var bad_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_host_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_hostpath_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var bad_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_hostpath_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var bad_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_regex_Array.map(easylist2re).join("|") + ")", "i");
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_url_parts_RegExp = new RegExp("(?:" + good_url_parts.split("\\n").map(easylist2re).join("|") + ")", "i");
+var good_url_parts_RegExp = new RegExp("(?:" + good_url_parts_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_url_parts_RegExp = new RegExp("(?:" + bad_url_parts.split("\\n").map(easylist2re).join("|") + ")", "i");
+var bad_url_parts_RegExp = new RegExp("(?:" + bad_url_parts_Array.map(easylist2re).join("|") + ")", "i");
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_url_regex_RegExp = new RegExp("(?:" + good_url_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var good_url_regex_RegExp = new RegExp("(?:" + good_url_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_url_regex_RegExp = new RegExp("(?:" + bad_url_regex.split("\\n").map(easylist2re).join("|") + ")", "i");
+var bad_url_regex_RegExp = new RegExp("(?:" + bad_url_regex_Array.map(easylist2re).join("|") + ")", "i");
 
 // Post-processing: Dereference large strings (perhaps unnecessarily) to allow garbage collection
-good_da_host_regex = null;
-good_da_hostpath_regex = null;
-good_da_regex = null;
-bad_da_host_regex = null;
-bad_da_hostpath_regex = null;
-bad_da_regex = null;
-good_url_parts = null;
-bad_url_parts = null;
-good_url_regex = null;
-bad_url_regex = null;
+good_da_host_regex_Array = null;
+good_da_hostpath_regex_Array = null;
+good_da_regex_Array = null;
+bad_da_host_regex_Array = null;
+bad_da_hostpath_regex_Array = null;
+bad_da_regex_Array = null;
+good_url_parts_Array = null;
+bad_url_parts_Array = null;
+good_url_regex_Array = null;
+bad_url_regex_Array = null;
 
 //////////////////////////////////////////////////
 // Define the is_ipv4_address function and vars //
@@ -335,6 +393,7 @@ var debug_flag = false;               // use for short-circuit '&&' to print deb
 function FindProxyForURL(url, host)
 {
     var host_is_ipv4 = is_ipv4_address(host);
+    var host_ipv4_address;
     
     alert_flag && alert("url is: " + url);
     alert_flag && alert("host is: " + host);
@@ -377,6 +436,64 @@ function FindProxyForURL(url, host)
         alert("host_noserver is: " + host_noserver);
     }
 
+    // Short circuit to blackhole for good_da_host_exceptions
+    if ( hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
+        alert_flag && alert("good_da_host_exceptions_JSON blackhole!");
+        // Redefine url and host to avoid leaking information to the blackhole
+        url = "http://127.0.0.1:80";
+        host = "127.0.0.1";
+        return blackhole;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    // Check to make sure we can get an IPv4 address from the given host //
+    // name.  If we cannot do that then skip the Networks tests.         //
+    ///////////////////////////////////////////////////////////////////////
+    
+    host_ipv4_address = host_is_ipv4 ? host : (isResolvable(host) ? dnsResolve(host) : false);
+
+    if (host_ipv4_address) {
+        alert_flag && alert("host ipv4 address is: " + host_ipv4_address);
+        /////////////////////////////////////////////////////////////////////////////
+        // If the IP translates to one of the GoodNetworks_Array (with exceptions) //
+        // we pass it because it is considered safe.                               //
+        /////////////////////////////////////////////////////////////////////////////
+    
+        for (i in GoodNetworks_Exceptions_Array) {
+            tmpNet = GoodNetworks_Exceptions_Array[i].split(/,\s*/);
+            if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
+                alert_flag && alert("GoodNetworks_Exceptions_Array Blackhole!");
+                // Redefine url and host to avoid leaking information to the blackhole
+                url = "http://127.0.0.1:80";
+                host = "127.0.0.1";
+                return blackhole;
+            }
+        }
+        for (i in GoodNetworks_Array) {
+            tmpNet = GoodNetworks_Array[i].split(/,\s*/);
+            if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
+                alert_flag && alert("GoodNetworks_Array PASS!");
+                return MyFindProxyForURL(url.toString(), host);
+            }
+        }
+    
+        ///////////////////////////////////////////////////////////////////////
+        // If the IP translates to one of the BadNetworks_Array we fail it   //
+        // because it is not considered safe.                                //
+        ///////////////////////////////////////////////////////////////////////
+    
+        for (i in BadNetworks_Array) {
+            tmpNet = BadNetworks_Array[i].split(/,\s*/);
+            if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
+                alert_flag && alert("BadNetworks_Array Blackhole!");
+                // Redefine url and host to avoid leaking information to the blackhole
+                url = "http://127.0.0.1:80";
+                host = "127.0.0.1";
+                return blackhole;
+            }
+        }
+    }
+
     //////////////////////////////////////////////////////////////////////////////
     // HTTPS: https scheme can only use domain information                      //
     // unless PacHttpsUrlStrippingEnabled == false [Chrome] or                  //
@@ -393,7 +510,8 @@ function FindProxyForURL(url, host)
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
 
-        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ) {
+        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host)))
+            && !hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
                 alert_flag && alert("HTTPS PASS!");
             return MyFindProxyForURL(url.toString(), host);
         }
@@ -421,15 +539,16 @@ function FindProxyForURL(url, host)
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
 
-        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ||  // fastest test first
-            (use_pass_rules_parts_flag &&
-                (good_da_hostpath_exact_flag && (hasOwnProperty(good_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(good_da_hostpath_JSON,url_noquery)) ) ||
-                // test logic: only do the slower test if the host has a (non)suspect fqdn
-                (good_da_host_regex_flag && (good_da_host_RegExp.test(host_noserver)||good_da_host_RegExp.test(host))) ||
-                (good_da_hostpath_regex_flag && (good_da_hostpath_RegExp.test(url_noservernoquery)||good_da_hostpath_RegExp.test(url_noquery))) ||
-                (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
-                (good_url_parts_flag && good_url_parts_RegExp.test(url_pathonly)) ||
-                (good_url_regex_flag && good_url_regex_RegExp.test(url))) ) {
+        if ( !hasOwnProperty(good_da_host_exceptions_JSON,host)
+            && ((good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ||  // fastest test first
+                (use_pass_rules_parts_flag &&
+                    (good_da_hostpath_exact_flag && (hasOwnProperty(good_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(good_da_hostpath_JSON,url_noquery)) ) ||
+                    // test logic: only do the slower test if the host has a (non)suspect fqdn
+                    (good_da_host_regex_flag && (good_da_host_RegExp.test(host_noserver)||good_da_host_RegExp.test(host))) ||
+                    (good_da_hostpath_regex_flag && (good_da_hostpath_RegExp.test(url_noservernoquery)||good_da_hostpath_RegExp.test(url_noquery))) ||
+                    (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
+                    (good_url_parts_flag && good_url_parts_RegExp.test(url_pathonly)) ||
+                    (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
             return MyFindProxyForURL(url.toString(), host);
         }
     
@@ -528,7 +647,57 @@ bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 """
 
 # list variables based on EasyList strategies above
-good_da_host_exact = []
+# initial values prepended before EasyList rules
+# pass updates and services from these domains
+# handle organization-specific ad and tracking servers in later commit
+good_da_host_exact = ['apple.com',
+                      'init.itunes.apple.com',  # use nslookup to determine canonical names
+                      'init-cdn.itunes-apple.com.akadns.net',
+                      'itunes.apple.com.edgekey.net',
+                      'icloud.com',
+                      'setup.icloud.com',
+                      'setup.fe.apple-dns.net',
+                      'gsa.apple.com',
+                      'gsa.apple.com.akadns.net',
+                      'iadsdk.apple.com',
+                      'iadsdk.apple.com.edgekey.net',
+                      'lcdn-locator.apple.com',
+                      'lcdn-locator.apple.com.akadns.net',
+                      'lcdn-locator-usuqo.apple.com.akadns.net',
+                      'cl1.apple.com',
+                      'cl2.apple.com',
+                      'cl3.apple.com',
+                      'cl4.apple.com',
+                      'cl5.apple.com',
+                      'cl1-cdn.origin-apple.com.akadns.net',
+                      'cl2-cdn.origin-apple.com.akadns.net',
+                      'cl3-cdn.origin-apple.com.akadns.net',
+                      'cl4-cdn.origin-apple.com.akadns.net',
+                      'cl5-cdn.origin-apple.com.akadns.net',
+                      'cl1.apple.com.edgekey.net',
+                      'cl2.apple.com.edgekey.net',
+                      'cl3.apple.com.edgekey.net',
+                      'cl4.apple.com.edgekey.net',
+                      'cl5.apple.com.edgekey.net',
+                      'xp.apple.com',
+                      'xp.itunes-apple.com.akadns.net',
+                      'mt-ingestion-service-pv.itunes.apple.com',
+                      'p32-sharedstreams.icloud.com',
+                      'p32-sharedstreams.fe.apple-dns.net',
+                      'p32-fmip.icloud.com',
+                      'p32-fmip.fe.apple-dns.net',
+                      'gsp-ssl.ls.apple.com',
+                      'gsp-ssl.ls-apple.com.akadns.net',
+                      'gsp-ssl.ls2-apple.com.akadns.net',
+                      'gspe35-ssl.ls.apple.com',
+                      'gspe35-ssl.ls-apple.com.akadns.net',
+                      'gspe35-ssl.ls.apple.com.edgekey.net',
+                      'gsp64-ssl.ls.apple.com',
+                      'gsp64-ssl.ls-apple.com.akadns.net',
+                      'mt-ingestion-service-st11.itunes.apple.com',
+                      'mt-ingestion-service-st11.itunes-apple.com.akadns.net',
+                      'apple-dns.net',
+                      'microsoft.com', 'mozilla.com', 'mozilla.org']
 good_da_host_regex = []
 good_da_hostpath_exact = []
 good_da_hostpath_regex = []
@@ -543,16 +712,57 @@ bad_url_parts = []
 good_url_regex = []
 bad_url_regex = []
 
+# provide explicit expceptions to good hosts or domains, e.g. iad.apple.com
+good_da_host_exceptions_exact = [ 'iad.apple.com',
+                                  'bingads.microsoft.com',
+                                  'azure.bingads.trafficmanager.net',
+                                  'choice.microsoft.com',
+                                  'choice.microsoft.com.nsatc.net',
+                                  'corpext.msitadfs.glbdns2.microsoft.com',
+                                  'corp.sts.microsoft.com',
+                                  'df.telemetry.microsoft.com',
+                                  'diagnostics.support.microsoft.com',
+                                  'feedback.search.microsoft.com',
+                                  'i1.services.social.microsoft.com',
+                                  'i1.services.social.microsoft.com.nsatc.net',
+                                  'redir.metaservices.microsoft.com',
+                                  'reports.wes.df.telemetry.microsoft.com',
+                                  'services.wes.df.telemetry.microsoft.com',
+                                  'settings-sandbox.data.microsoft.com',
+                                  'settings-win.data.microsoft.com',
+                                  'sqm.df.telemetry.microsoft.com',
+                                  'sqm.telemetry.microsoft.com',
+                                  'sqm.telemetry.microsoft.com.nsatc.net',
+                                  'statsfe1.ws.microsoft.com',
+                                  'statsfe2.update.microsoft.com.akadns.net',
+                                  'statsfe2.ws.microsoft.com',
+                                  'survey.watson.microsoft.com',
+                                  'telecommand.telemetry.microsoft.com',
+                                  'telecommand.telemetry.microsoft.com.nsatc.net',
+                                  'telemetry.urs.microsoft.com',
+                                  'vortex.data.microsoft.com',
+                                  'vortex-sandbox.data.microsoft.com',
+                                  'vortex-win.data.microsoft.com',
+                                  'cy2.vortex.data.microsoft.com.akadns.net',
+                                  'watson.microsoft.com',
+                                  'watson.ppe.telemetry.microsoft.com'
+                                  'watson.telemetry.microsoft.com',
+                                  'watson.telemetry.microsoft.com.nsatc.net',
+                                  'wes.df.telemetry.microsoft.com',
+                                  'win10.ipv6.microsoft.com',
+                                  'www.bingads.microsoft.com',
+                                  'survey.watson.microsoft.com' ]
+
 # EasyList regular expressions
 
 comment_re = re.compile(r'^!\s*')   # ! commment
 configuration_re = re.compile(r'^\[[^]]*?\]')  # [Adblock Plus 2.0]
-easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object[^-]|xmlhttprequest|object-subrequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
+easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object(?!-subrequest)|object-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
 option_re = re.compile(r'^(.*?)(\$' + easylist_opts + r'.*?)$')
 # regex's used to exclude options for specific cases
 domain_option = r'(?:domain=)'  # discards rules specific to links from specific domains
 alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
-notdm3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:script|stylesheet|object[^-]|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+notdm3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 not3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:domain|script|stylesheet|object[^-]|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
 scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
@@ -2338,8 +2548,8 @@ badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_
 # use or not use regular expression rules of any kind
 def regex_ignore_test(line,opts=''):
     res = False  # don't ignore any rule
-    # ignore domain opts with wildcards
-    # res = re_test(domain_option_exception_re,opts) and re_test(r'[*]',line)
+    # ignore wildcards and anchors
+    # res = re_test(r'[*^]',line)
     return res
 
 def re_test(regex,string):
@@ -2386,6 +2596,7 @@ def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
             line = exception_re.sub('\\1', line)
             exception_flag = True
             option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
+            if exceptions_ignore_flag: continue
         # selector case: ignore
         if re_test(selector_re,line): continue
         # specific options: ignore
@@ -2467,7 +2678,7 @@ def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
                     bad_url_parts.append(line)
                 continue  # superfluous continue
 
-for fname in ['~/Desktop/easylist.txt', '~/Desktop/easyprivacy.txt']:
+for fname in ['~/Desktop/easyprivacy.txt', '~/Desktop/easylist.txt']:
     fd = open(os.path.expanduser(fname), 'r')
     # ignore the very large number of url part rules in easylist.txt
     easylist_append_rules(fd,True and fname == '~/Desktop/easylist.txt')
@@ -2481,6 +2692,7 @@ good_da_host_regex = ordered_unique_nonempty(good_da_host_regex)
 good_da_hostpath_exact = ordered_unique_nonempty(good_da_hostpath_exact)
 good_da_hostpath_regex = ordered_unique_nonempty(good_da_hostpath_regex)
 good_da_regex = ordered_unique_nonempty(good_da_regex)
+good_da_host_exceptions_exact = ordered_unique_nonempty(good_da_host_exceptions_exact)
 
 bad_da_host_exact = ordered_unique_nonempty(bad_da_host_exact)
 bad_da_host_regex = ordered_unique_nonempty(bad_da_host_regex)
@@ -2495,30 +2707,31 @@ bad_url_regex = ordered_unique_nonempty(bad_url_regex)
 
 # Use to define js object hashes (much faster than string conversion)
 def js_init_object(object_name):
-    arr = globals()[object_name]
+    obj = globals()[object_name]
+    if len(obj) > truncate_hash_max:
+        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(object_name,len(obj),truncate_hash_max))
+        obj = obj[:truncate_hash_max]
     return '''\
 
 // {:d} rules:
 var {}_JSON = {}{}{};
 var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
-'''.format(len(arr),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in arr),' }',object_name,len(arr))
+'''.format(len(obj),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
 
 # Use to define '\n'-separated regex alternatives
-alternatives_max = 4999
 def js_init_array(array_name):
     # Javascript uses '`' for here documents
-    delimiter = '`' if len(globals()[array_name]) > 1 else '"'
     arr = globals()[array_name]
 
-    if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > alternatives_max:
-        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),alternatives_max))
-        arr = arr[:alternatives_max]
+    if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > truncate_alternatives_max:
+        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),truncate_alternatives_max))
+        arr = arr[:truncate_alternatives_max]
     return '''\
 
 // {:d} rules:
-var {} = {}{}{};
+var {}_Array = {}{}{};
 var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
-'''.format(len(arr),array_name,delimiter,"\n".join(arr),delimiter,array_name,len(arr))
+'''.format(len(arr),array_name,'[ ',",\n".join('"{}"'.format(x) for x in arr),' ]',array_name,len(arr))
 
 proxy_pac = proxy_pac_preamble \
             + "\n".join(["// " + l for l in easylist_strategy.split("\n")]) \
@@ -2527,6 +2740,7 @@ proxy_pac = proxy_pac_preamble \
             + js_init_object('good_da_hostpath_exact') \
             + js_init_array('good_da_hostpath_regex') \
             + js_init_array('good_da_regex') \
+            + js_init_object('good_da_host_exceptions_exact') \
             + js_init_object('bad_da_host_exact') \
             + js_init_array('bad_da_host_regex') \
             + js_init_object('bad_da_hostpath_exact') \
@@ -2543,6 +2757,7 @@ for l in ['good_da_host_exact',
           'good_da_hostpath_exact',
           'good_da_hostpath_regex',
           'good_da_regex',
+          'good_da_host_exceptions_exact',
           'bad_da_host_exact',
           'bad_da_host_regex',
           'bad_da_hostpath_exact',

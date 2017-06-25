@@ -91,8 +91,66 @@ var blackhole = "PROXY " + blackhole_ip_port;
 // bad_da_host_exact == bad domain anchor with host/path type, exact matching with Object hash
 // bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 // 
-// 70 rules:
-var good_da_host_JSON = { "content-img.newsinc.com": null,
+// 120 rules:
+var good_da_host_JSON = { "apple.com": null,
+"init.itunes.apple.com": null,
+"init-cdn.itunes-apple.com.akadns.net": null,
+"itunes.apple.com.edgekey.net": null,
+"icloud.com": null,
+"setup.icloud.com": null,
+"setup.fe.apple-dns.net": null,
+"gsa.apple.com": null,
+"gsa.apple.com.akadns.net": null,
+"iadsdk.apple.com": null,
+"iadsdk.apple.com.edgekey.net": null,
+"lcdn-locator.apple.com": null,
+"lcdn-locator.apple.com.akadns.net": null,
+"lcdn-locator-usuqo.apple.com.akadns.net": null,
+"cl1.apple.com": null,
+"cl2.apple.com": null,
+"cl3.apple.com": null,
+"cl4.apple.com": null,
+"cl5.apple.com": null,
+"cl1-cdn.origin-apple.com.akadns.net": null,
+"cl2-cdn.origin-apple.com.akadns.net": null,
+"cl3-cdn.origin-apple.com.akadns.net": null,
+"cl4-cdn.origin-apple.com.akadns.net": null,
+"cl5-cdn.origin-apple.com.akadns.net": null,
+"cl1.apple.com.edgekey.net": null,
+"cl2.apple.com.edgekey.net": null,
+"cl3.apple.com.edgekey.net": null,
+"cl4.apple.com.edgekey.net": null,
+"cl5.apple.com.edgekey.net": null,
+"xp.apple.com": null,
+"xp.itunes-apple.com.akadns.net": null,
+"mt-ingestion-service-pv.itunes.apple.com": null,
+"p32-sharedstreams.icloud.com": null,
+"p32-sharedstreams.fe.apple-dns.net": null,
+"p32-fmip.icloud.com": null,
+"p32-fmip.fe.apple-dns.net": null,
+"gsp-ssl.ls.apple.com": null,
+"gsp-ssl.ls-apple.com.akadns.net": null,
+"gsp-ssl.ls2-apple.com.akadns.net": null,
+"gspe35-ssl.ls.apple.com": null,
+"gspe35-ssl.ls-apple.com.akadns.net": null,
+"gspe35-ssl.ls.apple.com.edgekey.net": null,
+"gsp64-ssl.ls.apple.com": null,
+"gsp64-ssl.ls-apple.com.akadns.net": null,
+"mt-ingestion-service-st11.itunes.apple.com": null,
+"mt-ingestion-service-st11.itunes-apple.com.akadns.net": null,
+"apple-dns.net": null,
+"microsoft.com": null,
+"mozilla.com": null,
+"mozilla.org": null,
+"logging.apache.org": null,
+"metrics.mozilla.com": null,
+"metrics.torproject.org": null,
+"query.petametrics.com": null,
+"siteanalytics.compete.com": null,
+"track2.royalmail.com": null,
+"trackjs.com": null,
+"webtrack.dhlglobalmail.com": null,
+"content-img.newsinc.com": null,
 "images.sportsworldnews.com": null,
 "ads.indeed.com": null,
 "ads.m1.com.sg": null,
@@ -153,23 +211,169 @@ var good_da_host_JSON = { "content-img.newsinc.com": null,
 "adv.blogupp.com": null,
 "adv.welaika.com": null,
 "ads.fuckingmachines.com": null,
-"ads.ultimatesurrender.com": null,
-"logging.apache.org": null,
-"metrics.mozilla.com": null,
-"metrics.torproject.org": null,
-"query.petametrics.com": null,
-"siteanalytics.compete.com": null,
-"track2.royalmail.com": null,
-"trackjs.com": null,
-"webtrack.dhlglobalmail.com": null };
-var good_da_host_exact_flag = 70 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+"ads.ultimatesurrender.com": null };
+var good_da_host_exact_flag = 120 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 0 rules:
-var good_da_host_regex = "";
+var good_da_host_regex_Array = [  ];
 var good_da_host_regex_flag = 0 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 1105 rules:
-var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
+// 1117 rules:
+var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
+"analytics.atomiconline.com/services/jquery.js": null,
+"anthem.com/includes/foresee/foresee-trigger.js": null,
+"atdmt.com/ds/yusptsprtspr": null,
+"atpworldtour.com/assets/js/util/googleAnalytics.js": null,
+"att.com/webtrends/scripts/dcs_tag.js": null,
+"autoscout24.net/unifiedtracking/ivw.js": null,
+"barclays.co.uk/touchclarity/mbox.js": null,
+"behanceserved.com/stats/stats.js": null,
+"benswann.com/decor/javascript/magnify_stats.js": null,
+"bettycrocker.com/Shared/Javascript/ntpagetag.js": null,
+"bettycrocker.com/Shared/Javascript/UnicaTag.js": null,
+"bitgo.com/vendor/googleanalytics/angular-ga.min.js": null,
+"bolha.com/clicktracker": null,
+"bootcamp.mit.edu/js/angulartics-google-analytics.min.js": null,
+"borderfree.com/assets/utils/google-analytics.js": null,
+"britishairways.com/cms/global/scripts/applications/tracking/visualsciences.js": null,
+"canada.com/js/ooyala/comscore.js": null,
+"care2.com/assets/scripts/cookies/care2/NitroCookies.js": null,
+"cio.com/js/demandbase.js": null,
+"cisco.com/web/fw/lib/ntpagetag.js": null,
+"cisco.com/web/fw/m/ntpagetag.min.js": null,
+"citiretailservices.citibankonline.com/USCRSF/USCRSGBL/js/AppMeasurement.js": null,
+"collegeboard.org/webanalytics": null,
+"contentdef.com/assets/common/js/google-analytics.js": null,
+"csoonline.com/js/demandbase.js": null,
+"dailyfinance.com/traffic": null,
+"dailymail.co.uk/brightcove/tracking/ted3.js": null,
+"debenhams.com/foresee/foresee-trigger.js": null,
+"diablo3.com/assets/js/jquery.google-analytics.js": null,
+"dopemagazine.com/wp-content/plugins/masterslider/public/assets/css/blank.gif": null,
+"ecostream.tv/js/ecos.js": null,
+"egencia.com/pubspec/scripts/include/omnitureAnalytics.js": null,
+"egencia.com/pubspec/scripts/include/siteanalytics_include.js": null,
+"epixhd.com/styleassets/js/google-analytics.js": null,
+"expedia.com/static/default/default/scripts/siteAnalytics.js": null,
+"expedia.com/static/default/default/scripts/TealeafSDK.js": null,
+"flagshipmerchantservices.com/clickpathmedia.js": null,
+"freefilefillableforms.com/js/lib/irs/fingerprint.js": null,
+"games.pch.com/js/analytics.js": null,
+"gardenista.com/media/js/libs/ga_social_tracking.js": null,
+"go.com/stat/dolwebanalytics.js": null,
+"go.com/stat/flash/analyticreportingas3.swf": null,
+"goldbet.com/Scripts/googleAnalytics.js": null,
+"goldmansachs.com/a/pg/js/prod/gs-analytics-init.js": null,
+"grapeshot.co.uk/image-resize": null,
+"grapeshot.co.uk/sare-api": null,
+"graphracer.com/js/libs/heatmap.js": null,
+"halowars.com/stats/images/Buttons/MapStats.jpg": null,
+"harvard.edu/scripts/ga_social_tracking.js": null,
+"haystax.com/components/leaflet/heatmap.js": null,
+"hhgregg.com/wcsstore/MadisonsStorefrontAssetStore/javascript/Analytics/AnalyticsTagDataObject.js": null,
+"homedepot.com/static/scripts/resxclsa.js": null,
+"hostlogr.com/etc/geo.php": null,
+"kentucky.com/mistats/finalizestats.js": null,
+"latimes.com/hive/javascripts/loggingService.js": null,
+"leretourdelautruche.com/map/nuke/heatmap.js": null,
+"lininteractive.com/chartbeat": null,
+"lipmonthly.com/js/angulartics-google-analytics/dist/angulartics-ga.min.js": null,
+"live.indiatimes.com/trackjs.cms": null,
+"lloydstsb.com/it/xslt/touchclarity/omtr_tc.js": null,
+"logmein.com/scripts/Tracking/Tracking.js": null,
+"mec.ca/media/javascript/resxclsx.js": null,
+"medicare.gov/SharedResources/widgets/foresee/foresee-trigger.js": null,
+"metrics.ctvdigital.net/global/CtvAd.js": null,
+"metrics.nissanusa.com/b/ss/nissanusacom": null,
+"microsoft.com/click/services/RioTracking2.js": null,
+"mightyspring.com/static/js/beacon.js": null,
+"milb.com/shared/scripts/bam.tracking.js": null,
+"mlb.com/shared/scripts/bam.tracking.js": null,
+"motorolasolutions.com/wrs/b2bsdc.js": null,
+"munchkin.marketo.net/munchkin.js": null,
+"musicvideogenome.com/javascripts/stats.js": null,
+"nasa.gov/js/libraries/angulartics/angulartics-google-analytics.js": null,
+"nationalgeographic.com/assets/scripts/utils/event-tracking.js": null,
+"necn.com/includes/AppMeasurement.js": null,
+"nerdwallet.com/lib/dist/analytics.min.js": null,
+"netinsight.travelers.com/scripts/ntpagetaghttps.js": null,
+"novell.com/common/util/demandbase_data.php": null,
+"nymag.com/decor/javascript/magnify_stats.js": null,
+"ooyala.com/crossdomain.xml": null,
+"palerra.net/apprity/api/analytics": null,
+"patrick-wied.at/static/heatmapjs/src/heatmap.js": null,
+"pillsbury.com/Shared/StarterKit/Javascript/ntpagetag.js": null,
+"pillsbury.com/Shared/StarterKit/Javascript/UnicaTag.js": null,
+"piwik.pro/images": null,
+"pixel.facebook.com/ajax/gigaboxx/endpoint/UpdateLastSeenTime.php": null,
+"playtheend.com/api/v1/players/heatmap.json": null,
+"polycom.com/polycomservice/js/unica/ntpagetag.js": null,
+"propelmedia.com/resources/images/load.gif": null,
+"ps.w.org/google-analytics-dashboard-for-wp/assets": null,
+"pshared.5min.com/Scripts/OnePlayer/Loggers/ComScore.StreamSense.js": null,
+"pshared.5min.com/Scripts/OnePlayer/Loggers/ComScore.Viewability.js": null,
+"push2check.com/stats.php": null,
+"randomhouse.com/book/css/certona.css": null,
+"rawstory.com/decor/javascript/magnify_stats.js": null,
+"redditenhancementsuite.com/js/jquery.google-analytics.js": null,
+"redfin.com/stingray/clicktracker.jsp": null,
+"remodelista.com/media/js/libs/ga_social_tracking.js": null,
+"rockingsoccer.com/js/match_stats.js": null,
+"samepage.io/assets/lib/google-analytics/GoogleAnalytics.js": null,
+"scorecardresearch.com/c2/plugins/streamsense_plugin_html5.js": null,
+"scorecardresearch.com/c2/plugins/streamsense_plugin_theplatform.js": null,
+"snapchat.com/static/js/google-analytics.js": null,
+"sportsgrid.com/decor/javascript/magnify_stats.js": null,
+"star-telegram.com/mistats/sites/dfw/startelegram.js": null,
+"statcounter.com/js/fusioncharts.js": null,
+"statcounter.com/msline.swf": null,
+"statefillableforms.com/js/lib/irs/fingerprint.js": null,
+"static.chartbeat.com/crossdomain.xml": null,
+"stats.jtvnw.net/crossdomain.xml": null,
+"support.thesslstore.com/visitor/index.php": null,
+"tablespoon.com/library/js/TBSP_ntpagetag.js": null,
+"ted.com/decor/javascript/magnify_stats.js": null,
+"teenvogue.com/js/eventTracker.js": null,
+"telegraph.co.uk/template/ver1-0/js/webtrends/live/wtid.js": null,
+"texasroadhouse.com/common/javascript/google-analytics.js": null,
+"thestreet-static.com/video/js/kGoogleAnalytics.js": null,
+"thetenthwatch.com/js/tracking.js": null,
+"tracking.unrealengine.com/tracking.js": null,
+"ultimedia.com/js/common/jquery.gatracker.js": null,
+"unity3d.com/profiles/unity3d/themes/unity/images/services/analytics": null,
+"utm.arc.nasa.gov/common/css": null,
+"utm.arc.nasa.gov/common/js/common.js": null,
+"utm.arc.nasa.gov/common/js/hideEmail.js": null,
+"utm.arc.nasa.gov/common/js/nav.js": null,
+"utm.arc.nasa.gov/common/js/swap.js": null,
+"utm.arc.nasa.gov/images": null,
+"uverseonline.att.net/report/click_tracking_nes.json": null,
+"vizio.com/resources/js/vizio-module-tracking-google-analytics.js": null,
+"vulture.com/decor/javascript/magnify_stats.js": null,
+"walmart.com/__ssobj/core.js": null,
+"wbshop.com/fcgi-bin/iipsrv.fcgi": null,
+"websimages.com/JS/Tracker.js": null,
+"westjet.com/js/webstats.js": null,
+"whirlpool.com/foresee/foresee-trigger.js": null,
+"wwe.com/sites/all/modules/wwe/wwe_analytics/s_wwe_code.js": null,
+"youtube.com/api/analytics": null,
+"zappos.com/js/trackingPixel/mercentTracker.js": null,
+"zylom.com/images/site/zylom/scripts/google-analytics.js": null,
+"aplus.com/p.gif": null,
+"fandango.com/b/ss": null,
+"kaspersky.co.uk/b/ss": null,
+"metrics.ancestry.com/b/ss": null,
+"metrics.brooksbrothers.com/b/ss": null,
+"metrics.consumerreports.org/b/ss": null,
+"metrics.nationwide.co.uk/b/ss": null,
+"metrics.target.com/b/ss": null,
+"metrics.thetrainline.com/b/ss": null,
+"metrics.ticketmaster.com/b/ss": null,
+"smetrics.target.com/b/ss": null,
+"smetrics.ticketmaster.com/b/ss": null,
+"smetrics.walmartmoneycard.com/b/ss": null,
+"stat.safeway.com/b/ss": null,
+"cdndoge.xyz/common/js/cookie.js": null,
 "cdndoge.xyz/common/js/jquery.js": null,
 "cdndoge.xyz/lib/sweetalert/sweetalert.js": null,
 "cdndoge.xyz/video-download/js/bootstrap.js": null,
@@ -342,6 +546,7 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "cameralabs.com/PG_library/Regional/US/Love_a_Coffee_120x240.jpg": null,
 "candystand.com/assets/images/ads": null,
 "caranddriver.com/assets/js/ads/ads-combined.min.js": null,
+"casino.com/banners/flash": null,
 "cctv.com/js/cntv_Advertise.js": null,
 "cdn.complexmedianetwork.com/cdn/agenda.complex.com/js/jquery.writecapture.js": null,
 "cdn.complexmedianetwork.com/cdn/agenda.complex.com/js/jwplayerl.js": null,
@@ -408,6 +613,7 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "englishanimes.com/wp-content/themes/englishanimes/js/pop.js": null,
 "epicgameads.com/crossdomain.xml": null,
 "eplayerhtml5.performgroup.com/js/tsEplayerHtml5/js/Eplayer/js/modules/bannerview/bannerview.main.js": null,
+"espn.co.uk/ads/gamemodule_v0.2.swf": null,
 "evanscycles.com/ads": null,
 "eventim.de/obj/basic/ad2_obj/layout": null,
 "ewallpapers.eu/ads/logo.jpg": null,
@@ -425,8 +631,11 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "forums.realgm.com/banners": null,
 "freeads.in/classifieds/common/postad.css": null,
 "freeads.in/freead.png": null,
+"freeonlinegames.com/advertising/adaptv-as3.swf": null,
+"freeonlinegames.com/advertising/google-loader.swf": null,
 "freeride.co.uk/img/admarket": null,
 "fs-freeware.net/images/jdownloads/downloadimages/banner_ads.png": null,
+"gameitnow.com/ads/google_loader.swf": null,
 "gcultra.com/js/exit_popup.js": null,
 "getgamesgo.com/Banners": null,
 "glamour.com/aspen/components/cn-fe-ads/js/cn.dart.js": null,
@@ -679,6 +888,7 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "tnol.com/adimages/digitaledition": null,
 "tooltrucks.com/ads": null,
 "tooltrucks.com/banners": null,
+"toongames.com/advertising/toon-google-preloader.swf": null,
 "topusajobs.com/banners": null,
 "torontosun.com/assets/js/dfp.js": null,
 "trade-a-plane.com/AdBox/js/jquery.TAP_AdBox.js": null,
@@ -737,6 +947,7 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "yumenetworks.com/crossdomain.xml": null,
 "zap2it.com/ads/newsletter": null,
 "zedo.com/crossdomain.xml": null,
+"zeenews.india.com/ads/jw/player.swf": null,
 "ziehl-abegg.com/images/img_adverts": null,
 "10-download.com/ad/adframe.js": null,
 "95.211.184.210/js/advertisement.js": null,
@@ -998,9 +1209,11 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "felcia.co.uk/css/advert-view.css": null,
 "felcia.co.uk/js/ads_common.js": null,
 "filmon.com/ad/affiliateimages/banner-250x350.png": null,
+"flashgames247.com/advertising/preroll/google-fg247-preloader.swf": null,
 "folha.uol.com.br/paywall/js/1/publicidade.ads.js": null,
 "fotolog.com/styles/flags/ad.gif": null,
 "freeride.se/img/admarket": null,
+"haberler.com/video-haber/adsense_news_politics.swf": null,
 "happymtb.org/annonser": null,
 "hizlial.com/banners": null,
 "hry.cz/ad/adcode.js": null,
@@ -1071,10 +1284,12 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "fucktube.com/work/videoad.php": null,
 "gaynetwork.co.uk/Images/ads/bg": null,
 "hdzog.com/js/advertising.js": null,
+"hostedadsp.realitykings.com/hosted/flash/rk_player_1.5_300x250.swf": null,
 "iafd.com/graphics/headshots/thumbs/th_iafd_ad.gif": null,
 "manhuntshop.com/affimages": null,
 "manhuntshop.com/images/affbanners": null,
 "nonktube.com/img/adyea.jpg": null,
+"panicporn.com/Bannerads/player/player_flv_multi.swf": null,
 "sextoyfun.com/admin/aff_files/BannerManager": null,
 "sextoyfun.com/control/aff_banners": null,
 "skimtube.com/advertisements.php": null,
@@ -1113,733 +1328,2882 @@ var good_da_hostpath_JSON = { "cdndoge.xyz/common/js/cookie.js": null,
 "sexix.net/adframe.js": null,
 "sexvidx.tv/js/eroex.js": null,
 "sexwebvideo.com/js/ads.js": null,
+"submityourflicks.com/player/player-ads.swf": null,
 "tube8.com/js/advertisement.js": null,
 "voyeurperversion.com/inc/showads.js": null,
 "watchingmysistergoblack.com/pop.js": null,
 "xibitnet.com/check/advertisement.js": null,
 "xibitnet.com/check/advertisements.js": null,
 "ads.b10f.jp/flv": null,
-"imagebam.com/image": null,
-"aliyun.com/nocaptcha/analyze.jsonp": null,
-"analytics.atomiconline.com/services/jquery.js": null,
-"anthem.com/includes/foresee/foresee-trigger.js": null,
-"atdmt.com/ds/yusptsprtspr": null,
-"atpworldtour.com/assets/js/util/googleAnalytics.js": null,
-"att.com/webtrends/scripts/dcs_tag.js": null,
-"autoscout24.net/unifiedtracking/ivw.js": null,
-"barclays.co.uk/touchclarity/mbox.js": null,
-"behanceserved.com/stats/stats.js": null,
-"benswann.com/decor/javascript/magnify_stats.js": null,
-"bettycrocker.com/Shared/Javascript/ntpagetag.js": null,
-"bettycrocker.com/Shared/Javascript/UnicaTag.js": null,
-"bitgo.com/vendor/googleanalytics/angular-ga.min.js": null,
-"bolha.com/clicktracker": null,
-"bootcamp.mit.edu/js/angulartics-google-analytics.min.js": null,
-"borderfree.com/assets/utils/google-analytics.js": null,
-"britishairways.com/cms/global/scripts/applications/tracking/visualsciences.js": null,
-"canada.com/js/ooyala/comscore.js": null,
-"care2.com/assets/scripts/cookies/care2/NitroCookies.js": null,
-"cio.com/js/demandbase.js": null,
-"cisco.com/web/fw/lib/ntpagetag.js": null,
-"cisco.com/web/fw/m/ntpagetag.min.js": null,
-"citiretailservices.citibankonline.com/USCRSF/USCRSGBL/js/AppMeasurement.js": null,
-"collegeboard.org/webanalytics": null,
-"contentdef.com/assets/common/js/google-analytics.js": null,
-"csoonline.com/js/demandbase.js": null,
-"dailyfinance.com/traffic": null,
-"dailymail.co.uk/brightcove/tracking/ted3.js": null,
-"debenhams.com/foresee/foresee-trigger.js": null,
-"diablo3.com/assets/js/jquery.google-analytics.js": null,
-"dopemagazine.com/wp-content/plugins/masterslider/public/assets/css/blank.gif": null,
-"ecostream.tv/js/ecos.js": null,
-"egencia.com/pubspec/scripts/include/omnitureAnalytics.js": null,
-"egencia.com/pubspec/scripts/include/siteanalytics_include.js": null,
-"epixhd.com/styleassets/js/google-analytics.js": null,
-"expedia.com/static/default/default/scripts/siteAnalytics.js": null,
-"expedia.com/static/default/default/scripts/TealeafSDK.js": null,
-"flagshipmerchantservices.com/clickpathmedia.js": null,
-"freefilefillableforms.com/js/lib/irs/fingerprint.js": null,
-"games.pch.com/js/analytics.js": null,
-"gardenista.com/media/js/libs/ga_social_tracking.js": null,
-"go.com/stat/dolwebanalytics.js": null,
-"go.com/stat/flash/analyticreportingas3.swf": null,
-"goldbet.com/Scripts/googleAnalytics.js": null,
-"goldmansachs.com/a/pg/js/prod/gs-analytics-init.js": null,
-"grapeshot.co.uk/image-resize": null,
-"grapeshot.co.uk/sare-api": null,
-"graphracer.com/js/libs/heatmap.js": null,
-"halowars.com/stats/images/Buttons/MapStats.jpg": null,
-"harvard.edu/scripts/ga_social_tracking.js": null,
-"haystax.com/components/leaflet/heatmap.js": null,
-"hhgregg.com/wcsstore/MadisonsStorefrontAssetStore/javascript/Analytics/AnalyticsTagDataObject.js": null,
-"homedepot.com/static/scripts/resxclsa.js": null,
-"hostlogr.com/etc/geo.php": null,
-"kentucky.com/mistats/finalizestats.js": null,
-"latimes.com/hive/javascripts/loggingService.js": null,
-"leretourdelautruche.com/map/nuke/heatmap.js": null,
-"lininteractive.com/chartbeat": null,
-"lipmonthly.com/js/angulartics-google-analytics/dist/angulartics-ga.min.js": null,
-"live.indiatimes.com/trackjs.cms": null,
-"lloydstsb.com/it/xslt/touchclarity/omtr_tc.js": null,
-"logmein.com/scripts/Tracking/Tracking.js": null,
-"mec.ca/media/javascript/resxclsx.js": null,
-"medicare.gov/SharedResources/widgets/foresee/foresee-trigger.js": null,
-"metrics.ctvdigital.net/global/CtvAd.js": null,
-"metrics.nissanusa.com/b/ss/nissanusacom": null,
-"microsoft.com/click/services/RioTracking2.js": null,
-"mightyspring.com/static/js/beacon.js": null,
-"milb.com/shared/scripts/bam.tracking.js": null,
-"mlb.com/shared/scripts/bam.tracking.js": null,
-"motorolasolutions.com/wrs/b2bsdc.js": null,
-"munchkin.marketo.net/munchkin.js": null,
-"musicvideogenome.com/javascripts/stats.js": null,
-"nasa.gov/js/libraries/angulartics/angulartics-google-analytics.js": null,
-"nationalgeographic.com/assets/scripts/utils/event-tracking.js": null,
-"necn.com/includes/AppMeasurement.js": null,
-"nerdwallet.com/lib/dist/analytics.min.js": null,
-"netinsight.travelers.com/scripts/ntpagetaghttps.js": null,
-"novell.com/common/util/demandbase_data.php": null,
-"nymag.com/decor/javascript/magnify_stats.js": null,
-"ooyala.com/crossdomain.xml": null,
-"palerra.net/apprity/api/analytics": null,
-"patrick-wied.at/static/heatmapjs/src/heatmap.js": null,
-"pillsbury.com/Shared/StarterKit/Javascript/ntpagetag.js": null,
-"pillsbury.com/Shared/StarterKit/Javascript/UnicaTag.js": null,
-"piwik.pro/images": null,
-"pixel.facebook.com/ajax/gigaboxx/endpoint/UpdateLastSeenTime.php": null,
-"playtheend.com/api/v1/players/heatmap.json": null,
-"polycom.com/polycomservice/js/unica/ntpagetag.js": null,
-"propelmedia.com/resources/images/load.gif": null,
-"ps.w.org/google-analytics-dashboard-for-wp/assets": null,
-"pshared.5min.com/Scripts/OnePlayer/Loggers/ComScore.StreamSense.js": null,
-"pshared.5min.com/Scripts/OnePlayer/Loggers/ComScore.Viewability.js": null,
-"push2check.com/stats.php": null,
-"randomhouse.com/book/css/certona.css": null,
-"rawstory.com/decor/javascript/magnify_stats.js": null,
-"redditenhancementsuite.com/js/jquery.google-analytics.js": null,
-"redfin.com/stingray/clicktracker.jsp": null,
-"remodelista.com/media/js/libs/ga_social_tracking.js": null,
-"rockingsoccer.com/js/match_stats.js": null,
-"samepage.io/assets/lib/google-analytics/GoogleAnalytics.js": null,
-"scorecardresearch.com/c2/plugins/streamsense_plugin_html5.js": null,
-"scorecardresearch.com/c2/plugins/streamsense_plugin_theplatform.js": null,
-"snapchat.com/static/js/google-analytics.js": null,
-"sportsgrid.com/decor/javascript/magnify_stats.js": null,
-"star-telegram.com/mistats/sites/dfw/startelegram.js": null,
-"statcounter.com/js/fusioncharts.js": null,
-"statcounter.com/msline.swf": null,
-"statefillableforms.com/js/lib/irs/fingerprint.js": null,
-"static.chartbeat.com/crossdomain.xml": null,
-"stats.jtvnw.net/crossdomain.xml": null,
-"support.thesslstore.com/visitor/index.php": null,
-"tablespoon.com/library/js/TBSP_ntpagetag.js": null,
-"ted.com/decor/javascript/magnify_stats.js": null,
-"teenvogue.com/js/eventTracker.js": null,
-"telegraph.co.uk/template/ver1-0/js/webtrends/live/wtid.js": null,
-"texasroadhouse.com/common/javascript/google-analytics.js": null,
-"thestreet-static.com/video/js/kGoogleAnalytics.js": null,
-"thetenthwatch.com/js/tracking.js": null,
-"tracking.unrealengine.com/tracking.js": null,
-"ultimedia.com/js/common/jquery.gatracker.js": null,
-"unity3d.com/profiles/unity3d/themes/unity/images/services/analytics": null,
-"utm.arc.nasa.gov/common/css": null,
-"utm.arc.nasa.gov/common/js/common.js": null,
-"utm.arc.nasa.gov/common/js/hideEmail.js": null,
-"utm.arc.nasa.gov/common/js/nav.js": null,
-"utm.arc.nasa.gov/common/js/swap.js": null,
-"utm.arc.nasa.gov/images": null,
-"uverseonline.att.net/report/click_tracking_nes.json": null,
-"vizio.com/resources/js/vizio-module-tracking-google-analytics.js": null,
-"vulture.com/decor/javascript/magnify_stats.js": null,
-"walmart.com/__ssobj/core.js": null,
-"wbshop.com/fcgi-bin/iipsrv.fcgi": null,
-"websimages.com/JS/Tracker.js": null,
-"westjet.com/js/webstats.js": null,
-"whirlpool.com/foresee/foresee-trigger.js": null,
-"wwe.com/sites/all/modules/wwe/wwe_analytics/s_wwe_code.js": null,
-"youtube.com/api/analytics": null,
-"zappos.com/js/trackingPixel/mercentTracker.js": null,
-"zylom.com/images/site/zylom/scripts/google-analytics.js": null,
-"aplus.com/p.gif": null,
-"fandango.com/b/ss": null,
-"kaspersky.co.uk/b/ss": null,
-"metrics.ancestry.com/b/ss": null,
-"metrics.brooksbrothers.com/b/ss": null,
-"metrics.consumerreports.org/b/ss": null,
-"metrics.nationwide.co.uk/b/ss": null,
-"metrics.target.com/b/ss": null,
-"metrics.thetrainline.com/b/ss": null,
-"metrics.ticketmaster.com/b/ss": null,
-"smetrics.target.com/b/ss": null,
-"smetrics.ticketmaster.com/b/ss": null,
-"smetrics.walmartmoneycard.com/b/ss": null,
-"stat.safeway.com/b/ss": null };
-var good_da_hostpath_exact_flag = 1105 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+"imagebam.com/image": null };
+var good_da_hostpath_exact_flag = 1117 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 434 rules:
-var good_da_hostpath_regex = `thebarchive.com/foolfuuka/foolz/*/board.js
-thebarchive.com/foolfuuka/foolz/*/bootstrap.min.js
-thebarchive.com/foolfuuka/foolz/*/plugins.js
-gorillavid.in^*/jsSelect.js
-gorillavid.in^*/jwplayer.js
-speedtest.net/javascript/jquery-*.min.js
-speedtest.net/javascript/jquery.ui*.js
-motherless.com/scripts/jquery-*.min.js
-motherless.com/scripts/jquery.*.js
-247realmedia.com^*/farecomp/
-24ur.com/adserver/adall.
-24ur.com/static/*/banners.js
-a.giantrealm.com/assets/vau/grplayer*.swf
-addictinggames.com^*/mtvi_ads_reporting.js
-adf.ly/images/ad*.png
-ads.foxnews.com/api/*-slideshow-data.js
-ads.globo.com^*/globovideo/player/
-ads.yimg.com/ev/eu/any/vint/videointerstitial*.js
-ads.yimg.com^*/search/b/syc_logo_2.gif
-ads.yimg.com^*videoadmodule*.swf
-akamaihd.net/hads-*.mp4
-aone-soft.com/style/images/ad*.jpg
-apple.com^*/includes/ads
-apple.com^*/video-ad.html
-att.com/images/*/admanager/
-autotrader.co.uk/static/*/images/adv/icons.png
-bonappetit.com^*/cn.dart.js
-box10.com/advertising/*-preroll.swf
-britishairways.com/cms/global/styles/*/openx.css
-bthomehub.home/images/adv_
-burbankleader.com/hive/images/adv_
-canadianlisted.com/css/*/ad/index.css
-cbsistatic.com^*/sticky-ads.js
-cdn.turner.com^*/video/336x280_ad.gif
-cdn77.org/static/js/advertisement*.js
-chase.com^*/adserving/
-classistatic.com^*/banner-ads/
-coastlinepilot.com/hive/images/adv_
-comsec.com.au^*/homepage_banner_ad.gif
-crazygamenerd.web.fc2.com^*/ads.png
-csair.com/*/adpic.js
-ctv.ca/players/mediaplayer/*/AdManager.js^
-cyberpower.advizia.com^*/scripts/adv.js
-dailyhiit.com/sites/*/ad-images/
-dailymail.co.uk^*/googleads--.js
-dailypilot.com/hive/images/adv_
-delish.com/cm/shared/scripts/refreshads-*.js
-developer.apple.com/app-store/search-ads/images/*-ad
-dolidoli.com/images/ads-
-dragon-mania-legends-wiki.mobga.me^*_advertisement.
-dragon-mania-legends-wiki.mobga.me^*_Advertisement_
-drupal.org^*/revealads.png
-earthtechling.com^*/imasters-wp-adserver-styles.css
-economist.com.na^*/banners/cartoon_
-eduspec.science.ru.nl^*-images/ad-
-esi.tech.ccp.is^*/affiliation/
-expedia.com/minify/ads-min-*.js
-farecompare.com^*/farecomp/
-flysaa.com^*/jquery.adserver.js
-freeviewnz.tv^*/uploads/ads/
-garmin.com^*/Sponsors.js
-glendalenewspress.com/hive/images/adv_
-guim.co.uk^*/styles/wide/google-ads.css
-gumtree.com^*/postAd.js
-hbindependent.com/hive/images/adv_
-homedepot.com^*/thdGoogleAdSense.js
-hotnewhiphop.com/web_root/images/ads/banner-*.png
-housebeautiful.com/cm/shared/scripts/refreshads-*.js
-hulu.com/published/*.flv
-hulu.com/published/*.mp4
-i.cdn.turner.com^*/adserviceadapter.swf
-icefilms.info/jquery.lazyload-ad-*-min.js
-iframe.ivillage.com/iframe_render
-ikea.com^*/img/ad_
-ikea.com^*/img/ads/
-itv.com^*.adserver.js
-itv.com^*/tvshows_adcall_08.js
-itweb.co.za/banners/en-cdt*.gif
-jobsearch.careerone.com.au^*/bannerad.asmx/
-joyhubs.com/View/*/js/pop.js
-kcna.kp/images/ads_arrow_
-kcra.com^*/adpositionsizein-min.js
-ksl.com/resources/classifieds/graphics/ad_
-l.yimg.com/*/adservice/
-lacanadaonline.com/hive/images/adv_
-lanacion.com.ar/*/publicidad/
-live365.com/web/components/ads/*.html
-mail.google.com^*/uploaderapi*.swf
-maps.googleapis.com/maps-api-*/adsense.js
-maps.gstatic.com/maps-api-*/adsense.js
-marcs.com^*/AdViewer.js
-media.expedia.com/*/ads/
-medscape.com/html.ng/*slideshow
-metalmusicradio.com^*/banner.php
-miller-mccune.com/wp-content/plugins/*/oiopub-direct/images/style/output.css
-mobinozer.com^*/gads.js
-monster.com/awm/*/ADVERTISING-
-msnbcmedia.msn.com^*/sitemanagement/ads/*/blog_printbutton.png
-mussil.com/mussilcomfiles/commercials/*.jpg
-myhouseabroad.com/*/ads/
-news.nate.com/etc/adrectanglebanner
-nfl.com^*/ads.js
-nflcdn.com/static/*/global/ads.js
-nytimes.com/ads/interstitial/skip*.gif
-nytimes.com/adx/images/ads/*_buynow_btn_53x18.gif
-nytimes.com/adx/images/ads/*_premium-crosswords_bg_600x329.gif
-oas.absoluteradio.co.uk^*/www.absoluteradio.co.uk/player/
-objects.tremormedia.com/embed/swf/admanager*.swf
-omgubuntu.co.uk^*/banner.js
-onionstatic.com^*/videoads.js
-opgevenisgeenoptie.nl^*/favicon_ad6.ico
-pbs.org^*/sponsors/flvvideoplayer.swf
-pets4homes.co.uk/*/advert.js
-pets4homes.co.uk^*/advert.css
-plugcomputer.org^*/ad1.jpg
-purebilling.com^*/pb.min.js
-radiotimes.com/rt-service/resource/jspack
-refline.ch^*/advertisement.css
-rsvlts.com/wp-content/uploads/*-advertisment-
-secondlife.com/assets/*_AD3.jpg
-shelleytheatre.co.uk/filmimages/banners/160
-smmirror.com^*/getads.php
-socialblogsitewebdesign.com^*/advertising_conversion_images/
-songza.com/static/*/songza/ads/iframe.js
-sonypictures.com^*/admedia/
-southwest.com/assets/images/ads/ad_select_flight_
-southwest.com^*/homepage/ads/
-spotrails.com^*/flowplayeradplayerplugin.swf
-springbokradio.com/images/ads-
-springbokradio.com/sitebuilder/images/ads-
-st.com^*/banners.js
-teknikor.com/content/wp-content/themes/*-adv.jpg
-theepochtimes.com^*/article-ads.js
-thefourthperiod.com/ads/tfplogo_
-thomann.de/thumb/*/pics/adv/adv_image_
-thunderheadeng.com/wp-content/uploads/*300x250
-timeinc.net^*/tii_ads.js
-tkcarsites.com/soba/bannersservice
-tntexpress.com.au^*/marketing/banners/
-topgear.com^*/ads.min.js
-traktorpool.de^*/advert.
-translate.google.com/translate/static/*-ads/
-trustedreviews.com^*/adtech.js
-turner.com^*/ads/freewheel/*/AdManager.js
-turner.com^*/ads/freewheel/*/admanager.swf
-tv-kino.net/wp-content/themes/*/advertisement.js
-tvnz.co.nz/*/advertisement.js
-twitvid.com/mediaplayer_*.swf
-ukbride.co.uk/css/*/adverts.css
-usanetwork.com^*/usanetwork_ads.s_code.js
-utdallas.edu^*/banner.js
-vacationstarter.com/hive/images/adv_
-vagazette.com/hive/images/adv_
-vid.ag/static/js/adver*.js
-video.nbcuni.com^*/ad_engine_extension_nbc.swf
-video.nbcuni.com^*/inext_ad_engine/ad_engine_extension.swf
-vidtech.cbsinteractive.com/plugins/*_adplugin.swf
-vizanime.com/ad/get_ads
-vtstage.cbsinteractive.com/plugins/*_adplugin.swf
-walmartmoneycard.com^*/shared/ad_rotater.swf
-whitepages.com^*/google_adsense.js
-widget.slide.com^*/ads/*/preroll.swf
-wired.com^*/cn-fe-ads/cn.dart.js
-worldstarhiphop.com^*/dj2.swf
-wp.com/_static/*/criteo.js
-yimg.com^*/java/promotions/js/ad_eo_1.1.js
-4fuckr.com^*/adframe.js
-4sysops.com^*/adframe.js
-ahmedabadmirror.com/*ads.cms
-amazonaws.com^*/videoads.js
-anisearch.com^*/ads/
-bestofmedia.com^*/advertisement.js
-bestream.tv/advert*.js
-brainyquote.com^*/ad*.js
-brassyobedientcotangent.com^*/ads.js
-cdn-seekingalpha.com^*/ads.js
-coolgames.com^*/ads.js
-credio.com/ad
-crunchyroll.com^*/ads_enabled_flag.js
-decomaniacos.es^*/advertisement.js
-designtaxi.com/js/ad*.js
-divisionid.com^*/ads.js
-drakulastream.tv^*/flash_popunder.js
-dressup.com^*/ads.js
-dressuppink.com^*/ads.js
-dvbtmap.eu^*/ad*.js
-eska.pl^*bbelements.js
-eu5.org^*/advert.js
-exsite.pl^*/advert.js
-ffiles.com/images/mmfiles_
-findthedata.com/ad
-freebitcoin.wmat.pl^*/advertisement.js
-gallerynova.se^*/advertisement.js
-gamesgames.com^*/advertisement.js
-getlinkyoutube.com^*/adframe.js
-girlgames.com^*/ads.js
-girlsaskguys.com^*/js/ads.
-girlsocool.com^*/ads.js
-gofirstrow.eu^*/advertisement.js
-grouchyaccessoryrockefeller.com^*/ads.js
-guygames.com^*/ads.js
-hallpass.com^*/ads.js
-hdmovie14.net/js/ad*.js
-hentai-foundry.com^*/ads.js
-hindustantimes.com^*/ads.js
-hpfanficarchive.com^*/advertisement.js
-intoday.in^*/ads.js
-investing.com^*/ads.js
-investors.com^*/ads.js
-jkanime.net^*/advertisement2.js
-juba-get.com^*/advertisement.js
-juzupload.com/advert*.js
-katsomo.fi^*/advert.js
-katsomo.fi^*/advertisement.js
-kbb.com^*/ads.js
-kotaku.com.au^*/ads.js
-lifehacker.com.au^*/ads.js
-live2.snopes.com^*/adframe.js
-lookr.com^*/advertisement.js
-majorleaguegaming.com/live/assets/advertisement-*.js
-mangakaka.com^*/advertiser.js
-megahd.me^*/advertisement.js
-mix.dj^*/advertisement.js
-mobinozer.com^*/advert.js
-mp3clan.com^*/advertisement.js
-mtlblog.com/wp-content/*/advert.js
-myiplayer.com/ad*.js
-nationalgeographic.com^*/advertising.js
-nettavisen.no^*/advertisement.js
-onlinevideoconverter.com^*ad*.js
-photofacefun.com^*/adblock.js
-pleaseletmeadvertise.com/.adcenter.
-pleaseletmeadvertise.com^*/ads.js
-pubdirecte.com^*/advertisement.js
-qrrro.com^*/adhandler/
-racedepartment.com^*/advertisement.js
-radioio.com^*/adframe.js
-rincondelvago.com^*_adsense.js
-runners.es^*/advertisement.js
-sbs.com.au^*/advertisement.js
-securenetsystems.net^*/ads.js
-securenetsystems.net^*/adv.js
-sepulchralconestogaleftover.com^*/ads.js
-share-online.biz^*/ads.js
-shipthankrecognizing.info^*/ads.js
-showsport-tv.com/adv*.js
-siamfishing.com^*/advert.js
-sitepoint.com^*/ad-server.js
-slacker.com^*/Advertising.js
-sounddrain.net^*/advertisement.js
-stickgames.com^*/ads.js
-techweekeurope.co.uk^*/advertising.js
-telegraph.co.uk^*/ads.js
-tf2center.com^*/advert.js
-thetechpoint.org^*/ads.js
-thevideo.me/js/ad*.js
-theweatherspace.com^*/advertisement.js
-tvpelis.net^*/advertisement2.js
-veedi.com^*/ADS.js
-vgunetwork.com/public/js/*/advertisement.js
-videocelebrities.eu^*/adframe/
-virtualpets.com^*/ads.js
-weather.com^*/advertisement.js
-webfirstrow.eu^*/advertisement.js
-wwg.com^*/ads.js
-yellowbridge.com^*/advertisement.js
-ytconv.net/*google_ads.js
-ad.e-kolay.net/jquery-*-Medyanet.min.js
-ad.nl^*/themes/ad/ad.css
-ads.nicovideo.jp/assets/js/ads-*.js
-bancainternet.com.ar/eBanking/images/*-PUBLICIDAD.
-blocket.se^*/newad.js
-di.se^*/advertisement.js
-ettevotja.ee/templates/*/images/advert.gif
-fotojorgen.no/images/*/webadverts/
-fotosioon.com/wp-content/*/images/advert.gif
-izigo.pt^*/adsearch
-kanalfrederikshavn.dk^*/jquery.openx.js
-kompas.com^*/supersized.*.min_ads.js
-minuripsmed.ee/templates/*/images/advert.gif
-trrsf.com^*/admanager.js
-tugaleaks.com^*/wp-super-popup-pro/sppro.js
-tugaleaks.com^*/wp-super-popup-pro/sppro.php
-ynet.co.il^*/ads.js
-paymentgate.ru/payment/*_Advert/
-arnhemland-safaris.com/images/*_480_80_
-artserieshotels.com.au/images/*_460_60.
-assets.vice.com^*_120x60.jpg
-breakingisraelnews.com/wp-content/uploads/*-300x250-
-canada.com/news/*-300-250.gif
-consumerist-com.wpengine.netdna-cdn.com/assets/*300x250
-crowdignite.com/img/upload/*300x250
-dawn.com/wp-content/uploads/*_300x250.jpg
-discovery.com^*/ratio-size/pixel-ratio/300x250.png
-disney.com.au/global/swf/*728x90.swf
-efvi.eu/badge/*-120x60.png
-film.com/plugins/*-300x250
-firestormgames.co.uk/image/*-120x60.
-gujaratsamachar.com/thumbprocessor/cache/300x250-
-imdb.com/images/*doubleclick/*300x250
-imdb.com/images/*doubleclick/*320x240
-marketing.beatport.com.s3.amazonaws.com^*/728x90_
-motherboard.tv/content-images/*_120x60.
-nationalgeographic.com/exposure/content/*300x250
-onescreen.net/os/static/widgets/*300x250
-opposingviews.com^*/300x250/
-rehabs.com^*/xicons_social_sprite_400x60.png
-static-origin.openedition.org^*-120x240.jpg
-tribune.com.ng/news2013/cache/mod_yt_k2megaslider/images/*_120_60.jpg
-turner.com/v5cache/TCM/images/*_120x60.
-turner.com/v5cache/TCM/Images/*_120x60_
-usanetwork.com/sites/usanetwork/*300x250
-usopen.org/images/pics/misc/*.300x250.jpg
-vortex.accuweather.com^*_120x60_bg.jpg
-vortex.accuweather.com^*_160x600_bg.jpg
-vortex.accuweather.com^*_300x250_bg.jpg
-w3easy.org/templates/*_120x60.
-w3easy.org/templates/*_120x60_
-weatherbug.com/images/stickers/*/728x90/
-weatherbug.com/style/stickers/*_728x90.css
-pornhubpremium.com/user/login_status
-209.58.131.22^*/advertisement.js
-25643e662a2.com/ad*.js
-fuqer.com^*/advertisement.js
-n4mo.org/wp-content/*/ads/
-phncdn.com^*/ads.js
-4game.com^*/yandex-metrika.js
-about-australia.com/*/clickheat.js
-accorhotels.com^*/xtanalyzer_roi.js
-adidas.com^*/adidasAnalytics.js
-alicdn.com^*/click_stat/
-aliunicorn.com^*/click-stat.js
-aliunicorn.com^*/click_stat/
-amctv.com^*/comscore.js
-arcgis.com^*/heatmap.js
-bc.geocities.*/not_found/
-beacon.guim.co.uk/accept-beacon
-bountysource.com/badge/tracker
-boxtops4education.com^*/ntpagetag.js
-bt.com^*/touchclarity/homepage/omtr_tc.js
-buffalowildwings.com^*/google-analytics.js
-cache.nymag.com^*/clickability.js
-canadiantire.ca^*/analytics.sitecatalyst.js
-cbc.ca/g/stats/videoheartbeat/*/cbc-videoheartbeat.js
-cbc.ca^*/loggingservice.js
-cdn-redfin.com^*/page_analytics.xd.js
-coremetrics.com*/eluminate.js
-craveonline.com^*/google-analytics.min.js
-cschat.ebay.com^*/scripts/log.js
-ctv.ca/players/mediaplayer/*/comscorebeacon.js
-dailycaller.com^*_chartbeat.js
-deals.nextag.com^*/ClickTracker.jsp
-demandware.edgesuite.net^*/js/tracking.js
-directline.com^*/analytics.sitecatalyst.js
-evernote.com^*/google-analytics-util.js
-faostat3.fao.org^*/google-analytics-manager.js
-fccbrea.org^*/swfaddress.js
-fifa.com^*/webanalytics.js
-firstdirect.com^*/logging-code.js
-flipps.com^*/page-tracking.js
-focus.ti.com^*/metrics-min.js
-foodnetwork.com^*/analytics.sitecatalyst.js
-gameplayer.io^*/EventTracker.js
-go.com^*/analytics/tracker.otv.js
-healthcare.gov/marketplace/*/clear.gif
-highcharts.com^*/heatmap.js
-hotmail.com/mail/*/i2a.js
-ibis.com/scripts-*/xtanalyzer_roi.js
-imrworldwide.com^*/flashdetect.js
-imrworldwide.com^*/swfobject.js
-intel.com^*/angular-google-analytics.js
-itworld.com/elqnow/elq*.js
-jackjones.com^*/google-analytics-tagging.js
-js.vpro.nl/vpro/*/statcounter.js
-juxtacommons.org^*/heatmap.js
-kaltura.com/content/*/comscorePlugin.swf
-keremerkan.net/wp-content/plugins/wp-minify/min/*/google-analyticator/
-koldcast.tv/mint/*/tracker.php
-lenovo.com^*/GoogleAnalytics.js
-lg.com^*/foresee/foresee-trigger.js
-lightningmaps.org^*/piwik.js
-link.theplatform.com/*/tracker.log
-lordandtaylor.com^*/javascript/Analytics/CartEventDataInit.js
-lsi.com^*/google-analytics.js
-lufthansa.com^*/mmcore.js
-magnify.net^*/magnify_stats.js
-maserati.com^*/transparent1x1.png
-media-imdb.com^*/clickstream.js
-media.ticketmaster.*/click_track.js
-narf-archive.com^*/clickstream.js
-nationalreview.com^*/chartbeat.js
-ncbi.nlm.nih.gov/stat
-networkworld.com^*/demandbase.js
-nytimes.com^*/EventTracker.js
-nytimes.com^*/wtbase.js
-nytimes.com^*/wtinit.js
-odcdn.com^*/cm.js
-officeworks.com.au^*/site-tracker.js
-ourworld.com/ow/evercookie_
-periscope.tv^*/bugsnag-*.min.js
-playcanvas.com.*/keen.min.js
-pokemonblackwhite.com^*/jquery.google-analytics.js
-popmoney.com^*/jquery.analytics.js
-qz.com^*/tracking/bizo.js
-qz.com^*/tracking/chartbeat.js
-qz.com^*/tracking/comscore.js
-rawgit.com^*/heatmap.js
-res-x.com^*/Resonance.aspx
-safelinkwireless.com/enrollment/*/GoogleAnalytics.js
-sears.com^*/analytics.sitecatalyst.js
-sijcc.org^*/page-tracking.js
-skypicker.com/places/BCN
-southwest.com^*/mbox.js
-tc.bankofamerica.com/c
-thehotelwindsor.com.au^*/javascript.googleAnalytics.js
-ticketm.net^*/click_track.js
-trustedreviews.com^*/google/analytics.js
-uefa.com^*/chartbeat-trending-carousel.js
-unifi.me/mootools/classes/*-tracking
-vice.com^*/vmp_analytics.js
-vidible.tv^*/ComScore.StreamSense.js
-vidible.tv^*/ComScore.Viewability.js
-visa.com^*/vendor/unica.js
-volvocars.com^*/swfaddress.js
-westelm.com^*/bloomreach.js
-widgets.outbrain.com^*/comScore/comScore.htm
-wikia.nocookie.net^*/AnalyticsEngine/js/analytics_prod.js
-wikimedia.org^*/trackClick.js
-windward.eu^*/angulartics-google-analytics.min.js
-wired.com^*/cn-fe-stats/
-wp.com/_static/*/gaAddons.js
-wp.com^*/wp-content/plugins/wunderground/assets/img/icons/k/clear.gif
-xcweather.co.uk/*/geo.php
-xfinity.com^*/Comcast.SelfService.Sitecatalyst.js`;
+var good_da_hostpath_regex_Array = [ "4game.com^*/yandex-metrika.js",
+"about-australia.com/*/clickheat.js",
+"accorhotels.com^*/xtanalyzer_roi.js",
+"adidas.com^*/adidasAnalytics.js",
+"alicdn.com^*/click_stat/",
+"aliunicorn.com^*/click-stat.js",
+"aliunicorn.com^*/click_stat/",
+"amctv.com^*/comscore.js",
+"arcgis.com^*/heatmap.js",
+"bc.geocities.*/not_found/",
+"beacon.guim.co.uk/accept-beacon",
+"bountysource.com/badge/tracker",
+"boxtops4education.com^*/ntpagetag.js",
+"bt.com^*/touchclarity/homepage/omtr_tc.js",
+"buffalowildwings.com^*/google-analytics.js",
+"cache.nymag.com^*/clickability.js",
+"canadiantire.ca^*/analytics.sitecatalyst.js",
+"cbc.ca/g/stats/videoheartbeat/*/cbc-videoheartbeat.js",
+"cbc.ca^*/loggingservice.js",
+"cdn-redfin.com^*/page_analytics.xd.js",
+"coremetrics.com*/eluminate.js",
+"craveonline.com^*/google-analytics.min.js",
+"cschat.ebay.com^*/scripts/log.js",
+"ctv.ca/players/mediaplayer/*/comscorebeacon.js",
+"dailycaller.com^*_chartbeat.js",
+"deals.nextag.com^*/ClickTracker.jsp",
+"demandware.edgesuite.net^*/js/tracking.js",
+"directline.com^*/analytics.sitecatalyst.js",
+"evernote.com^*/google-analytics-util.js",
+"faostat3.fao.org^*/google-analytics-manager.js",
+"fccbrea.org^*/swfaddress.js",
+"fifa.com^*/webanalytics.js",
+"firstdirect.com^*/logging-code.js",
+"flipps.com^*/page-tracking.js",
+"focus.ti.com^*/metrics-min.js",
+"foodnetwork.com^*/analytics.sitecatalyst.js",
+"gameplayer.io^*/EventTracker.js",
+"go.com^*/analytics/tracker.otv.js",
+"healthcare.gov/marketplace/*/clear.gif",
+"highcharts.com^*/heatmap.js",
+"hotmail.com/mail/*/i2a.js",
+"ibis.com/scripts-*/xtanalyzer_roi.js",
+"imrworldwide.com^*/flashdetect.js",
+"imrworldwide.com^*/swfobject.js",
+"intel.com^*/angular-google-analytics.js",
+"itworld.com/elqnow/elq*.js",
+"jackjones.com^*/google-analytics-tagging.js",
+"js.vpro.nl/vpro/*/statcounter.js",
+"juxtacommons.org^*/heatmap.js",
+"kaltura.com/content/*/comscorePlugin.swf",
+"keremerkan.net/wp-content/plugins/wp-minify/min/*/google-analyticator/",
+"koldcast.tv/mint/*/tracker.php",
+"lenovo.com^*/GoogleAnalytics.js",
+"lg.com^*/foresee/foresee-trigger.js",
+"lightningmaps.org^*/piwik.js",
+"link.theplatform.com/*/tracker.log",
+"lordandtaylor.com^*/javascript/Analytics/CartEventDataInit.js",
+"lsi.com^*/google-analytics.js",
+"lufthansa.com^*/mmcore.js",
+"magnify.net^*/magnify_stats.js",
+"maserati.com^*/transparent1x1.png",
+"media-imdb.com^*/clickstream.js",
+"media.ticketmaster.*/click_track.js",
+"narf-archive.com^*/clickstream.js",
+"nationalreview.com^*/chartbeat.js",
+"ncbi.nlm.nih.gov/stat",
+"networkworld.com^*/demandbase.js",
+"nytimes.com^*/EventTracker.js",
+"nytimes.com^*/wtbase.js",
+"nytimes.com^*/wtinit.js",
+"odcdn.com^*/cm.js",
+"officeworks.com.au^*/site-tracker.js",
+"ourworld.com/ow/evercookie_",
+"periscope.tv^*/bugsnag-*.min.js",
+"playcanvas.com.*/keen.min.js",
+"pokemonblackwhite.com^*/jquery.google-analytics.js",
+"popmoney.com^*/jquery.analytics.js",
+"qz.com^*/tracking/bizo.js",
+"qz.com^*/tracking/chartbeat.js",
+"qz.com^*/tracking/comscore.js",
+"rawgit.com^*/heatmap.js",
+"res-x.com^*/Resonance.aspx",
+"safelinkwireless.com/enrollment/*/GoogleAnalytics.js",
+"sears.com^*/analytics.sitecatalyst.js",
+"sijcc.org^*/page-tracking.js",
+"skypicker.com/places/BCN",
+"southwest.com^*/mbox.js",
+"tc.bankofamerica.com/c",
+"thehotelwindsor.com.au^*/javascript.googleAnalytics.js",
+"ticketm.net^*/click_track.js",
+"trustedreviews.com^*/google/analytics.js",
+"uefa.com^*/chartbeat-trending-carousel.js",
+"unifi.me/mootools/classes/*-tracking",
+"vice.com^*/vmp_analytics.js",
+"vidible.tv^*/ComScore.StreamSense.js",
+"vidible.tv^*/ComScore.Viewability.js",
+"visa.com^*/vendor/unica.js",
+"volvocars.com^*/swfaddress.js",
+"westelm.com^*/bloomreach.js",
+"widgets.outbrain.com^*/comScore/comScore.htm",
+"wikia.nocookie.net^*/AnalyticsEngine/js/analytics_prod.js",
+"wikimedia.org^*/trackClick.js",
+"windward.eu^*/angulartics-google-analytics.min.js",
+"wired.com^*/cn-fe-stats/",
+"wp.com/_static/*/criteo.js",
+"wp.com/_static/*/gaAddons.js",
+"wp.com^*/wp-content/plugins/wunderground/assets/img/icons/k/clear.gif",
+"xcweather.co.uk/*/geo.php",
+"xfinity.com^*/Comcast.SelfService.Sitecatalyst.js",
+"thebarchive.com/foolfuuka/foolz/*/board.js",
+"thebarchive.com/foolfuuka/foolz/*/bootstrap.min.js",
+"thebarchive.com/foolfuuka/foolz/*/plugins.js",
+"gorillavid.in^*/jsSelect.js",
+"gorillavid.in^*/jwplayer.js",
+"speedtest.net/javascript/jquery-*.min.js",
+"speedtest.net/javascript/jquery.ui*.js",
+"motherless.com/scripts/jquery-*.min.js",
+"motherless.com/scripts/jquery.*.js",
+"247realmedia.com^*/farecomp/",
+"24ur.com/adserver/adall.",
+"24ur.com/static/*/banners.js",
+"a.giantrealm.com/assets/vau/grplayer*.swf",
+"addictinggames.com^*/mtvi_ads_reporting.js",
+"adf.ly/images/ad*.png",
+"ads.foxnews.com/api/*-slideshow-data.js",
+"ads.globo.com^*/globovideo/player/",
+"ads.yimg.com/ev/eu/any/vint/videointerstitial*.js",
+"ads.yimg.com^*/search/b/syc_logo_2.gif",
+"ads.yimg.com^*videoadmodule*.swf",
+"akamaihd.net/hads-*.mp4",
+"aone-soft.com/style/images/ad*.jpg",
+"apple.com^*/includes/ads",
+"apple.com^*/video-ad.html",
+"att.com/images/*/admanager/",
+"autotrader.co.uk/static/*/images/adv/icons.png",
+"bonappetit.com^*/cn.dart.js",
+"box10.com/advertising/*-preroll.swf",
+"britishairways.com/cms/global/styles/*/openx.css",
+"bthomehub.home/images/adv_",
+"burbankleader.com/hive/images/adv_",
+"canadianlisted.com/css/*/ad/index.css",
+"cbsistatic.com^*/sticky-ads.js",
+"cdn.turner.com^*/video/336x280_ad.gif",
+"cdn77.org/static/js/advertisement*.js",
+"chase.com^*/adserving/",
+"classistatic.com^*/banner-ads/",
+"coastlinepilot.com/hive/images/adv_",
+"comsec.com.au^*/homepage_banner_ad.gif",
+"crazygamenerd.web.fc2.com^*/ads.png",
+"csair.com/*/adpic.js",
+"ctv.ca/players/mediaplayer/*/AdManager.js^",
+"cyberpower.advizia.com^*/scripts/adv.js",
+"dailyhiit.com/sites/*/ad-images/",
+"dailymail.co.uk^*/googleads--.js",
+"dailypilot.com/hive/images/adv_",
+"delish.com/cm/shared/scripts/refreshads-*.js",
+"developer.apple.com/app-store/search-ads/images/*-ad",
+"dolidoli.com/images/ads-",
+"dragon-mania-legends-wiki.mobga.me^*_advertisement.",
+"dragon-mania-legends-wiki.mobga.me^*_Advertisement_",
+"drupal.org^*/revealads.png",
+"earthtechling.com^*/imasters-wp-adserver-styles.css",
+"economist.com.na^*/banners/cartoon_",
+"eduspec.science.ru.nl^*-images/ad-",
+"esi.tech.ccp.is^*/affiliation/",
+"expedia.com/minify/ads-min-*.js",
+"farecompare.com^*/farecomp/",
+"flysaa.com^*/jquery.adserver.js",
+"freeviewnz.tv^*/uploads/ads/",
+"garmin.com^*/Sponsors.js",
+"glendalenewspress.com/hive/images/adv_",
+"guim.co.uk^*/styles/wide/google-ads.css",
+"gumtree.com^*/postAd.js",
+"hbindependent.com/hive/images/adv_",
+"homedepot.com^*/thdGoogleAdSense.js",
+"hotnewhiphop.com/web_root/images/ads/banner-*.png",
+"housebeautiful.com/cm/shared/scripts/refreshads-*.js",
+"hulu.com/published/*.flv",
+"hulu.com/published/*.mp4",
+"i.cdn.turner.com^*/adserviceadapter.swf",
+"icefilms.info/jquery.lazyload-ad-*-min.js",
+"iframe.ivillage.com/iframe_render",
+"ikea.com^*/img/ad_",
+"ikea.com^*/img/ads/",
+"itv.com^*.adserver.js",
+"itv.com^*/tvshows_adcall_08.js",
+"itweb.co.za/banners/en-cdt*.gif",
+"jobsearch.careerone.com.au^*/bannerad.asmx/",
+"joyhubs.com/View/*/js/pop.js",
+"kcna.kp/images/ads_arrow_",
+"kcra.com^*/adpositionsizein-min.js",
+"ksl.com/resources/classifieds/graphics/ad_",
+"l.yimg.com/*/adservice/",
+"lacanadaonline.com/hive/images/adv_",
+"lanacion.com.ar/*/publicidad/",
+"live365.com/web/components/ads/*.html",
+"mail.google.com^*/uploaderapi*.swf",
+"maps.googleapis.com/maps-api-*/adsense.js",
+"maps.gstatic.com/maps-api-*/adsense.js",
+"marcs.com^*/AdViewer.js",
+"media.expedia.com/*/ads/",
+"medscape.com/html.ng/*slideshow",
+"metalmusicradio.com^*/banner.php",
+"miller-mccune.com/wp-content/plugins/*/oiopub-direct/images/style/output.css",
+"mobinozer.com^*/gads.js",
+"monster.com/awm/*/ADVERTISING-",
+"msnbcmedia.msn.com^*/sitemanagement/ads/*/blog_printbutton.png",
+"mussil.com/mussilcomfiles/commercials/*.jpg",
+"myhouseabroad.com/*/ads/",
+"news.nate.com/etc/adrectanglebanner",
+"nfl.com^*/ads.js",
+"nflcdn.com/static/*/global/ads.js",
+"nytimes.com/ads/interstitial/skip*.gif",
+"nytimes.com/adx/images/ads/*_buynow_btn_53x18.gif",
+"nytimes.com/adx/images/ads/*_premium-crosswords_bg_600x329.gif",
+"oas.absoluteradio.co.uk^*/www.absoluteradio.co.uk/player/",
+"objects.tremormedia.com/embed/swf/admanager*.swf",
+"omgubuntu.co.uk^*/banner.js",
+"onionstatic.com^*/videoads.js",
+"opgevenisgeenoptie.nl^*/favicon_ad6.ico",
+"pbs.org^*/sponsors/flvvideoplayer.swf",
+"pets4homes.co.uk/*/advert.js",
+"pets4homes.co.uk^*/advert.css",
+"plugcomputer.org^*/ad1.jpg",
+"purebilling.com^*/pb.min.js",
+"radiotimes.com/rt-service/resource/jspack",
+"refline.ch^*/advertisement.css",
+"rsvlts.com/wp-content/uploads/*-advertisment-",
+"secondlife.com/assets/*_AD3.jpg",
+"shelleytheatre.co.uk/filmimages/banners/160",
+"smmirror.com^*/getads.php",
+"socialblogsitewebdesign.com^*/advertising_conversion_images/",
+"songza.com/static/*/songza/ads/iframe.js",
+"sonypictures.com^*/admedia/",
+"southwest.com/assets/images/ads/ad_select_flight_",
+"southwest.com^*/homepage/ads/",
+"spotrails.com^*/flowplayeradplayerplugin.swf",
+"springbokradio.com/images/ads-",
+"springbokradio.com/sitebuilder/images/ads-",
+"st.com^*/banners.js",
+"teknikor.com/content/wp-content/themes/*-adv.jpg",
+"theepochtimes.com^*/article-ads.js",
+"thefourthperiod.com/ads/tfplogo_",
+"thomann.de/thumb/*/pics/adv/adv_image_",
+"thunderheadeng.com/wp-content/uploads/*300x250",
+"timeinc.net^*/tii_ads.js",
+"tkcarsites.com/soba/bannersservice",
+"tntexpress.com.au^*/marketing/banners/",
+"topgear.com^*/ads.min.js",
+"traktorpool.de^*/advert.",
+"translate.google.com/translate/static/*-ads/",
+"trustedreviews.com^*/adtech.js",
+"turner.com^*/ads/freewheel/*/AdManager.js",
+"turner.com^*/ads/freewheel/*/admanager.swf",
+"tv-kino.net/wp-content/themes/*/advertisement.js",
+"tvnz.co.nz/*/advertisement.js",
+"twitvid.com/mediaplayer_*.swf",
+"ukbride.co.uk/css/*/adverts.css",
+"usanetwork.com^*/usanetwork_ads.s_code.js",
+"utdallas.edu^*/banner.js",
+"vacationstarter.com/hive/images/adv_",
+"vagazette.com/hive/images/adv_",
+"vid.ag/static/js/adver*.js",
+"video.nbcuni.com^*/ad_engine_extension_nbc.swf",
+"video.nbcuni.com^*/inext_ad_engine/ad_engine_extension.swf",
+"vidtech.cbsinteractive.com/plugins/*_adplugin.swf",
+"vizanime.com/ad/get_ads",
+"vtstage.cbsinteractive.com/plugins/*_adplugin.swf",
+"walmartmoneycard.com^*/shared/ad_rotater.swf",
+"whitepages.com^*/google_adsense.js",
+"widget.slide.com^*/ads/*/preroll.swf",
+"wired.com^*/cn-fe-ads/cn.dart.js",
+"worldstarhiphop.com^*/dj2.swf",
+"yimg.com^*/java/promotions/js/ad_eo_1.1.js",
+"4fuckr.com^*/adframe.js",
+"4sysops.com^*/adframe.js",
+"ahmedabadmirror.com/*ads.cms",
+"amazonaws.com^*/videoads.js",
+"anisearch.com^*/ads/",
+"bestofmedia.com^*/advertisement.js",
+"bestream.tv/advert*.js",
+"brainyquote.com^*/ad*.js",
+"brassyobedientcotangent.com^*/ads.js",
+"cdn-seekingalpha.com^*/ads.js",
+"coolgames.com^*/ads.js",
+"credio.com/ad",
+"crunchyroll.com^*/ads_enabled_flag.js",
+"decomaniacos.es^*/advertisement.js",
+"designtaxi.com/js/ad*.js",
+"divisionid.com^*/ads.js",
+"drakulastream.tv^*/flash_popunder.js",
+"dressup.com^*/ads.js",
+"dressuppink.com^*/ads.js",
+"dvbtmap.eu^*/ad*.js",
+"eska.pl^*bbelements.js",
+"eu5.org^*/advert.js",
+"exsite.pl^*/advert.js",
+"ffiles.com/images/mmfiles_",
+"findthedata.com/ad",
+"freebitcoin.wmat.pl^*/advertisement.js",
+"gallerynova.se^*/advertisement.js",
+"gamesgames.com^*/advertisement.js",
+"getlinkyoutube.com^*/adframe.js",
+"girlgames.com^*/ads.js",
+"girlsaskguys.com^*/js/ads.",
+"girlsocool.com^*/ads.js",
+"gofirstrow.eu^*/advertisement.js",
+"grouchyaccessoryrockefeller.com^*/ads.js",
+"guygames.com^*/ads.js",
+"hallpass.com^*/ads.js",
+"hdmovie14.net/js/ad*.js",
+"hentai-foundry.com^*/ads.js",
+"hindustantimes.com^*/ads.js",
+"hpfanficarchive.com^*/advertisement.js",
+"intoday.in^*/ads.js",
+"investing.com^*/ads.js",
+"investors.com^*/ads.js",
+"jkanime.net^*/advertisement2.js",
+"juba-get.com^*/advertisement.js",
+"juzupload.com/advert*.js",
+"katsomo.fi^*/advert.js",
+"katsomo.fi^*/advertisement.js",
+"kbb.com^*/ads.js",
+"kotaku.com.au^*/ads.js",
+"lifehacker.com.au^*/ads.js",
+"live2.snopes.com^*/adframe.js",
+"lookr.com^*/advertisement.js",
+"majorleaguegaming.com/live/assets/advertisement-*.js",
+"mangakaka.com^*/advertiser.js",
+"megahd.me^*/advertisement.js",
+"mix.dj^*/advertisement.js",
+"mobinozer.com^*/advert.js",
+"mp3clan.com^*/advertisement.js",
+"mtlblog.com/wp-content/*/advert.js",
+"myiplayer.com/ad*.js",
+"nationalgeographic.com^*/advertising.js",
+"nettavisen.no^*/advertisement.js",
+"onlinevideoconverter.com^*ad*.js",
+"photofacefun.com^*/adblock.js",
+"pleaseletmeadvertise.com/.adcenter.",
+"pleaseletmeadvertise.com^*/ads.js",
+"pubdirecte.com^*/advertisement.js",
+"qrrro.com^*/adhandler/",
+"racedepartment.com^*/advertisement.js",
+"radioio.com^*/adframe.js",
+"rincondelvago.com^*_adsense.js",
+"runners.es^*/advertisement.js",
+"sbs.com.au^*/advertisement.js",
+"securenetsystems.net^*/ads.js",
+"securenetsystems.net^*/adv.js",
+"sepulchralconestogaleftover.com^*/ads.js",
+"share-online.biz^*/ads.js",
+"shipthankrecognizing.info^*/ads.js",
+"showsport-tv.com/adv*.js",
+"siamfishing.com^*/advert.js",
+"sitepoint.com^*/ad-server.js",
+"slacker.com^*/Advertising.js",
+"sounddrain.net^*/advertisement.js",
+"stickgames.com^*/ads.js",
+"techweekeurope.co.uk^*/advertising.js",
+"telegraph.co.uk^*/ads.js",
+"tf2center.com^*/advert.js",
+"thetechpoint.org^*/ads.js",
+"thevideo.me/js/ad*.js",
+"theweatherspace.com^*/advertisement.js",
+"tvpelis.net^*/advertisement2.js",
+"veedi.com^*/ADS.js",
+"vgunetwork.com/public/js/*/advertisement.js",
+"videocelebrities.eu^*/adframe/",
+"virtualpets.com^*/ads.js",
+"weather.com^*/advertisement.js",
+"webfirstrow.eu^*/advertisement.js",
+"wwg.com^*/ads.js",
+"yellowbridge.com^*/advertisement.js",
+"ytconv.net/*google_ads.js",
+"ad.e-kolay.net/jquery-*-Medyanet.min.js",
+"ad.nl^*/themes/ad/ad.css",
+"ads.nicovideo.jp/assets/js/ads-*.js",
+"bancainternet.com.ar/eBanking/images/*-PUBLICIDAD.",
+"blocket.se^*/newad.js",
+"di.se^*/advertisement.js",
+"ettevotja.ee/templates/*/images/advert.gif",
+"fotojorgen.no/images/*/webadverts/",
+"fotosioon.com/wp-content/*/images/advert.gif",
+"izigo.pt^*/adsearch",
+"kanalfrederikshavn.dk^*/jquery.openx.js",
+"kompas.com^*/supersized.*.min_ads.js",
+"minuripsmed.ee/templates/*/images/advert.gif",
+"trrsf.com^*/admanager.js",
+"tugaleaks.com^*/wp-super-popup-pro/sppro.js",
+"tugaleaks.com^*/wp-super-popup-pro/sppro.php",
+"ynet.co.il^*/ads.js",
+"paymentgate.ru/payment/*_Advert/",
+"arnhemland-safaris.com/images/*_480_80_",
+"artserieshotels.com.au/images/*_460_60.",
+"assets.vice.com^*_120x60.jpg",
+"breakingisraelnews.com/wp-content/uploads/*-300x250-",
+"canada.com/news/*-300-250.gif",
+"consumerist-com.wpengine.netdna-cdn.com/assets/*300x250",
+"crowdignite.com/img/upload/*300x250",
+"dawn.com/wp-content/uploads/*_300x250.jpg",
+"discovery.com^*/ratio-size/pixel-ratio/300x250.png",
+"disney.com.au/global/swf/*728x90.swf",
+"efvi.eu/badge/*-120x60.png",
+"film.com/plugins/*-300x250",
+"firestormgames.co.uk/image/*-120x60.",
+"gujaratsamachar.com/thumbprocessor/cache/300x250-",
+"imdb.com/images/*doubleclick/*300x250",
+"imdb.com/images/*doubleclick/*320x240",
+"marketing.beatport.com.s3.amazonaws.com^*/728x90_",
+"motherboard.tv/content-images/*_120x60.",
+"nationalgeographic.com/exposure/content/*300x250",
+"onescreen.net/os/static/widgets/*300x250",
+"opposingviews.com^*/300x250/",
+"rehabs.com^*/xicons_social_sprite_400x60.png",
+"static-origin.openedition.org^*-120x240.jpg",
+"tribune.com.ng/news2013/cache/mod_yt_k2megaslider/images/*_120_60.jpg",
+"turner.com/v5cache/TCM/images/*_120x60.",
+"turner.com/v5cache/TCM/Images/*_120x60_",
+"usanetwork.com/sites/usanetwork/*300x250",
+"usopen.org/images/pics/misc/*.300x250.jpg",
+"vortex.accuweather.com^*_120x60_bg.jpg",
+"vortex.accuweather.com^*_160x600_bg.jpg",
+"vortex.accuweather.com^*_300x250_bg.jpg",
+"w3easy.org/templates/*_120x60.",
+"w3easy.org/templates/*_120x60_",
+"weatherbug.com/images/stickers/*/728x90/",
+"weatherbug.com/style/stickers/*_728x90.css",
+"pornhubpremium.com/user/login_status",
+"209.58.131.22^*/advertisement.js",
+"25643e662a2.com/ad*.js",
+"fuqer.com^*/advertisement.js",
+"n4mo.org/wp-content/*/ads/",
+"phncdn.com^*/ads.js" ];
 var good_da_hostpath_regex_flag = 434 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 122 rules:
-var good_da_regex = `flashx.tv/js/jquery.min.js|
-flashx.tv/js/light.min.js|
-speedtest.net/javascript/speedtest-main.js?p=*&r=*&q=*%3*&s=*%3*=
-speedtest.net/javascript/speedtest-main.js?v=
-ad.doubleclick.net/ad/can/cbs/*;pausead=1;
-ads.nyootv.com:8080/crossdomain.xml
-ads.pandora.tv/netinsight/text/pandora_global/channel/icf@
-ads.sudpresse.be/adview.php?what=zone:
-ads.trutv.com/html.ng/tile=*&site=trutv&tru_tv_pos=preroll&
-adtech.de/?advideo/3.0/1215.1/3228528/*;vidas=pre_roll;
-allot.com/Banners/*.swf$object
-andcorp.com.au^*.swf?clicktag=
-bing.net/images/thumbnail.aspx?q=
-casino.com/banners/flash/$object,~third-party
-cbs.com/sitecommon/includes/cacheable/combine.php?*/adfunctions.
-checkerdist.com/product-detail.cfm?*advert_id=
-completemarkets.com/pictureHandler.ashx?adid=
-css.wpdigital.net/wpost/css/combo?*/ads.css
-dailymotion.com/videowall/*&clickTAG=http
-directtextbook.com^*.php?ad_
-discovery.com/components/consolidate-static/?files=*/adsense-
-disney.go.com/dxd/data/ads/game_ad.xml?gameid=
-espn.co.uk/ads/gamemodule_v0.2.swf$object
-expedia.co.nz/html.cms/tpid=*&adsize=
-flyerservices.com/cached_banner_pages/*bannerid=
-freeonlinegames.com/advertising/adaptv-as3.swf?$object
-freeonlinegames.com/advertising/google-loader.swf?$object
-funiaste.net/obrazki/*&adtype=
-g.doubleclick.net/pagead/ads?ad_type=text_dynamicimage_flash^
-game.zylom.com^*.swf?*&adURL=$object
-game.zylom.com^*/cm_loader.*.swf?$object
-gameitnow.com/ads/google_loader.swf$object
-girlsplay.com/banners/ima3_preloader_$object
-gmx.com/images/outsource/application/mailclient/mailcom/resource/mailclient/flash/multiselection_upload/multiselectionupload-*.swf$object
-godtube.com/resource/mediaplayer/*&adzone=
-healthline.com/v2/ad-mr2-iframe?useAdsHost=*&dfpAdSite=
-i.espn.co.uk/ads/gamemodule_$object
-ifeelgoood.com/tapcontent-*.swf?clicktag=$object
-itv.com^*/flvplayer.swf?$object
-kiz10.com/template/publicidad/ficha/ads_preloadgame/ima3_preloader_$object
-koaa.com/videoplayer/iframe.cfm?*&hide_ads=
-lightningcast.net/servlets/getplaylist?*&responsetype=asx&$object
-mofunzone.com/ads/ima3_preloader_*.swf$object
-nationalgeographic.com/channel/videos/satellite/*.swf?adsite=
-ox-d.sbnation.com/w/1.0/jstag|
-pacogames.com/ad/ima3_preloader_$object
-ping.indieclicktv.com/www/delivery/ajs.php?zoneid
-pinkbike.org^*.swf?ad=0&$object
-player.onescreen.net/*/MediaPlayer.swf?ads=
-player.streamtheworld.com/liveplayer.php?*adstype=
-radioguide.fm/minify/?*/Advertising/webroot/css/advertising.css
-rthk.hk/assets/flash/rthk/*/ad_banner$object
-rthk.org.hk/assets/flash/rthk/*/ad_banner$object
-server.cpmstar.com/adviewas3.swf?contentspotid=
-sify.com/news/postcomments.php?*468x60.html
-sploder.com/prerollad.swf?s=
-static.cricinfo.com^*/ADVERTS/*/liveScores.swf$object
-style.com/flashxml/*.doubleclick$object
-style.com/images/*.doubleclick$object
-supersonicads.com/api/v1/trackCommission.php*password=
-terraristik.com^*&ad_type=
-toongames.com/advertising/toon-google-preloader.swf$object
-trutv.com/includes/banners/de/video/*.ad|
-tudouui.com/bin/player2/*&adsourceid=
-upc-cablecom.ch^*.swf?clicktag=http$object
-vombasavers.com^*.swf?clickTAG=$object,~third-party
-washingtonpost.com/wpost/css/combo?*/ads.css
-washingtonpost.com/wpost2/css/combo?*/ads.css
-washingtonpost.com^*=/ad/audsci.js
-wrapper.teamxbox.com/a?size=headermainad
-yimg.com/zz/combo?*&*.js
-yimg.com^*&yat/js/ads_
-zattoo.com/?advideo/*;vidAS=PRE_ROLL;
-zeenews.india.com/ads/jw/player.swf$object
-channel4.com/ad/l/1?|
-coinurl.com/get.php?id=18045
-majorleaguegaming.com^*.png?*=
-moje-dzialdowo.pl/images/*.swf|$object
-monsoonads.com:8080/crossdomain.xml
-ads.peteava.ro/www/serve_ads/serve2.php?campaign=
-autotube.cz/ui/player/ad.php?id=
-flashgames247.com/advertising/preroll/google-fg247-preloader.swf$object
-haberler.com/video-haber/adsense_news_politics.swf?$object
-openx.zomoto.nl/live/www/delivery/spcjs.php?id=
-ring.bg/adserver/adall.php?*&video_on_page=1
-run.admost.com/adx/get.ashx?z=*&accptck=true&nojs=1
-uol.com.br/html.ng/*&affiliate=
-vk.com/ads?act=
-google.com/uds/modules/elements/newsshow/iframe.html?*=300x250&
-maps.googleapis.com/maps/api/*=300x250&
-weatherbug.com/desktop-weather/*=728x90&
-ads.affiliate-cruise-mail.com/redirect.aspx?pid=*&bid=
-ads.affiliates-spinit.com/redirect.aspx?pid=*&bid=
-ads.annapartners.com/redirect.aspx?pid=*&bid=
-ads.cherrycasino.com/tracking.php?tracking_code&aid=
-ads.comeon.com/redirect.aspx?pid=*&bid=
-ads.ellmountgaming.com/redirect.aspx?pid=*&bid=
-ads.euroslots.com/tracking.php?tracking_code&aid=
-ads.leovegas.com/redirect.aspx?pid=*&bid=
-ads.mrgreen.com/redirect.aspx?pid=*&bid=
-ads.mrringoaffiliates.com/redirect.aspx?pid=*&bid=
-ads.o-networkaffiliates.com/redirect.aspx?pid=*&bid=
-ads.yakocasinoaffiliates.com/redirect.aspx?pid=*&bid=
-adserving.unibet.com/redirect.aspx?pid=*&bid=
-adsrv.eacdn.com/C.ashx?btag=a_
-adsrv.eacdn.com/wl/clk?btag=a_
-gsmarena.com/adclick.php?bannerid=
-hostedadsp.realitykings.com/hosted/flash/rk_player_1.5_300x250.swf$object
-kuntfutube.com/go.php?ad=
-panicporn.com/Bannerads/player/player_flv_multi.swf$object
-pornteengirl.com/temporaire/image.php?*/virtuagirl/
-img.pornhub.com/gif/*.gif|
-redtube.com/htmllogin|
-submityourflicks.com/player/player-ads.swf$object
-abclocal.go.com/combiner/c?js=*/visitorAPI.js
-adblockanalytics.com/ads.js|
-link.theplatform.com/*?affiliate=
-metrics.howstuffworks.com/b/ss/*&ot=
-ping.hellobar.com/?*&_e=click&
-pixel.facebook.com/ajax/notifications/mark_read.php?*&alert_ids%
-tags.w55c.net/rs?*&t=marketing
-ups.com/*/WebTracking/track&dcs`;
-var good_da_regex_flag = 122 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+// 96 rules:
+var good_da_regex_Array = [ "abclocal.go.com/combiner/c?js=*/visitorAPI.js",
+"adblockanalytics.com/ads.js|",
+"link.theplatform.com/*?affiliate=",
+"metrics.howstuffworks.com/b/ss/*&ot=",
+"ping.hellobar.com/?*&_e=click&",
+"pixel.facebook.com/ajax/notifications/mark_read.php?*&alert_ids%",
+"tags.w55c.net/rs?*&t=marketing",
+"ups.com/*/WebTracking/track&dcs",
+"flashx.tv/js/jquery.min.js|",
+"flashx.tv/js/light.min.js|",
+"speedtest.net/javascript/speedtest-main.js?p=*&r=*&q=*%3*&s=*%3*=",
+"speedtest.net/javascript/speedtest-main.js?v=",
+"ad.doubleclick.net/ad/can/cbs/*;pausead=1;",
+"ads.nyootv.com:8080/crossdomain.xml",
+"ads.pandora.tv/netinsight/text/pandora_global/channel/icf@",
+"ads.sudpresse.be/adview.php?what=zone:",
+"ads.trutv.com/html.ng/tile=*&site=trutv&tru_tv_pos=preroll&",
+"adtech.de/?advideo/3.0/1215.1/3228528/*;vidas=pre_roll;",
+"andcorp.com.au^*.swf?clicktag=",
+"bing.net/images/thumbnail.aspx?q=",
+"cbs.com/sitecommon/includes/cacheable/combine.php?*/adfunctions.",
+"checkerdist.com/product-detail.cfm?*advert_id=",
+"completemarkets.com/pictureHandler.ashx?adid=",
+"css.wpdigital.net/wpost/css/combo?*/ads.css",
+"dailymotion.com/videowall/*&clickTAG=http",
+"directtextbook.com^*.php?ad_",
+"discovery.com/components/consolidate-static/?files=*/adsense-",
+"disney.go.com/dxd/data/ads/game_ad.xml?gameid=",
+"expedia.co.nz/html.cms/tpid=*&adsize=",
+"flyerservices.com/cached_banner_pages/*bannerid=",
+"funiaste.net/obrazki/*&adtype=",
+"g.doubleclick.net/pagead/ads?ad_type=text_dynamicimage_flash^",
+"game.zylom.com^*.swf?*&adURL=",
+"godtube.com/resource/mediaplayer/*&adzone=",
+"healthline.com/v2/ad-mr2-iframe?useAdsHost=*&dfpAdSite=",
+"ifeelgoood.com/tapcontent-*.swf?clicktag=",
+"koaa.com/videoplayer/iframe.cfm?*&hide_ads=",
+"lightningcast.net/servlets/getplaylist?*&responsetype=asx&",
+"nationalgeographic.com/channel/videos/satellite/*.swf?adsite=",
+"ox-d.sbnation.com/w/1.0/jstag|",
+"ping.indieclicktv.com/www/delivery/ajs.php?zoneid",
+"pinkbike.org^*.swf?ad=0&",
+"player.onescreen.net/*/MediaPlayer.swf?ads=",
+"player.streamtheworld.com/liveplayer.php?*adstype=",
+"radioguide.fm/minify/?*/Advertising/webroot/css/advertising.css",
+"server.cpmstar.com/adviewas3.swf?contentspotid=",
+"sify.com/news/postcomments.php?*468x60.html",
+"sploder.com/prerollad.swf?s=",
+"supersonicads.com/api/v1/trackCommission.php*password=",
+"terraristik.com^*&ad_type=",
+"trutv.com/includes/banners/de/video/*.ad|",
+"tudouui.com/bin/player2/*&adsourceid=",
+"upc-cablecom.ch^*.swf?clicktag=http",
+"vombasavers.com^*.swf?clickTAG=",
+"washingtonpost.com/wpost/css/combo?*/ads.css",
+"washingtonpost.com/wpost2/css/combo?*/ads.css",
+"washingtonpost.com^*=/ad/audsci.js",
+"wrapper.teamxbox.com/a?size=headermainad",
+"yimg.com/zz/combo?*&*.js",
+"yimg.com^*&yat/js/ads_",
+"zattoo.com/?advideo/*;vidAS=PRE_ROLL;",
+"channel4.com/ad/l/1?|",
+"coinurl.com/get.php?id=18045",
+"majorleaguegaming.com^*.png?*=",
+"moje-dzialdowo.pl/images/*.swf|",
+"monsoonads.com:8080/crossdomain.xml",
+"ads.peteava.ro/www/serve_ads/serve2.php?campaign=",
+"autotube.cz/ui/player/ad.php?id=",
+"openx.zomoto.nl/live/www/delivery/spcjs.php?id=",
+"ring.bg/adserver/adall.php?*&video_on_page=1",
+"run.admost.com/adx/get.ashx?z=*&accptck=true&nojs=1",
+"uol.com.br/html.ng/*&affiliate=",
+"vk.com/ads?act=",
+"google.com/uds/modules/elements/newsshow/iframe.html?*=300x250&",
+"maps.googleapis.com/maps/api/*=300x250&",
+"weatherbug.com/desktop-weather/*=728x90&",
+"ads.affiliate-cruise-mail.com/redirect.aspx?pid=*&bid=",
+"ads.affiliates-spinit.com/redirect.aspx?pid=*&bid=",
+"ads.annapartners.com/redirect.aspx?pid=*&bid=",
+"ads.cherrycasino.com/tracking.php?tracking_code&aid=",
+"ads.comeon.com/redirect.aspx?pid=*&bid=",
+"ads.ellmountgaming.com/redirect.aspx?pid=*&bid=",
+"ads.euroslots.com/tracking.php?tracking_code&aid=",
+"ads.leovegas.com/redirect.aspx?pid=*&bid=",
+"ads.mrgreen.com/redirect.aspx?pid=*&bid=",
+"ads.mrringoaffiliates.com/redirect.aspx?pid=*&bid=",
+"ads.o-networkaffiliates.com/redirect.aspx?pid=*&bid=",
+"ads.yakocasinoaffiliates.com/redirect.aspx?pid=*&bid=",
+"adserving.unibet.com/redirect.aspx?pid=*&bid=",
+"adsrv.eacdn.com/C.ashx?btag=a_",
+"adsrv.eacdn.com/wl/clk?btag=a_",
+"gsmarena.com/adclick.php?bannerid=",
+"kuntfutube.com/go.php?ad=",
+"pornteengirl.com/temporaire/image.php?*/virtuagirl/",
+"img.pornhub.com/gif/*.gif|",
+"redtube.com/htmllogin|" ];
+var good_da_regex_flag = 96 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+
+// 37 rules:
+var good_da_host_exceptions_JSON = { "iad.apple.com": null,
+"bingads.microsoft.com": null,
+"azure.bingads.trafficmanager.net": null,
+"choice.microsoft.com": null,
+"choice.microsoft.com.nsatc.net": null,
+"corpext.msitadfs.glbdns2.microsoft.com": null,
+"corp.sts.microsoft.com": null,
+"df.telemetry.microsoft.com": null,
+"diagnostics.support.microsoft.com": null,
+"feedback.search.microsoft.com": null,
+"i1.services.social.microsoft.com": null,
+"i1.services.social.microsoft.com.nsatc.net": null,
+"redir.metaservices.microsoft.com": null,
+"reports.wes.df.telemetry.microsoft.com": null,
+"services.wes.df.telemetry.microsoft.com": null,
+"settings-sandbox.data.microsoft.com": null,
+"settings-win.data.microsoft.com": null,
+"sqm.df.telemetry.microsoft.com": null,
+"sqm.telemetry.microsoft.com": null,
+"sqm.telemetry.microsoft.com.nsatc.net": null,
+"statsfe1.ws.microsoft.com": null,
+"statsfe2.update.microsoft.com.akadns.net": null,
+"statsfe2.ws.microsoft.com": null,
+"survey.watson.microsoft.com": null,
+"telecommand.telemetry.microsoft.com": null,
+"telecommand.telemetry.microsoft.com.nsatc.net": null,
+"telemetry.urs.microsoft.com": null,
+"vortex.data.microsoft.com": null,
+"vortex-sandbox.data.microsoft.com": null,
+"vortex-win.data.microsoft.com": null,
+"cy2.vortex.data.microsoft.com.akadns.net": null,
+"watson.microsoft.com": null,
+"watson.ppe.telemetry.microsoft.comwatson.telemetry.microsoft.com": null,
+"watson.telemetry.microsoft.com.nsatc.net": null,
+"wes.df.telemetry.microsoft.com": null,
+"win10.ipv6.microsoft.com": null,
+"www.bingads.microsoft.com": null };
+var good_da_host_exceptions_exact_flag = 37 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 8455 rules:
-var bad_da_host_JSON = { "a.ads.": null,
+var bad_da_host_JSON = { "meetrics.netbb-": null,
+"0tracker.com": null,
+"149.13.65.144": null,
+"195.10.245.55": null,
+"1freecounter.com": null,
+"212.227.100.108": null,
+"24counter.com": null,
+"2cnt.net": null,
+"2o7.net": null,
+"33across.com": null,
+"360tag.com": null,
+"3dlivestats.com": null,
+"3dstats.com": null,
+"3gl.net": null,
+"62.160.52.73": null,
+"66.228.52.30": null,
+"67.228.151.70": null,
+"72.172.88.25": null,
+"74.55.82.102": null,
+"77tracking.com": null,
+"99counters.com": null,
+"99stats.com": null,
+"a-counters.com": null,
+"aamsitecertifier.com": null,
+"abcstats.com": null,
+"abmr.net": null,
+"absolstats.co.za": null,
+"acc-hd.de": null,
+"acceptableserver.com": null,
+"access-analyze.org": null,
+"access-traffic.com": null,
+"accessintel.com": null,
+"accumulatorg.com": null,
+"acecounter.com": null,
+"acestats.net": null,
+"acetrk.com": null,
+"acexedge.com": null,
+"activemeter.com": null,
+"acxiom-online.com": null,
+"ad-score.com": null,
+"adalyser.com": null,
+"adblade.com": null,
+"adchemix.com": null,
+"adchemy-content.com": null,
+"adclickstats.net": null,
+"addfreestats.com": null,
+"adelixir.com": null,
+"adfox.ru": null,
+"admantx.com": null,
+"admitad.com": null,
+"admother.com": null,
+"adobedtm.com": null,
+"adobetag.com": null,
+"adprotraffic.com": null,
+"adsensedetective.com": null,
+"adspsp.com": null,
+"adsymptotic.com": null,
+"adultblogtoplist.com": null,
+"advanced-web-analytics.com": null,
+"adyapper.com": null,
+"afairweb.com": null,
+"affilae.com": null,
+"affiliateedge.eu": null,
+"affiliates-pro.com": null,
+"affiliatetrackingsetup.com": null,
+"affiliatly.com": null,
+"affistats.com": null,
+"agkn.com": null,
+"aidata.io": null,
+"aimediagroup.com": null,
+"akstat.com": null,
+"alexacdn.com": null,
+"alexametrics.com": null,
+"alltagcloud.info": null,
+"alltracked.com": null,
+"altastat.com": null,
+"amavalet.com": null,
+"amazingcounters.com": null,
+"amilliamilli.com": null,
+"amung.us": null,
+"analoganalytics.com": null,
+"analytics-egain.com": null,
+"analytics-engine.net": null,
+"analyticswizard.com": null,
+"analytk.com": null,
+"anametrix.net": null,
+"angelfishstats.com": null,
+"anonymousdmp.com": null,
+"answerscloud.com": null,
+"apexstats.com": null,
+"apicit.net": null,
+"app.link": null,
+"appboycdn.com": null,
+"aqtracker.com": null,
+"arena-quantum.co.uk": null,
+"arlime.com": null,
+"arturtrack.com": null,
+"athenainstitute.biz": null,
+"attracta.com": null,
+"audience.visiblemeasures.com": null,
+"audienceiq.com": null,
+"audiencerate.com": null,
+"autoaffiliatenetwork.com": null,
+"autoaudience.com": null,
+"avantlink.com": null,
+"avastats.com": null,
+"avmws.com": null,
+"awmcounter.de": null,
+"axf8.net": null,
+"azalead.com": null,
+"b1img.com": null,
+"babator.com": null,
+"basicstat.com": null,
+"beacon.kmi-us.com": null,
+"beanstalkdata.com": null,
+"beemrdwn.com": null,
+"beencounter.com": null,
+"behavioralengine.com": null,
+"belstat.at": null,
+"belstat.be": null,
+"belstat.ch": null,
+"belstat.com": null,
+"belstat.de": null,
+"belstat.fr": null,
+"belstat.nl": null,
+"bestweb2013stat.lk": null,
+"betarget.com": null,
+"bettermetrics.co": null,
+"bigcattracks.com": null,
+"bigmir.net": null,
+"bigstats.net": null,
+"bigtracker.com": null,
+"bionicclick.com": null,
+"bizible.com": null,
+"bkrtx.com": null,
+"bkvtrack.com": null,
+"blockbreaker.io": null,
+"blockmetrics.com": null,
+"blog-stat.com": null,
+"blogmeetsbrand.com": null,
+"blogscounter.com": null,
+"blogsontop.com": null,
+"blogtoplist.com": null,
+"bluecava.com": null,
+"blueconic.net": null,
+"bluekai.com": null,
+"blvdstatus.com": null,
+"bm23.com": null,
+"bmlmedia.com": null,
+"bmmetrix.com": null,
+"bookforest.biz": null,
+"boomtrain.com": null,
+"botsvisit.com": null,
+"brat-online.ro": null,
+"brcdn.com": null,
+"brightedge.com": null,
+"browser-statistik.de": null,
+"bstk.co": null,
+"btbuckets.com": null,
+"btstatic.com": null,
+"bubblestat.com": null,
+"bugsnag.com": null,
+"burstbeacon.com": null,
+"burt.io": null,
+"buzzdeck.com": null,
+"bytemgdd.com": null,
+"c-webstats.de": null,
+"c.adroll.com": null,
+"c1exchange.com": null,
+"c3metrics.com": null,
+"c3tag.com": null,
+"c4tracking01.com": null,
+"call-tracking.co.uk": null,
+"callrail.com": null,
+"calltrackingmetrics.com": null,
+"calltracks.com": null,
+"campaigncog.com": null,
+"caphyon-analytics.com": null,
+"capturly.com": null,
+"cashburners.com": null,
+"cashcount.com": null,
+"cccpmo.com": null,
+"ccgateway.net": null,
+"cdntrf.com": null,
+"cedexis.com": null,
+"cedexis.net": null,
+"celebros-analytics.com": null,
+"celebrus.com": null,
+"cetrk.com": null,
+"cftrack.com": null,
+"chartaca.com": null,
+"chartbeat.com": null,
+"chartbeat.net": null,
+"checkstat.nl": null,
+"cheezburger-analytics.com": null,
+"chickensaladandads.com": null,
+"chrumedia.com": null,
+"circular-counters.com": null,
+"cleananalytics.com": null,
+"clearviewstats.com": null,
+"click-linking.com": null,
+"click-url.com": null,
+"click2meter.com": null,
+"click4assistance.co.uk": null,
+"clickable.net": null,
+"clickaider.com": null,
+"clickalyzer.com": null,
+"clickclick.net": null,
+"clickcloud.info": null,
+"clickconversion.net": null,
+"clickdensity.com": null,
+"clickdimensions.com": null,
+"clickening.com": null,
+"clickforensics.com": null,
+"clickigniter.io": null,
+"clickinc.com": null,
+"clickmanage.com": null,
+"clickmeter.com": null,
+"clickpathmedia.com": null,
+"clickprotector.com": null,
+"clickreport.com": null,
+"clicksagent.com": null,
+"clicksen.se": null,
+"clickshift.com": null,
+"clickstream.co.za": null,
+"clicktale.net": null,
+"clicktrack1.com": null,
+"clicktracks.com": null,
+"clickzs.com": null,
+"clickzzs.nl": null,
+"cloud-exploration.com": null,
+"cloud-iq.com": null,
+"cloudtracer101.com": null,
+"clustrmaps.com": null,
+"cnt1.net": null,
+"cnxweb.com": null,
+"cnzz.com": null,
+"codata.ru": null,
+"cogmatch.net": null,
+"cognitivematch.com": null,
+"collserve.com": null,
+"company-target.com": null,
+"compteur.cc": null,
+"contactmonkey.com": null,
+"content-square.net": null,
+"content.ad": null,
+"contentinsights.com": null,
+"contentspread.net": null,
+"continue.com": null,
+"convergetrack.com": null,
+"conversionlogic.net": null,
+"conversionly.com": null,
+"conversionruler.com": null,
+"convertexperiments.com": null,
+"convertglobal.com": null,
+"convertro.com": null,
+"cooladata.com": null,
+"coremetrics.com": null,
+"counter.gd": null,
+"counter.top.kg": null,
+"counter160.com": null,
+"counterbot.com": null,
+"countercentral.com": null,
+"countergeo.com": null,
+"counterland.com": null,
+"counters4u.com": null,
+"counterservis.com": null,
+"countersforlife.com": null,
+"countertracker.com": null,
+"counterviews.net": null,
+"counting4free.com": null,
+"cqcounter.com": null,
+"craftkeys.com": null,
+"craktraffic.com": null,
+"crazyegg.com": null,
+"criteo.com": null,
+"criteo.net": null,
+"crmmetrix.fr": null,
+"crmmetrixwris.com": null,
+"crowdscience.com": null,
+"crsspxl.com": null,
+"crwdcntrl.net": null,
+"csdata1.com": null,
+"csi-tracking.com": null,
+"cttracking02.com": null,
+"customerdiscoverytrack.com": null,
+"cxense.com": null,
+"cxt.ms": null,
+"cybermonitor.com": null,
+"dacounter.com": null,
+"dailycaller-alerts.com": null,
+"dashboard.io": null,
+"data-analytics.jp": null,
+"databrain.com": null,
+"datacaciques.com": null,
+"datafeedfile.com": null,
+"datam.com": null,
+"datamind.ru": null,
+"dataperforma.com": null,
+"dataxpand.com": null,
+"daylife-analytics.com": null,
+"dc.tremormedia.com": null,
+"decdna.net": null,
+"demandbase.com": null,
+"demdex.net": null,
+"devatics.com": null,
+"dgmsearchlab.com": null,
+"dhmtracking.co.za": null,
+"diffusion-tracker.com": null,
+"digitaloptout.com": null,
+"digitaltarget.ru": null,
+"dinkstat.com": null,
+"directrdr.com": null,
+"displaymarketplace.com": null,
+"distralytics.com": null,
+"dmanalytics1.com": null,
+"dmclick.cn": null,
+"dmtracker.com": null,
+"dmtry.com": null,
+"dominocounter.net": null,
+"dotomi.com": null,
+"doubleclick.net": null,
+"downture.in": null,
+"dsply.com": null,
+"dstrack2.info": null,
+"dwin1.com": null,
+"e-webtrack.net": null,
+"earnitup.com": null,
+"easy-hit-counters.com": null,
+"easycounter.com": null,
+"easyhitcounters.com": null,
+"easyresearch.se": null,
+"ec-track.com": null,
+"ecn5.com": null,
+"ecommstats.com": null,
+"ecsanalytics.com": null,
+"ecustomeropinions.com": null,
+"edigitalsurvey.com": null,
+"email-match.com": null,
+"embeddedanalytics.com": null,
+"emediatrack.com": null,
+"enecto.com": null,
+"enectoanalytics.com": null,
+"engagemaster.com": null,
+"enquisite.com": null,
+"eperfectdata.com": null,
+"epiodata.com": null,
+"epitrack.com": null,
+"eproof.com": null,
+"eps-analyzer.de": null,
+"ereportz.com": null,
+"esm1.net": null,
+"esomniture.com": null,
+"estara.com": null,
+"estat.com": null,
+"estrack.net": null,
+"ethnio.com": null,
+"etracker.com": null,
+"etrafficcounter.com": null,
+"etrafficstats.com": null,
+"eu-survey.com": null,
+"euleriancdn.net": null,
+"europagerank.com": null,
+"eventoptimize.com": null,
+"everestjs.net": null,
+"everesttech.net": null,
+"evergage.com": null,
+"evisitanalyst.com": null,
+"evisitcs.com": null,
+"evisitcs2.com": null,
+"evolvemediametrics.com": null,
+"evyy.net": null,
+"ewebanalytics.com": null,
+"ewebcounter.com": null,
+"exactag.com": null,
+"exclusiveclicks.com": null,
+"exelator.com": null,
+"exovueplatform.com": null,
+"explore-123.com": null,
+"exposebox.com": null,
+"extole.com": null,
+"extreme-dm.com": null,
+"ezytrack.com": null,
+"fabricww.com": null,
+"factortg.com": null,
+"fandommetrics.com": null,
+"fanplayr.com": null,
+"fast-thinking.co.uk": null,
+"fastanalytic.com": null,
+"fastly-analytics.com": null,
+"fastonlineusers.com": null,
+"fastwebcounter.com": null,
+"fdxstats.xyz": null,
+"feedjit.com": null,
+"filitrac.com": null,
+"finalid.com": null,
+"fitanalytics.com": null,
+"flagcounter.com": null,
+"flash-counter.com": null,
+"flash-stat.com": null,
+"flashgamestats.com": null,
+"flcounter.com": null,
+"flowstats.net": null,
+"fluencymedia.com": null,
+"fluidsurveys.com": null,
+"flxpxl.com": null,
+"flyingpt.com": null,
+"followercounter.com": null,
+"footprintdns.com": null,
+"footprintlive.com": null,
+"foreseeresults.com": null,
+"forkcdn.com": null,
+"formalyzer.com": null,
+"fpctraffic2.com": null,
+"fqsecure.com": null,
+"free-counter.co.uk": null,
+"free-counter.com": null,
+"free-counters.co.uk": null,
+"free-website-hit-counters.com": null,
+"free-website-statistics.com": null,
+"freebloghitcounter.com": null,
+"freecountercode.com": null,
+"freecounterstat.com": null,
+"freegeoip.net": null,
+"freehitscounter.org": null,
+"freelogs.com": null,
+"freeonlineusers.com": null,
+"freesitemapgenerator.com": null,
+"freestats.com": null,
+"freetrafficsystem.com": null,
+"freeusersonline.com": null,
+"freeweblogger.com": null,
+"freshcounter.com": null,
+"fruitflan.com": null,
+"fueldeck.com": null,
+"fugetech.com": null,
+"funstage.com": null,
+"fuse-data.com": null,
+"fusestats.com": null,
+"fyreball.com": null,
+"gaug.es": null,
+"gbotvisit.com": null,
+"gemius.pl": null,
+"gemtrackers.com": null,
+"geobytes.com": null,
+"geoplugin.net": null,
+"getbackstory.com": null,
+"getblueshift.com": null,
+"getclicky.com": null,
+"getfreebl.com": null,
+"getsmartlook.com": null,
+"getstatistics.se": null,
+"gigcount.com": null,
+"glbtracker.com": null,
+"globalviptraffic.com": null,
+"globetrackr.com": null,
+"go-mpulse.net": null,
+"goaltraffic.com": null,
+"goldstats.com": null,
+"goodcounter.org": null,
+"googleadservices.com": null,
+"googlerank.info": null,
+"gosquared.com": null,
+"gostats.com": null,
+"gostats.org": null,
+"gostats.ro": null,
+"govmetric.com": null,
+"grepdata.com": null,
+"group-ib.ru": null,
+"gsimedia.net": null,
+"gstats.cn": null,
+"gtopstats.com": null,
+"guruquicks.net": null,
+"gvisit.com": null,
+"halldata.com": null,
+"halstats.com": null,
+"heapanalytics.com": null,
+"heatmap.it": null,
+"hentaicounter.com": null,
+"hexagon-analytics.com": null,
+"heystaks.com": null,
+"hiconversion.com": null,
+"higherengine.com": null,
+"highmetrics.com": null,
+"histats.com": null,
+"hit-counter-download.com": null,
+"hit-counter.info": null,
+"hit-counters.net": null,
+"hitcounterstats.com": null,
+"hitmatic.com": null,
+"hitmaze-counters.net": null,
+"hitslink.com": null,
+"hitsprocessor.com": null,
+"hittail.com": null,
+"hittracker.com": null,
+"hitwebcounter.com": null,
+"host-tracker.com": null,
+"hostip.info": null,
+"hoststats.info": null,
+"hotdogsandads.com": null,
+"hotjar.com": null,
+"hotlog.ru": null,
+"hs-analytics.net": null,
+"humanclick.com": null,
+"hunt-leads.com": null,
+"hxtrack.com": null,
+"hyfntrak.com": null,
+"hypestat.com": null,
+"i-stats.com": null,
+"ib-ibi.com": null,
+"ic-live.com": null,
+"iclive.com": null,
+"icstats.nl": null,
+"id-visitors.com": null,
+"ideoclick.com": null,
+"idtargeting.com": null,
+"igaming.biz": null,
+"ijncw.tv": null,
+"imanginatium.com": null,
+"immanalytics.com": null,
+"impcounter.com": null,
+"imrtrack.com": null,
+"imrworldwide.com": null,
+"inboxtag.com": null,
+"index.ru": null,
+"indexstats.com": null,
+"indextools.com": null,
+"individuad.net": null,
+"inferclick.com": null,
+"infinity-tracking.net": null,
+"inflectionpointmedia.com": null,
+"innovateads.com": null,
+"inphonic.com": null,
+"inpwrd.com": null,
+"insitemetrics.com": null,
+"inspectlet.com": null,
+"instore.biz": null,
+"integritystat.com": null,
+"intelli-tracker.com": null,
+"intermundomedia.com": null,
+"interstateanalytics.com": null,
+"invitemedia.com": null,
+"invoc.us": null,
+"ip-api.com": null,
+"ip-label.net": null,
+"ipcounter.de": null,
+"iperceptions.com": null,
+"ipinfodb.com": null,
+"ipinyou.com.cn": null,
+"ipstat.com": null,
+"ist-track.com": null,
+"istrack.com": null,
+"itrackerpro.com": null,
+"itracmediav4.com": null,
+"iwebtrack.com": null,
+"iwstats.com": null,
+"jimdo-stats.com": null,
+"jirafe.com": null,
+"jscounter.com": null,
+"jstracker.com": null,
+"jump-time.net": null,
+"jumptime.com": null,
+"jwmstats.com": null,
+"k-analytix.com": null,
+"kameleoon.com": null,
+"kampyle.com": null,
+"keymetric.net": null,
+"keywee.co": null,
+"keywordmax.com": null,
+"killerwebstats.com": null,
+"kissmetrics.com": null,
+"klldabck.com": null,
+"knowlead.io": null,
+"knowledgevine.net": null,
+"komtrack.com": null,
+"krxd.net": null,
+"l2.visiblemeasures.com": null,
+"lead-123.com": null,
+"lead-converter.com": null,
+"lead-tracking.biz": null,
+"leadforensics.com": null,
+"leadformix.com": null,
+"leadlife.com": null,
+"leadmanagerfx.com": null,
+"leadsius.com": null,
+"leadsrx.com": null,
+"legolas-media.com": null,
+"les-experts.com": null,
+"levexis.com": null,
+"liadm.com": null,
+"lijit.com": null,
+"linezing.com": null,
+"link-smart.com": null,
+"linkconnector.com": null,
+"linkpulse.com": null,
+"linksynergy.com": null,
+"linkxchanger.com": null,
+"listrakbi.com": null,
+"livestat.com": null,
+"lockview.cn": null,
+"locotrack.net": null,
+"logcounter.com": null,
+"loggly.com": null,
+"lognormal.net": null,
+"lookery.com": null,
+"losstrack.com": null,
+"lporirxe.com": null,
+"luckyorange.com": null,
+"luminate.com": null,
+"lxtrack.com": null,
+"lymantriacypresdoctrine.biz": null,
+"m-pathy.com": null,
+"macandcheeseandads.com": null,
+"magnify360.com": null,
+"mailstat.us": null,
+"maploco.com": null,
+"marinsm.com": null,
+"market2lead.com": null,
+"marketizator.com": null,
+"marketo.net": null,
+"martianstats.com": null,
+"masterstats.com": null,
+"matheranalytics.com": null,
+"mathtag.com": null,
+"maxtracker.net": null,
+"mbotvisit.com": null,
+"mdotlabs.com": null,
+"measuremap.com": null,
+"meatballsandads.com": null,
+"mediaarmor.com": null,
+"mediaforgews.com": null,
+"mediagauge.com": null,
+"mediametrics.ru": null,
+"mediaplex.com": null,
+"mediarithmics.com": null,
+"mediaseeding.com": null,
+"mega-stats.com": null,
+"memecounter.com": null,
+"mercadoclics.com": null,
+"mercent.com": null,
+"meteorsolutions.com": null,
+"metricsdirect.com": null,
+"mezzobit.com": null,
+"midkotatraffic.net": null,
+"millioncounter.com": null,
+"minewhat.com": null,
+"mixpanel.com": null,
+"mkt51.net": null,
+"mktoresp.com": null,
+"mlclick.com": null,
+"mletracker.com": null,
+"mlstat.com": null,
+"mmccint.com": null,
+"mno.link": null,
+"mobalyzer.net": null,
+"mochibot.com": null,
+"monetate.net": null,
+"mongoosemetrics.com": null,
+"mouseflow.com": null,
+"mousestats.com": null,
+"mplxtms.com": null,
+"mpstat.us": null,
+"mstracker.net": null,
+"mtracking.com": null,
+"mtrics.cdc.gov": null,
+"mvilivestats.com": null,
+"mvtracker.com": null,
+"mxcdn.net": null,
+"myaffiliateprogram.com": null,
+"myfastcounter.com": null,
+"mynewcounter.com": null,
+"myomnistar.com": null,
+"myroitracking.com": null,
+"myseostats.com": null,
+"mysitetraffic.net": null,
+"mysocialpixel.com": null,
+"mytictac.com": null,
+"mywebstats.com.au": null,
+"mywebstats.org": null,
+"naturaltracking.com": null,
+"neatstats.com": null,
+"nedstat.com": null,
+"nedstat.net": null,
+"nedstatbasic.net": null,
+"nedstatpro.net": null,
+"nestedmedia.com": null,
+"netclickstats.com": null,
+"netflame.cc": null,
+"netmining.com": null,
+"netmng.com": null,
+"newstatscounter.info": null,
+"nextstat.com": null,
+"nordicresearch.com": null,
+"notifyvisitors.com": null,
+"novately.com": null,
+"nr-data.net": null,
+"nstracking.com": null,
+"nuconomy.com": null,
+"nudatasecurity.com": null,
+"nuggad.net": null,
+"od.visiblemeasures.com": null,
+"odoscope.com": null,
+"offermatica.com": null,
+"ohmystats.com": null,
+"ojrq.net": null,
+"oktopost.com": null,
+"omtrdc.net": null,
+"ondu.ru": null,
+"onelink-translations.com": null,
+"onestat.com": null,
+"online-media-stats.com": null,
+"online-metrix.net": null,
+"opbandit.com": null,
+"openclick.com": null,
+"openstat.net": null,
+"opentracker.net": null,
+"openxtracker.com": null,
+"optimizely.com": null,
+"optimost.com": null,
+"optreadetrus.info": null,
+"os-data.com": null,
+"ositracker.com": null,
+"otracking.com": null,
+"ournet-analytics.com": null,
+"outboundlink.me": null,
+"overstat.com": null,
+"owlanalytics.io": null,
+"p-td.com": null,
+"p.raasnet.com": null,
+"p0.raasnet.com": null,
+"pagefair.com": null,
+"pages05.net": null,
+"paidstats.com": null,
+"parklogic.com": null,
+"parrable.com": null,
+"pclicks.com": null,
+"peerius.com": null,
+"percentmobile.com": null,
+"perfectaudience.com": null,
+"performanceanalyser.net": null,
+"performtracking.com": null,
+"perimeterx.net": null,
+"petametrics.com": null,
+"phone-analytics.com": null,
+"photorank.me": null,
+"pi-stats.com": null,
+"ping-fast.com": null,
+"pingdom.net": null,
+"pixel.parsely.com": null,
+"pixel.watch": null,
+"pixeleze.com": null,
+"pixelinteractivemedia.com": null,
+"pixelrevenue.com": null,
+"pixelsnippet.com": null,
+"pizzaandads.com": null,
+"placemypixel.com": null,
+"platformpanda.com": null,
+"popsample.com": null,
+"populr.me": null,
+"porngraph.com": null,
+"portfold.com": null,
+"postaffiliatepro.com": null,
+"postclickmarketing.com": null,
+"ppclocation.biz": null,
+"ppctracking.net": null,
+"prchecker.info": null,
+"precisioncounter.com": null,
+"predictiveresponse.net": null,
+"prnx.net": null,
+"profilertracking3.com": null,
+"profilesnitch.com": null,
+"projecthaile.com": null,
+"projectsunblock.com": null,
+"proofpositivemedia.com": null,
+"proxad.net": null,
+"prtracker.com": null,
+"pstats.com": null,
+"psyma-statistics.com": null,
+"ptengine.com": null,
+"publishflow.com": null,
+"pulselog.com": null,
+"purevideo.com": null,
+"pzkysq.pink": null,
+"q-counter.com": null,
+"q-stats.nl": null,
+"qbaka.net": null,
+"qdtracking.com": null,
+"qsstats.com": null,
+"quantcount.com": null,
+"quantserve.com": null,
+"qubitproducts.com": null,
+"questradeaffiliates.com": null,
+"quillion.com": null,
+"quintelligence.com": null,
+"radarstats.com": null,
+"radarurl.com": null,
+"rampanel.com": null,
+"rampmetrics.com": null,
+"rankingpartner.com": null,
+"rapidcounter.com": null,
+"rapidstats.net": null,
+"rapidtrk.net": null,
+"reactful.com": null,
+"readertracking.com": null,
+"readnotify.com": null,
+"real5traf.ru": null,
+"realcounter.eu": null,
+"realcounters.com": null,
+"realtimewebstats.net": null,
+"realtracker.com": null,
+"realtracking.ninja": null,
+"redcounter.net": null,
+"redistats.com": null,
+"redstatcounter.com": null,
+"reinvigorate.net": null,
+"relead.com": null,
+"reliablecounter.com": null,
+"remarketstats.com": null,
+"res-x.com": null,
+"revenuepilot.com": null,
+"revenuewire.net": null,
+"revolvermaps.com": null,
+"rewardtv.com": null,
+"reztrack.com": null,
+"rfihub.com": null,
+"rhinoseo.com": null,
+"riastats.com": null,
+"richmetrics.com": null,
+"ritecounter.com": null,
+"rkdms.com": null,
+"rlcdn.com": null,
+"rnengage.com": null,
+"roia.biz": null,
+"roispy.com": null,
+"roitesting.com": null,
+"roivista.com": null,
+"rollingcounters.com": null,
+"rs6.net": null,
+"rsvpgenius.com": null,
+"ru4.com": null,
+"rumanalytics.com": null,
+"sageanalyst.net": null,
+"saletrack.co.uk": null,
+"sarevtop.com": null,
+"sayutracking.co.uk": null,
+"scastnet.com": null,
+"schoolyeargo.com": null,
+"scorecardresearch.com": null,
+"scoutanalytics.net": null,
+"script.ag": null,
+"scripts21.com": null,
+"scriptshead.com": null,
+"searchignite.com": null,
+"sedotracker.com": null,
+"segment-analytics.com": null,
+"segment.com": null,
+"segment.io": null,
+"sematext.com": null,
+"sendtraffic.com": null,
+"serious-partners.com": null,
+"servestats.com": null,
+"serving-sys.com": null,
+"servingtrkid.com": null,
+"servustats.com": null,
+"sessioncam.com": null,
+"sexcounter.com": null,
+"sexystat.com": null,
+"shareasale.com": null,
+"sharpspring.com": null,
+"shinystat.com": null,
+"shoelace.com": null,
+"showroomlogic.com": null,
+"silverpop.com": null,
+"simplehitcounter.com": null,
+"simplereach.com": null,
+"simpli.fi": null,
+"singlefeed.com": null,
+"site24x7rum.com": null,
+"siteapps.com": null,
+"sitebro.com": null,
+"sitebro.net": null,
+"sitebro.tw": null,
+"sitecompass.com": null,
+"siteimprove.com": null,
+"siteimproveanalytics.com": null,
+"sitelinktrack.com": null,
+"sitemeter.com": null,
+"sitereport.org": null,
+"sitestat.com": null,
+"sitetag.us": null,
+"sitetagger.co.uk": null,
+"sitetracker.com": null,
+"sitetraq.nl": null,
+"skimresources.com": null,
+"slingpic.com": null,
+"smartctr.com": null,
+"smartracker.net": null,
+"smileyhost.net": null,
+"smrtlnks.com": null,
+"sniperlog.ru": null,
+"snoobi.com": null,
+"socialhoney.co": null,
+"socialprofitmachine.com": null,
+"socialtrack.co": null,
+"socialtrack.net": null,
+"socketanalytics.com": null,
+"soflopxl.com": null,
+"softonic-analytics.net": null,
+"sojern.com": null,
+"sometrics.com": null,
+"sophus3.com": null,
+"spectate.com": null,
+"splittag.com": null,
+"springmetrics.com": null,
+"spycounter.net": null,
+"spylog.com": null,
+"spylog.ru": null,
+"spywords.com": null,
+"squidanalytics.com": null,
+"stadsvc.com": null,
+"startstat.ru": null,
+"stat08.com": null,
+"stat24.com": null,
+"statcount.com": null,
+"statcounter.com": null,
+"statcounterfree.com": null,
+"statcounters.info": null,
+"stathat.com": null,
+"stathound.com": null,
+"statisfy.net": null,
+"statistiche-web.com": null,
+"statistx.com": null,
+"statowl.com": null,
+"stats-analytics.info": null,
+"stats.cz": null,
+"stats2.com": null,
+"stats21.com": null,
+"stats2513.com": null,
+"stats4all.com": null,
+"stats4you.com": null,
+"statsbox.nl": null,
+"statsevent.com": null,
+"statsimg.com": null,
+"statsinsight.com": null,
+"statsit.com": null,
+"statsmachine.com": null,
+"statsrely.com": null,
+"statssheet.com": null,
+"statsw.com": null,
+"statswave.com": null,
+"statsy.net": null,
+"stattooz.com": null,
+"stattrax.com": null,
+"statun.com": null,
+"statuncore.com": null,
+"stcounter.com": null,
+"steelhousemedia.com": null,
+"stormiq.com": null,
+"stroeerdigitalmedia.de": null,
+"sub2tech.com": null,
+"successfultogether.co.uk": null,
+"summitemarketinganalytics.com": null,
+"sumologic.com": null,
+"supercounters.com": null,
+"superstats.com": null,
+"supert.ag": null,
+"surefire.link": null,
+"surfcounters.com": null,
+"surfertracker.com": null,
+"surveyscout.com": null,
+"surveywriter.com": null,
+"swfstats.com": null,
+"swiss-counter.com": null,
+"sxtracking.com": null,
+"synthasite.net": null,
+"t-analytics.com": null,
+"tagcommander.com": null,
+"tagifydiageo.com": null,
+"tagsrvcs.com": null,
+"targetfuel.com": null,
+"tcimg.com": null,
+"tdstats.com": null,
+"tedioustooth.com": null,
+"tellapart.com": null,
+"tendatta.com": null,
+"tentaculos.net": null,
+"terabytemedia.com": null,
+"testin.cn": null,
+"thebestlinks.com": null,
+"thebrighttag.com": null,
+"thecounter.com": null,
+"thefreehitcounter.com": null,
+"thermstats.com": null,
+"thesearchagency.net": null,
+"thisisacoolthing.com": null,
+"thisisanothercoolthing.com": null,
+"tinycounter.com": null,
+"tkqlhce.com": null,
+"tnctrx.com": null,
+"tns-counter.ru": null,
+"tns-cs.net": null,
+"top100bloggers.com": null,
+"top100webshops.com": null,
+"top10sportsites.com": null,
+"topblogging.com": null,
+"toplist.cz": null,
+"touchclarity.com": null,
+"tracc.it": null,
+"trace.events": null,
+"tracemyip.org": null,
+"tracetracking.net": null,
+"track-web.net": null,
+"track2.me": null,
+"trackalyzer.com": null,
+"trackbar.info": null,
+"trackcdn.com": null,
+"trackcmp.net": null,
+"trackconsole.com": null,
+"trackdiscovery.net": null,
+"trackeame.com": null,
+"trackedlink.net": null,
+"trackedweb.net": null,
+"tracking100.com": null,
+"tracking202.com": null,
+"trackinglabs.com": null,
+"trackkas.com": null,
+"trackmyweb.net": null,
+"trackset.com": null,
+"tracksy.com": null,
+"tracktrk.net": null,
+"trackuity.com": null,
+"trackvoluum.com": null,
+"trackword.biz": null,
+"trackyourstats.com": null,
+"tradedoubler.com": null,
+"tradescape.biz": null,
+"trafficby.net": null,
+"trafficengine.net": null,
+"trafficfacts.com": null,
+"trafficjoint.com": null,
+"trafficregenerator.com": null,
+"traffikcntr.com": null,
+"trafic.ro": null,
+"trailheadapp.com": null,
+"treasuredata.com": null,
+"trekmedia.net": null,
+"trendcounter.com": null,
+"trgtcdn.com": null,
+"triggertag.gorillanation.com": null,
+"trovus.co.uk": null,
+"trs.cn": null,
+"tru.am": null,
+"truconversion.com": null,
+"truehits.in.th": null,
+"truehits1.gits.net.th": null,
+"truoptik.com": null,
+"tscounter.com": null,
+"tubetrafficcash.com": null,
+"tynt.com": null,
+"ubertags.com": null,
+"ubertracking.info": null,
+"ugdturner.com": null,
+"umbel.com": null,
+"upstats.ru": null,
+"uptimeviewer.com": null,
+"uralweb.ru": null,
+"urlbrief.com": null,
+"usabilitytools.com": null,
+"usabilla.com": null,
+"userlook.com": null,
+"useronlinecounter.com": null,
+"userreport.com": null,
+"userzoom.com": null,
+"v3cdn.net": null,
+"valaffiliates.com": null,
+"vantage-media.net": null,
+"vbanalytics.com": null,
+"vdna-assets.com": null,
+"veinteractive.com": null,
+"ventivmedia.com": null,
+"verticalscope.com": null,
+"vertster.com": null,
+"video.oms.eu": null,
+"videos.oms.eu": null,
+"videostat.com": null,
+"visibility-stats.com": null,
+"visistat.com": null,
+"visitlog.net": null,
+"visitor-analytics.net": null,
+"visitor-track.com": null,
+"visitorglobe.com": null,
+"visitorinspector.com": null,
+"visitorjs.com": null,
+"visitorpath.com": null,
+"visitorprofiler.com": null,
+"visitortracklog.com": null,
+"visitorville.com": null,
+"visitstreamer.com": null,
+"visualdna-stats.com": null,
+"visualdna.com": null,
+"visualwebsiteoptimizer.com": null,
+"voicefive.com": null,
+"voodooalerts.com": null,
+"vstats.co": null,
+"vtracker.net": null,
+"w3counter.com": null,
+"w55c.net": null,
+"waframedia9.com": null,
+"web-counter.net": null,
+"web-stat.com": null,
+"web-stat.net": null,
+"webclicktracker.com": null,
+"webcounter.co.za": null,
+"webcounter.ws": null,
+"webflowmetrics.com": null,
+"webgains.com": null,
+"webglstats.com": null,
+"webiqonline.com": null,
+"webleads-tracker.com": null,
+"webseoanalytics.co.za": null,
+"website-hit-counters.com": null,
+"websiteceo.com": null,
+"websiteonlinecounter.com": null,
+"websiteperform.com": null,
+"websitewelcome.com": null,
+"webspectator.com": null,
+"webstat.com": null,
+"webstat.net": null,
+"webstat.se": null,
+"webstats.com": null,
+"webstats4u.com": null,
+"webtraffic.se": null,
+"webtrafficagents.com": null,
+"webtraxs.com": null,
+"webtrekk-asia.net": null,
+"webtrends.com": null,
+"webtrendslive.com": null,
+"wemfbox.ch": null,
+"whackedmedia.com": null,
+"whatismyip.win": null,
+"whoisvisiting.com": null,
+"whosclickingwho.com": null,
+"wikia-beacon.com": null,
+"wildxtraffic.com": null,
+"wiredminds.de": null,
+"wisetrack.net": null,
+"wishloop.com": null,
+"woopra.com": null,
+"worldlogger.com": null,
+"wowanalytics.co.uk": null,
+"wp-stats.com": null,
+"wpdstat.com": null,
+"wtp101.com": null,
+"wtstats.com": null,
+"wundercounter.com": null,
+"wwwstats.info": null,
+"x-stat.de": null,
+"xg4ken.com": null,
+"xiti.com": null,
+"xxxcounter.com": null,
+"xyztraffic.com": null,
+"y-track.com": null,
+"yamanoha.com": null,
+"ybotvisit.com": null,
+"ycctrk.co.uk": null,
+"yieldbot.com": null,
+"yieldify.com": null,
+"youmetrix.co.uk": null,
+"your-counter.be": null,
+"youramigo.com": null,
+"zanox-affiliate.de": null,
+"zanox.com": null,
+"zdbb.net": null,
+"zenlivestats.com": null,
+"zoomanalytics.co": null,
+"zoomflow.com": null,
+"zqtk.net": null,
+"zroitracker.com": null,
+"a.mobify.com": null,
+"activetracker.activehotels.com": null,
+"ad.aloodo.com": null,
+"adfox.yandex.ru": null,
+"adlog.com.com": null,
+"ads-trk.vidible.tv": null,
+"ads.bridgetrack.com": null,
+"adtrack.calls.net": null,
+"affiliate.iamplify.com": null,
+"affiliate.mediatemple.net": null,
+"affiliates.mgmmirage.com": null,
+"affiliates.minglematch.com": null,
+"affiliates.spark.net": null,
+"affiliates.swappernet.com": null,
+"akatracking.esearchvision.com": null,
+"ams.addflow.ru": null,
+"an.yandex.ru": null,
+"analytic.pho.fm": null,
+"analytic.xingcloud.com": null,
+"analyticapi.pho.fm": null,
+"analyticcdn.globalmailer.com": null,
+"analytics-rhwg.rhcloud.com": null,
+"analytics-static.ugc.bazaarvoice.com": null,
+"analytics-v2.anvato.com": null,
+"analytics.abacast.com": null,
+"analytics.adeevo.com": null,
+"analytics.amakings.com": null,
+"analytics.anvato.net": null,
+"analytics.apnewsregistry.com": null,
+"analytics.artirix.com": null,
+"analytics.atomiconline.com": null,
+"analytics.avanser.com.au": null,
+"analytics.aweber.com": null,
+"analytics.bigcommerce.com": null,
+"analytics.brandcrumb.com": null,
+"analytics.carambo.la": null,
+"analytics.cincopa.com": null,
+"analytics.clickpathmedia.com": null,
+"analytics.closealert.com": null,
+"analytics.cmg.net": null,
+"analytics.codigo.se": null,
+"analytics.conmio.com": null,
+"analytics.convertlanguage.com": null,
+"analytics.cynapse.com": null,
+"analytics.datahc.com": null,
+"analytics.dev.springboardvideo.com": null,
+"analytics.edgekey.net": null,
+"analytics.edgesuite.net": null,
+"analytics.episodic.com": null,
+"analytics.fairfax.com.au": null,
+"analytics.favcy.com": null,
+"analytics.gvim.mobi": null,
+"analytics.hosting24.com": null,
+"analytics.hpprintx.com": null,
+"analytics.kaltura.com": null,
+"analytics.kapost.com": null,
+"analytics.live.com": null,
+"analytics.livestream.com": null,
+"analytics.mailmunch.co": null,
+"analytics.matchbin.com": null,
+"analytics.mlstatic.com": null,
+"analytics.onlyonlinemarketing.com": null,
+"analytics.ooyala.com": null,
+"analytics.optilead.co.uk": null,
+"analytics.orenshmu.com": null,
+"analytics.performable.com": null,
+"analytics.photorank.me": null,
+"analytics.piksel.com": null,
+"analytics.prod.aws.ecnext.net": null,
+"analytics.r17.com": null,
+"analytics.radiatemedia.com": null,
+"analytics.recruitics.com": null,
+"analytics.revee.com": null,
+"analytics.reyrey.net": null,
+"analytics.rogersmedia.com": null,
+"analytics.shareaholic.com": null,
+"analytics.sitewit.com": null,
+"analytics.snidigital.com": null,
+"analytics.sonymusic.com": null,
+"analytics.springboardvideo.com": null,
+"analytics.staticiv.com": null,
+"analytics.stg.springboardvideo.com": null,
+"analytics.strangeloopnetworks.com": null,
+"analytics.themarketiq.com": null,
+"analytics.tout.com": null,
+"analytics.tribeca.vidavee.com": null,
+"analytics.urx.io": null,
+"analytics.vendemore.com": null,
+"analytics.websolute.it": null,
+"analytics.wildtangent.com": null,
+"analytics.yola.net": null,
+"analytics.yolacdn.net": null,
+"analyticsengine.s3.amazonaws.com": null,
+"attributiontrackingga.googlecode.com": null,
+"audit.median.hu": null,
+"axislogger.appspot.com": null,
+"b-aws.aol.com": null,
+"basilic.netdna-cdn.com": null,
+"bat.bing.com": null,
+"beacon.affil.walmart.com": null,
+"beacon.errorception.com": null,
+"beacon.gcion.com": null,
+"beacon.gu-web.net": null,
+"beacon.guim.co.uk": null,
+"beacon.heliumnetwork.com": null,
+"beacon.indieclick.com": null,
+"beacon.livefyre.com": null,
+"beacon.richrelevance.com": null,
+"beacon.riskified.com": null,
+"beacon.rum.dynapis.com": null,
+"beacon.securestudies.com": null,
+"beacon.sojern.com": null,
+"beacon.squixa.net": null,
+"beacon.thred.woven.com": null,
+"beacon.viewlift.com": null,
+"beacon2.indieclick.com": null,
+"beacon2.indieclicktv.com": null,
+"beacons.brandads.net": null,
+"bid.g.doubleclick.net": null,
+"bitdash-reporting.appspot.com": null,
+"blip.bizrate.com": null,
+"bonsai.internetbrands.com": null,
+"bright.bncnt.com": null,
+"bs.yandex.ru": null,
+"btn.clickability.com": null,
+"business.sharedcount.com": null,
+"c.compete.com": null,
+"c.imedia.cz": null,
+"c.wen.ru": null,
+"c3metrics.medifast1.com": null,
+"cadreon.s3.amazonaws.com": null,
+"canvas-ping.conduit-data.com": null,
+"canvas-usage-v2.conduit-data.com": null,
+"cc.swiftype.com": null,
+"cdn.trafficexchangelist.com": null,
+"ce.lijit.com": null,
+"cgicounter.oneandone.co.uk": null,
+"cgicounter.puretec.de": null,
+"chanalytics.merchantadvantage.com": null,
+"chartaca.com.s3.amazonaws.com": null,
+"click.appinthestore.com": null,
+"click.aristotle.net": null,
+"click.geopaysys.com": null,
+"click.rssfwd.com": null,
+"click1.email.nymagazine.com": null,
+"click1.online.vulture.com": null,
+"clicks.dealer.com": null,
+"clickstream.loomia.com": null,
+"clicktale.pantherssl.com": null,
+"clicktalecdn.sslcs.cdngc.net": null,
+"clickthru.lefbc.com": null,
+"clicktracker.iscan.nl": null,
+"clicktracks.aristotle.net": null,
+"clientstat.castup.net": null,
+"cloudfront-labs.amazonaws.com": null,
+"cm.g.doubleclick.net": null,
+"cnt.3dmy.net": null,
+"cnt.mastorage.net": null,
+"collect.igodigital.com": null,
+"collector.air.tv": null,
+"collector.contentexchange.me": null,
+"collector.leaddyno.com": null,
+"collector.nextguide.tv": null,
+"collector.roistat.com": null,
+"control.adap.tv": null,
+"cookies.livepartners.com": null,
+"cookietracker.cloudapp.net": null,
+"cookiex.ngd.yahoo.com": null,
+"count.paycounter.com": null,
+"counter.bloke.com": null,
+"counter.cam-content.com": null,
+"counter.htmlvalidator.com": null,
+"counter.hyipexplorer.com": null,
+"counter.maases.com": null,
+"counter.mgaserv.com": null,
+"counter.pagesview.com": null,
+"counter.pax.com": null,
+"counter.powweb.com": null,
+"counter.rambler.ru": null,
+"counter.scribblelive.com": null,
+"counter.scribblelive.net": null,
+"counter.snackly.co": null,
+"counter.sparklit.com": null,
+"counter.top.ge": null,
+"counter.webcom.com": null,
+"counter.webmasters.bpath.com": null,
+"counter.yadro.ru": null,
+"counters.freewebs.com": null,
+"counters.gigya.com": null,
+"csi.gstatic.com": null,
+"curate.nestedmedia.com": null,
+"cx.atdmt.com": null,
+"d.shareaholic.com": null,
+"d169bbxks24g2u.cloudfront.net": null,
+"d1cdnlzf6usiff.cloudfront.net": null,
+"d1cerpgff739r9.cloudfront.net": null,
+"d1clfvuu2240eh.cloudfront.net": null,
+"d1clufhfw8sswh.cloudfront.net": null,
+"d1cr9zxt7u0sgu.cloudfront.net": null,
+"d1gp8joe0evc8s.cloudfront.net": null,
+"d1ksyxj9xozc2j.cloudfront.net": null,
+"d1lm7kd3bd3yo9.cloudfront.net": null,
+"d1m6l9dfulcyw7.cloudfront.net": null,
+"d1nh2vjpqpfnin.cloudfront.net": null,
+"d1qpxk1wfeh8v1.cloudfront.net": null,
+"d1r27qvpjiaqj3.cloudfront.net": null,
+"d1r55yzuc1b1bw.cloudfront.net": null,
+"d1rgnfh960lz2b.cloudfront.net": null,
+"d1ros97qkrwjf5.cloudfront.net": null,
+"d1wscoizcbxzhp.cloudfront.net": null,
+"d1xfq2052q7thw.cloudfront.net": null,
+"d1yu5hbtu8mng9.cloudfront.net": null,
+"d1z2jf7jlzjs58.cloudfront.net": null,
+"d21o24qxwf7uku.cloudfront.net": null,
+"d22v2nmahyeg2a.cloudfront.net": null,
+"d23p9gffjvre9v.cloudfront.net": null,
+"d28g9g3vb08y70.cloudfront.net": null,
+"d2gfdmu30u15x7.cloudfront.net": null,
+"d2gfi8ctn6kki7.cloudfront.net": null,
+"d2kmrmwhq7wkvs.cloudfront.net": null,
+"d2nxi61n77zqpl.cloudfront.net": null,
+"d2oh4tlt9mrke9.cloudfront.net": null,
+"d2pxb4n3f9klsc.cloudfront.net": null,
+"d2ry9vue95px0b.cloudfront.net": null,
+"d2so4705rl485y.cloudfront.net": null,
+"d2tgfbvjf3q6hn.cloudfront.net": null,
+"d2xgf76oeu9pbh.cloudfront.net": null,
+"d303e3cdddb4ded4b6ff495a7b496ed5.s3.amazonaws.com": null,
+"d3135glefggiep.cloudfront.net": null,
+"d33im0067v833a.cloudfront.net": null,
+"d34ko97cxuv4p7.cloudfront.net": null,
+"d36lvucg9kzous.cloudfront.net": null,
+"d36wtdrdo22bqa.cloudfront.net": null,
+"d396ihyrqc81w.cloudfront.net": null,
+"d3a2okcloueqyx.cloudfront.net": null,
+"d3cxv97fi8q177.cloudfront.net": null,
+"d3ezl4ajpp2zy8.cloudfront.net": null,
+"d3h1v5cflrhzi4.cloudfront.net": null,
+"d3hr5gm0wlxm5h.cloudfront.net": null,
+"d3kyk5bao1crtw.cloudfront.net": null,
+"d3l3lkinz3f56t.cloudfront.net": null,
+"d3mskfhorhi2fb.cloudfront.net": null,
+"d3ojzyhbolvoi5.cloudfront.net": null,
+"d3qxwzhswv93jk.cloudfront.net": null,
+"d3r7h55ola878c.cloudfront.net": null,
+"d3rmnwi2tssrfx.cloudfront.net": null,
+"d3s7ggfq1s6jlj.cloudfront.net": null,
+"d3tglifpd8whs6.cloudfront.net": null,
+"d4ax0r5detcsu.cloudfront.net": null,
+"d6jkenny8w8yo.cloudfront.net": null,
+"d81mfvml8p5ml.cloudfront.net": null,
+"d8rk54i4mohrb.cloudfront.net": null,
+"d9lq0o81skkdj.cloudfront.net": null,
+"daq0d0aotgq0f.cloudfront.net": null,
+"data.alexa.com": null,
+"data.beyond.com": null,
+"data.circulate.com": null,
+"data.imakenews.com": null,
+"data.marketgid.com": null,
+"data.minute.ly": null,
+"data.queryly.com": null,
+"datam8.co.nz": null,
+"dc8na2hxrj29i.cloudfront.net": null,
+"demandmedia.s3.amazonaws.com": null,
+"dfanalytics.dealerfire.com": null,
+"dfdbz2tdq3k01.cloudfront.net": null,
+"djibeacon.djns.com": null,
+"dkj2m377b0yzw.cloudfront.net": null,
+"dl1d2m8ri9v3j.cloudfront.net": null,
+"dn34cbtcv9mef.cloudfront.net": null,
+"dnn506yrbagrg.cloudfront.net": null,
+"doug1izaerwt3.cloudfront.net": null,
+"dt.sellpoint.net": null,
+"du8783wkf05yr.cloudfront.net": null,
+"dufue2m4sondk.cloudfront.net": null,
+"dw.com.com": null,
+"dymlo6ffhj97l.cloudfront.net": null,
+"dzmxze7hxwn6b.cloudfront.net": null,
+"dzxxxg6ij9u99.cloudfront.net": null,
+"ebay.northernhost.com": null,
+"ecommstats.s3.amazonaws.com": null,
+"entry-stats.huffpost.com": null,
+"epl.paypal-communication.com": null,
+"eservicesanalytics.com.au": null,
+"event.loyalty.bigdoor.com": null,
+"event.previewnetworks.com": null,
+"event.trove.com": null,
+"eventgateway.soundcloud.com": null,
+"eventlog.inspsearch.com": null,
+"eventlog.inspsearchapi.com": null,
+"events.antenna.is": null,
+"events.bounceexchange.com": null,
+"events.izooto.com": null,
+"events.jotform.com": null,
+"events.launchdarkly.com": null,
+"events.marquee-cdn.net": null,
+"events.medio.com": null,
+"events.realgravity.com": null,
+"events.whisk.com": null,
+"eventtracker.videostrip.com": null,
+"experience.contextly.com": null,
+"fastcounter.bcentral.com": null,
+"fastcounter.onlinehoster.net": null,
+"fbpixel.network.exchange": null,
+"filament-stats.herokuapp.com": null,
+"flashstats.libsyn.com": null,
+"fluidsurveys-com.fs.cm": null,
+"ga-beacon.appspot.com": null,
+"geo.q5media.net": null,
+"geoip.nekudo.com": null,
+"geoip.taskforce.is": null,
+"glbdns.microsoft.com": null,
+"glogger.inspcloud.com": null,
+"go-stats.dlinkddns.com": null,
+"gsp1.baidu.com": null,
+"gtrk.s3.amazonaws.com": null,
+"hawkeye-data-production.sciencemag.org.s3-website-us-east-1.amazonaws.com": null,
+"hello.staticstuff.net": null,
+"hi.hellobar.com": null,
+"hit-pool.upscore.io": null,
+"hits.dealer.com": null,
+"hm.baidu.com": null,
+"hop.clickbank.net": null,
+"i-stats.ieurop.net": null,
+"ihstats.cloudapp.net": null,
+"imp.affiliator.com": null,
+"imp.clickability.com": null,
+"informer.yandex.ru": null,
+"insights.gravity.com": null,
+"itracking.fccinteractive.com": null,
+"javascriptcounter.appspot.com": null,
+"js-agent.newrelic.com": null,
+"kalstats.kaltura.com": null,
+"l.coincident.tv": null,
+"l.fairblocker.com": null,
+"l.ooyala.com": null,
+"l.player.ooyala.com": null,
+"l.sharethis.com": null,
+"lct.salesforce.com": null,
+"leadtracking.plumvoice.com": null,
+"link.americastestkitchencorp.com": null,
+"link.huffingtonpost.com": null,
+"link.informer.com": null,
+"livecounter.theyosh.nl": null,
+"livestats.kaltura.com": null,
+"log.adap.tv": null,
+"log.invodo.com": null,
+"log.olark.com": null,
+"log1.survey.io": null,
+"logger.logidea.info": null,
+"logger.snackly.co": null,
+"logger.sociablelabs.com": null,
+"logging.carambo.la": null,
+"loggingapi.spingo.com": null,
+"logs.spilgames.com": null,
+"logs.thebloggernetwork.com": null,
+"logssl.enquisite.com": null,
+"loxodo-analytics.ext.nile.works": null,
+"lunametrics.wpengine.netdna-cdn.com": null,
+"m.addthisedge.com": null,
+"magnify360-cdn.s3.amazonaws.com": null,
+"mc.yandex.ru": null,
+"mediametrics.mpsa.com": null,
+"mediapartner.bigpoint.net": null,
+"metering.pagesuite.com": null,
+"metric.nwsource.com": null,
+"metrics-api.librato.com": null,
+"metrics.brightcove.com": null,
+"metrics.chmedia.com": null,
+"metrics.ctvdigital.net": null,
+"metrics.el-mundo.net": null,
+"metrics.feedroom.com": null,
+"metrics.loomia.com": null,
+"metrics.scribblelive.com": null,
+"metrics.seenon.com": null,
+"metrics.sonymusicd2c.com": null,
+"metrics.toptenreviews.com": null,
+"metrics.upcload.com": null,
+"metrics.wikinvest.com": null,
+"mmpstats.mirror-image.com": null,
+"mp.pianomedia.eu": null,
+"mtrcs.samba.tv": null,
+"myscoop-tracking.googlecode.com": null,
+"neocounter.neoworx-blog-tools.net": null,
+"newsanalytics.com.au": null,
+"nol.yahoo.com": null,
+"nonxt1.c.youtube.com": null,
+"o.addthis.com": null,
+"observer.ip-label.net": null,
+"octopart-analytics.com": null,
+"offermatica.intuit.com": null,
+"offers.keynote.com": null,
+"om.rogersmedia.com": null,
+"onespot-tracking.herokuapp.com": null,
+"pages-stats.rbl.ms": null,
+"partner.cynapse.com": null,
+"partners.etoro.com": null,
+"partners.thefilter.com": null,
+"peermapcontent.affino.com": null,
+"perr.h-cdn.com": null,
+"ping.hellobar.com": null,
+"ping.rasset.ie": null,
+"pixel.colorupmedia.com": null,
+"pixel.fanbridge.com": null,
+"pixel.newsdata.com.au": null,
+"pixel.solvemedia.com": null,
+"pixels.youknowbest.com": null,
+"platform.communicatorcorp.com": null,
+"pmetrics.performancing.com": null,
+"postpixel.vindicosuite.com": null,
+"providence.voxmedia.com": null,
+"prstats.postrelease.com": null,
+"pt.crossmediaservices.com": null,
+"ptracker.nurturehq.com": null,
+"ptsc.shoplocal.com": null,
+"pub.sheknows.com": null,
+"px.excitedigitalmedia.com": null,
+"px.owneriq.net": null,
+"qlog.adap.tv": null,
+"qos.video.yimg.com": null,
+"qubitanalytics.appspot.com": null,
+"r.mail.ru": null,
+"r.msn.com": null,
+"referrer.disqus.com": null,
+"report.downloastar.com": null,
+"reporting.singlefeed.com": null,
+"reportinglogger.my.rightster.com": null,
+"rich-agent.s3.amazonaws.com": null,
+"rlinks.one.in": null,
+"roitrack.addlvr.com": null,
+"rs.sinajs.cn": null,
+"rtt.campanja.com": null,
+"s.clickability.com": null,
+"s3-tracking.synthasite.net.s3.amazonaws.com": null,
+"sadv.dadapro.com": null,
+"scout.haymarketmedia.com": null,
+"scripts.psyma.com": null,
+"search.mediatarget.net": null,
+"searchstats.usa.gov": null,
+"seg.sharethis.com": null,
+"segments.adap.tv": null,
+"sftrack.searchforce.net": null,
+"shared.65twenty.com": null,
+"sig.atdmt.com": null,
+"sig.gamerdna.com": null,
+"sitereports.officelive.com": null,
+"spacedust.netmediaeurope.com": null,
+"speedtrap.shopdirect.com": null,
+"stat.boredomtherapy.com": null,
+"stat.easydate.biz": null,
+"stat.ed.cupidplc.com": null,
+"stat.itp-nyc.com": null,
+"stat.php-d.com": null,
+"stat.pladform.ru": null,
+"stat.segitek.hu": null,
+"stat.to.cupidplc.com": null,
+"stat.web-regie.com": null,
+"statdb.pressflex.com": null,
+"static.parsely.com": null,
+"statistics.infowap.info": null,
+"statistics.m0lxcdn.kukuplay.com": null,
+"statistics.tattermedia.com": null,
+"statistics.wibiya.com": null,
+"statm.the-adult-company.com": null,
+"stats-messages.gifs.com": null,
+"stats-newyork1.bloxcms.com": null,
+"stats.big-boards.com": null,
+"stats.bitgravity.com": null,
+"stats.bluebillywig.com": null,
+"stats.cdn.pfn.bz": null,
+"stats.cdn.playfair.co.za": null,
+"stats.clickability.com": null,
+"stats.clipprtv.com": null,
+"stats.cloudwp.io": null,
+"stats.cnevids.com": null,
+"stats.complex.com": null,
+"stats.datahjaelp.net": null,
+"stats.dice.com": null,
+"stats.directnic.com": null,
+"stats.edicy.com": null,
+"stats.free-rein.net": null,
+"stats.g.doubleclick.net": null,
+"stats.geegain.com": null,
+"stats.gifs.com": null,
+"stats.heyoya.com": null,
+"stats.highwire.com": null,
+"stats.indexstats.com": null,
+"stats.inergizedigitalmedia.com": null,
+"stats.itweb.co.za": null,
+"stats.kaltura.com": null,
+"stats.lightningcast.net": null,
+"stats.load.com": null,
+"stats.lotlinx.com": null,
+"stats.magnify.net": null,
+"stats.manticoretechnology.com": null,
+"stats.mituyu.com": null,
+"stats.nebula.fi": null,
+"stats.netbopdev.co.uk": null,
+"stats.olark.com": null,
+"stats.ombx.io": null,
+"stats.openload.co": null,
+"stats.ozwebsites.biz": null,
+"stats.polldaddy.com": null,
+"stats.qmerce.com": null,
+"stats.ref2000.com": null,
+"stats.sa-as.com": null,
+"stats.sawlive.tv": null,
+"stats.shopify.com": null,
+"stats.smartclip.net": null,
+"stats.snacktools.net": null,
+"stats.snappytv.com": null,
+"stats.solidopinion.com": null,
+"stats.staging.suite101.com": null,
+"stats.surfaid.ihost.com": null,
+"stats.svpply.com": null,
+"stats.topofblogs.com": null,
+"stats.twistage.com": null,
+"stats.viddler.com": null,
+"stats.vodpod.com": null,
+"stats.webs.com": null,
+"stats.webstarts.com": null,
+"stats.whicdn.com": null,
+"stats.wp.com": null,
+"stats.yme.com": null,
+"stats.yourminis.com": null,
+"stats1.tune.pk": null,
+"stats2.lightningcast.net": null,
+"stats3.unrulymedia.com": null,
+"statsadv.dadapro.com": null,
+"statsapi.screen9.com": null,
+"statsdev.treesd.com": null,
+"statsrv.451.com": null,
+"statt-collect.herokuapp.com": null,
+"su.addthis.com": null,
+"survey.interquest.com": null,
+"surveywall-api.survata.com": null,
+"sync.adap.tv": null,
+"t.a3cloud.net": null,
+"t.sharethis.com": null,
+"t.smile.eu": null,
+"t2.t2b.click": null,
+"tag.aticdn.net": null,
+"tagger.opecloud.com": null,
+"targeting.wpdigital.net": null,
+"te.supportfreecontent.com": null,
+"telemetry.soundcloud.com": null,
+"thetradedesk-tags.s3.amazonaws.com": null,
+"tl.tradetracker.net": null,
+"tm.tradetracker.net": null,
+"top-fwz1.mail.ru": null,
+"tr-metrics.loomia.com": null,
+"tr.advance.net": null,
+"tr.cloud-media.fr": null,
+"track.99acres.com": null,
+"track.addevent.com": null,
+"track.atgstores.com": null,
+"track.atom-data.io": null,
+"track.bannedcelebs.com": null,
+"track.cafemomstatic.com": null,
+"track.captivate.ai": null,
+"track.did-it.com": null,
+"track.digitalriver.com": null,
+"track.dzloans.com": null,
+"track.g-bot.net": null,
+"track.gridlockparadise.com": null,
+"track.juno.com": null,
+"track.kandle.org": null,
+"track.leadin.com": null,
+"track.mailerlite.com": null,
+"track.mybloglog.com": null,
+"track.mycliplister.com": null,
+"track.omg2.com": null,
+"track.parse.ly": null,
+"track.pricespider.com": null,
+"track.propelplus.com": null,
+"track.qcri.org": null,
+"track.qoof.com": null,
+"track.redirecting2.net": null,
+"track.ringcentral.com": null,
+"track.sauce.ly": null,
+"track.searchignite.com": null,
+"track.securedvisit.com": null,
+"track.shop2market.com": null,
+"track.sigfig.com": null,
+"track.sitetag.us": null,
+"track.social.com": null,
+"track.spots.im": null,
+"track.sprinklecontent.com": null,
+"track.strife.com": null,
+"track.td3x.com": null,
+"track.untd.com": null,
+"track.vscash.com": null,
+"track.written.com": null,
+"track.yfret.com": null,
+"track.yieldsoftware.com": null,
+"tracker.beezup.com": null,
+"tracker.downdetector.com": null,
+"tracker.everestnutrition.com": null,
+"tracker.financialcontent.com": null,
+"tracker.icerocket.com": null,
+"tracker.iqnomy.com": null,
+"tracker.issuu.com": null,
+"tracker.keywordintent.com": null,
+"tracker.marinsoftware.com": null,
+"tracker.mgnetwork.com": null,
+"tracker.mtrax.net": null,
+"tracker.myseofriend.net": null,
+"tracker.neon-images.com": null,
+"tracker.neon-lab.com": null,
+"tracker.roitesting.com": null,
+"tracker.seoboost.net": null,
+"tracker.timesgroup.com": null,
+"tracker.twenga.": null,
+"tracker.u-link.me": null,
+"tracker.vreveal.com": null,
+"tracker2.apollo-mail.net": null,
+"trackerapi.truste.com": null,
+"trackicollect.ibase.fr": null,
+"tracking.adalyser.com": null,
+"tracking.allposters.com": null,
+"tracking.badgeville.com": null,
+"tracking.bidmizer.com": null,
+"tracking.cmcigroup.com": null,
+"tracking.cmjump.com.au": null,
+"tracking.dealerwebwatcher.com": null,
+"tracking.drsfostersmith.com": null,
+"tracking.dsmmadvantage.com": null,
+"tracking.edvisors.com": null,
+"tracking.ehavior.net": null,
+"tracking.fanbridge.com": null,
+"tracking.fccinteractive.com": null,
+"tracking.feedperfect.com": null,
+"tracking.fits.me": null,
+"tracking.g2crowd.com": null,
+"tracking.godatafeed.com": null,
+"tracking.i-click.com.hk": null,
+"tracking.interweave.com": null,
+"tracking.jotform.com": null,
+"tracking.keywee.co": null,
+"tracking.lengow.com": null,
+"tracking.listhub.net": null,
+"tracking.livingsocial.com": null,
+"tracking.maxcdn.com": null,
+"tracking.musixmatch.com": null,
+"tracking.performgroup.com": null,
+"tracking.plattformad.com": null,
+"tracking.plinga.de": null,
+"tracking.practicefusion.com": null,
+"tracking.quillion.com": null,
+"tracking.quisma.com": null,
+"tracking.rapidape.com": null,
+"tracking.searchmarketing.com": null,
+"tracking.sembox.it": null,
+"tracking.skyword.com": null,
+"tracking.sokrati.com": null,
+"tracking.sponsorpay.com": null,
+"tracking.synthasite.net": null,
+"tracking.target2sell.com": null,
+"tracking.theeword.co.uk": null,
+"tracking.thehut.net": null,
+"tracking.tradeking.com": null,
+"tracking.waterfrontmedia.com": null,
+"tracking.worldmedia.net": null,
+"tracking2.channeladvisor.com": null,
+"tracking2.interweave.com": null,
+"trackingapi.cloudapp.net": null,
+"trackingdev.nixxie.com": null,
+"tracksys.developlabs.net": null,
+"traffic.acwebconnecting.com": null,
+"traffic.belaydevelopment.com": null,
+"traffic.prod.cobaltgroup.com": null,
+"traffic.pubexchange.com": null,
+"traffic.shareaholic.com": null,
+"trakksocial.googlecode.com": null,
+"trax.dirxion.com": null,
+"tree-pixel-log.s3.amazonaws.com": null,
+"trf.intuitwebsites.com": null,
+"triad.technorati.com": null,
+"trk.vindicosuite.com": null,
+"ts.tradetracker.net": null,
+"ttdetect.staticimgfarm.com": null,
+"ucounter.ucoz.net": null,
+"usage.trackjs.com": null,
+"userlog.synapseip.tv": null,
+"vertical-stats.huffpost.com": null,
+"video-ad-stats.googlesyndication.com": null,
+"visit.geocities.com": null,
+"visit.webhosting.yahoo.com": null,
+"vtracking.in.com": null,
+"watch.teroti.com": null,
+"webeffective.keynote.com": null,
+"weblog.livesport.eu": null,
+"weblogger-dynamic-lb.playdom.com": null,
+"webservices.websitepros.com": null,
+"webstats.motigo.com": null,
+"webstats.seoinc.com": null,
+"webstats.thaindian.com": null,
+"webtracker.apicasystem.com": null,
+"webtracker.educationconnection.com": null,
+"whoson.creativemark.co.uk": null,
+"wibiya-actions.conduit-data.com": null,
+"wibiya-june-new-log.conduit-data.com": null,
+"widget.perfectmarket.com": null,
+"widget.quantcast.com": null,
+"win.staticstuff.net": null,
+"wp-stat.s3.amazonaws.com": null,
+"wstat.wibiya.com": null,
+"analytics.mecloud.vn": null,
+"aax-us-iad.amazon.com": null,
+"acookie.alibaba.com": null,
+"adguru.guruji.com": null,
+"adv.drtuber.com": null,
+"advancedtracker.appspot.com": null,
+"adwiretracker.fwix.com": null,
+"affiliate.mercola.com": null,
+"affiliate.productreview.com.au": null,
+"affiliate.resellerclub.com": null,
+"affiliates.genealogybank.com": null,
+"affiliates.londonmarketing.com": null,
+"affiliates.mozy.com": null,
+"affiliates.myfax.com": null,
+"affiliates.treasureisland.com": null,
+"affiliates.vpn.ht": null,
+"amp.virginmedia.com": null,
+"analytic.imlive.com": null,
+"analytics.adfreetime.com": null,
+"analytics.archive.org": null,
+"analytics.bloomberg.com": null,
+"analytics.femalefirst.co.uk": null,
+"analytics.global.sky.com": null,
+"analytics.go.com": null,
+"analytics.gorillanation.com": null,
+"analytics.ifood.tv": null,
+"analytics.iraiser.eu": null,
+"analytics.localytics.com": null,
+"analytics.mindjolt.com": null,
+"analytics.msnbc.msn.com": null,
+"analytics.newsinc.com": null,
+"analytics.posttv.com": null,
+"analytics.services.distractify.com": null,
+"analytics.skyscanner.net": null,
+"analytics.slashdotmedia.com": null,
+"analytics.teespring.com": null,
+"analytics.thenest.com": null,
+"analytics.thenewslens.com": null,
+"analytics.thevideo.me": null,
+"analytics.twitter.com": null,
+"analytics.upworthy.com": null,
+"analytics.us.archive.org": null,
+"analytics.volvocars.com": null,
+"analytics.wetpaint.me": null,
+"analytics.whatculture.com": null,
+"analytics.yahoo.com": null,
+"analyze.yahooapis.com": null,
+"atax.gamermetrics.com": null,
+"atax.gamespy.com": null,
+"atax.gamestats.com": null,
+"athenatmpbeacon.theglobeandmail.ca": null,
+"atrack.allposters.com": null,
+"atrack.art.com": null,
+"atracktive.collegehumor.com": null,
+"b-aws.techcrunch.com": null,
+"b.huffingtonpost.com": null,
+"b.myspace.com": null,
+"b.photobucket.com": null,
+"bat.adforum.com": null,
+"bats.video.yahoo.com": null,
+"bc.yahoo.com": null,
+"beacon-1.newrelic.com": null,
+"beacon.ehow.com": null,
+"beacon.examiner.com": null,
+"beacon.indieclicktv.com": null,
+"beacon.lycos.com": null,
+"beacon.netflix.com": null,
+"beacon.nuskin.com": null,
+"beacon.search.yahoo.com": null,
+"beacon.walmart.com": null,
+"beacon.wikia-services.com": null,
+"beacon.www.theguardian.com": null,
+"beacons.helium.com": null,
+"beap-bc.yahoo.com": null,
+"bench.uc.cn": null,
+"c.microsoft.com": null,
+"cbs.wondershare.com": null,
+"cdnstats.tube8.com": null,
+"chkpt.zdnet.com": null,
+"cl.expedia.com": null,
+"clck.yandex.com": null,
+"click.aliexpress.com": null,
+"click.engage.xbox.com": null,
+"click.mmosite.com": null,
+"click.udimg.com": null,
+"click2.cafepress.com": null,
+"clicks.hurriyet.com.tr": null,
+"clicks.traffictrader.net": null,
+"clkstat.china.cn": null,
+"clog.go.com": null,
+"cls.ichotelsgroup.com": null,
+"cmstrendslog.timesnow.tv": null,
+"cnt.nicemix.com": null,
+"cnt.nuvid.com": null,
+"cnt.vivatube.com": null,
+"collector-cdn.github.com": null,
+"collector.shopstream.co": null,
+"collector.shorte.st": null,
+"collector.statowl.com": null,
+"comms-web-tracking.uswitchinternal.com": null,
+"coolertracks.emailroi.com": null,
+"count.livetv.ru": null,
+"count.prx.org": null,
+"count.rin.ru": null,
+"counter.entertainmentwise.com": null,
+"counter.joins.com": null,
+"counter.promodeejay.net": null,
+"counter.sina.com.cn": null,
+"counter.theconversation.edu.au": null,
+"counter.zerohedge.com": null,
+"da.virginmedia.com": null,
+"data.mic.com": null,
+"data.ryanair.com": null,
+"data.younow.com": null,
+"datacollector.coin.scribol.com": null,
+"dmtracking2.alibaba.com": null,
+"dw.cnet.com": null,
+"ec2-prod-tracker.babelgum.com": null,
+"enlightenment.secureshoppingbasket.com": null,
+"entry-stats.huffingtonpost.com": null,
+"eventlogger.soundcloud.com": null,
+"events.privy.com": null,
+"events.redditmedia.com": null,
+"events.turbosquid.com": null,
+"eventtracker.elitedaily.com": null,
+"evisit.exeter.ac.uk": null,
+"expbl2ro.xbox.com": null,
+"expdb2.msn.com": null,
+"f.staticlp.com": null,
+"fast.forbes.com": null,
+"g.msn.com": null,
+"ga.nsimg.net": null,
+"geo.yahoo.com": null,
+"geobeacon.ign.com": null,
+"geoip-lookup.vice.com": null,
+"geoip.al.com": null,
+"geoip.boredpanda.com": null,
+"geoip.cleveland.com": null,
+"geoip.gulflive.com": null,
+"geoip.inquirer.net": null,
+"geoip.lehighvalleylive.com": null,
+"geoip.masslive.com": null,
+"geoip.mlive.com": null,
+"geoip.nj.com": null,
+"geoip.nola.com": null,
+"geoip.oregonlive.com": null,
+"geoip.pennlive.com": null,
+"geoip.silive.com": null,
+"geoip.syracuse.com": null,
+"geoip.viamichelin.com": null,
+"geoiplookup.wikimedia.org": null,
+"glean.pop6.com": null,
+"gmonitor.aliimg.com": null,
+"imgtrack.domainmarket.com": null,
+"immassets.s3.amazonaws.com": null,
+"kinesisproxy.hearstlabs.com": null,
+"lh.secure.yahoo.com": null,
+"lilb2.shutterstock.com": null,
+"linkpuls.idg.no": null,
+"live-audience.dailymotion.com": null,
+"log.data.disney.com": null,
+"log.go.com": null,
+"log.optimizely.com": null,
+"log.snapdeal.com": null,
+"log.thevideo.me": null,
+"log.vdn.apps.cntv.cn": null,
+"log.wat.tv": null,
+"logdev.openload.co": null,
+"logger.dailymotion.com": null,
+"logger.viki.io": null,
+"logging.goodgamestudios.com": null,
+"loggingservices.tribune.com": null,
+"logs.dashlane.com": null,
+"lsam.research.microsoft.com": null,
+"lslmetrics.djlmgdigital.com": null,
+"marketing.alibaba.com": null,
+"meter-svc.nytimes.com": null,
+"metric.gstatic.com": null,
+"metric.inetcore.com": null,
+"metrics.apartments.com": null,
+"metrics.aws.sitepoint.com": null,
+"metrics.cbn.com": null,
+"metrics.cnn.com": null,
+"metrics.dailymotion.com": null,
+"metrics.ee.co.uk": null,
+"metrics.extremetech.com": null,
+"metrics.tbliab.net": null,
+"metrics.ted.com": null,
+"metrics.washingtonpost.com": null,
+"mp.twitch.tv": null,
+"nb.myspace.com": null,
+"nmtracking.netflix.com": null,
+"oimg.m.cnbc.com": null,
+"oimg.mobile.cnbc.com": null,
+"optimize-stats.voxmedia.com": null,
+"origin-tracking.trulia.com": null,
+"partner.worldoftanks.com": null,
+"partners.badongo.com": null,
+"partners.mysavings.com": null,
+"pclick.europe.yahoo.com": null,
+"pclick.internal.yahoo.com": null,
+"pclick.yahoo.com": null,
+"performances.bestofmedia.com": null,
+"ping.buto.tv": null,
+"pings.blip.tv": null,
+"pix.eads.com": null,
+"pixel.facebook.com": null,
+"pixel.pcworld.com": null,
+"pixel.redditmedia.com": null,
+"pixels.livingsocial.com": null,
+"presentationtracking.netflix.com": null,
+"proxypage.msn.com": null,
+"pulse-analytics-beacon.reutersmedia.net": null,
+"pvstat.china.cn": null,
+"rainbow-uk.mythings.com": null,
+"rd.meebo.com": null,
+"reco.hardsextube.com": null,
+"rel.msn.com": null,
+"report.shell.com": null,
+"revsci.tvguide.com": null,
+"roll.bankofamerica.com": null,
+"rs.mail.ru": null,
+"rta.dailymail.co.uk": null,
+"s.youtube.com": null,
+"s2.youtube.com": null,
+"sana.newsinc.com.s3.amazonaws.com": null,
+"scribe.twitter.com": null,
+"sense.dailymotion.com": null,
+"session-tracker.badcreditloans.com": null,
+"sitelife.ehow.com": null,
+"sixpack.udimg.com": null,
+"smetrics.att.com": null,
+"smetrics.delta.com": null,
+"sp.udimg.com": null,
+"spade.twitch.tv": null,
+"spanids.thesaurus.com": null,
+"spotlight.accuweather.com": null,
+"ssl-stats.wordpress.com": null,
+"stat.alibaba.com": null,
+"stat.dealtime.com": null,
+"stat.ruvr.ru": null,
+"stat.torrentbar.com": null,
+"statistics.crowdynews.com": null,
+"stats.aplus.com": null,
+"stats.articlesbase.com": null,
+"stats.avg.com": null,
+"stats.bbc.co.uk": null,
+"stats.behance.net": null,
+"stats.binki.es": null,
+"stats.blogg.se": null,
+"stats.break.com": null,
+"stats.cardschat.com": null,
+"stats.christianpost.com": null,
+"stats.clear-media.com": null,
+"stats.ebay.com": null,
+"stats.europe.newsweek.com": null,
+"stats.eyeviewdigital.com": null,
+"stats.farfetch.com": null,
+"stats.firedrive.com": null,
+"stats.harpercollins.com": null,
+"stats.ibtimes.co.in": null,
+"stats.macmillanusa.com": null,
+"stats.mehrnews.com": null,
+"stats.nymag.com": null,
+"stats.opoloo.de": null,
+"stats.pandora.com": null,
+"stats.paste2.org": null,
+"stats.paypal.com": null,
+"stats.piaggio.com": null,
+"stats.propublica.org": null,
+"stats.pusher.com": null,
+"stats.radiostreamlive.com": null,
+"stats.redditmedia.com": null,
+"stats.searchftps.net": null,
+"stats.searchftps.org": null,
+"stats.searchsight.com": null,
+"stats.sharenet.co.za": null,
+"stats.shoppydoo.com": null,
+"stats.slashgear.com": null,
+"stats.slideshare.net": null,
+"stats.someecards.com": null,
+"stats.storify.com": null,
+"stats.suite101.com": null,
+"stats.thevideo.me": null,
+"stats.townnews.com": null,
+"stats.tvmaze.com": null,
+"stats.uswitch.com": null,
+"stats.vc.gg": null,
+"stats.video.search.yahoo.com": null,
+"stats.visistat.com": null,
+"stats.vulture.com": null,
+"stats.wordpress.com": null,
+"stats.wwd.com": null,
+"stats.wwitv.com": null,
+"stats.ynet.co.il": null,
+"stats.zmags.com": null,
+"statscol.pond5.com": null,
+"statstracker.celebrity-gossip.net": null,
+"stattrack.0catch.com": null,
+"stcollection.moneysupermarket.com": null,
+"streamstats1.blinkx.com": null,
+"sugar.gameforge.com": null,
+"surveys.cnet.com": null,
+"t.blinkist.com": null,
+"t.dailymail.co.uk": null,
+"t.paypal.com": null,
+"tag-stats.huffpost.com": null,
+"ted.dailymail.co.uk": null,
+"timeslogtn.timesnow.tv": null,
+"timestrends.timesnow.tv": null,
+"tk.kargo.com": null,
+"total.shanghaidaily.com": null,
+"tracelog.www.alibaba.com": null,
+"track.briskfile.com": null,
+"track.catalogs.com": null,
+"track.cbs.com": null,
+"track.codepen.io": null,
+"track.collegehumor.com": null,
+"track.dictionary.com": null,
+"track.engagesciences.com": null,
+"track.ft.com": null,
+"track.fxstreet.com": null,
+"track.gawker.com": null,
+"track.hubspot.com": null,
+"track.netzero.net": null,
+"track.ning.com": null,
+"track.promptfile.com": null,
+"track.pushbullet.com": null,
+"track.slideshare.net": null,
+"track.thesaurus.com": null,
+"track.ugamezone.com": null,
+"track.webgains.com": null,
+"track.websiteceo.com": null,
+"track.wildblue.com": null,
+"track.zalando.": null,
+"track.zomato.com": null,
+"tracker.anandtech.com": null,
+"tracker.calameo.com": null,
+"tracker.cpapath.com": null,
+"tracker.joost.com": null,
+"tracker.lolalytics.com": null,
+"tracker.mattel.com": null,
+"tracker.pinnaclesports.com": null,
+"tracker.realclearpolitics.com": null,
+"tracker.redditmedia.com": null,
+"tracker.revip.info": null,
+"tracker.secretescapes.com": null,
+"tracker.uprinting.com": null,
+"tracker.washtimes.com": null,
+"tracker.wordstream.com": null,
+"tracking.ancestry.com": null,
+"tracking.batanga.com": null,
+"tracking.battleon.com": null,
+"tracking.carprices.com": null,
+"tracking.carsales.com.au": null,
+"tracking.chacha.com": null,
+"tracking.conduit.com": null,
+"tracking.eurosport.com": null,
+"tracking.goodgamestudios.com": null,
+"tracking.hsn.com": null,
+"tracking.koego.com": null,
+"tracking.military.com": null,
+"tracking.moneyam.com": null,
+"tracking.mycapture.com": null,
+"tracking.olx-st.com": null,
+"tracking.olx.": null,
+"tracking.porndoelabs.com": null,
+"tracking.realtor.com": null,
+"tracking.resumecompanion.com": null,
+"tracking.shoptogether.buy.com": null,
+"tracking.softwareprojects.com": null,
+"tracking.tidalhifi.com": null,
+"tracking.times247.com": null,
+"tracking.ukwm.co.uk": null,
+"tracking.unrealengine.com": null,
+"tracking.ustream.tv": null,
+"tracking.yourfilehost.com": null,
+"trackpm.shop2market.com": null,
+"traffic.buyservices.com": null,
+"traffic.tuberip.com": null,
+"trax.tvguide.com": null,
+"trueffect.underarmour.com": null,
+"up.nytimes.com": null,
+"uptpro.homestead.com": null,
+"urchin-tracker.bigpoint.net": null,
+"vertical-stats.huffingtonpost.com": null,
+"video-stats.video.google.com": null,
+"videotracker.washingtonpost.com": null,
+"visit.dealspwn.com": null,
+"visit.mobot.net": null,
+"visit.theglobeandmail.com": null,
+"visitors.sourcingmap.com": null,
+"vitamine.networldmedia.net": null,
+"vstat.vidigy.com": null,
+"vstats.digitaltrends.com": null,
+"weblog.strawberrynet.com": null,
+"weblogger01.data.disney.com": null,
+"webstats.perfectworld.com": null,
+"wtk.db.com": null,
+"wusstrack.wunderground.com": null,
+"wzus1.thesaurus.com": null,
+"ynuf.alibaba.com": null,
+"zap.dw-world.de": null,
+"a.ads.": null,
 "104.154.237.93": null,
 "10pipsaffiliates.com": null,
 "152media.com": null,
@@ -1856,7 +4220,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "20dollars2surf.com": null,
 "213.163.70.183": null,
 "247realmedia.com": null,
-"33across.com": null,
 "35.184.98.90": null,
 "350media.com": null,
 "360ads.com": null,
@@ -2503,7 +4866,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "clickexa.com": null,
 "clickexperts.net": null,
 "clickfuse.com": null,
-"clickinc.com": null,
 "clickintext.com": null,
 "clickintext.net": null,
 "clickiocdn.com": null,
@@ -6419,12 +8781,10 @@ var bad_da_host_JSON = { "a.ads.": null,
 "cloudsrvtrk.com": null,
 "cloudtracked.com": null,
 "clpremdo.com": null,
-"cm.g.doubleclick.net": null,
 "com-online.website": null,
 "console-domain.link": null,
 "consolepprofile.com": null,
 "content-offer-app.site": null,
-"content.ad": null,
 "contentabc.com": null,
 "cpmterra.com": null,
 "crazyad.net": null,
@@ -6479,7 +8839,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "lustigbanner.com": null,
 "media-app.com": null,
 "media-serving.com": null,
-"mediaseeding.com": null,
 "meetgoodgirls.com": null,
 "meetsexygirls.org": null,
 "millionairesurveys.com": null,
@@ -6520,7 +8879,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "ronetu.ru": null,
 "rubikon6.if.ua": null,
 "runslin.com": null,
-"serving-sys.com": null,
 "sexitnow.com": null,
 "singleicejo.link": null,
 "singlesexdates.com": null,
@@ -7177,7 +9535,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "adsnero.website": null,
 "adultmoda.com": null,
 "banners.cams.com": null,
-"c4tracking01.com": null,
 "cam4tracking.com": null,
 "chokertraffic.com": null,
 "cstraffic.com": null,
@@ -7188,7 +9545,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "exgfpunished.com": null,
 "fbay.tv": null,
 "fox-forden.ru": null,
-"fpctraffic2.com": null,
 "freecamsexposed.com": null,
 "freewebcams.com": null,
 "gettraff.com": null,
@@ -7208,7 +9564,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "sexintheuk.com": null,
 "socialsex.biz": null,
 "socialsex.com": null,
-"trackvoluum.com": null,
 "turnefo.ru": null,
 "voyeurbase.com": null,
 "watchmygf.com": null,
@@ -7274,7 +9629,6 @@ var bad_da_host_JSON = { "a.ads.": null,
 "adstest.zaman.com.tr": null,
 "affil.mupromo.com": null,
 "affiliate.juno.co.uk": null,
-"affiliate.mediatemple.net": null,
 "affiliatehub.skybet.com": null,
 "affiliateprogram.keywordspy.com": null,
 "affiliates-cdn.mozilla.org": null,
@@ -8015,2313 +10369,1110 @@ var bad_da_host_JSON = { "a.ads.": null,
 "delivery.porn5.com": null,
 "pop.fapxl.com": null,
 "pop.mrstiff.com": null,
-"rd.cockhero.info": null,
-"meetrics.netbb-": null,
-"0tracker.com": null,
-"149.13.65.144": null,
-"195.10.245.55": null,
-"1freecounter.com": null,
-"212.227.100.108": null,
-"24counter.com": null,
-"2cnt.net": null,
-"2o7.net": null,
-"360tag.com": null,
-"3dlivestats.com": null,
-"3dstats.com": null,
-"3gl.net": null,
-"62.160.52.73": null,
-"66.228.52.30": null,
-"67.228.151.70": null,
-"72.172.88.25": null,
-"74.55.82.102": null,
-"77tracking.com": null,
-"99counters.com": null,
-"99stats.com": null,
-"a-counters.com": null,
-"aamsitecertifier.com": null,
-"abcstats.com": null,
-"abmr.net": null,
-"absolstats.co.za": null,
-"acc-hd.de": null,
-"acceptableserver.com": null,
-"access-analyze.org": null,
-"access-traffic.com": null,
-"accessintel.com": null,
-"accumulatorg.com": null,
-"acecounter.com": null,
-"acestats.net": null,
-"acetrk.com": null,
-"acexedge.com": null,
-"activemeter.com": null,
-"acxiom-online.com": null,
-"ad-score.com": null,
-"adalyser.com": null,
-"adblade.com": null,
-"adchemix.com": null,
-"adchemy-content.com": null,
-"adclickstats.net": null,
-"addfreestats.com": null,
-"adelixir.com": null,
-"adfox.ru": null,
-"admantx.com": null,
-"admitad.com": null,
-"admother.com": null,
-"adobedtm.com": null,
-"adobetag.com": null,
-"adprotraffic.com": null,
-"adsensedetective.com": null,
-"adspsp.com": null,
-"adsymptotic.com": null,
-"adultblogtoplist.com": null,
-"advanced-web-analytics.com": null,
-"adyapper.com": null,
-"afairweb.com": null,
-"affilae.com": null,
-"affiliateedge.eu": null,
-"affiliates-pro.com": null,
-"affiliatetrackingsetup.com": null,
-"affiliatly.com": null,
-"affistats.com": null,
-"agkn.com": null,
-"aidata.io": null,
-"aimediagroup.com": null,
-"akstat.com": null,
-"alexacdn.com": null,
-"alexametrics.com": null,
-"alltagcloud.info": null,
-"alltracked.com": null,
-"altastat.com": null,
-"amavalet.com": null,
-"amazingcounters.com": null,
-"amilliamilli.com": null,
-"amung.us": null,
-"analoganalytics.com": null,
-"analytics-egain.com": null,
-"analytics-engine.net": null,
-"analyticswizard.com": null,
-"analytk.com": null,
-"anametrix.net": null,
-"angelfishstats.com": null,
-"anonymousdmp.com": null,
-"answerscloud.com": null,
-"apexstats.com": null,
-"apicit.net": null,
-"app.link": null,
-"appboycdn.com": null,
-"aqtracker.com": null,
-"arena-quantum.co.uk": null,
-"arlime.com": null,
-"arturtrack.com": null,
-"athenainstitute.biz": null,
-"attracta.com": null,
-"audience.visiblemeasures.com": null,
-"audienceiq.com": null,
-"audiencerate.com": null,
-"autoaffiliatenetwork.com": null,
-"autoaudience.com": null,
-"avantlink.com": null,
-"avastats.com": null,
-"avmws.com": null,
-"awmcounter.de": null,
-"axf8.net": null,
-"azalead.com": null,
-"b1img.com": null,
-"babator.com": null,
-"basicstat.com": null,
-"beacon.kmi-us.com": null,
-"beanstalkdata.com": null,
-"beemrdwn.com": null,
-"beencounter.com": null,
-"behavioralengine.com": null,
-"belstat.at": null,
-"belstat.be": null,
-"belstat.ch": null,
-"belstat.com": null,
-"belstat.de": null,
-"belstat.fr": null,
-"belstat.nl": null,
-"bestweb2013stat.lk": null,
-"betarget.com": null,
-"bettermetrics.co": null,
-"bigcattracks.com": null,
-"bigmir.net": null,
-"bigstats.net": null,
-"bigtracker.com": null,
-"bionicclick.com": null,
-"bizible.com": null,
-"bkrtx.com": null,
-"bkvtrack.com": null,
-"blockbreaker.io": null,
-"blockmetrics.com": null,
-"blog-stat.com": null,
-"blogmeetsbrand.com": null,
-"blogscounter.com": null,
-"blogsontop.com": null,
-"blogtoplist.com": null,
-"bluecava.com": null,
-"blueconic.net": null,
-"bluekai.com": null,
-"blvdstatus.com": null,
-"bm23.com": null,
-"bmlmedia.com": null,
-"bmmetrix.com": null,
-"bookforest.biz": null,
-"boomtrain.com": null,
-"botsvisit.com": null,
-"brat-online.ro": null,
-"brcdn.com": null,
-"brightedge.com": null,
-"browser-statistik.de": null,
-"bstk.co": null,
-"btbuckets.com": null,
-"btstatic.com": null,
-"bubblestat.com": null,
-"bugsnag.com": null,
-"burstbeacon.com": null,
-"burt.io": null,
-"buzzdeck.com": null,
-"bytemgdd.com": null,
-"c-webstats.de": null,
-"c.adroll.com": null,
-"c1exchange.com": null,
-"c3metrics.com": null,
-"c3tag.com": null,
-"call-tracking.co.uk": null,
-"callrail.com": null,
-"calltrackingmetrics.com": null,
-"calltracks.com": null,
-"campaigncog.com": null,
-"caphyon-analytics.com": null,
-"capturly.com": null,
-"cashburners.com": null,
-"cashcount.com": null,
-"cccpmo.com": null,
-"ccgateway.net": null,
-"cdntrf.com": null,
-"cedexis.com": null,
-"cedexis.net": null,
-"celebros-analytics.com": null,
-"celebrus.com": null,
-"cetrk.com": null,
-"cftrack.com": null,
-"chartaca.com": null,
-"chartbeat.com": null,
-"chartbeat.net": null,
-"checkstat.nl": null,
-"cheezburger-analytics.com": null,
-"chickensaladandads.com": null,
-"chrumedia.com": null,
-"circular-counters.com": null,
-"cleananalytics.com": null,
-"clearviewstats.com": null,
-"click-linking.com": null,
-"click-url.com": null,
-"click2meter.com": null,
-"click4assistance.co.uk": null,
-"clickable.net": null,
-"clickaider.com": null,
-"clickalyzer.com": null,
-"clickclick.net": null,
-"clickcloud.info": null,
-"clickconversion.net": null,
-"clickdensity.com": null,
-"clickdimensions.com": null,
-"clickening.com": null,
-"clickforensics.com": null,
-"clickigniter.io": null,
-"clickmanage.com": null,
-"clickmeter.com": null,
-"clickpathmedia.com": null,
-"clickprotector.com": null,
-"clickreport.com": null,
-"clicksagent.com": null,
-"clicksen.se": null,
-"clickshift.com": null,
-"clickstream.co.za": null,
-"clicktale.net": null,
-"clicktrack1.com": null,
-"clicktracks.com": null,
-"clickzs.com": null,
-"clickzzs.nl": null,
-"cloud-exploration.com": null,
-"cloud-iq.com": null,
-"cloudtracer101.com": null,
-"clustrmaps.com": null,
-"cnt1.net": null,
-"cnxweb.com": null,
-"cnzz.com": null,
-"codata.ru": null,
-"cogmatch.net": null,
-"cognitivematch.com": null,
-"collserve.com": null,
-"company-target.com": null,
-"compteur.cc": null,
-"contactmonkey.com": null,
-"content-square.net": null,
-"contentinsights.com": null,
-"contentspread.net": null,
-"continue.com": null,
-"convergetrack.com": null,
-"conversionlogic.net": null,
-"conversionly.com": null,
-"conversionruler.com": null,
-"convertexperiments.com": null,
-"convertglobal.com": null,
-"convertro.com": null,
-"cooladata.com": null,
-"coremetrics.com": null,
-"counter.gd": null,
-"counter.top.kg": null,
-"counter160.com": null,
-"counterbot.com": null,
-"countercentral.com": null,
-"countergeo.com": null,
-"counterland.com": null,
-"counters4u.com": null,
-"counterservis.com": null,
-"countersforlife.com": null,
-"countertracker.com": null,
-"counterviews.net": null,
-"counting4free.com": null,
-"cqcounter.com": null,
-"craftkeys.com": null,
-"craktraffic.com": null,
-"crazyegg.com": null,
-"criteo.com": null,
-"criteo.net": null,
-"crmmetrix.fr": null,
-"crmmetrixwris.com": null,
-"crowdscience.com": null,
-"crsspxl.com": null,
-"crwdcntrl.net": null,
-"csdata1.com": null,
-"csi-tracking.com": null,
-"cttracking02.com": null,
-"customerdiscoverytrack.com": null,
-"cxense.com": null,
-"cxt.ms": null,
-"cybermonitor.com": null,
-"dacounter.com": null,
-"dailycaller-alerts.com": null,
-"dashboard.io": null,
-"data-analytics.jp": null,
-"databrain.com": null,
-"datacaciques.com": null,
-"datafeedfile.com": null,
-"datam.com": null,
-"datamind.ru": null,
-"dataperforma.com": null,
-"dataxpand.com": null,
-"daylife-analytics.com": null,
-"dc.tremormedia.com": null,
-"decdna.net": null,
-"demandbase.com": null,
-"demdex.net": null,
-"devatics.com": null,
-"dgmsearchlab.com": null,
-"dhmtracking.co.za": null,
-"diffusion-tracker.com": null,
-"digitaloptout.com": null,
-"digitaltarget.ru": null,
-"dinkstat.com": null,
-"directrdr.com": null,
-"displaymarketplace.com": null,
-"distralytics.com": null,
-"dmanalytics1.com": null,
-"dmclick.cn": null,
-"dmtracker.com": null,
-"dmtry.com": null,
-"dominocounter.net": null,
-"dotomi.com": null,
-"doubleclick.net": null,
-"downture.in": null,
-"dsply.com": null,
-"dstrack2.info": null,
-"dwin1.com": null,
-"e-webtrack.net": null,
-"earnitup.com": null,
-"easy-hit-counters.com": null,
-"easycounter.com": null,
-"easyhitcounters.com": null,
-"easyresearch.se": null,
-"ec-track.com": null,
-"ecn5.com": null,
-"ecommstats.com": null,
-"ecsanalytics.com": null,
-"ecustomeropinions.com": null,
-"edigitalsurvey.com": null,
-"email-match.com": null,
-"embeddedanalytics.com": null,
-"emediatrack.com": null,
-"enecto.com": null,
-"enectoanalytics.com": null,
-"engagemaster.com": null,
-"enquisite.com": null,
-"eperfectdata.com": null,
-"epiodata.com": null,
-"epitrack.com": null,
-"eproof.com": null,
-"eps-analyzer.de": null,
-"ereportz.com": null,
-"esm1.net": null,
-"esomniture.com": null,
-"estara.com": null,
-"estat.com": null,
-"estrack.net": null,
-"ethnio.com": null,
-"etracker.com": null,
-"etrafficcounter.com": null,
-"etrafficstats.com": null,
-"eu-survey.com": null,
-"euleriancdn.net": null,
-"europagerank.com": null,
-"eventoptimize.com": null,
-"everestjs.net": null,
-"everesttech.net": null,
-"evergage.com": null,
-"evisitanalyst.com": null,
-"evisitcs.com": null,
-"evisitcs2.com": null,
-"evolvemediametrics.com": null,
-"evyy.net": null,
-"ewebanalytics.com": null,
-"ewebcounter.com": null,
-"exactag.com": null,
-"exclusiveclicks.com": null,
-"exelator.com": null,
-"exovueplatform.com": null,
-"explore-123.com": null,
-"exposebox.com": null,
-"extole.com": null,
-"extreme-dm.com": null,
-"ezytrack.com": null,
-"fabricww.com": null,
-"factortg.com": null,
-"fandommetrics.com": null,
-"fanplayr.com": null,
-"fast-thinking.co.uk": null,
-"fastanalytic.com": null,
-"fastly-analytics.com": null,
-"fastonlineusers.com": null,
-"fastwebcounter.com": null,
-"fdxstats.xyz": null,
-"feedjit.com": null,
-"filitrac.com": null,
-"finalid.com": null,
-"fitanalytics.com": null,
-"flagcounter.com": null,
-"flash-counter.com": null,
-"flash-stat.com": null,
-"flashgamestats.com": null,
-"flcounter.com": null,
-"flowstats.net": null,
-"fluencymedia.com": null,
-"fluidsurveys.com": null,
-"flxpxl.com": null,
-"flyingpt.com": null,
-"followercounter.com": null,
-"footprintdns.com": null,
-"footprintlive.com": null,
-"foreseeresults.com": null,
-"forkcdn.com": null,
-"formalyzer.com": null,
-"fqsecure.com": null,
-"free-counter.co.uk": null,
-"free-counter.com": null,
-"free-counters.co.uk": null,
-"free-website-hit-counters.com": null,
-"free-website-statistics.com": null,
-"freebloghitcounter.com": null,
-"freecountercode.com": null,
-"freecounterstat.com": null,
-"freegeoip.net": null,
-"freehitscounter.org": null,
-"freelogs.com": null,
-"freeonlineusers.com": null,
-"freesitemapgenerator.com": null,
-"freestats.com": null,
-"freetrafficsystem.com": null,
-"freeusersonline.com": null,
-"freeweblogger.com": null,
-"freshcounter.com": null,
-"fruitflan.com": null,
-"fueldeck.com": null,
-"fugetech.com": null,
-"funstage.com": null,
-"fuse-data.com": null,
-"fusestats.com": null,
-"fyreball.com": null,
-"gaug.es": null,
-"gbotvisit.com": null,
-"gemius.pl": null,
-"gemtrackers.com": null,
-"geobytes.com": null,
-"geoplugin.net": null,
-"getbackstory.com": null,
-"getblueshift.com": null,
-"getclicky.com": null,
-"getfreebl.com": null,
-"getsmartlook.com": null,
-"getstatistics.se": null,
-"gigcount.com": null,
-"glbtracker.com": null,
-"globalviptraffic.com": null,
-"globetrackr.com": null,
-"go-mpulse.net": null,
-"goaltraffic.com": null,
-"goldstats.com": null,
-"goodcounter.org": null,
-"googleadservices.com": null,
-"googlerank.info": null,
-"gosquared.com": null,
-"gostats.com": null,
-"gostats.org": null,
-"gostats.ro": null,
-"govmetric.com": null,
-"grepdata.com": null,
-"group-ib.ru": null,
-"gsimedia.net": null,
-"gstats.cn": null,
-"gtopstats.com": null,
-"guruquicks.net": null,
-"gvisit.com": null,
-"halldata.com": null,
-"halstats.com": null,
-"heapanalytics.com": null,
-"heatmap.it": null,
-"hentaicounter.com": null,
-"hexagon-analytics.com": null,
-"heystaks.com": null,
-"hiconversion.com": null,
-"higherengine.com": null,
-"highmetrics.com": null,
-"histats.com": null,
-"hit-counter-download.com": null,
-"hit-counter.info": null,
-"hit-counters.net": null,
-"hitcounterstats.com": null,
-"hitmatic.com": null,
-"hitmaze-counters.net": null,
-"hitslink.com": null,
-"hitsprocessor.com": null,
-"hittail.com": null,
-"hittracker.com": null,
-"hitwebcounter.com": null,
-"host-tracker.com": null,
-"hostip.info": null,
-"hoststats.info": null,
-"hotdogsandads.com": null,
-"hotjar.com": null,
-"hotlog.ru": null,
-"hs-analytics.net": null,
-"humanclick.com": null,
-"hunt-leads.com": null,
-"hxtrack.com": null,
-"hyfntrak.com": null,
-"hypestat.com": null,
-"i-stats.com": null,
-"ib-ibi.com": null,
-"ic-live.com": null,
-"iclive.com": null,
-"icstats.nl": null,
-"id-visitors.com": null,
-"ideoclick.com": null,
-"idtargeting.com": null,
-"igaming.biz": null,
-"ijncw.tv": null,
-"imanginatium.com": null,
-"immanalytics.com": null,
-"impcounter.com": null,
-"imrtrack.com": null,
-"imrworldwide.com": null,
-"inboxtag.com": null,
-"index.ru": null,
-"indexstats.com": null,
-"indextools.com": null,
-"individuad.net": null,
-"inferclick.com": null,
-"infinity-tracking.net": null,
-"inflectionpointmedia.com": null,
-"innovateads.com": null,
-"inphonic.com": null,
-"inpwrd.com": null,
-"insitemetrics.com": null,
-"inspectlet.com": null,
-"instore.biz": null,
-"integritystat.com": null,
-"intelli-tracker.com": null,
-"intermundomedia.com": null,
-"interstateanalytics.com": null,
-"invitemedia.com": null,
-"invoc.us": null,
-"ip-api.com": null,
-"ip-label.net": null,
-"ipcounter.de": null,
-"iperceptions.com": null,
-"ipinfodb.com": null,
-"ipinyou.com.cn": null,
-"ipstat.com": null,
-"ist-track.com": null,
-"istrack.com": null,
-"itrackerpro.com": null,
-"itracmediav4.com": null,
-"iwebtrack.com": null,
-"iwstats.com": null,
-"jimdo-stats.com": null,
-"jirafe.com": null,
-"jscounter.com": null,
-"jstracker.com": null,
-"jump-time.net": null,
-"jumptime.com": null,
-"jwmstats.com": null,
-"k-analytix.com": null,
-"kameleoon.com": null,
-"kampyle.com": null,
-"keymetric.net": null,
-"keywee.co": null,
-"keywordmax.com": null,
-"killerwebstats.com": null,
-"kissmetrics.com": null,
-"klldabck.com": null,
-"knowlead.io": null,
-"knowledgevine.net": null,
-"komtrack.com": null,
-"krxd.net": null,
-"l2.visiblemeasures.com": null,
-"lead-123.com": null,
-"lead-converter.com": null,
-"lead-tracking.biz": null,
-"leadforensics.com": null,
-"leadformix.com": null,
-"leadlife.com": null,
-"leadmanagerfx.com": null,
-"leadsius.com": null,
-"leadsrx.com": null,
-"legolas-media.com": null,
-"les-experts.com": null,
-"levexis.com": null,
-"liadm.com": null,
-"lijit.com": null,
-"linezing.com": null,
-"link-smart.com": null,
-"linkconnector.com": null,
-"linkpulse.com": null,
-"linksynergy.com": null,
-"linkxchanger.com": null,
-"listrakbi.com": null,
-"livestat.com": null,
-"lockview.cn": null,
-"locotrack.net": null,
-"logcounter.com": null,
-"loggly.com": null,
-"lognormal.net": null,
-"lookery.com": null,
-"losstrack.com": null,
-"lporirxe.com": null,
-"luckyorange.com": null,
-"luminate.com": null,
-"lxtrack.com": null,
-"lymantriacypresdoctrine.biz": null,
-"m-pathy.com": null,
-"macandcheeseandads.com": null,
-"magnify360.com": null,
-"mailstat.us": null,
-"maploco.com": null,
-"marinsm.com": null,
-"market2lead.com": null,
-"marketizator.com": null,
-"marketo.net": null,
-"martianstats.com": null,
-"masterstats.com": null,
-"matheranalytics.com": null,
-"mathtag.com": null,
-"maxtracker.net": null,
-"mbotvisit.com": null,
-"mdotlabs.com": null,
-"measuremap.com": null,
-"meatballsandads.com": null,
-"mediaarmor.com": null,
-"mediaforgews.com": null,
-"mediagauge.com": null,
-"mediametrics.ru": null,
-"mediaplex.com": null,
-"mediarithmics.com": null,
-"mega-stats.com": null,
-"memecounter.com": null,
-"mercadoclics.com": null,
-"mercent.com": null,
-"meteorsolutions.com": null,
-"metricsdirect.com": null,
-"mezzobit.com": null,
-"midkotatraffic.net": null,
-"millioncounter.com": null,
-"minewhat.com": null,
-"mixpanel.com": null,
-"mkt51.net": null,
-"mktoresp.com": null,
-"mlclick.com": null,
-"mletracker.com": null,
-"mlstat.com": null,
-"mmccint.com": null,
-"mno.link": null,
-"mobalyzer.net": null,
-"mochibot.com": null,
-"monetate.net": null,
-"mongoosemetrics.com": null,
-"mouseflow.com": null,
-"mousestats.com": null,
-"mplxtms.com": null,
-"mpstat.us": null,
-"mstracker.net": null,
-"mtracking.com": null,
-"mtrics.cdc.gov": null,
-"mvilivestats.com": null,
-"mvtracker.com": null,
-"mxcdn.net": null,
-"myaffiliateprogram.com": null,
-"myfastcounter.com": null,
-"mynewcounter.com": null,
-"myomnistar.com": null,
-"myroitracking.com": null,
-"myseostats.com": null,
-"mysitetraffic.net": null,
-"mysocialpixel.com": null,
-"mytictac.com": null,
-"mywebstats.com.au": null,
-"mywebstats.org": null,
-"naturaltracking.com": null,
-"neatstats.com": null,
-"nedstat.com": null,
-"nedstat.net": null,
-"nedstatbasic.net": null,
-"nedstatpro.net": null,
-"nestedmedia.com": null,
-"netclickstats.com": null,
-"netflame.cc": null,
-"netmining.com": null,
-"netmng.com": null,
-"newstatscounter.info": null,
-"nextstat.com": null,
-"nordicresearch.com": null,
-"notifyvisitors.com": null,
-"novately.com": null,
-"nr-data.net": null,
-"nstracking.com": null,
-"nuconomy.com": null,
-"nudatasecurity.com": null,
-"nuggad.net": null,
-"od.visiblemeasures.com": null,
-"odoscope.com": null,
-"offermatica.com": null,
-"ohmystats.com": null,
-"ojrq.net": null,
-"oktopost.com": null,
-"omtrdc.net": null,
-"ondu.ru": null,
-"onelink-translations.com": null,
-"onestat.com": null,
-"online-media-stats.com": null,
-"online-metrix.net": null,
-"opbandit.com": null,
-"openclick.com": null,
-"openstat.net": null,
-"opentracker.net": null,
-"openxtracker.com": null,
-"optimizely.com": null,
-"optimost.com": null,
-"optreadetrus.info": null,
-"os-data.com": null,
-"ositracker.com": null,
-"otracking.com": null,
-"ournet-analytics.com": null,
-"outboundlink.me": null,
-"overstat.com": null,
-"owlanalytics.io": null,
-"p-td.com": null,
-"p.raasnet.com": null,
-"p0.raasnet.com": null,
-"pagefair.com": null,
-"pages05.net": null,
-"paidstats.com": null,
-"parklogic.com": null,
-"parrable.com": null,
-"pclicks.com": null,
-"peerius.com": null,
-"percentmobile.com": null,
-"perfectaudience.com": null,
-"performanceanalyser.net": null,
-"performtracking.com": null,
-"perimeterx.net": null,
-"petametrics.com": null,
-"phone-analytics.com": null,
-"photorank.me": null,
-"pi-stats.com": null,
-"ping-fast.com": null,
-"pingdom.net": null,
-"pixel.parsely.com": null,
-"pixel.watch": null,
-"pixeleze.com": null,
-"pixelinteractivemedia.com": null,
-"pixelrevenue.com": null,
-"pixelsnippet.com": null,
-"pizzaandads.com": null,
-"placemypixel.com": null,
-"platformpanda.com": null,
-"popsample.com": null,
-"populr.me": null,
-"porngraph.com": null,
-"portfold.com": null,
-"postaffiliatepro.com": null,
-"postclickmarketing.com": null,
-"ppclocation.biz": null,
-"ppctracking.net": null,
-"prchecker.info": null,
-"precisioncounter.com": null,
-"predictiveresponse.net": null,
-"prnx.net": null,
-"profilertracking3.com": null,
-"profilesnitch.com": null,
-"projecthaile.com": null,
-"projectsunblock.com": null,
-"proofpositivemedia.com": null,
-"proxad.net": null,
-"prtracker.com": null,
-"pstats.com": null,
-"psyma-statistics.com": null,
-"ptengine.com": null,
-"publishflow.com": null,
-"pulselog.com": null,
-"purevideo.com": null,
-"pzkysq.pink": null,
-"q-counter.com": null,
-"q-stats.nl": null,
-"qbaka.net": null,
-"qdtracking.com": null,
-"qsstats.com": null,
-"quantcount.com": null,
-"quantserve.com": null,
-"qubitproducts.com": null,
-"questradeaffiliates.com": null,
-"quillion.com": null,
-"quintelligence.com": null,
-"radarstats.com": null,
-"radarurl.com": null,
-"rampanel.com": null,
-"rampmetrics.com": null,
-"rankingpartner.com": null,
-"rapidcounter.com": null,
-"rapidstats.net": null,
-"rapidtrk.net": null,
-"reactful.com": null,
-"readertracking.com": null,
-"readnotify.com": null,
-"real5traf.ru": null,
-"realcounter.eu": null,
-"realcounters.com": null,
-"realtimewebstats.net": null,
-"realtracker.com": null,
-"realtracking.ninja": null,
-"redcounter.net": null,
-"redistats.com": null,
-"redstatcounter.com": null,
-"reinvigorate.net": null,
-"relead.com": null,
-"reliablecounter.com": null,
-"remarketstats.com": null,
-"res-x.com": null,
-"revenuepilot.com": null,
-"revenuewire.net": null,
-"revolvermaps.com": null,
-"rewardtv.com": null,
-"reztrack.com": null,
-"rfihub.com": null,
-"rhinoseo.com": null,
-"riastats.com": null,
-"richmetrics.com": null,
-"ritecounter.com": null,
-"rkdms.com": null,
-"rlcdn.com": null,
-"rnengage.com": null,
-"roia.biz": null,
-"roispy.com": null,
-"roitesting.com": null,
-"roivista.com": null,
-"rollingcounters.com": null,
-"rs6.net": null,
-"rsvpgenius.com": null,
-"ru4.com": null,
-"rumanalytics.com": null,
-"sageanalyst.net": null,
-"saletrack.co.uk": null,
-"sarevtop.com": null,
-"sayutracking.co.uk": null,
-"scastnet.com": null,
-"schoolyeargo.com": null,
-"scorecardresearch.com": null,
-"scoutanalytics.net": null,
-"script.ag": null,
-"scripts21.com": null,
-"scriptshead.com": null,
-"searchignite.com": null,
-"sedotracker.com": null,
-"segment-analytics.com": null,
-"segment.com": null,
-"segment.io": null,
-"sematext.com": null,
-"sendtraffic.com": null,
-"serious-partners.com": null,
-"servestats.com": null,
-"servingtrkid.com": null,
-"servustats.com": null,
-"sessioncam.com": null,
-"sexcounter.com": null,
-"sexystat.com": null,
-"shareasale.com": null,
-"sharpspring.com": null,
-"shinystat.com": null,
-"shoelace.com": null,
-"showroomlogic.com": null,
-"silverpop.com": null,
-"simplehitcounter.com": null,
-"simplereach.com": null,
-"simpli.fi": null,
-"singlefeed.com": null,
-"site24x7rum.com": null,
-"siteapps.com": null,
-"sitebro.com": null,
-"sitebro.net": null,
-"sitebro.tw": null,
-"sitecompass.com": null,
-"siteimprove.com": null,
-"siteimproveanalytics.com": null,
-"sitelinktrack.com": null,
-"sitemeter.com": null,
-"sitereport.org": null,
-"sitestat.com": null,
-"sitetag.us": null,
-"sitetagger.co.uk": null,
-"sitetracker.com": null,
-"sitetraq.nl": null,
-"skimresources.com": null,
-"slingpic.com": null,
-"smartctr.com": null,
-"smartracker.net": null,
-"smileyhost.net": null,
-"smrtlnks.com": null,
-"sniperlog.ru": null,
-"snoobi.com": null,
-"socialhoney.co": null,
-"socialprofitmachine.com": null,
-"socialtrack.co": null,
-"socialtrack.net": null,
-"socketanalytics.com": null,
-"soflopxl.com": null,
-"softonic-analytics.net": null,
-"sojern.com": null,
-"sometrics.com": null,
-"sophus3.com": null,
-"spectate.com": null,
-"splittag.com": null,
-"springmetrics.com": null,
-"spycounter.net": null,
-"spylog.com": null,
-"spylog.ru": null,
-"spywords.com": null,
-"squidanalytics.com": null,
-"stadsvc.com": null,
-"startstat.ru": null,
-"stat08.com": null,
-"stat24.com": null,
-"statcount.com": null,
-"statcounter.com": null,
-"statcounterfree.com": null,
-"statcounters.info": null,
-"stathat.com": null,
-"stathound.com": null,
-"statisfy.net": null,
-"statistiche-web.com": null,
-"statistx.com": null,
-"statowl.com": null,
-"stats-analytics.info": null,
-"stats.cz": null,
-"stats2.com": null,
-"stats21.com": null,
-"stats2513.com": null,
-"stats4all.com": null,
-"stats4you.com": null,
-"statsbox.nl": null,
-"statsevent.com": null,
-"statsimg.com": null,
-"statsinsight.com": null,
-"statsit.com": null,
-"statsmachine.com": null,
-"statsrely.com": null,
-"statssheet.com": null,
-"statsw.com": null,
-"statswave.com": null,
-"statsy.net": null,
-"stattooz.com": null,
-"stattrax.com": null,
-"statun.com": null,
-"statuncore.com": null,
-"stcounter.com": null,
-"steelhousemedia.com": null,
-"stormiq.com": null,
-"stroeerdigitalmedia.de": null,
-"sub2tech.com": null,
-"successfultogether.co.uk": null,
-"summitemarketinganalytics.com": null,
-"sumologic.com": null,
-"supercounters.com": null,
-"superstats.com": null,
-"supert.ag": null,
-"surefire.link": null,
-"surfcounters.com": null,
-"surfertracker.com": null,
-"surveyscout.com": null,
-"surveywriter.com": null,
-"swfstats.com": null,
-"swiss-counter.com": null,
-"sxtracking.com": null,
-"synthasite.net": null,
-"t-analytics.com": null,
-"tagcommander.com": null,
-"tagifydiageo.com": null,
-"tagsrvcs.com": null,
-"targetfuel.com": null,
-"tcimg.com": null,
-"tdstats.com": null,
-"tedioustooth.com": null,
-"tellapart.com": null,
-"tendatta.com": null,
-"tentaculos.net": null,
-"terabytemedia.com": null,
-"testin.cn": null,
-"thebestlinks.com": null,
-"thebrighttag.com": null,
-"thecounter.com": null,
-"thefreehitcounter.com": null,
-"thermstats.com": null,
-"thesearchagency.net": null,
-"thisisacoolthing.com": null,
-"thisisanothercoolthing.com": null,
-"tinycounter.com": null,
-"tkqlhce.com": null,
-"tnctrx.com": null,
-"tns-counter.ru": null,
-"tns-cs.net": null,
-"top100bloggers.com": null,
-"top100webshops.com": null,
-"top10sportsites.com": null,
-"topblogging.com": null,
-"toplist.cz": null,
-"touchclarity.com": null,
-"tracc.it": null,
-"trace.events": null,
-"tracemyip.org": null,
-"tracetracking.net": null,
-"track-web.net": null,
-"track2.me": null,
-"trackalyzer.com": null,
-"trackbar.info": null,
-"trackcdn.com": null,
-"trackcmp.net": null,
-"trackconsole.com": null,
-"trackdiscovery.net": null,
-"trackeame.com": null,
-"trackedlink.net": null,
-"trackedweb.net": null,
-"tracking100.com": null,
-"tracking202.com": null,
-"trackinglabs.com": null,
-"trackkas.com": null,
-"trackmyweb.net": null,
-"trackset.com": null,
-"tracksy.com": null,
-"tracktrk.net": null,
-"trackuity.com": null,
-"trackword.biz": null,
-"trackyourstats.com": null,
-"tradedoubler.com": null,
-"tradescape.biz": null,
-"trafficby.net": null,
-"trafficengine.net": null,
-"trafficfacts.com": null,
-"trafficjoint.com": null,
-"trafficregenerator.com": null,
-"traffikcntr.com": null,
-"trafic.ro": null,
-"trailheadapp.com": null,
-"treasuredata.com": null,
-"trekmedia.net": null,
-"trendcounter.com": null,
-"trgtcdn.com": null,
-"triggertag.gorillanation.com": null,
-"trovus.co.uk": null,
-"trs.cn": null,
-"tru.am": null,
-"truconversion.com": null,
-"truehits.in.th": null,
-"truehits1.gits.net.th": null,
-"truoptik.com": null,
-"tscounter.com": null,
-"tubetrafficcash.com": null,
-"tynt.com": null,
-"ubertags.com": null,
-"ubertracking.info": null,
-"ugdturner.com": null,
-"umbel.com": null,
-"upstats.ru": null,
-"uptimeviewer.com": null,
-"uralweb.ru": null,
-"urlbrief.com": null,
-"usabilitytools.com": null,
-"usabilla.com": null,
-"userlook.com": null,
-"useronlinecounter.com": null,
-"userreport.com": null,
-"userzoom.com": null,
-"v3cdn.net": null,
-"valaffiliates.com": null,
-"vantage-media.net": null,
-"vbanalytics.com": null,
-"vdna-assets.com": null,
-"veinteractive.com": null,
-"ventivmedia.com": null,
-"verticalscope.com": null,
-"vertster.com": null,
-"video.oms.eu": null,
-"videos.oms.eu": null,
-"videostat.com": null,
-"visibility-stats.com": null,
-"visistat.com": null,
-"visitlog.net": null,
-"visitor-analytics.net": null,
-"visitor-track.com": null,
-"visitorglobe.com": null,
-"visitorinspector.com": null,
-"visitorjs.com": null,
-"visitorpath.com": null,
-"visitorprofiler.com": null,
-"visitortracklog.com": null,
-"visitorville.com": null,
-"visitstreamer.com": null,
-"visualdna-stats.com": null,
-"visualdna.com": null,
-"visualwebsiteoptimizer.com": null,
-"voicefive.com": null,
-"voodooalerts.com": null,
-"vstats.co": null,
-"vtracker.net": null,
-"w3counter.com": null,
-"w55c.net": null,
-"waframedia9.com": null,
-"web-counter.net": null,
-"web-stat.com": null,
-"web-stat.net": null,
-"webclicktracker.com": null,
-"webcounter.co.za": null,
-"webcounter.ws": null,
-"webflowmetrics.com": null,
-"webgains.com": null,
-"webglstats.com": null,
-"webiqonline.com": null,
-"webleads-tracker.com": null,
-"webseoanalytics.co.za": null,
-"website-hit-counters.com": null,
-"websiteceo.com": null,
-"websiteonlinecounter.com": null,
-"websiteperform.com": null,
-"websitewelcome.com": null,
-"webspectator.com": null,
-"webstat.com": null,
-"webstat.net": null,
-"webstat.se": null,
-"webstats.com": null,
-"webstats4u.com": null,
-"webtraffic.se": null,
-"webtrafficagents.com": null,
-"webtraxs.com": null,
-"webtrekk-asia.net": null,
-"webtrends.com": null,
-"webtrendslive.com": null,
-"wemfbox.ch": null,
-"whackedmedia.com": null,
-"whatismyip.win": null,
-"whoisvisiting.com": null,
-"whosclickingwho.com": null,
-"wikia-beacon.com": null,
-"wildxtraffic.com": null,
-"wiredminds.de": null,
-"wisetrack.net": null,
-"wishloop.com": null,
-"woopra.com": null,
-"worldlogger.com": null,
-"wowanalytics.co.uk": null,
-"wp-stats.com": null,
-"wpdstat.com": null,
-"wtp101.com": null,
-"wtstats.com": null,
-"wundercounter.com": null,
-"wwwstats.info": null,
-"x-stat.de": null,
-"xg4ken.com": null,
-"xiti.com": null,
-"xxxcounter.com": null,
-"xyztraffic.com": null,
-"y-track.com": null,
-"yamanoha.com": null,
-"ybotvisit.com": null,
-"ycctrk.co.uk": null,
-"yieldbot.com": null,
-"yieldify.com": null,
-"youmetrix.co.uk": null,
-"your-counter.be": null,
-"youramigo.com": null,
-"zanox-affiliate.de": null,
-"zanox.com": null,
-"zdbb.net": null,
-"zenlivestats.com": null,
-"zoomanalytics.co": null,
-"zoomflow.com": null,
-"zqtk.net": null,
-"zroitracker.com": null,
-"a.mobify.com": null,
-"activetracker.activehotels.com": null,
-"ad.aloodo.com": null,
-"adfox.yandex.ru": null,
-"adlog.com.com": null,
-"ads-trk.vidible.tv": null,
-"ads.bridgetrack.com": null,
-"adtrack.calls.net": null,
-"affiliate.iamplify.com": null,
-"affiliates.mgmmirage.com": null,
-"affiliates.minglematch.com": null,
-"affiliates.spark.net": null,
-"affiliates.swappernet.com": null,
-"akatracking.esearchvision.com": null,
-"ams.addflow.ru": null,
-"an.yandex.ru": null,
-"analytic.pho.fm": null,
-"analytic.xingcloud.com": null,
-"analyticapi.pho.fm": null,
-"analyticcdn.globalmailer.com": null,
-"analytics-rhwg.rhcloud.com": null,
-"analytics-static.ugc.bazaarvoice.com": null,
-"analytics-v2.anvato.com": null,
-"analytics.abacast.com": null,
-"analytics.adeevo.com": null,
-"analytics.amakings.com": null,
-"analytics.anvato.net": null,
-"analytics.apnewsregistry.com": null,
-"analytics.artirix.com": null,
-"analytics.atomiconline.com": null,
-"analytics.avanser.com.au": null,
-"analytics.aweber.com": null,
-"analytics.bigcommerce.com": null,
-"analytics.brandcrumb.com": null,
-"analytics.carambo.la": null,
-"analytics.cincopa.com": null,
-"analytics.clickpathmedia.com": null,
-"analytics.closealert.com": null,
-"analytics.cmg.net": null,
-"analytics.codigo.se": null,
-"analytics.conmio.com": null,
-"analytics.convertlanguage.com": null,
-"analytics.cynapse.com": null,
-"analytics.datahc.com": null,
-"analytics.dev.springboardvideo.com": null,
-"analytics.edgekey.net": null,
-"analytics.edgesuite.net": null,
-"analytics.episodic.com": null,
-"analytics.fairfax.com.au": null,
-"analytics.favcy.com": null,
-"analytics.gvim.mobi": null,
-"analytics.hosting24.com": null,
-"analytics.hpprintx.com": null,
-"analytics.kaltura.com": null,
-"analytics.kapost.com": null,
-"analytics.live.com": null,
-"analytics.livestream.com": null,
-"analytics.mailmunch.co": null,
-"analytics.matchbin.com": null,
-"analytics.mlstatic.com": null,
-"analytics.onlyonlinemarketing.com": null,
-"analytics.ooyala.com": null,
-"analytics.optilead.co.uk": null,
-"analytics.orenshmu.com": null,
-"analytics.performable.com": null,
-"analytics.photorank.me": null,
-"analytics.piksel.com": null,
-"analytics.prod.aws.ecnext.net": null,
-"analytics.r17.com": null,
-"analytics.radiatemedia.com": null,
-"analytics.recruitics.com": null,
-"analytics.revee.com": null,
-"analytics.reyrey.net": null,
-"analytics.rogersmedia.com": null,
-"analytics.shareaholic.com": null,
-"analytics.sitewit.com": null,
-"analytics.snidigital.com": null,
-"analytics.sonymusic.com": null,
-"analytics.springboardvideo.com": null,
-"analytics.staticiv.com": null,
-"analytics.stg.springboardvideo.com": null,
-"analytics.strangeloopnetworks.com": null,
-"analytics.themarketiq.com": null,
-"analytics.tout.com": null,
-"analytics.tribeca.vidavee.com": null,
-"analytics.urx.io": null,
-"analytics.vendemore.com": null,
-"analytics.websolute.it": null,
-"analytics.wildtangent.com": null,
-"analytics.yola.net": null,
-"analytics.yolacdn.net": null,
-"analyticsengine.s3.amazonaws.com": null,
-"attributiontrackingga.googlecode.com": null,
-"audit.median.hu": null,
-"axislogger.appspot.com": null,
-"b-aws.aol.com": null,
-"basilic.netdna-cdn.com": null,
-"bat.bing.com": null,
-"beacon.affil.walmart.com": null,
-"beacon.errorception.com": null,
-"beacon.gcion.com": null,
-"beacon.gu-web.net": null,
-"beacon.guim.co.uk": null,
-"beacon.heliumnetwork.com": null,
-"beacon.indieclick.com": null,
-"beacon.livefyre.com": null,
-"beacon.richrelevance.com": null,
-"beacon.riskified.com": null,
-"beacon.rum.dynapis.com": null,
-"beacon.securestudies.com": null,
-"beacon.sojern.com": null,
-"beacon.squixa.net": null,
-"beacon.thred.woven.com": null,
-"beacon.viewlift.com": null,
-"beacon2.indieclick.com": null,
-"beacon2.indieclicktv.com": null,
-"beacons.brandads.net": null,
-"bid.g.doubleclick.net": null,
-"bitdash-reporting.appspot.com": null,
-"blip.bizrate.com": null,
-"bonsai.internetbrands.com": null,
-"bright.bncnt.com": null,
-"bs.yandex.ru": null,
-"btn.clickability.com": null,
-"business.sharedcount.com": null,
-"c.compete.com": null,
-"c.imedia.cz": null,
-"c.wen.ru": null,
-"c3metrics.medifast1.com": null,
-"cadreon.s3.amazonaws.com": null,
-"canvas-ping.conduit-data.com": null,
-"canvas-usage-v2.conduit-data.com": null,
-"cc.swiftype.com": null,
-"cdn.trafficexchangelist.com": null,
-"ce.lijit.com": null,
-"cgicounter.oneandone.co.uk": null,
-"cgicounter.puretec.de": null,
-"chanalytics.merchantadvantage.com": null,
-"chartaca.com.s3.amazonaws.com": null,
-"click.appinthestore.com": null,
-"click.aristotle.net": null,
-"click.geopaysys.com": null,
-"click.rssfwd.com": null,
-"click1.email.nymagazine.com": null,
-"click1.online.vulture.com": null,
-"clicks.dealer.com": null,
-"clickstream.loomia.com": null,
-"clicktale.pantherssl.com": null,
-"clicktalecdn.sslcs.cdngc.net": null,
-"clickthru.lefbc.com": null,
-"clicktracker.iscan.nl": null,
-"clicktracks.aristotle.net": null,
-"clientstat.castup.net": null,
-"cloudfront-labs.amazonaws.com": null,
-"cnt.3dmy.net": null,
-"cnt.mastorage.net": null,
-"collect.igodigital.com": null,
-"collector.air.tv": null,
-"collector.contentexchange.me": null,
-"collector.leaddyno.com": null,
-"collector.nextguide.tv": null,
-"collector.roistat.com": null,
-"control.adap.tv": null,
-"cookies.livepartners.com": null,
-"cookietracker.cloudapp.net": null,
-"cookiex.ngd.yahoo.com": null,
-"count.paycounter.com": null,
-"counter.bloke.com": null,
-"counter.cam-content.com": null,
-"counter.htmlvalidator.com": null,
-"counter.hyipexplorer.com": null,
-"counter.maases.com": null,
-"counter.mgaserv.com": null,
-"counter.pagesview.com": null,
-"counter.pax.com": null,
-"counter.powweb.com": null,
-"counter.rambler.ru": null,
-"counter.scribblelive.com": null,
-"counter.scribblelive.net": null,
-"counter.snackly.co": null,
-"counter.sparklit.com": null,
-"counter.top.ge": null,
-"counter.webcom.com": null,
-"counter.webmasters.bpath.com": null,
-"counter.yadro.ru": null,
-"counters.freewebs.com": null,
-"counters.gigya.com": null,
-"csi.gstatic.com": null,
-"curate.nestedmedia.com": null,
-"cx.atdmt.com": null,
-"d.shareaholic.com": null,
-"d169bbxks24g2u.cloudfront.net": null,
-"d1cdnlzf6usiff.cloudfront.net": null,
-"d1cerpgff739r9.cloudfront.net": null,
-"d1clfvuu2240eh.cloudfront.net": null,
-"d1clufhfw8sswh.cloudfront.net": null,
-"d1cr9zxt7u0sgu.cloudfront.net": null,
-"d1gp8joe0evc8s.cloudfront.net": null,
-"d1ksyxj9xozc2j.cloudfront.net": null,
-"d1lm7kd3bd3yo9.cloudfront.net": null,
-"d1m6l9dfulcyw7.cloudfront.net": null,
-"d1nh2vjpqpfnin.cloudfront.net": null,
-"d1qpxk1wfeh8v1.cloudfront.net": null,
-"d1r27qvpjiaqj3.cloudfront.net": null,
-"d1r55yzuc1b1bw.cloudfront.net": null,
-"d1rgnfh960lz2b.cloudfront.net": null,
-"d1ros97qkrwjf5.cloudfront.net": null,
-"d1wscoizcbxzhp.cloudfront.net": null,
-"d1xfq2052q7thw.cloudfront.net": null,
-"d1yu5hbtu8mng9.cloudfront.net": null,
-"d1z2jf7jlzjs58.cloudfront.net": null,
-"d21o24qxwf7uku.cloudfront.net": null,
-"d22v2nmahyeg2a.cloudfront.net": null,
-"d23p9gffjvre9v.cloudfront.net": null,
-"d28g9g3vb08y70.cloudfront.net": null,
-"d2gfdmu30u15x7.cloudfront.net": null,
-"d2gfi8ctn6kki7.cloudfront.net": null,
-"d2kmrmwhq7wkvs.cloudfront.net": null,
-"d2nxi61n77zqpl.cloudfront.net": null,
-"d2oh4tlt9mrke9.cloudfront.net": null,
-"d2pxb4n3f9klsc.cloudfront.net": null,
-"d2ry9vue95px0b.cloudfront.net": null,
-"d2so4705rl485y.cloudfront.net": null,
-"d2tgfbvjf3q6hn.cloudfront.net": null,
-"d2xgf76oeu9pbh.cloudfront.net": null,
-"d303e3cdddb4ded4b6ff495a7b496ed5.s3.amazonaws.com": null,
-"d3135glefggiep.cloudfront.net": null,
-"d33im0067v833a.cloudfront.net": null,
-"d34ko97cxuv4p7.cloudfront.net": null,
-"d36lvucg9kzous.cloudfront.net": null,
-"d36wtdrdo22bqa.cloudfront.net": null,
-"d396ihyrqc81w.cloudfront.net": null,
-"d3a2okcloueqyx.cloudfront.net": null,
-"d3cxv97fi8q177.cloudfront.net": null,
-"d3ezl4ajpp2zy8.cloudfront.net": null,
-"d3h1v5cflrhzi4.cloudfront.net": null,
-"d3hr5gm0wlxm5h.cloudfront.net": null,
-"d3kyk5bao1crtw.cloudfront.net": null,
-"d3l3lkinz3f56t.cloudfront.net": null,
-"d3mskfhorhi2fb.cloudfront.net": null,
-"d3ojzyhbolvoi5.cloudfront.net": null,
-"d3qxwzhswv93jk.cloudfront.net": null,
-"d3r7h55ola878c.cloudfront.net": null,
-"d3rmnwi2tssrfx.cloudfront.net": null,
-"d3s7ggfq1s6jlj.cloudfront.net": null,
-"d3tglifpd8whs6.cloudfront.net": null,
-"d4ax0r5detcsu.cloudfront.net": null,
-"d6jkenny8w8yo.cloudfront.net": null,
-"d81mfvml8p5ml.cloudfront.net": null,
-"d8rk54i4mohrb.cloudfront.net": null,
-"d9lq0o81skkdj.cloudfront.net": null,
-"daq0d0aotgq0f.cloudfront.net": null,
-"data.alexa.com": null,
-"data.beyond.com": null,
-"data.circulate.com": null,
-"data.imakenews.com": null,
-"data.marketgid.com": null,
-"data.minute.ly": null,
-"data.queryly.com": null,
-"datam8.co.nz": null,
-"dc8na2hxrj29i.cloudfront.net": null,
-"demandmedia.s3.amazonaws.com": null,
-"dfanalytics.dealerfire.com": null,
-"dfdbz2tdq3k01.cloudfront.net": null,
-"djibeacon.djns.com": null,
-"dkj2m377b0yzw.cloudfront.net": null,
-"dl1d2m8ri9v3j.cloudfront.net": null,
-"dn34cbtcv9mef.cloudfront.net": null,
-"dnn506yrbagrg.cloudfront.net": null,
-"doug1izaerwt3.cloudfront.net": null,
-"dt.sellpoint.net": null,
-"du8783wkf05yr.cloudfront.net": null,
-"dufue2m4sondk.cloudfront.net": null,
-"dw.com.com": null,
-"dymlo6ffhj97l.cloudfront.net": null,
-"dzmxze7hxwn6b.cloudfront.net": null,
-"dzxxxg6ij9u99.cloudfront.net": null,
-"ebay.northernhost.com": null,
-"ecommstats.s3.amazonaws.com": null,
-"entry-stats.huffpost.com": null,
-"epl.paypal-communication.com": null,
-"eservicesanalytics.com.au": null,
-"event.loyalty.bigdoor.com": null,
-"event.previewnetworks.com": null,
-"event.trove.com": null,
-"eventgateway.soundcloud.com": null,
-"eventlog.inspsearch.com": null,
-"eventlog.inspsearchapi.com": null,
-"events.antenna.is": null,
-"events.bounceexchange.com": null,
-"events.izooto.com": null,
-"events.jotform.com": null,
-"events.launchdarkly.com": null,
-"events.marquee-cdn.net": null,
-"events.medio.com": null,
-"events.realgravity.com": null,
-"events.whisk.com": null,
-"eventtracker.videostrip.com": null,
-"experience.contextly.com": null,
-"fastcounter.bcentral.com": null,
-"fastcounter.onlinehoster.net": null,
-"fbpixel.network.exchange": null,
-"filament-stats.herokuapp.com": null,
-"flashstats.libsyn.com": null,
-"fluidsurveys-com.fs.cm": null,
-"ga-beacon.appspot.com": null,
-"geo.q5media.net": null,
-"geoip.nekudo.com": null,
-"geoip.taskforce.is": null,
-"glbdns.microsoft.com": null,
-"glogger.inspcloud.com": null,
-"go-stats.dlinkddns.com": null,
-"gsp1.baidu.com": null,
-"gtrk.s3.amazonaws.com": null,
-"hawkeye-data-production.sciencemag.org.s3-website-us-east-1.amazonaws.com": null,
-"hello.staticstuff.net": null,
-"hi.hellobar.com": null,
-"hit-pool.upscore.io": null,
-"hits.dealer.com": null,
-"hm.baidu.com": null,
-"hop.clickbank.net": null,
-"i-stats.ieurop.net": null,
-"ihstats.cloudapp.net": null,
-"imp.affiliator.com": null,
-"imp.clickability.com": null,
-"informer.yandex.ru": null,
-"insights.gravity.com": null,
-"itracking.fccinteractive.com": null,
-"javascriptcounter.appspot.com": null,
-"js-agent.newrelic.com": null,
-"kalstats.kaltura.com": null,
-"l.coincident.tv": null,
-"l.fairblocker.com": null,
-"l.ooyala.com": null,
-"l.player.ooyala.com": null,
-"l.sharethis.com": null,
-"lct.salesforce.com": null,
-"leadtracking.plumvoice.com": null,
-"link.americastestkitchencorp.com": null,
-"link.huffingtonpost.com": null,
-"link.informer.com": null,
-"livecounter.theyosh.nl": null,
-"livestats.kaltura.com": null,
-"log.adap.tv": null,
-"log.invodo.com": null,
-"log.olark.com": null,
-"log1.survey.io": null,
-"logger.logidea.info": null,
-"logger.snackly.co": null,
-"logger.sociablelabs.com": null,
-"logging.carambo.la": null,
-"loggingapi.spingo.com": null,
-"logs.spilgames.com": null,
-"logs.thebloggernetwork.com": null,
-"logssl.enquisite.com": null,
-"loxodo-analytics.ext.nile.works": null,
-"lunametrics.wpengine.netdna-cdn.com": null,
-"m.addthisedge.com": null,
-"magnify360-cdn.s3.amazonaws.com": null,
-"mc.yandex.ru": null,
-"mediametrics.mpsa.com": null,
-"mediapartner.bigpoint.net": null,
-"metering.pagesuite.com": null,
-"metric.nwsource.com": null,
-"metrics-api.librato.com": null,
-"metrics.brightcove.com": null,
-"metrics.chmedia.com": null,
-"metrics.ctvdigital.net": null,
-"metrics.el-mundo.net": null,
-"metrics.feedroom.com": null,
-"metrics.loomia.com": null,
-"metrics.scribblelive.com": null,
-"metrics.seenon.com": null,
-"metrics.sonymusicd2c.com": null,
-"metrics.toptenreviews.com": null,
-"metrics.upcload.com": null,
-"metrics.wikinvest.com": null,
-"mmpstats.mirror-image.com": null,
-"mp.pianomedia.eu": null,
-"mtrcs.samba.tv": null,
-"myscoop-tracking.googlecode.com": null,
-"neocounter.neoworx-blog-tools.net": null,
-"newsanalytics.com.au": null,
-"nol.yahoo.com": null,
-"nonxt1.c.youtube.com": null,
-"o.addthis.com": null,
-"observer.ip-label.net": null,
-"octopart-analytics.com": null,
-"offermatica.intuit.com": null,
-"offers.keynote.com": null,
-"om.rogersmedia.com": null,
-"onespot-tracking.herokuapp.com": null,
-"pages-stats.rbl.ms": null,
-"partner.cynapse.com": null,
-"partners.etoro.com": null,
-"partners.thefilter.com": null,
-"peermapcontent.affino.com": null,
-"perr.h-cdn.com": null,
-"ping.hellobar.com": null,
-"ping.rasset.ie": null,
-"pixel.colorupmedia.com": null,
-"pixel.fanbridge.com": null,
-"pixel.newsdata.com.au": null,
-"pixel.solvemedia.com": null,
-"pixels.youknowbest.com": null,
-"platform.communicatorcorp.com": null,
-"pmetrics.performancing.com": null,
-"postpixel.vindicosuite.com": null,
-"providence.voxmedia.com": null,
-"prstats.postrelease.com": null,
-"pt.crossmediaservices.com": null,
-"ptracker.nurturehq.com": null,
-"ptsc.shoplocal.com": null,
-"pub.sheknows.com": null,
-"px.excitedigitalmedia.com": null,
-"px.owneriq.net": null,
-"qlog.adap.tv": null,
-"qos.video.yimg.com": null,
-"qubitanalytics.appspot.com": null,
-"r.mail.ru": null,
-"r.msn.com": null,
-"referrer.disqus.com": null,
-"report.downloastar.com": null,
-"reporting.singlefeed.com": null,
-"reportinglogger.my.rightster.com": null,
-"rich-agent.s3.amazonaws.com": null,
-"rlinks.one.in": null,
-"roitrack.addlvr.com": null,
-"rs.sinajs.cn": null,
-"rtt.campanja.com": null,
-"s.clickability.com": null,
-"s3-tracking.synthasite.net.s3.amazonaws.com": null,
-"sadv.dadapro.com": null,
-"scout.haymarketmedia.com": null,
-"scripts.psyma.com": null,
-"search.mediatarget.net": null,
-"searchstats.usa.gov": null,
-"seg.sharethis.com": null,
-"segments.adap.tv": null,
-"sftrack.searchforce.net": null,
-"shared.65twenty.com": null,
-"sig.atdmt.com": null,
-"sig.gamerdna.com": null,
-"sitereports.officelive.com": null,
-"spacedust.netmediaeurope.com": null,
-"speedtrap.shopdirect.com": null,
-"stat.boredomtherapy.com": null,
-"stat.easydate.biz": null,
-"stat.ed.cupidplc.com": null,
-"stat.itp-nyc.com": null,
-"stat.php-d.com": null,
-"stat.pladform.ru": null,
-"stat.segitek.hu": null,
-"stat.to.cupidplc.com": null,
-"stat.web-regie.com": null,
-"statdb.pressflex.com": null,
-"static.parsely.com": null,
-"statistics.infowap.info": null,
-"statistics.m0lxcdn.kukuplay.com": null,
-"statistics.tattermedia.com": null,
-"statistics.wibiya.com": null,
-"statm.the-adult-company.com": null,
-"stats-messages.gifs.com": null,
-"stats-newyork1.bloxcms.com": null,
-"stats.big-boards.com": null,
-"stats.bitgravity.com": null,
-"stats.bluebillywig.com": null,
-"stats.cdn.pfn.bz": null,
-"stats.cdn.playfair.co.za": null,
-"stats.clickability.com": null,
-"stats.clipprtv.com": null,
-"stats.cloudwp.io": null,
-"stats.cnevids.com": null,
-"stats.complex.com": null,
-"stats.datahjaelp.net": null,
-"stats.dice.com": null,
-"stats.directnic.com": null,
-"stats.edicy.com": null,
-"stats.free-rein.net": null,
-"stats.g.doubleclick.net": null,
-"stats.geegain.com": null,
-"stats.gifs.com": null,
-"stats.heyoya.com": null,
-"stats.highwire.com": null,
-"stats.indexstats.com": null,
-"stats.inergizedigitalmedia.com": null,
-"stats.itweb.co.za": null,
-"stats.kaltura.com": null,
-"stats.lightningcast.net": null,
-"stats.load.com": null,
-"stats.lotlinx.com": null,
-"stats.magnify.net": null,
-"stats.manticoretechnology.com": null,
-"stats.mituyu.com": null,
-"stats.nebula.fi": null,
-"stats.netbopdev.co.uk": null,
-"stats.olark.com": null,
-"stats.ombx.io": null,
-"stats.openload.co": null,
-"stats.ozwebsites.biz": null,
-"stats.polldaddy.com": null,
-"stats.qmerce.com": null,
-"stats.ref2000.com": null,
-"stats.sa-as.com": null,
-"stats.sawlive.tv": null,
-"stats.shopify.com": null,
-"stats.smartclip.net": null,
-"stats.snacktools.net": null,
-"stats.snappytv.com": null,
-"stats.solidopinion.com": null,
-"stats.staging.suite101.com": null,
-"stats.surfaid.ihost.com": null,
-"stats.svpply.com": null,
-"stats.topofblogs.com": null,
-"stats.twistage.com": null,
-"stats.viddler.com": null,
-"stats.vodpod.com": null,
-"stats.webs.com": null,
-"stats.webstarts.com": null,
-"stats.whicdn.com": null,
-"stats.wp.com": null,
-"stats.yme.com": null,
-"stats.yourminis.com": null,
-"stats1.tune.pk": null,
-"stats2.lightningcast.net": null,
-"stats3.unrulymedia.com": null,
-"statsadv.dadapro.com": null,
-"statsapi.screen9.com": null,
-"statsdev.treesd.com": null,
-"statsrv.451.com": null,
-"statt-collect.herokuapp.com": null,
-"su.addthis.com": null,
-"survey.interquest.com": null,
-"surveywall-api.survata.com": null,
-"sync.adap.tv": null,
-"t.a3cloud.net": null,
-"t.sharethis.com": null,
-"t.smile.eu": null,
-"t2.t2b.click": null,
-"tag.aticdn.net": null,
-"tagger.opecloud.com": null,
-"targeting.wpdigital.net": null,
-"te.supportfreecontent.com": null,
-"telemetry.soundcloud.com": null,
-"thetradedesk-tags.s3.amazonaws.com": null,
-"tl.tradetracker.net": null,
-"tm.tradetracker.net": null,
-"top-fwz1.mail.ru": null,
-"tr-metrics.loomia.com": null,
-"tr.advance.net": null,
-"tr.cloud-media.fr": null,
-"track.99acres.com": null,
-"track.addevent.com": null,
-"track.atgstores.com": null,
-"track.atom-data.io": null,
-"track.bannedcelebs.com": null,
-"track.cafemomstatic.com": null,
-"track.captivate.ai": null,
-"track.did-it.com": null,
-"track.digitalriver.com": null,
-"track.dzloans.com": null,
-"track.g-bot.net": null,
-"track.gridlockparadise.com": null,
-"track.juno.com": null,
-"track.kandle.org": null,
-"track.leadin.com": null,
-"track.mailerlite.com": null,
-"track.mybloglog.com": null,
-"track.mycliplister.com": null,
-"track.omg2.com": null,
-"track.parse.ly": null,
-"track.pricespider.com": null,
-"track.propelplus.com": null,
-"track.qcri.org": null,
-"track.qoof.com": null,
-"track.redirecting2.net": null,
-"track.ringcentral.com": null,
-"track.sauce.ly": null,
-"track.searchignite.com": null,
-"track.securedvisit.com": null,
-"track.shop2market.com": null,
-"track.sigfig.com": null,
-"track.sitetag.us": null,
-"track.social.com": null,
-"track.spots.im": null,
-"track.sprinklecontent.com": null,
-"track.strife.com": null,
-"track.td3x.com": null,
-"track.untd.com": null,
-"track.vscash.com": null,
-"track.written.com": null,
-"track.yfret.com": null,
-"track.yieldsoftware.com": null,
-"tracker.beezup.com": null,
-"tracker.downdetector.com": null,
-"tracker.everestnutrition.com": null,
-"tracker.financialcontent.com": null,
-"tracker.icerocket.com": null,
-"tracker.iqnomy.com": null,
-"tracker.issuu.com": null,
-"tracker.keywordintent.com": null,
-"tracker.marinsoftware.com": null,
-"tracker.mgnetwork.com": null,
-"tracker.mtrax.net": null,
-"tracker.myseofriend.net": null,
-"tracker.neon-images.com": null,
-"tracker.neon-lab.com": null,
-"tracker.roitesting.com": null,
-"tracker.seoboost.net": null,
-"tracker.timesgroup.com": null,
-"tracker.twenga.": null,
-"tracker.u-link.me": null,
-"tracker.vreveal.com": null,
-"tracker2.apollo-mail.net": null,
-"trackerapi.truste.com": null,
-"trackicollect.ibase.fr": null,
-"tracking.adalyser.com": null,
-"tracking.allposters.com": null,
-"tracking.badgeville.com": null,
-"tracking.bidmizer.com": null,
-"tracking.cmcigroup.com": null,
-"tracking.cmjump.com.au": null,
-"tracking.dealerwebwatcher.com": null,
-"tracking.drsfostersmith.com": null,
-"tracking.dsmmadvantage.com": null,
-"tracking.edvisors.com": null,
-"tracking.ehavior.net": null,
-"tracking.fanbridge.com": null,
-"tracking.fccinteractive.com": null,
-"tracking.feedperfect.com": null,
-"tracking.fits.me": null,
-"tracking.g2crowd.com": null,
-"tracking.godatafeed.com": null,
-"tracking.i-click.com.hk": null,
-"tracking.interweave.com": null,
-"tracking.jotform.com": null,
-"tracking.keywee.co": null,
-"tracking.lengow.com": null,
-"tracking.listhub.net": null,
-"tracking.livingsocial.com": null,
-"tracking.maxcdn.com": null,
-"tracking.musixmatch.com": null,
-"tracking.performgroup.com": null,
-"tracking.plattformad.com": null,
-"tracking.plinga.de": null,
-"tracking.practicefusion.com": null,
-"tracking.quillion.com": null,
-"tracking.quisma.com": null,
-"tracking.rapidape.com": null,
-"tracking.searchmarketing.com": null,
-"tracking.sembox.it": null,
-"tracking.skyword.com": null,
-"tracking.sokrati.com": null,
-"tracking.sponsorpay.com": null,
-"tracking.synthasite.net": null,
-"tracking.target2sell.com": null,
-"tracking.theeword.co.uk": null,
-"tracking.thehut.net": null,
-"tracking.tradeking.com": null,
-"tracking.waterfrontmedia.com": null,
-"tracking.worldmedia.net": null,
-"tracking2.channeladvisor.com": null,
-"tracking2.interweave.com": null,
-"trackingapi.cloudapp.net": null,
-"trackingdev.nixxie.com": null,
-"tracksys.developlabs.net": null,
-"traffic.acwebconnecting.com": null,
-"traffic.belaydevelopment.com": null,
-"traffic.prod.cobaltgroup.com": null,
-"traffic.pubexchange.com": null,
-"traffic.shareaholic.com": null,
-"trakksocial.googlecode.com": null,
-"trax.dirxion.com": null,
-"tree-pixel-log.s3.amazonaws.com": null,
-"trf.intuitwebsites.com": null,
-"triad.technorati.com": null,
-"trk.vindicosuite.com": null,
-"ts.tradetracker.net": null,
-"ttdetect.staticimgfarm.com": null,
-"ucounter.ucoz.net": null,
-"usage.trackjs.com": null,
-"userlog.synapseip.tv": null,
-"vertical-stats.huffpost.com": null,
-"video-ad-stats.googlesyndication.com": null,
-"visit.geocities.com": null,
-"visit.webhosting.yahoo.com": null,
-"vtracking.in.com": null,
-"watch.teroti.com": null,
-"webeffective.keynote.com": null,
-"weblog.livesport.eu": null,
-"weblogger-dynamic-lb.playdom.com": null,
-"webservices.websitepros.com": null,
-"webstats.motigo.com": null,
-"webstats.seoinc.com": null,
-"webstats.thaindian.com": null,
-"webtracker.apicasystem.com": null,
-"webtracker.educationconnection.com": null,
-"whoson.creativemark.co.uk": null,
-"wibiya-actions.conduit-data.com": null,
-"wibiya-june-new-log.conduit-data.com": null,
-"widget.perfectmarket.com": null,
-"widget.quantcast.com": null,
-"win.staticstuff.net": null,
-"wp-stat.s3.amazonaws.com": null,
-"wstat.wibiya.com": null,
-"analytics.mecloud.vn": null,
-"aax-us-iad.amazon.com": null,
-"acookie.alibaba.com": null,
-"adguru.guruji.com": null,
-"adv.drtuber.com": null,
-"advancedtracker.appspot.com": null,
-"adwiretracker.fwix.com": null,
-"affiliate.mercola.com": null,
-"affiliate.productreview.com.au": null,
-"affiliate.resellerclub.com": null,
-"affiliates.genealogybank.com": null,
-"affiliates.londonmarketing.com": null,
-"affiliates.mozy.com": null,
-"affiliates.myfax.com": null,
-"affiliates.treasureisland.com": null,
-"affiliates.vpn.ht": null,
-"amp.virginmedia.com": null,
-"analytic.imlive.com": null,
-"analytics.adfreetime.com": null,
-"analytics.archive.org": null,
-"analytics.bloomberg.com": null,
-"analytics.femalefirst.co.uk": null,
-"analytics.global.sky.com": null,
-"analytics.go.com": null,
-"analytics.gorillanation.com": null,
-"analytics.ifood.tv": null,
-"analytics.iraiser.eu": null,
-"analytics.localytics.com": null,
-"analytics.mindjolt.com": null,
-"analytics.msnbc.msn.com": null,
-"analytics.newsinc.com": null,
-"analytics.posttv.com": null,
-"analytics.services.distractify.com": null,
-"analytics.skyscanner.net": null,
-"analytics.slashdotmedia.com": null,
-"analytics.teespring.com": null,
-"analytics.thenest.com": null,
-"analytics.thenewslens.com": null,
-"analytics.thevideo.me": null,
-"analytics.twitter.com": null,
-"analytics.upworthy.com": null,
-"analytics.us.archive.org": null,
-"analytics.volvocars.com": null,
-"analytics.wetpaint.me": null,
-"analytics.whatculture.com": null,
-"analytics.yahoo.com": null,
-"analyze.yahooapis.com": null,
-"atax.gamermetrics.com": null,
-"atax.gamespy.com": null,
-"atax.gamestats.com": null,
-"athenatmpbeacon.theglobeandmail.ca": null,
-"atrack.allposters.com": null,
-"atrack.art.com": null,
-"atracktive.collegehumor.com": null,
-"b-aws.techcrunch.com": null,
-"b.huffingtonpost.com": null,
-"b.myspace.com": null,
-"b.photobucket.com": null,
-"bat.adforum.com": null,
-"bats.video.yahoo.com": null,
-"bc.yahoo.com": null,
-"beacon-1.newrelic.com": null,
-"beacon.ehow.com": null,
-"beacon.examiner.com": null,
-"beacon.indieclicktv.com": null,
-"beacon.lycos.com": null,
-"beacon.netflix.com": null,
-"beacon.nuskin.com": null,
-"beacon.search.yahoo.com": null,
-"beacon.walmart.com": null,
-"beacon.wikia-services.com": null,
-"beacon.www.theguardian.com": null,
-"beacons.helium.com": null,
-"beap-bc.yahoo.com": null,
-"bench.uc.cn": null,
-"c.microsoft.com": null,
-"cbs.wondershare.com": null,
-"cdnstats.tube8.com": null,
-"chkpt.zdnet.com": null,
-"cl.expedia.com": null,
-"clck.yandex.com": null,
-"click.aliexpress.com": null,
-"click.engage.xbox.com": null,
-"click.mmosite.com": null,
-"click.udimg.com": null,
-"click2.cafepress.com": null,
-"clicks.hurriyet.com.tr": null,
-"clicks.traffictrader.net": null,
-"clkstat.china.cn": null,
-"clog.go.com": null,
-"cls.ichotelsgroup.com": null,
-"cmstrendslog.timesnow.tv": null,
-"cnt.nicemix.com": null,
-"cnt.nuvid.com": null,
-"cnt.vivatube.com": null,
-"collector-cdn.github.com": null,
-"collector.shopstream.co": null,
-"collector.shorte.st": null,
-"collector.statowl.com": null,
-"comms-web-tracking.uswitchinternal.com": null,
-"coolertracks.emailroi.com": null,
-"count.livetv.ru": null,
-"count.prx.org": null,
-"count.rin.ru": null,
-"counter.entertainmentwise.com": null,
-"counter.joins.com": null,
-"counter.promodeejay.net": null,
-"counter.sina.com.cn": null,
-"counter.theconversation.edu.au": null,
-"counter.zerohedge.com": null,
-"da.virginmedia.com": null,
-"data.mic.com": null,
-"data.ryanair.com": null,
-"data.younow.com": null,
-"datacollector.coin.scribol.com": null,
-"dmtracking2.alibaba.com": null,
-"dw.cnet.com": null,
-"ec2-prod-tracker.babelgum.com": null,
-"enlightenment.secureshoppingbasket.com": null,
-"entry-stats.huffingtonpost.com": null,
-"eventlogger.soundcloud.com": null,
-"events.privy.com": null,
-"events.redditmedia.com": null,
-"events.turbosquid.com": null,
-"eventtracker.elitedaily.com": null,
-"evisit.exeter.ac.uk": null,
-"expbl2ro.xbox.com": null,
-"expdb2.msn.com": null,
-"f.staticlp.com": null,
-"fast.forbes.com": null,
-"g.msn.com": null,
-"ga.nsimg.net": null,
-"geo.yahoo.com": null,
-"geobeacon.ign.com": null,
-"geoip-lookup.vice.com": null,
-"geoip.al.com": null,
-"geoip.boredpanda.com": null,
-"geoip.cleveland.com": null,
-"geoip.gulflive.com": null,
-"geoip.inquirer.net": null,
-"geoip.lehighvalleylive.com": null,
-"geoip.masslive.com": null,
-"geoip.mlive.com": null,
-"geoip.nj.com": null,
-"geoip.nola.com": null,
-"geoip.oregonlive.com": null,
-"geoip.pennlive.com": null,
-"geoip.silive.com": null,
-"geoip.syracuse.com": null,
-"geoip.viamichelin.com": null,
-"geoiplookup.wikimedia.org": null,
-"glean.pop6.com": null,
-"gmonitor.aliimg.com": null,
-"imgtrack.domainmarket.com": null,
-"immassets.s3.amazonaws.com": null,
-"kinesisproxy.hearstlabs.com": null,
-"lh.secure.yahoo.com": null,
-"lilb2.shutterstock.com": null,
-"linkpuls.idg.no": null,
-"live-audience.dailymotion.com": null,
-"log.data.disney.com": null,
-"log.go.com": null,
-"log.optimizely.com": null,
-"log.snapdeal.com": null,
-"log.thevideo.me": null,
-"log.vdn.apps.cntv.cn": null,
-"log.wat.tv": null,
-"logdev.openload.co": null,
-"logger.dailymotion.com": null,
-"logger.viki.io": null,
-"logging.goodgamestudios.com": null,
-"loggingservices.tribune.com": null,
-"logs.dashlane.com": null,
-"lsam.research.microsoft.com": null,
-"lslmetrics.djlmgdigital.com": null,
-"marketing.alibaba.com": null,
-"meter-svc.nytimes.com": null,
-"metric.gstatic.com": null,
-"metric.inetcore.com": null,
-"metrics.apartments.com": null,
-"metrics.aws.sitepoint.com": null,
-"metrics.cbn.com": null,
-"metrics.cnn.com": null,
-"metrics.dailymotion.com": null,
-"metrics.ee.co.uk": null,
-"metrics.extremetech.com": null,
-"metrics.tbliab.net": null,
-"metrics.ted.com": null,
-"metrics.washingtonpost.com": null,
-"mp.twitch.tv": null,
-"nb.myspace.com": null,
-"nmtracking.netflix.com": null,
-"oimg.m.cnbc.com": null,
-"oimg.mobile.cnbc.com": null,
-"optimize-stats.voxmedia.com": null,
-"origin-tracking.trulia.com": null,
-"partner.worldoftanks.com": null,
-"partners.badongo.com": null,
-"partners.mysavings.com": null,
-"pclick.europe.yahoo.com": null,
-"pclick.internal.yahoo.com": null,
-"pclick.yahoo.com": null,
-"performances.bestofmedia.com": null,
-"ping.buto.tv": null,
-"pings.blip.tv": null,
-"pix.eads.com": null,
-"pixel.facebook.com": null,
-"pixel.pcworld.com": null,
-"pixel.redditmedia.com": null,
-"pixels.livingsocial.com": null,
-"presentationtracking.netflix.com": null,
-"proxypage.msn.com": null,
-"pulse-analytics-beacon.reutersmedia.net": null,
-"pvstat.china.cn": null,
-"rainbow-uk.mythings.com": null,
-"rd.meebo.com": null,
-"reco.hardsextube.com": null,
-"rel.msn.com": null,
-"report.shell.com": null,
-"revsci.tvguide.com": null,
-"roll.bankofamerica.com": null,
-"rs.mail.ru": null,
-"rta.dailymail.co.uk": null,
-"s.youtube.com": null,
-"s2.youtube.com": null,
-"sana.newsinc.com.s3.amazonaws.com": null,
-"scribe.twitter.com": null,
-"sense.dailymotion.com": null,
-"session-tracker.badcreditloans.com": null,
-"sitelife.ehow.com": null,
-"sixpack.udimg.com": null,
-"smetrics.att.com": null,
-"smetrics.delta.com": null,
-"sp.udimg.com": null,
-"spade.twitch.tv": null,
-"spanids.thesaurus.com": null,
-"spotlight.accuweather.com": null,
-"ssl-stats.wordpress.com": null,
-"stat.alibaba.com": null,
-"stat.dealtime.com": null,
-"stat.ruvr.ru": null,
-"stat.torrentbar.com": null,
-"statistics.crowdynews.com": null,
-"stats.aplus.com": null,
-"stats.articlesbase.com": null,
-"stats.avg.com": null,
-"stats.bbc.co.uk": null,
-"stats.behance.net": null,
-"stats.binki.es": null,
-"stats.blogg.se": null,
-"stats.break.com": null,
-"stats.cardschat.com": null,
-"stats.christianpost.com": null,
-"stats.clear-media.com": null,
-"stats.ebay.com": null,
-"stats.europe.newsweek.com": null,
-"stats.eyeviewdigital.com": null,
-"stats.farfetch.com": null,
-"stats.firedrive.com": null,
-"stats.harpercollins.com": null,
-"stats.ibtimes.co.in": null,
-"stats.macmillanusa.com": null,
-"stats.mehrnews.com": null,
-"stats.nymag.com": null,
-"stats.opoloo.de": null,
-"stats.pandora.com": null,
-"stats.paste2.org": null,
-"stats.paypal.com": null,
-"stats.piaggio.com": null,
-"stats.propublica.org": null,
-"stats.pusher.com": null,
-"stats.radiostreamlive.com": null,
-"stats.redditmedia.com": null,
-"stats.searchftps.net": null,
-"stats.searchftps.org": null,
-"stats.searchsight.com": null,
-"stats.sharenet.co.za": null,
-"stats.shoppydoo.com": null,
-"stats.slashgear.com": null,
-"stats.slideshare.net": null,
-"stats.someecards.com": null,
-"stats.storify.com": null,
-"stats.suite101.com": null,
-"stats.thevideo.me": null,
-"stats.townnews.com": null,
-"stats.tvmaze.com": null,
-"stats.uswitch.com": null,
-"stats.vc.gg": null,
-"stats.video.search.yahoo.com": null,
-"stats.visistat.com": null,
-"stats.vulture.com": null,
-"stats.wordpress.com": null,
-"stats.wwd.com": null,
-"stats.wwitv.com": null,
-"stats.ynet.co.il": null,
-"stats.zmags.com": null,
-"statscol.pond5.com": null,
-"statstracker.celebrity-gossip.net": null,
-"stattrack.0catch.com": null,
-"stcollection.moneysupermarket.com": null,
-"streamstats1.blinkx.com": null,
-"sugar.gameforge.com": null,
-"surveys.cnet.com": null,
-"t.blinkist.com": null,
-"t.dailymail.co.uk": null,
-"t.paypal.com": null,
-"tag-stats.huffpost.com": null,
-"ted.dailymail.co.uk": null,
-"timeslogtn.timesnow.tv": null,
-"timestrends.timesnow.tv": null,
-"tk.kargo.com": null,
-"total.shanghaidaily.com": null,
-"tracelog.www.alibaba.com": null,
-"track.briskfile.com": null,
-"track.catalogs.com": null,
-"track.cbs.com": null,
-"track.codepen.io": null,
-"track.collegehumor.com": null,
-"track.dictionary.com": null,
-"track.engagesciences.com": null,
-"track.ft.com": null,
-"track.fxstreet.com": null,
-"track.gawker.com": null,
-"track.hubspot.com": null,
-"track.netzero.net": null,
-"track.ning.com": null,
-"track.promptfile.com": null,
-"track.pushbullet.com": null,
-"track.slideshare.net": null,
-"track.thesaurus.com": null,
-"track.ugamezone.com": null,
-"track.webgains.com": null,
-"track.websiteceo.com": null,
-"track.wildblue.com": null,
-"track.zalando.": null,
-"track.zomato.com": null,
-"tracker.anandtech.com": null,
-"tracker.calameo.com": null,
-"tracker.cpapath.com": null,
-"tracker.joost.com": null,
-"tracker.lolalytics.com": null,
-"tracker.mattel.com": null,
-"tracker.pinnaclesports.com": null,
-"tracker.realclearpolitics.com": null,
-"tracker.redditmedia.com": null,
-"tracker.revip.info": null,
-"tracker.secretescapes.com": null,
-"tracker.uprinting.com": null,
-"tracker.washtimes.com": null,
-"tracker.wordstream.com": null,
-"tracking.ancestry.com": null,
-"tracking.batanga.com": null,
-"tracking.battleon.com": null,
-"tracking.carprices.com": null,
-"tracking.carsales.com.au": null,
-"tracking.chacha.com": null,
-"tracking.conduit.com": null,
-"tracking.eurosport.com": null,
-"tracking.goodgamestudios.com": null,
-"tracking.hsn.com": null,
-"tracking.koego.com": null,
-"tracking.military.com": null,
-"tracking.moneyam.com": null,
-"tracking.mycapture.com": null,
-"tracking.olx-st.com": null,
-"tracking.olx.": null,
-"tracking.porndoelabs.com": null,
-"tracking.realtor.com": null,
-"tracking.resumecompanion.com": null,
-"tracking.shoptogether.buy.com": null,
-"tracking.softwareprojects.com": null,
-"tracking.tidalhifi.com": null,
-"tracking.times247.com": null,
-"tracking.ukwm.co.uk": null,
-"tracking.unrealengine.com": null,
-"tracking.ustream.tv": null,
-"tracking.yourfilehost.com": null,
-"trackpm.shop2market.com": null,
-"traffic.buyservices.com": null,
-"traffic.tuberip.com": null,
-"trax.tvguide.com": null,
-"trueffect.underarmour.com": null,
-"up.nytimes.com": null,
-"uptpro.homestead.com": null,
-"urchin-tracker.bigpoint.net": null,
-"vertical-stats.huffingtonpost.com": null,
-"video-stats.video.google.com": null,
-"videotracker.washingtonpost.com": null,
-"visit.dealspwn.com": null,
-"visit.mobot.net": null,
-"visit.theglobeandmail.com": null,
-"visitors.sourcingmap.com": null,
-"vitamine.networldmedia.net": null,
-"vstat.vidigy.com": null,
-"vstats.digitaltrends.com": null,
-"weblog.strawberrynet.com": null,
-"weblogger01.data.disney.com": null,
-"webstats.perfectworld.com": null,
-"wtk.db.com": null,
-"wusstrack.wunderground.com": null,
-"wzus1.thesaurus.com": null,
-"ynuf.alibaba.com": null,
-"zap.dw-world.de": null };
+"rd.cockhero.info": null };
 var bad_da_host_exact_flag = 8455 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 21 rules:
-var bad_da_host_regex = `anet*.tradedoubler.com
-imp*.tradedoubler.com
-adr-*.vindicosuite.com
-cas.*.criteo.com
-caw.*.criteo.com
-images.*.criteo.net
-banners*.spacash.com
-sextronix.*.cdnaccess.com
-ads-*.hulu.com
-img*.i-comers.com
-plundermedia.com*rectangle-
-analytics-beacon-*.amazonaws.com
-collector-*.elb.amazonaws.com
-collector-*.tvsquared.com
-datacollect*.abtasty.com
-metro-trending-*.amazonaws.com
-siteintercept*.qualtrics.com
-trk*.vidible.tv
-vtnlog-*.elb.amazonaws.com
-logger-*.dailymotion.com
-metric*.rediff.com`;
+var bad_da_host_regex_Array = [ "analytics-beacon-*.amazonaws.com",
+"collector-*.elb.amazonaws.com",
+"collector-*.tvsquared.com",
+"datacollect*.abtasty.com",
+"metro-trending-*.amazonaws.com",
+"siteintercept*.qualtrics.com",
+"trk*.vidible.tv",
+"vtnlog-*.elb.amazonaws.com",
+"logger-*.dailymotion.com",
+"metric*.rediff.com",
+"anet*.tradedoubler.com",
+"imp*.tradedoubler.com",
+"adr-*.vindicosuite.com",
+"cas.*.criteo.com",
+"caw.*.criteo.com",
+"images.*.criteo.net",
+"banners*.spacash.com",
+"sextronix.*.cdnaccess.com",
+"ads-*.hulu.com",
+"img*.i-comers.com",
+"plundermedia.com*rectangle-" ];
 var bad_da_host_regex_flag = 21 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 4252 rules:
-var bad_da_hostpath_JSON = { "ad.admitad.com/banner": null,
+// 4256 rules:
+var bad_da_hostpath_JSON = { "google-analytics.com/analytics.js": null,
+"google-analytics.com/cx/api.js": null,
+"google-analytics.com/ga_exp.js": null,
+"google-analytics.com/internal/analytics.js": null,
+"google-analytics.com/plugins": null,
+"google-analytics.com/siteopt.js": null,
+"googletagmanager.com/gtm.js": null,
+"quantserve.com/api": null,
+"quantserve.com/pixel": null,
+"visiblemeasures.com/swf/as3/as3sohandler.swf": null,
+"101apps.com/tracker.ashx": null,
+"148.251.8.156/track.js": null,
+"198.101.148.38/update_counter.php": null,
+"208.91.157.30/viewtrack": null,
+"4theclueless.com/adlogger": null,
+"5251.net/stat.jsp": null,
+"88.208.248.58/tracking": null,
+"99widgets.com/counters": null,
+"aao.org/aao/sdc/track.js": null,
+"acces-charme.com/fakebar/track.php": null,
+"ad.atdmt.com/c": null,
+"ad.atdmt.com/e": null,
+"ad.atdmt.com/i/img": null,
+"ad.atdmt.com/m": null,
+"ad.atdmt.com/s": null,
+"addnow.com/tracker": null,
+"addthis.com/at": null,
+"addthis.com/live": null,
+"addthis.com/red/p.png": null,
+"addthiscdn.com/live": null,
+"addthisedge.com/live": null,
+"addtoany.com/menu/transparent.gif": null,
+"adultmastercash.com/e1.php": null,
+"affilired.com/analytic": null,
+"afrigator.com/track": null,
+"aiya.com.cn/stat.js": null,
+"akamai.com/crs/lgsitewise.js": null,
+"akanoo.com/tracker": null,
+"alexa.com/traffic": null,
+"alipay.com/service/clear.png": null,
+"allanalpass.com/track": null,
+"alooma.io/track": null,
+"alphasitebuilder.co.za/tracker": null,
+"amatomu.com/link/log": null,
+"amatomu.com/log.php": null,
+"amazonaws.com/amacrpr/crpr.js": null,
+"amazonaws.com/cdn.barilliance.com": null,
+"amazonaws.com/fstrk.net": null,
+"amazonaws.com/g.aspx": null,
+"amazonaws.com/initialize": null,
+"amazonaws.com/js/reach.js": null,
+"amazonaws.com/ki.js": null,
+"amazonaws.com/new.cetrk.com": null,
+"amazonaws.com/searchdiscovery-satellite-production": null,
+"amazonaws.com/statics.reedge.com": null,
+"amazonaws.com/wgntrk": null,
+"aolanswers.com/wtrack": null,
+"aolcdn.com/js/mg2.js": null,
+"aolcdn.com/omniunih_int.js": null,
+"api.awe.sm/stats": null,
+"api.choicestream.com/instr/ccm": null,
+"app.cdn-cs.com/__t.png": null,
+"app.pendo.io/data/ptm.gif": null,
+"appliedsemantics.com/images/x.gif": null,
+"appspot.com/api/track": null,
+"asterpix.com/tagcloudview": null,
+"atdmt.com/action": null,
+"atdmt.com/iaction": null,
+"atdmt.com/jaction": null,
+"atdmt.com/mstag": null,
+"atom-data.io/session/latest/track.html": null,
+"autoline-top.com/counter.php": null,
+"aweber.com/form/displays.htm": null,
+"b5media.com/bbpixel.php": null,
+"bhphotovideo.com/imp": null,
+"bidsystem.com/ppc/sendtracker.aspx": null,
+"bing.com/action": null,
+"bitgravity.com/b.gif": null,
+"blinkx.com/thirdparty/iab": null,
+"blogblog.com/tracker": null,
+"bobparsons.com/image.aspx": null,
+"brandaffinity.net/icetrack": null,
+"bravenet.com/counter": null,
+"break.com/apextracker": null,
+"break.com/break/js/brktrkr.js": null,
+"breakingburner.com/stats.html": null,
+"breakmedia.com/track.jpg": null,
+"browserscope.org/user/beacon": null,
+"canada.com/js/analytics": null,
+"carambo.la/analytics": null,
+"carambo.la/logging": null,
+"cdnma.com/apps/capture.js": null,
+"cdnplanet.com/static/rum/rum.js": null,
+"citygridmedia.com/tracker": null,
+"citysearch.com/tracker": null,
+"clickchatsold.com/d0": null,
+"cloudapp.net/l": null,
+"cloudfront.net/abw.js": null,
+"cloudfront.net/analytics.js": null,
+"cloudfront.net/analyticsengine": null,
+"cloudfront.net/bti": null,
+"cloudfront.net/code/keen-2.1.0-min.js": null,
+"cloudfront.net/esf.js": null,
+"cloudfront.net/js/ca.js": null,
+"cloudfront.net/js/reach.js": null,
+"cloudfront.net/khp.js": null,
+"cloudfront.net/log.js": null,
+"cloudfront.net/performable": null,
+"cloudfront.net/powr.js": null,
+"cloudfront.net/pt1x1.gif": null,
+"cloudfront.net/rc.js": null,
+"cloudfront.net/rum/bacon.min.js": null,
+"cloudfront.net/sentinel.js": null,
+"cloudfront.net/sso.js": null,
+"cloudfront.net/track.html": null,
+"cloudfront.net/trackb.html": null,
+"cloudfront.net/tracker.js": null,
+"cloudfront.net/zephyr.js": null,
+"cnevids.com/metrics": null,
+"cnpapers.com/scripts/library": null,
+"comic-rocket.com/metrics.js": null,
+"compendiumblog.com/js/stats.js": null,
+"creativecdn.com/pix": null,
+"crm-vwg.com/tracker": null,
+"crowdfactory.com/tracker": null,
+"cumulus-cloud.com/trackers": null,
+"d27s92d8z1yatv.cloudfront.net/js/jquery.jw.analitycs.js": null,
+"d2nq0f8d9ofdwv.cloudfront.net/track.js": null,
+"d3qxef4rp70elm.cloudfront.net/m.js": null,
+"data.fotorama.io": null,
+"daylogs.com/counter": null,
+"dealerfire.com/analytics": null,
+"deb.gs/track": null,
+"delivra.com/tracking": null,
+"delvenetworks.com/player/plugins/analytics": null,
+"demandmedia.com/wm.js": null,
+"desert.ru/tracking": null,
+"digimedia.com/pageviews.php": null,
+"directnews.co.uk/feedtrack": null,
+"disqus.com/stats.html": null,
+"dmcdn.net/behavior": null,
+"dn-net.com/cc.js": null,
+"dtym7iokkjlif.cloudfront.net/dough": null,
+"early-birds.fr/tracker": null,
+"ecustomeropinions.com/survey/nojs.php": null,
+"elb.amazonaws.com/partner.gif": null,
+"elb.amazonaws.com/small.gif": null,
+"email-edg.paypal.com/o": null,
+"emarketeer.com/tracker": null,
+"embedly.com/widgets/xcomm.html": null,
+"epromote.co.za/track": null,
+"eventful.com/apps/generic": null,
+"eviesays.com/js/analytics": null,
+"evri.com/analytics": null,
+"facebook.com/ai.php": null,
+"facebook.com/audience_network": null,
+"facebook.com/brandlift.php": null,
+"facebook.com/common/scribe_endpoint.php": null,
+"facebook.com/email_open_log_pic.php": null,
+"facebook.com/fr/u.php": null,
+"facebook.com/js/conversions/tracking.js": null,
+"facebook.com/offsite_event.php": null,
+"facebook.com/rtb_impression": null,
+"facebook.com/rtb_video": null,
+"facebook.com/tr": null,
+"fairfax.com.au/js/track": null,
+"filesonic.com/referral": null,
+"fitanalytics.com/metrics": null,
+"flashi.tv/histats.php": null,
+"flex.msn.com/mstag": null,
+"fliqz.com/metrics": null,
+"followistic.com/widget/stat": null,
+"footballmedia.com/tracking": null,
+"foxcontent.com/tracking": null,
+"ftimg.net/js/log.js": null,
+"gatehousemedia.com/wickedlocal/ip.js": null,
+"geckofoot.com/gfcounterimg.aspx": null,
+"geckofoot.com/gfvisitormap.aspx": null,
+"geni.us/snippet.js": null,
+"github.com/notifications/beacon": null,
+"glam.com/cece/agof": null,
+"glam.com/ctagsimgcmd.act": null,
+"glam.com/jsadimp.gif": null,
+"goaww.com/stats.php": null,
+"godaddy.com/js/gdwebbeacon.js": null,
+"googleusercontent.com/tracker": null,
+"gotdns.com/track/blank.aspx": null,
+"gotmojo.com/track": null,
+"gowatchit.com/analytics.js": null,
+"grabnetworks.com/beacons": null,
+"gstatic.com/gadf/ga_dyn.js": null,
+"gubagoo.com/modules/tracking": null,
+"h2porn.com/new-hit": null,
+"hasbro.com/includes/js/metrics": null,
+"hgcdn.net": null,
+"hostingtoolbox.com/bin/Count.cgi": null,
+"hqq.tv/js/counters.js": null,
+"hubspot.com/analytics": null,
+"hubspot.com/cs/loader-v2.js": null,
+"hubspot.com/tracking": null,
+"i.s-microsoft.com/wedcs/ms.js": null,
+"icbdr.com/images/pixel.gif": null,
+"imgfarm.com/images/trk/myexcitetr.gif": null,
+"imghostsrc.com/counter.php": null,
+"impi.tv/trackvideo.aspx": null,
+"ind.sh/view.php": null,
+"infogr.am/logger.php": null,
+"inphonic.com/tracking": null,
+"inq.com/tagserver/logging": null,
+"inq.com/tagserver/tracking": null,
+"installiq.com/Pixels": null,
+"intensedebate.com/remotevisit.php": null,
+"intensedebate.com/widgets/blogstats": null,
+"interestsearch.net/videoTracker.js": null,
+"internetfuel.com/tracking": null,
+"intuitwebsites.com/tracking": null,
+"jobvite.com/analytics.js": null,
+"join-safe.com/tracking": null,
+"kbb.com/partner": null,
+"keywee.co/analytics.js": null,
+"lederer.nl/incl/stats.js.php": null,
+"legacy.com/globalscripts/tracking": null,
+"lela.com/api/v2/tracking.js": null,
+"letv.com/cloud_pl": null,
+"lightboxcdn.com/static/identity.html": null,
+"lijit.com/ip.php": null,
+"lijit.com/res/images/wijitTrack.gif": null,
+"lingows.appspot.com/page_data": null,
+"link.indiegogo.com/img": null,
+"linkbucks.com/visitScript": null,
+"linkedin.com/emimp": null,
+"linkwithin.com/pixel.png": null,
+"list-manage.com/track": null,
+"livefyre.com/libs/tracker": null,
+"livefyre.com/tracking": null,
+"liverail.com/track": null,
+"location3.com/analytics": null,
+"ltassrv.com/track": null,
+"luminate.com/track": null,
+"magnify.net/decor/track": null,
+"mail-app.com/pvtracker": null,
+"mandrillapp.com/track": null,
+"mangomolo.com/tracking": null,
+"mansion.com/mts.tracker.js": null,
+"mapquestapi.com/logger": null,
+"mashery.com/analytics": null,
+"maxmind.com/geoip": null,
+"mbsvr.net/js/tracker": null,
+"media-imdb.com/twilight": null,
+"mediabong.com/t": null,
+"mediabong.net/t": null,
+"meebo.com/cim/sandbox.php": null,
+"merchenta.com/track": null,
+"mkcms.com/stats.js": null,
+"mochiads.com/clk": null,
+"msecnd.net/scripts/a/ai.0.js": null,
+"mtvnservices.com/metrics": null,
+"museter.com/track.php": null,
+"mxmfb.com/rsps/img": null,
+"myfreecams.com/mfc2/lib/o-mfccore.js": null,
+"mymarketing.co.il/Include/tracker.js": null,
+"mysociety.org/track": null,
+"mzbcdn.net/mngr/mtm.js": null,
+"nastydollars.com/trk": null,
+"navlink.com/__utmala.js": null,
+"nbcudigitaladops.com/hosted/housepix.gif": null,
+"neon-lab.com/neonbctracker.js": null,
+"netne.net/stats": null,
+"nitropay.com/nads": null,
+"nsdsvc.com/scripts/action-tracker.js": null,
+"nspmotion.com/tracking": null,
+"nude.hu/html/track.js": null,
+"o.aolcdn.com/js/mg1.js": null,
+"oddcast.com/event.php": null,
+"odnaknopka.ru/stat.js": null,
+"onescreen.net/os/static/pixels": null,
+"onsugar.com/static/ck.php": null,
+"ora.tv/j/ora_evttracking.js": null,
+"pageturnpro.com/tracker.aspx": null,
+"pair.com/itero/tracker_ftc": null,
+"pcrl.co/js/jstracker.min.js": null,
+"phncdn.com/js/ssig_helper.js": null,
+"piano-media.com/auth/index.php": null,
+"piano-media.com/bucket/novosense.swf": null,
+"piano-media.com/uid": null,
+"pixel.indieclicktv.com/annonymous": null,
+"pixhosting.com/ct/jct.php": null,
+"platform.twitter.com/impressions.js": null,
+"pornhost.com/count_hit_player.php": null,
+"poweredbyeden.com/widget/tracker": null,
+"ppx.com/tracking": null,
+"pricespider.com/impression": null,
+"print2webcorp.com/mkt3/_js/p2w_tracker.js": null,
+"privacytool.org/AnonymityChecker/js/fontdetect.js": null,
+"propelplus.com/track": null,
+"proxify.com/xyz.php": null,
+"publicbroadcasting.net/analytics": null,
+"qq.com/heatmap": null,
+"quisma.com/tracking": null,
+"rackcdn.com/easie.js": null,
+"rackcdn.com/icon2.gif": null,
+"rackcdn.com/knotice.api.js": null,
+"rackcdn.com/stf.js": null,
+"rbl.ms/res/users/tracking": null,
+"readcube.com/tracking": null,
+"reevoo.com/track": null,
+"reevoo.com/track_url": null,
+"reverbnation.com/widgets/trk": null,
+"ria.ru/js/counter.js": null,
+"royalecms.com/statistics.php": null,
+"salesforce.com/sfga.js": null,
+"saymedia.com/latest/tetrapak.js": null,
+"scribol.com/traffix/widget_tracker": null,
+"searchmaestros.com/trackpoint": null,
+"sendtonews.com/player/loggingajax.php": null,
+"shareaholic.com/partners.js": null,
+"shareholder.com/track": null,
+"shareit.com/affiliate.html": null,
+"shoplocal.com/it.ashx": null,
+"sinajs.cn/open/analytics": null,
+"skimresources.com/api/ref-banners.js": null,
+"skysa.com/tracker": null,
+"slidesharecdn.com/images/1x1.gif": null,
+"snazzyspace.com/generators/viewer-counter/counter.php": null,
+"sohu.com/stat": null,
+"southafricahome.com/statsmodulev2": null,
+"spaceprogram.com/webstats": null,
+"sparklit.com/counter": null,
+"spot.im/analytics/analytics.js": null,
+"spot.im/api/tracker": null,
+"stats.screenresolution.org/get.php": null,
+"stileproject.com/vhtk": null,
+"su.pr/hosted_js": null,
+"sulia.com/papi/sulia_partner.js": null,
+"sumo.com/apps/heatmaps": null,
+"sumome.com/api/event": null,
+"sumome.com/apps/heatmaps": null,
+"survey.io/log": null,
+"swiftypecdn.com/cc.js": null,
+"swiftypecdn.com/te.js": null,
+"synergizeonline.net/trackpoint": null,
+"tagcdn.com/pix": null,
+"technorati.com/technoratimedia-pixel.js": null,
+"techweb.com/beacon": null,
+"themesltd.com/hit-counter": null,
+"themesltd.com/online-users-counter": null,
+"thepornstarlist.com/lo/lo/track.php": null,
+"thespringbox.com/analytics": null,
+"thismoment.com/tracking": null,
+"thron.com/shared/plugins/tracking": null,
+"tinyurl.com/pixel.gif": null,
+"tmgrup.com.tr/Statistic": null,
+"topix.net/t6track": null,
+"totallylayouts.com/hit-counter": null,
+"totallylayouts.com/online-users-counter": null,
+"touchcommerce.com/tagserver/logging": null,
+"tout.com/tracker.js": null,
+"traq.li/tracker": null,
+"trumba.com/et.aspx": null,
+"trustpilot.com/stats": null,
+"trustsquare.net/trafficmonitor": null,
+"twitter.com/jot.html": null,
+"twitter.com/oct.js": null,
+"twitter.com/scribe": null,
+"ultimatebootcd.com/tracker": null,
+"v.giantrealm.com/players/stats.swf": null,
+"vast.com/vimpressions.js": null,
+"veeseo.com/tracking": null,
+"ventunotech.com/beacon": null,
+"video.google.com/api/stats": null,
+"video.msn.com/report.aspx": null,
+"videoplaza.com/proxy/distributor": null,
+"videopress.com/plugins/stats": null,
+"vindicosuite.com/track": null,
+"vindicosuite.com/tracking": null,
+"vindicosuite.com/xumo/swf": null,
+"virgingames.com/tracker": null,
+"visual.ly/track.php": null,
+"vivociti.com/images": null,
+"vizury.com/analyze": null,
+"vk.com/videostats.php": null,
+"voxmedia.com/beacon-min.js": null,
+"voxmedia.com/pickup.js": null,
+"vpoweb.com/counter.php": null,
+"vwdealerdigital.com/cdn/sd.js": null,
+"w3track.com/newtrk": null,
+"weather.ca/counter.gif": null,
+"web-soft.in/counters": null,
+"webvoo.com/wt/Track.aspx": null,
+"webworx24.co.uk/123trace.php": null,
+"webzel.com/counter": null,
+"whosread.com/counter": null,
+"widgeo.net/tracking.php": null,
+"widgetbox.com/syndication/track": null,
+"widgethost.com/pax/counter.js": null,
+"widgetserver.com/metrics": null,
+"widgetserver.com/t": null,
+"wondershare.es/jslibs/track.js": null,
+"wpdigital.net/metrics": null,
+"wsf.com/tracking": null,
+"wsj.net/MW5/content/analytics/hooks.js": null,
+"wvnetworkmedia.org/min": null,
+"yellowbrix.com/images/content/cimage.gif": null,
+"yimg.com/wi/ytc.js": null,
+"ywxi.net/meter": null,
+"zapcdn.space/zapret.js": null,
+"zemanta.com/usersync/outbrain": null,
+"zoover.co.uk/tracking": null,
+"123rf.com/tk": null,
+"1e400.net/tracking.js": null,
+"24hourfitness.com/includes/script/siteTracking.js": null,
+"3dcartstores.com/3droi/monstertrack.asp": null,
+"4hds.com/js/camstats.js": null,
+"4info.com/alert/listeners": null,
+"9msn.com.au/share/com/js/fb_google_intercept.js": null,
+"a.huluad.com/beacons": null,
+"abc.net.au/counters": null,
+"abplive.in/analytics": null,
+"accountnow.com/SyslogWriter.ashx": null,
+"accuradio.com/static/track": null,
+"accuterm.com/data/stat.js": null,
+"aclu.org/aclu_statistics_image.php": null,
+"acura.ca/_Global/js/includes/tracker.js": null,
+"ad2links.com/lpajax.php": null,
+"adapd.com/addon/upixel": null,
+"adidas.com/analytics": null,
+"adroll.com/pixel": null,
+"advancedmp3players.co.uk/support/visitor/index.php": null,
+"agendize.com/analytics.js": null,
+"agoda.net/js/abtest/analytics.js": null,
+"akamaihd.net/pixelkabam": null,
+"alibi.com/tracker.gif": null,
+"allafrica.com/img/static/s_trans_nc.gif": null,
+"allcarpictures.com/stat": null,
+"allexperts.com/px": null,
+"allmovieportal.com/hostpagescript.js": null,
+"amazon.com/gp/yourstore/recs": null,
+"amazonaws.com/beacon/vtpixpc.gif": null,
+"amcnets.com/cgi-bin/true-ip.cgi": null,
+"amy.gs/track": null,
+"androidfilehost.com/libs/otf/stats.otf.php": null,
+"any.gs/track": null,
+"aol.ca/track": null,
+"aol.co.uk/track": null,
+"aol.com/articles/traffic": null,
+"aol.com/beacons": null,
+"aol.com/master": null,
+"aol.com/metrics": null,
+"aol.com/track": null,
+"applegate.co.uk/javascript/dcs/track.js": null,
+"appspot.com/tracking": null,
+"ashleymadison.com/app/public/track.p": null,
+"asianblast.com/statx": null,
+"askmen.com/tracking": null,
+"astrology.com/visits": null,
+"atlantis.com/_scripts/tsedge/pagemarker.gif": null,
+"audiusa.com/us/brand/en.usertracking_javascript.js": null,
+"autoblog.com/traffic": null,
+"autobytel.com/content/shared/markerfile.bin": null,
+"autosite.com/scripts/markerfile.bin": null,
+"autotrader.co.uk/page-tracking": null,
+"aviva.co.uk/metrics": null,
+"azfamily.com/images/pixel.gif": null,
+"baidu.com/js/log.js": null,
+"bandstores.co.uk/tracking/scripts": null,
+"barclaycard.co.uk/cs/static/js/esurveys/esurveys.js": null,
+"bbc.co.uk/cbbc/statstracker": null,
+"bbc.co.uk/click/img": null,
+"bbc.co.uk/zaguk.gif": null,
+"bbci.co.uk/archive_stats": null,
+"bermudasun.bm/stats": null,
+"bestofmedia.com/i/tomsguide/a.gif": null,
+"bestofmedia.com/sfp/js/boomerang": null,
+"beyond.com/common/track/trackgeneral.asp": null,
+"bing.com/widget/metrics.js": null,
+"birthvillage.com/watcher": null,
+"blackplanet.com/images/shim.gif": null,
+"blick.ch/stats": null,
+"bluenile.ca/track": null,
+"bluenile.co.uk/track": null,
+"bluenile.com/track": null,
+"boards.ie/timing.php": null,
+"boats.com/images/tracking": null,
+"brandrepublic.com/session-img": null,
+"branica.com/counter.php": null,
+"bridgetrack.com/site": null,
+"bridgetrack.com/track": null,
+"brightcove.com/1pix.gif": null,
+"broadbandchoices.co.uk/track.js": null,
+"bulgari.com/bulgari/wireframe_script/BulgariGa.js": null,
+"business.com/images2/anal.gif": null,
+"businessinsider.com/tracker.js": null,
+"buto.tv/track": null,
+"buzzamedia.com/js/track.js": null,
+"buzzurl.jp/api/counter": null,
+"caller.com/metrics": null,
+"capitalone.com/tracker": null,
+"cardstore.com/affiliate.jsp": null,
+"cartoonnetwork.com/tools/js/clickmap": null,
+"cbc.ca/g/stats": null,
+"cbox.ws/box/relay.swf": null,
+"cbsimg.net/js/cbsi/dw.js": null,
+"cclickvidservgs.com/mattel/cclick.js": null,
+"cellstores.com/tracking": null,
+"cert.org/images/1pxinv.gif": null,
+"chanel.com/js/flashtrack.js": null,
+"channel4.com/foresee_c4": null,
+"charter.com/static/scripts/mock/tracking.js": null,
+"cheapsalesconsulting.com/adaptive.php": null,
+"china.com/statistic.js": null,
+"chron.com/javascript/cider": null,
+"click.news.imdb.com/open.aspx": null,
+"cloudfront.net/amznUrchin.js": null,
+"cloudfront.net/bbc-filter.js": null,
+"cloudfront.net/m/princess/ae.js": null,
+"cloudfront.net/m/princess/ae.live.js": null,
+"cloudfront.net/vis_opt.js": null,
+"cloudfront.net/vis_opt_no_jquery.js": null,
+"codecguide.com/stats.js": null,
+"codeweblog.com/js/count.js": null,
+"collarity.com/ucs/tracker.js": null,
+"collegehumor.com/track.php": null,
+"commercialappeal.com/metrics": null,
+"computershopper.com/wsgac": null,
+"cooliris.com/shared/stats": null,
+"cosmopolitan.co.za/rest/track": null,
+"courierpress.com/metrics": null,
+"cracked.com/tracking": null,
+"crackle.com/tracking": null,
+"creativecommons.org/elog": null,
+"crowdignite.com/img/l.gif": null,
+"crunchsports.com/tracking_fetchinfo.aspx": null,
+"current.com/tracking.htm": null,
+"customerservicejobs.com/common/track": null,
+"cybercoders.com/js/tracker.js": null,
+"cyberlink.com/analytics": null,
+"dailyfinance.com/tmfstatic/vs.gif": null,
+"dailymail.co.uk/tracking": null,
+"dailymotion.com/logger": null,
+"dailymotion.com/track": null,
+"dainikbhaskar.com/tracking": null,
+"deadspin.com/at.js.php": null,
+"dealnews.com/lw/ul.php": null,
+"debtconsolidationcare.com/affiliate/tracker": null,
+"dell.com/metrics": null,
+"depositfiles.com/stats.php": null,
+"designtaxi.com/tracker.php": null,
+"destructoid.com/img2.phtml": null,
+"dictionary.com/track": null,
+"displaymate.com/cgi-bin/stat": null,
+"docstoc.com/metrics": null,
+"domainit.com/scripts/track.js": null,
+"domaintools.com/tracker.php": null,
+"drpeterjones.com/stats": null,
+"dump8.com/js/stat.php": null,
+"dvdempire.com/images/empty2.asp": null,
+"dyo.gs/track": null,
+"eafyfsuh.net/track": null,
+"ebay-us.com/fp": null,
+"economist.com/geoip.php": null,
+"ectnews.com/shared/missing.gif": null,
+"edvantage.com.sg/site/servlet/tracker.jsp": null,
+"egg.com/rum/data.gif": null,
+"ehow.com/services/jslogging/log": null,
+"engadget.com/traffic": null,
+"eporner.com/stats": null,
+"everythinggirl.com/assets/tracker": null,
+"eweek.com/hqxapi": null,
+"ex.ua/counter": null,
+"exalead.com/search/pixel-ref": null,
+"examiner.com/sites/all/modules/custom/ex_stats": null,
+"exchangeandmart.co.uk/js/ga.js": null,
+"experiandirect.com/javascripts/tracking.js": null,
+"experts-exchange.com/pageloaded.jsp": null,
+"ez.no/statjs": null,
+"facebook.com/ct.php": null,
+"facebook.com/search/web/instrumentation.php": null,
+"facebook.com/xti.php": null,
+"fanfiction.net/eye": null,
+"fanhow.com/script/tracker.js": null,
+"fantasticfiction.co.uk/cgi-bin/checker.cgi": null,
+"farecompare.com/trackstar": null,
+"fark.net/imagesnoc": null,
+"farmville.com/trackaction.php": null,
+"fastexercise.com/logging.js": null,
+"favicon.co.uk/stat": null,
+"fc2.com/counter.php": null,
+"fc2.com/counter_img.php": null,
+"fccbrea.org/javascript/stats.js": null,
+"filmlinks4u.net/twatch/jslogger.php": null,
+"financeglobe.com/Visit": null,
+"flickr.com/beacon_client_api_timings.gne": null,
+"flickr.com/beacon_page_timings.gne": null,
+"flipkart.com/bbeacon.php": null,
+"flixist.com/img2.phtml": null,
+"flybmi.com/livetrack": null,
+"fncstatic.com/static/all/js/geo.js": null,
+"foodnavigator.com/tracker": null,
+"fool.com/tracking": null,
+"forbesimg.com/assets/js/forbes/fast_pixel.js": null,
+"ford.com/ngtemplates/ngassets/com/forddirect/ng/newMetrics.js": null,
+"ford.com/ngtemplates/ngassets/ford/general/scripts/js/galleryMetrics.js": null,
+"foxadd.com/addon/upixel": null,
+"foxtel.com.au/cms/fragments/corp_analytics": null,
+"freaksofcock.com/track": null,
+"free-tv-video-online.me/resources/js/counter.js": null,
+"freean.us/track": null,
+"freebiesms.com/tracker.aspx": null,
+"fujifilm.com/js/shared/analyzer.js": null,
+"furk.net/counter.yadro.ru": null,
+"galleries.bz/track": null,
+"gamefront.com/wp-content/plugins/tracker": null,
+"gamerdeals.net/aggbug.aspx": null,
+"gamesgames.com/WebAnalysis": null,
+"gamespot.com/cgi/chkpt.php": null,
+"geico.com/vs/track2.js": null,
+"giganews.com/images/rpp.gif": null,
+"gigya.com/js/gigyaGAIntegration.js": null,
+"globes.co.il/shared/s.ashx": null,
+"go.com/stat": null,
+"godaddy.com/image.aspx": null,
+"godaddy.com/pageevents.aspx": null,
+"googlelabs.com/log": null,
+"gosanangelo.com/metrics": null,
+"groupon.com/analytic": null,
+"hanksgalleries.com/stxt/counter.php": null,
+"haxx.ly/counter": null,
+"healthcarejobsite.com/Common/JavaScript/functions.tracking.js": null,
+"helium.com/javascripts/helium-beacons.js": null,
+"heraldtimesonline.com/js/tk.js": null,
+"heroku.com/track.js": null,
+"herold.at/images/stathbd.gif": null,
+"higheredjobs.com/ClickThru": null,
+"honda.ca/_Global/js/includes/tracker.js": null,
+"hoseasons.co.uk/tracking/js.html": null,
+"hostelbookers.com/track/request": null,
+"hostels.com/includes/lb.php": null,
+"hostels.com/includes/thing.php": null,
+"hothardware.com/stats": null,
+"hotnews.ro/pageCount.htm": null,
+"howcast.com/images/h.gif": null,
+"howtogeek.com/public/stats.php": null,
+"hrblock.com/includes/pixel": null,
+"huffingtonpost.com/geopromo": null,
+"huffingtonpost.com/include/geopromo.php": null,
+"huffingtonpost.com/traffic": null,
+"hulkshare.com/ajax/tracker.php": null,
+"hulkshare.com/stats.php": null,
+"hulu.com/beaconservice.swf": null,
+"hulu.com/google_conversion_video_view_tracking.html": null,
+"hwscdn.com/analytics.js": null,
+"i-am-bored.com/cad.asp": null,
+"i.walmartimages.com/i/icon": null,
+"iafrica.com/php-bin/iac/readcnt.php": null,
+"ibm.com/common/stats": null,
+"ibtimes.com/player/stats.swf": null,
+"icq.com/search/js/stats.js": null,
+"ign.com/global/analytics/drones.js": null,
+"iheart.com/tracking": null,
+"image.providesupport.com/cmd": null,
+"images.military.com/pixel.gif": null,
+"imgur.com/albumview.gif": null,
+"imgur.com/imageview.gif": null,
+"imgur.com/lumbar.gif": null,
+"independentmail.com/metrics": null,
+"infogr.am/js/metrics.js": null,
+"infomine.com/imcounter.js": null,
+"infoq.com/scripts/tracker.js": null,
+"infusionextreme.com/tracker": null,
+"ino.com/img/sites/mkt/click.gif": null,
+"intensedebate.com/empty.php": null,
+"intercom.io/gtm_tracking": null,
+"investegate.co.uk/Weblogs/IGLog.aspx": null,
+"ipetitions.com/img.php": null,
+"irs.gov/js/irs_reporting_cookie.js": null,
+"ixs1.net/s": null,
+"jakpost.net/jptracker": null,
+"javhd.com/click": null,
+"jetsetter.com/tracker.php": null,
+"jeuxjeux2.com/stats.php": null,
+"jobthread.com/js/t.js": null,
+"jobthread.com/t": null,
+"joins.com/hc.aspx": null,
+"kickass.cd/analytics.js": null,
+"kitsapsun.com/metrics": null,
+"klm.com/travel/generic/static/js/measure_async.js": null,
+"kloth.net/images/pixel.gif": null,
+"knoxnews.com/metrics": null,
+"kyte.tv/flash/MarbachMetricsOmniture.swf": null,
+"kyte.tv/flash/MarbachMetricsProvider.swf": null,
+"lancasteronline.com/javascript/ga.php": null,
+"landrover.com/system/logging": null,
+"latimes.com/images/pixel.gif": null,
+"legalmatch.com/scripts/lmtracker.js": null,
+"lendingtree.com/javascript/tracking.js": null,
+"letitbit.net/atercattus/letitbit/counter": null,
+"letitbit.net/counter": null,
+"lexus.com/lexus-share/js/campaign_tracking.js": null,
+"life.com/sm-stat": null,
+"link.codeyear.com/img": null,
+"linkbucks.com/track": null,
+"linkedin.com/analytics": null,
+"lipsy.co.uk/_assets/images/skin/tracking": null,
+"livedoor.com/counter": null,
+"livejournal.com/ljcounter": null,
+"livestrong.com/services/jslogging": null,
+"livesupport.zol.co.zw/image_tracker.php": null,
+"log.player.cntv.cn/stat.html": null,
+"logmein.com/scripts/Tracking": null,
+"lolbin.net/stats.php": null,
+"lovefilm.com/api/ioko/log": null,
+"lovefilm.com/lovefilm/images/dot.gif": null,
+"luxurylink.com/t/hpr.php": null,
+"mail.advantagebusinessmedia.com/open.aspx": null,
+"matchesfashion.com/js/Track.js": null,
+"mayoclinic.org/js/tracker.js": null,
+"mealime.com/assets/mealytics.js": null,
+"meduza.io/stat": null,
+"mercent.com/js/tracker.js": null,
+"merchantcircle.com/static/track.js": null,
+"merck.com/js/mercktracker.js": null,
+"met-art.com/visit.js": null,
+"metro.us/api/trackPage": null,
+"metroweekly.com/tools/blog_add_visitor": null,
+"mf2fm.com/php/stats.php": null,
+"microsoft.com/blankpixel.gif": null,
+"microsoft.com/click": null,
+"microsoft.com/collect": null,
+"microsoft.com/getsilverlight/scripts/silverlight/SilverlightAtlas-MSCOM-Tracking.js": null,
+"microsoft.com/getsilverlight/scripts/Tracker.js": null,
+"microsoft.com/library/svy": null,
+"microsoft.com/LTS/default.aspx": null,
+"miniurls.co/track": null,
+"mod.uk/js/tracker.js": null,
+"modernsalon.com/includes/sc_video_tracking.js": null,
+"momtastic.com/libraries/pebblebed/js/pb.track.js": null,
+"monkeyquest.com/monkeyquest/static/js/ga.js": null,
+"mortgage101.com/tracking": null,
+"mov-world.net/counter": null,
+"mozilla.com/js/track.js": null,
+"msn.com/ro.aspx": null,
+"msn.com/tracker": null,
+"multiply.com/common/dot_clear.gif": null,
+"myanimelist.net/static/logging.html": null,
+"myfitnesspal.com/assets/mfp_localytics.js": null,
+"myspace.com/beacon": null,
+"myspace.com/isf.gif": null,
+"mytravel.co.uk/thomascooktrack.gif": null,
+"nabble.com/static/analytics.js": null,
+"naplesnews.com/metrics": null,
+"naptol.com/usr/local/csp/staticContent/js/ga.js": null,
+"nationalgeographic.com/stats/ax": null,
+"nationalpayday.com/1pix.gif": null,
+"naughtydog.com/beacon": null,
+"naukrigulf.com/logger": null,
+"ncsoft.com/tracker.js": null,
+"net-a-porter.com/intl/trackpage.nap": null,
+"netmag.co.uk/matchbox/traffic": null,
+"netzero.net/account/event.do": null,
+"news.cn/webdig.js": null,
+"news.com.au/track": null,
+"news.com.au/tracking": null,
+"news9.com/beacon": null,
+"newsarama.com/common/track.php": null,
+"newsletter.mybboard.net/open.php": null,
+"newstatesman.com/js/NewStatesmanSDC.js": null,
+"nick.com/common/images/spacer.gif": null,
+"nih.gov/medlineplus/images/mplus_en_survey.js": null,
+"nih.gov/share/scripts/survey.js": null,
+"nike.com/cms/analytics-store-desktop.js": null,
+"nj.com/cgi-bin/stats": null,
+"nj.com/dhtml/stats": null,
+"noip.com/images/em.php": null,
+"nola.com/cgi-bin/stats": null,
+"nola.com/dhtml/stats": null,
+"nova.pub/track.php": null,
+"nydailynews.com/tracker.js": null,
+"nysun.com/tracker.js": null,
+"nyt.com/js/mtr.js": null,
+"nytimes.com/js/mtr.js": null,
+"nzbsrus.com/tracker": null,
+"offers.keynote.com/wt": null,
+"ok.co.uk/tracking": null,
+"olark.com/track": null,
+"oodle.co.uk/event/track-first-view": null,
+"oodle.com/js/suntracking.js": null,
+"optimizely.com/js/geo.js": null,
+"osalt.com/js/track.js": null,
+"oscars.org/scripts/wt_include1.js": null,
+"oscars.org/scripts/wt_include2.js": null,
+"ostkcdn.com/js/p13n.js": null,
+"pages03.net/WTS/event.jpeg": null,
+"pajamasmedia.com/stats": null,
+"papajohns.com/index_files/activityi.html": null,
+"paper.li/javascripts/analytics.js": null,
+"pardot.com/pd.js": null,
+"paypal.com/webapps/beaconweb": null,
+"pbsrc.com/common/pixel.png": null,
+"pcp001.com/media/globalPixel.js": null,
+"pepsi.com/js/pepsi_tracking.js": null,
+"photobucket.com/ss/open.php": null,
+"photobucket.com/track": null,
+"picbucks.com/track": null,
+"pixazza.com/track": null,
+"play.com/analytics": null,
+"play.com/sitetrak": null,
+"playboy.com/libs/analytics": null,
+"playlist.com/scripts/remote_logger.js": null,
+"playserver1.com/analytics": null,
+"playstation.com/beacon": null,
+"plentyoffish.com/tracking.js": null,
+"pokernews.com/track-views.php": null,
+"porndoo.com/lib/ajax/track.php": null,
+"presstv.ir/stat": null,
+"pricegrabber.com/analytics.php": null,
+"princetonreview.com/logging": null,
+"projop.dnsalias.com/intranet-crm-tracking": null,
+"prospects.ac.uk/assets/js/prospectsWebTrends.js": null,
+"ps-deals.com/aggbug.aspx": null,
+"pubarticles.com/add_hits_by_user_click.php": null,
+"puritan.com/images/pixels": null,
+"qbn.com/media/static/js/ga.js": null,
+"questionmarket.com/adsc": null,
+"questionmarket.com/static": null,
+"quickmeme.com/tracker": null,
+"quintcareers.4jobs.com/Common/JavaScript/functions.tracking.js": null,
+"racingbase.com/tracking_fetchinfo.aspx": null,
+"racinguk.com/images/home_sponsors": null,
+"radio-canada.ca/lib/TrueSight/markerFile.gif": null,
+"rakuten-static.com/com/rat": null,
+"rambler.ru/cnt": null,
+"razor.tv/site/servlet/tracker.jsp": null,
+"reachlocal.com/js/tracklandingpage.js": null,
+"realitytvworld.com/images/pixel.gif": null,
+"recomendedsite.com/addon/upixel": null,
+"redding.com/metrics": null,
+"redtube.com/_status/pix.php": null,
+"redtube.com/_status/pixa.php": null,
+"redtube.com/js/track.js": null,
+"redtube.com/pix.php": null,
+"redtube.com/stats": null,
+"reference.com/track": null,
+"rent.com/track/visit": null,
+"reporter-times.com/js/tk.js": null,
+"reporternews.com/metrics": null,
+"resellerclub.com/helpdesk/visitor/index.php": null,
+"retrevo.com/m/vm/tracking": null,
+"reuters.com/tracker": null,
+"rightmove.co.uk/ps/images/logging/timer.gif": null,
+"ringcentral.com/misc/se_track.asp": null,
+"rismedia.com/tracking.js": null,
+"rkdms.com/order.gif": null,
+"rkdms.com/sid.gif": null,
+"rottentomatoes.com/tracking": null,
+"rte.ie/player/playertracker.js": null,
+"rumble.com/l": null,
+"russellgrant.com/hostedsearch/panelcounter.aspx": null,
+"s-msn.com/br/gbl/js/2/report.js": null,
+"s-msn.com/s/js/loader/activity/trackloader.min.js": null,
+"sabah.com.tr/Statistic": null,
+"sabah.com.tr/StatisticImage": null,
+"sabc.co.za/SABC/analytics": null,
+"sap.com/global/ui/js/trackinghelper.js": null,
+"sasontnwc.net/track": null,
+"satellite-tv-guides.com/stat": null,
+"sciencedaily.com/blank.htm": null,
+"sciencedaily.com/cache.php": null,
+"scoop.co.nz/images/pixel.gif": null,
+"scribol.com/traffix-tracker.gif": null,
+"scriptlance.com/cgi-bin/freelancers/ref_click.cgi": null,
+"scripts.snowball.com/scripts/images/pixy.gif": null,
+"sdc.com/sdcdata.js": null,
+"search.usa.gov/javascripts/stats.js": null,
+"searchenginewatch.com/utils/article_track": null,
+"seatgeek.com/tracker.gif": null,
+"securepaynet.net/image.aspx": null,
+"selfip.org/counter": null,
+"sex-flow.com/js/error.js": null,
+"sharecast.com/counter.php": null,
+"shopautoweek.com/js/modules/tracker.js": null,
+"shopify.com/track.js": null,
+"shoplocal.com/dot_clear.gif": null,
+"shopping.com/pixel": null,
+"shopsubmit.co.uk/visitor.ashx": null,
+"shoutcast.com/traffic": null,
+"shvoong.com/images/spacer.gif": null,
+"siberiantimes.com/counter": null,
+"similarsites.com/sbbgate.aspx": null,
+"sinaimg.cn/unipro/pub": null,
+"singer22-static.com/stat": null,
+"sitemeter.com/meter.asp": null,
+"skypeassets.com/i/js/jquery/tracking.js": null,
+"skyrock.net/img/pix.gif": null,
+"skyrock.net/js/stats_blog.js": null,
+"skyrock.net/stats": null,
+"slack.com/clog/track": null,
+"slacker.com/beacon/page": null,
+"slashdot.org/images/js.gif": null,
+"slashgear.com/stats": null,
+"slide.com/tracker": null,
+"smartname.com/scripts/cookies.js": null,
+"snakesworld.com/cgi-bin/hitometer": null,
+"socialcodedev.com/pixel": null,
+"socialstreamingplayer.crystalmedianetworks.com/tracker": null,
+"soe.com/js/web-platform/web-data-tracker.js": null,
+"sofascore.com/geoip.js": null,
+"soonnight.com/stats.htm": null,
+"sourceforge.net/images/mlopen_post.html": null,
+"sovereignbank.com/utils/track.asp": null,
+"speakertext.com/analytics": null,
+"spinback.com/spinback/event/impression": null,
+"spinmedia.com/clarity.min.js": null,
+"spinmediacdn.com/clarity.min.js": null,
+"sporcle.com/adn/yaktrack.php": null,
+"squidoo.com/track": null,
+"staticice.com.au/cgi-bin/stats.cgi": null,
+"staticlp.com/analytics": null,
+"staticworld.net/pixel.gif": null,
+"statravel.co.uk/static/uk_division_web_live/Javascript/wt_gets.js": null,
+"stickpage.com/counter.php": null,
+"storenvy.com/tracking": null,
+"streetdirectory.com/tracking": null,
+"streetfire.net/flash/trackingutility.swf": null,
+"streetfire.net/handlers/logstreamfileimpression.ashx": null,
+"stuff.co.nz/track": null,
+"sublimevideo.net/_.gif": null,
+"sugarvine.com/inc/tracking.asp": null,
+"suite101.com/tracking": null,
+"sun.com/share/metrics": null,
+"surinenglish.com/acceso.php": null,
+"sysomos.com/track": null,
+"t.hulu.com/beacon": null,
+"t3.com/js/trackers.js": null,
+"tacobell.com/tb_files/js/tracker.js": null,
+"targetspot.com/track": null,
+"tarot.com/stats": null,
+"tcpalm.com/metrics": null,
+"tdwaterhouse.ca/includes/javascript/rtesurvey.js": null,
+"tfl.gov.uk/tfl-global/scripts/stats-config.js": null,
+"tfl.gov.uk/tfl-global/scripts/stats.js": null,
+"theconversation.com/javascripts/lib/content_tracker_hook.js": null,
+"thecreatorsproject.com/tracker.html": null,
+"thefreedictionary.com/x/tp.ashx": null,
+"thegameslist.com/wb/t.gif": null,
+"thejc.com/metatraffic2": null,
+"theolivepress.es/cdn-cgi/cl": null,
+"thesaurus.com/track": null,
+"theseforums.com/track": null,
+"theweek.com/decor/track": null,
+"tickco.com/track.js": null,
+"tidaltv.com/Ping.aspx": null,
+"timesrecordnews.com/metrics": null,
+"tinypic.com/track.php": null,
+"topix.com/t6track": null,
+"torrentz.ph/ping": null,
+"tottenhamhotspur.com/media/javascript/google": null,
+"toyota.com/analytics": null,
+"tracking.gfycat.com/viewCount": null,
+"trade-it.co.uk/counter": null,
+"trb.com/hive/swf/analytics.swf": null,
+"trialpay.com/mi": null,
+"tripadvisor.com/uvpages/page_moniker.html": null,
+"trivago.com/tracking": null,
+"trove.com/identity/public/visitor": null,
+"trovus.co.uk/tracker": null,
+"trowel.twitch.tv": null,
+"truste.com/common/js/ga.js": null,
+"tsn.ua/svc/video/stat": null,
+"tubeplus.me/geoip.php": null,
+"tubepornclassic.com/js/111.js": null,
+"tubxporn.com/track.php": null,
+"turn.com/js/module.tracking.js": null,
+"turnsocial.com/track": null,
+"tv-links.eu/qtt_spacer.gif": null,
+"tvshark.com/stats.js": null,
+"twitch.tv/track": null,
+"twitter.com/scribes": null,
+"twitvid.com/api/tracking.php": null,
+"twitvid.com/mediaplayer/players/tracker.swf": null,
+"u.tv/utvplayer/everywhere/tracking.aspx": null,
+"ucoz.com/stat": null,
+"ulogin.ru/stats.html": null,
+"ultimedia.com/deliver/statistiques": null,
+"unrulymedia.com/loader-analytics.html": null,
+"upornia.com/js/0818.js": null,
+"urbanlist.com/event/track-first-view": null,
+"usps.com/survey": null,
+"uts-rss.crystalmedianetworks.com/track.php": null,
+"validome.org/valilogger/track.js": null,
+"vator.tv/tracking": null,
+"vbs.tv/tracker.html": null,
+"vcstar.com/metrics": null,
+"venere.com/common/js/track.js": null,
+"victoriassecret.com/m/a.gif": null,
+"video.msn.com/frauddetect.aspx": null,
+"video.syfy.com/lg.php": null,
+"videopremium.tv/dev/tr.js": null,
+"villarenters.com/inttrack.aspx": null,
+"viralnova.com/track.php": null,
+"viralogy.com/javascript/viralogy_tracker.js": null,
+"virginholidays.co.uk/_assets/js/dc_storm/track.js": null,
+"vixy.net/fb-traffic-pop.js": null,
+"vmware.com/files/include/ga": null,
+"vodpod.com/stats": null,
+"vogue.co.uk/_/logic/statistics.js": null,
+"voyeurhit.com/js/a2210.js": null,
+"vzaar.com/libs/stats": null,
+"walletpop.com/track": null,
+"wallpaperstock.net/partners.js": null,
+"washingtonpost.com/rw/sites/twpweb/js/init/init.track-header-1.0.0.js": null,
+"washingtonpost.com/wp-stat/analytics": null,
+"watch-series.to/analytics.html": null,
+"wavescape.mobi/rest/track": null,
+"wcnc.com/g/g/button": null,
+"weather.com/pagelet/metrics": null,
+"webcamgalore.com/aslog.js": null,
+"webmonkey.com/js/stats": null,
+"weeklyblitz.net/tracker.js": null,
+"wellness.com/proxy.asp": null,
+"wikio.com/shopping/tracking/hit.jsp": null,
+"wikipedia.org/beacon": null,
+"windowsphone.com/scripts/siteTracking.js": null,
+"wired.com/ecom": null,
+"wired.com/js/stats": null,
+"wired.com/tracker.js": null,
+"worldnow.com/global/tools/video/Namespace_VideoReporting_DW.js": null,
+"worldreviewer.com/_search/tracker.png": null,
+"wovencube.com/track": null,
+"wunderground.com/tag.php": null,
+"wwe.com/sites/all/modules/wwe/wwe_analytics": null,
+"xda-cdn.com/analytics.js": null,
+"xhcdn.com/js/track.min.js": null,
+"yahoo.com/_td_api/beacon": null,
+"yahoo.com/beacon": null,
+"yahoo.com/neo/ygbeacon": null,
+"yahoo.com/perf.gif": null,
+"yahoo.com/track": null,
+"yellowpages.com/images/li.gif": null,
+"yellowpages.com/proxy/envoy": null,
+"yellowpages.com/proxy/turn_tags": null,
+"younewstv.com/js/easyxdm.min.js": null,
+"yourfilehost.com/counter.htm": null,
+"youronlinechoices.com/activity": null,
+"yourtv.com.au/share/com/js/fb_google_intercept.js": null,
+"youtube-nocookie.com/robots.txt": null,
+"yyv.co/track": null,
+"zappos.com/onload.cgi": null,
+"zawya.com/zscripts/ajaxztrack.cfm": null,
+"zedo.com/img/bh.gif": null,
+"zoomin.tv/impressions": null,
+"zoomin.tv/impressionsplayers": null,
+"zvents.com/partner_json": null,
+"zytpirwai.net/track": null,
+"aeroplan.com/static/js/omniture/s_code_prod.js": null,
+"aircanada.com/shared/common/sitecatalyst/s_code.js": null,
+"csmonitor.com/extension/csm_base/design/csm_design/javascript/omniture/s_code.js": null,
+"csmonitor.com/extension/csm_base/design/standard/javascript/adobe/s_code.js": null,
+"expressen.se/static/scripts/s_code.js": null,
+"ge.com/sites/all/themes/ge_2012/assets/js/bin/s_code.js": null,
+"lexus.com/lexus-share/js/tracking_omn/s_code.js": null,
+"mercola.com/Assets/js/omniture/sitecatalyst/mercola_s_code.js": null,
+"mercuryinsurance.com/static/js/s_code.js": null,
+"michaelkors.com/common/js/extern/omniture/s_code.js": null,
+"mnginteractive.com/live/omniture/sccore_NEW_JRC.js": null,
+"navyfederal.org/js/s_code.js": null,
+"nyteknik.se/ver02/javascript/2012_s_code_global.js": null,
+"paypal.com/acquisition-app/static/js/s_code.js": null,
+"philly.com/includes/s_code.js": null,
+"playstation.com/pscomauth/groups/public/documents/webasset/community_secured_s_code.js": null,
+"sephora.com/javascripts/analytics/wa2.js": null,
+"sltrib.com/csp/mediapool/sites/Shared/assets/csp/includes/omniture/SiteCatalystCode_H_17.js": null,
+"vitacost.com/Javascripts/s_code.js": null,
+"vmware.com/files/templates/inc/s_code_my.js": null,
+"radio-canada.ca/omniture/omni_stats_base.js": null,
+"watchseries.to/piwik.js": null,
+"ad.admitad.com/banner": null,
 "ad.admitad.com/f": null,
 "ad.admitad.com/fbanner": null,
 "ad.admitad.com/j": null,
@@ -11747,6 +12898,7 @@ var bad_da_hostpath_JSON = { "ad.admitad.com/banner": null,
 "hdtvtest.co.uk/image/partner": null,
 "hentai2read.com/ios/swf": null,
 "hentaihaven.org/wp-content/banners": null,
+"hentaistream.com/wp-includes/images": null,
 "heraldm.com/iframe": null,
 "herold.at/images/dealofday.swf": null,
 "herzeleid.com/files/images/banners": null,
@@ -12167,6 +13319,7 @@ var bad_da_hostpath_JSON = { "ad.admitad.com/banner": null,
 "nufc.com/forddirectbanner.js": null,
 "numberempire.com/images/b": null,
 "nutritionhorizon.com/content/banners": null,
+"nutritionhorizon.com/content/flash_loaders": null,
 "nuttynewstoday.com/images/hostwink.jpg": null,
 "nuttynewstoday.com/images/percento-banner.jpg": null,
 "nydailynews.com/img/sponsor": null,
@@ -13180,10 +14333,12 @@ var bad_da_hostpath_JSON = { "ad.admitad.com/banner": null,
 "javhub.net/img/r.jpg": null,
 "javporn.in/clicunder.js": null,
 "javstreaming.net/app/forad.js": null,
+"julesjordanvideo.com/flash": null,
 "justporno.tv/ad": null,
 "keezmovies.com/iframe.html": null,
 "kindgirls.com/banners2": null,
 "konachan.com/images/bam": null,
+"krasview.ru/content": null,
 "krasview.ru/resource/a.php": null,
 "kuntfutube.com/kellyban.gif": null,
 "lesbian.hu/banners": null,
@@ -13497,5433 +14652,4399 @@ var bad_da_hostpath_JSON = { "ad.admitad.com/banner": null,
 "imagebam.com/redirect_awe.php": null,
 "pinporn.com/popunder": null,
 "pornuppz.info/out.php": null,
-"ymages.org/prepop.php": null,
-"google-analytics.com/analytics.js": null,
-"google-analytics.com/cx/api.js": null,
-"google-analytics.com/ga_exp.js": null,
-"google-analytics.com/internal/analytics.js": null,
-"google-analytics.com/plugins": null,
-"google-analytics.com/siteopt.js": null,
-"googletagmanager.com/gtm.js": null,
-"quantserve.com/api": null,
-"quantserve.com/pixel": null,
-"visiblemeasures.com/swf/as3/as3sohandler.swf": null,
-"101apps.com/tracker.ashx": null,
-"148.251.8.156/track.js": null,
-"198.101.148.38/update_counter.php": null,
-"208.91.157.30/viewtrack": null,
-"4theclueless.com/adlogger": null,
-"5251.net/stat.jsp": null,
-"88.208.248.58/tracking": null,
-"99widgets.com/counters": null,
-"aao.org/aao/sdc/track.js": null,
-"acces-charme.com/fakebar/track.php": null,
-"ad.atdmt.com/c": null,
-"ad.atdmt.com/e": null,
-"ad.atdmt.com/i/img": null,
-"ad.atdmt.com/m": null,
-"ad.atdmt.com/s": null,
-"addnow.com/tracker": null,
-"addthis.com/at": null,
-"addthis.com/live": null,
-"addthis.com/red/p.png": null,
-"addthiscdn.com/live": null,
-"addthisedge.com/live": null,
-"addtoany.com/menu/transparent.gif": null,
-"adultmastercash.com/e1.php": null,
-"affilired.com/analytic": null,
-"afrigator.com/track": null,
-"aiya.com.cn/stat.js": null,
-"akamai.com/crs/lgsitewise.js": null,
-"akanoo.com/tracker": null,
-"alexa.com/traffic": null,
-"alipay.com/service/clear.png": null,
-"allanalpass.com/track": null,
-"alooma.io/track": null,
-"alphasitebuilder.co.za/tracker": null,
-"amatomu.com/link/log": null,
-"amatomu.com/log.php": null,
-"amazonaws.com/amacrpr/crpr.js": null,
-"amazonaws.com/cdn.barilliance.com": null,
-"amazonaws.com/fstrk.net": null,
-"amazonaws.com/g.aspx": null,
-"amazonaws.com/initialize": null,
-"amazonaws.com/js/reach.js": null,
-"amazonaws.com/ki.js": null,
-"amazonaws.com/new.cetrk.com": null,
-"amazonaws.com/searchdiscovery-satellite-production": null,
-"amazonaws.com/statics.reedge.com": null,
-"amazonaws.com/wgntrk": null,
-"aolanswers.com/wtrack": null,
-"aolcdn.com/js/mg2.js": null,
-"aolcdn.com/omniunih_int.js": null,
-"api.awe.sm/stats": null,
-"api.choicestream.com/instr/ccm": null,
-"app.cdn-cs.com/__t.png": null,
-"app.pendo.io/data/ptm.gif": null,
-"appliedsemantics.com/images/x.gif": null,
-"appspot.com/api/track": null,
-"asterpix.com/tagcloudview": null,
-"atdmt.com/action": null,
-"atdmt.com/iaction": null,
-"atdmt.com/jaction": null,
-"atdmt.com/mstag": null,
-"atom-data.io/session/latest/track.html": null,
-"autoline-top.com/counter.php": null,
-"aweber.com/form/displays.htm": null,
-"b5media.com/bbpixel.php": null,
-"bhphotovideo.com/imp": null,
-"bidsystem.com/ppc/sendtracker.aspx": null,
-"bing.com/action": null,
-"bitgravity.com/b.gif": null,
-"blinkx.com/thirdparty/iab": null,
-"blogblog.com/tracker": null,
-"bobparsons.com/image.aspx": null,
-"brandaffinity.net/icetrack": null,
-"bravenet.com/counter": null,
-"break.com/apextracker": null,
-"break.com/break/js/brktrkr.js": null,
-"breakingburner.com/stats.html": null,
-"breakmedia.com/track.jpg": null,
-"browserscope.org/user/beacon": null,
-"canada.com/js/analytics": null,
-"carambo.la/analytics": null,
-"carambo.la/logging": null,
-"cdnma.com/apps/capture.js": null,
-"cdnplanet.com/static/rum/rum.js": null,
-"citygridmedia.com/tracker": null,
-"citysearch.com/tracker": null,
-"clickchatsold.com/d0": null,
-"cloudapp.net/l": null,
-"cloudfront.net/abw.js": null,
-"cloudfront.net/analytics.js": null,
-"cloudfront.net/analyticsengine": null,
-"cloudfront.net/bti": null,
-"cloudfront.net/code/keen-2.1.0-min.js": null,
-"cloudfront.net/esf.js": null,
-"cloudfront.net/js/ca.js": null,
-"cloudfront.net/js/reach.js": null,
-"cloudfront.net/khp.js": null,
-"cloudfront.net/log.js": null,
-"cloudfront.net/performable": null,
-"cloudfront.net/powr.js": null,
-"cloudfront.net/pt1x1.gif": null,
-"cloudfront.net/rc.js": null,
-"cloudfront.net/rum/bacon.min.js": null,
-"cloudfront.net/sentinel.js": null,
-"cloudfront.net/sso.js": null,
-"cloudfront.net/track.html": null,
-"cloudfront.net/trackb.html": null,
-"cloudfront.net/tracker.js": null,
-"cloudfront.net/zephyr.js": null,
-"cnevids.com/metrics": null,
-"cnpapers.com/scripts/library": null,
-"comic-rocket.com/metrics.js": null,
-"compendiumblog.com/js/stats.js": null,
-"creativecdn.com/pix": null,
-"crm-vwg.com/tracker": null,
-"crowdfactory.com/tracker": null,
-"cumulus-cloud.com/trackers": null,
-"d27s92d8z1yatv.cloudfront.net/js/jquery.jw.analitycs.js": null,
-"d2nq0f8d9ofdwv.cloudfront.net/track.js": null,
-"d3qxef4rp70elm.cloudfront.net/m.js": null,
-"data.fotorama.io": null,
-"daylogs.com/counter": null,
-"dealerfire.com/analytics": null,
-"deb.gs/track": null,
-"delivra.com/tracking": null,
-"delvenetworks.com/player/plugins/analytics": null,
-"demandmedia.com/wm.js": null,
-"desert.ru/tracking": null,
-"digimedia.com/pageviews.php": null,
-"directnews.co.uk/feedtrack": null,
-"disqus.com/stats.html": null,
-"dmcdn.net/behavior": null,
-"dn-net.com/cc.js": null,
-"dtym7iokkjlif.cloudfront.net/dough": null,
-"early-birds.fr/tracker": null,
-"ecustomeropinions.com/survey/nojs.php": null,
-"elb.amazonaws.com/partner.gif": null,
-"elb.amazonaws.com/small.gif": null,
-"email-edg.paypal.com/o": null,
-"emarketeer.com/tracker": null,
-"embedly.com/widgets/xcomm.html": null,
-"epromote.co.za/track": null,
-"eventful.com/apps/generic": null,
-"eviesays.com/js/analytics": null,
-"evri.com/analytics": null,
-"facebook.com/ai.php": null,
-"facebook.com/audience_network": null,
-"facebook.com/brandlift.php": null,
-"facebook.com/common/scribe_endpoint.php": null,
-"facebook.com/email_open_log_pic.php": null,
-"facebook.com/fr/u.php": null,
-"facebook.com/js/conversions/tracking.js": null,
-"facebook.com/offsite_event.php": null,
-"facebook.com/rtb_impression": null,
-"facebook.com/rtb_video": null,
-"facebook.com/tr": null,
-"fairfax.com.au/js/track": null,
-"filesonic.com/referral": null,
-"fitanalytics.com/metrics": null,
-"flashi.tv/histats.php": null,
-"flex.msn.com/mstag": null,
-"fliqz.com/metrics": null,
-"followistic.com/widget/stat": null,
-"footballmedia.com/tracking": null,
-"foxcontent.com/tracking": null,
-"ftimg.net/js/log.js": null,
-"gatehousemedia.com/wickedlocal/ip.js": null,
-"geckofoot.com/gfcounterimg.aspx": null,
-"geckofoot.com/gfvisitormap.aspx": null,
-"geni.us/snippet.js": null,
-"github.com/notifications/beacon": null,
-"glam.com/cece/agof": null,
-"glam.com/ctagsimgcmd.act": null,
-"glam.com/jsadimp.gif": null,
-"goaww.com/stats.php": null,
-"godaddy.com/js/gdwebbeacon.js": null,
-"googleusercontent.com/tracker": null,
-"gotdns.com/track/blank.aspx": null,
-"gotmojo.com/track": null,
-"gowatchit.com/analytics.js": null,
-"grabnetworks.com/beacons": null,
-"gstatic.com/gadf/ga_dyn.js": null,
-"gubagoo.com/modules/tracking": null,
-"h2porn.com/new-hit": null,
-"hasbro.com/includes/js/metrics": null,
-"hgcdn.net": null,
-"hostingtoolbox.com/bin/Count.cgi": null,
-"hqq.tv/js/counters.js": null,
-"hubspot.com/analytics": null,
-"hubspot.com/cs/loader-v2.js": null,
-"hubspot.com/tracking": null,
-"i.s-microsoft.com/wedcs/ms.js": null,
-"icbdr.com/images/pixel.gif": null,
-"imgfarm.com/images/trk/myexcitetr.gif": null,
-"imghostsrc.com/counter.php": null,
-"impi.tv/trackvideo.aspx": null,
-"ind.sh/view.php": null,
-"infogr.am/logger.php": null,
-"inphonic.com/tracking": null,
-"inq.com/tagserver/logging": null,
-"inq.com/tagserver/tracking": null,
-"installiq.com/Pixels": null,
-"intensedebate.com/remotevisit.php": null,
-"intensedebate.com/widgets/blogstats": null,
-"interestsearch.net/videoTracker.js": null,
-"internetfuel.com/tracking": null,
-"intuitwebsites.com/tracking": null,
-"jobvite.com/analytics.js": null,
-"join-safe.com/tracking": null,
-"kbb.com/partner": null,
-"keywee.co/analytics.js": null,
-"lederer.nl/incl/stats.js.php": null,
-"legacy.com/globalscripts/tracking": null,
-"lela.com/api/v2/tracking.js": null,
-"letv.com/cloud_pl": null,
-"lightboxcdn.com/static/identity.html": null,
-"lijit.com/ip.php": null,
-"lijit.com/res/images/wijitTrack.gif": null,
-"lingows.appspot.com/page_data": null,
-"link.indiegogo.com/img": null,
-"linkbucks.com/visitScript": null,
-"linkedin.com/emimp": null,
-"linkwithin.com/pixel.png": null,
-"list-manage.com/track": null,
-"livefyre.com/libs/tracker": null,
-"livefyre.com/tracking": null,
-"liverail.com/track": null,
-"location3.com/analytics": null,
-"ltassrv.com/track": null,
-"luminate.com/track": null,
-"magnify.net/decor/track": null,
-"mail-app.com/pvtracker": null,
-"mandrillapp.com/track": null,
-"mangomolo.com/tracking": null,
-"mansion.com/mts.tracker.js": null,
-"mapquestapi.com/logger": null,
-"mashery.com/analytics": null,
-"maxmind.com/geoip": null,
-"mbsvr.net/js/tracker": null,
-"media-imdb.com/twilight": null,
-"mediabong.com/t": null,
-"mediabong.net/t": null,
-"meebo.com/cim/sandbox.php": null,
-"merchenta.com/track": null,
-"mkcms.com/stats.js": null,
-"mochiads.com/clk": null,
-"msecnd.net/scripts/a/ai.0.js": null,
-"mtvnservices.com/metrics": null,
-"museter.com/track.php": null,
-"mxmfb.com/rsps/img": null,
-"myfreecams.com/mfc2/lib/o-mfccore.js": null,
-"mymarketing.co.il/Include/tracker.js": null,
-"mysociety.org/track": null,
-"mzbcdn.net/mngr/mtm.js": null,
-"nastydollars.com/trk": null,
-"navlink.com/__utmala.js": null,
-"nbcudigitaladops.com/hosted/housepix.gif": null,
-"neon-lab.com/neonbctracker.js": null,
-"netne.net/stats": null,
-"nitropay.com/nads": null,
-"nsdsvc.com/scripts/action-tracker.js": null,
-"nspmotion.com/tracking": null,
-"nude.hu/html/track.js": null,
-"o.aolcdn.com/js/mg1.js": null,
-"oddcast.com/event.php": null,
-"odnaknopka.ru/stat.js": null,
-"onescreen.net/os/static/pixels": null,
-"onsugar.com/static/ck.php": null,
-"ora.tv/j/ora_evttracking.js": null,
-"pageturnpro.com/tracker.aspx": null,
-"pair.com/itero/tracker_ftc": null,
-"pcrl.co/js/jstracker.min.js": null,
-"phncdn.com/js/ssig_helper.js": null,
-"piano-media.com/auth/index.php": null,
-"piano-media.com/bucket/novosense.swf": null,
-"piano-media.com/uid": null,
-"pixel.indieclicktv.com/annonymous": null,
-"pixhosting.com/ct/jct.php": null,
-"platform.twitter.com/impressions.js": null,
-"pornhost.com/count_hit_player.php": null,
-"poweredbyeden.com/widget/tracker": null,
-"ppx.com/tracking": null,
-"pricespider.com/impression": null,
-"print2webcorp.com/mkt3/_js/p2w_tracker.js": null,
-"privacytool.org/AnonymityChecker/js/fontdetect.js": null,
-"propelplus.com/track": null,
-"proxify.com/xyz.php": null,
-"publicbroadcasting.net/analytics": null,
-"qq.com/heatmap": null,
-"quisma.com/tracking": null,
-"rackcdn.com/easie.js": null,
-"rackcdn.com/icon2.gif": null,
-"rackcdn.com/knotice.api.js": null,
-"rackcdn.com/stf.js": null,
-"rbl.ms/res/users/tracking": null,
-"readcube.com/tracking": null,
-"reevoo.com/track": null,
-"reevoo.com/track_url": null,
-"reverbnation.com/widgets/trk": null,
-"ria.ru/js/counter.js": null,
-"royalecms.com/statistics.php": null,
-"salesforce.com/sfga.js": null,
-"saymedia.com/latest/tetrapak.js": null,
-"scribol.com/traffix/widget_tracker": null,
-"searchmaestros.com/trackpoint": null,
-"sendtonews.com/player/loggingajax.php": null,
-"shareaholic.com/partners.js": null,
-"shareholder.com/track": null,
-"shareit.com/affiliate.html": null,
-"shoplocal.com/it.ashx": null,
-"sinajs.cn/open/analytics": null,
-"skimresources.com/api/ref-banners.js": null,
-"skysa.com/tracker": null,
-"slidesharecdn.com/images/1x1.gif": null,
-"snazzyspace.com/generators/viewer-counter/counter.php": null,
-"sohu.com/stat": null,
-"southafricahome.com/statsmodulev2": null,
-"spaceprogram.com/webstats": null,
-"sparklit.com/counter": null,
-"spot.im/analytics/analytics.js": null,
-"spot.im/api/tracker": null,
-"stats.screenresolution.org/get.php": null,
-"stileproject.com/vhtk": null,
-"su.pr/hosted_js": null,
-"sulia.com/papi/sulia_partner.js": null,
-"sumo.com/apps/heatmaps": null,
-"sumome.com/api/event": null,
-"sumome.com/apps/heatmaps": null,
-"survey.io/log": null,
-"swiftypecdn.com/cc.js": null,
-"swiftypecdn.com/te.js": null,
-"synergizeonline.net/trackpoint": null,
-"tagcdn.com/pix": null,
-"technorati.com/technoratimedia-pixel.js": null,
-"techweb.com/beacon": null,
-"themesltd.com/hit-counter": null,
-"themesltd.com/online-users-counter": null,
-"thepornstarlist.com/lo/lo/track.php": null,
-"thespringbox.com/analytics": null,
-"thismoment.com/tracking": null,
-"thron.com/shared/plugins/tracking": null,
-"tinyurl.com/pixel.gif": null,
-"tmgrup.com.tr/Statistic": null,
-"topix.net/t6track": null,
-"totallylayouts.com/hit-counter": null,
-"totallylayouts.com/online-users-counter": null,
-"touchcommerce.com/tagserver/logging": null,
-"tout.com/tracker.js": null,
-"traq.li/tracker": null,
-"trumba.com/et.aspx": null,
-"trustpilot.com/stats": null,
-"trustsquare.net/trafficmonitor": null,
-"twitter.com/jot.html": null,
-"twitter.com/oct.js": null,
-"twitter.com/scribe": null,
-"ultimatebootcd.com/tracker": null,
-"v.giantrealm.com/players/stats.swf": null,
-"vast.com/vimpressions.js": null,
-"veeseo.com/tracking": null,
-"ventunotech.com/beacon": null,
-"video.google.com/api/stats": null,
-"video.msn.com/report.aspx": null,
-"videoplaza.com/proxy/distributor": null,
-"videopress.com/plugins/stats": null,
-"vindicosuite.com/track": null,
-"vindicosuite.com/tracking": null,
-"vindicosuite.com/xumo/swf": null,
-"virgingames.com/tracker": null,
-"visual.ly/track.php": null,
-"vivociti.com/images": null,
-"vizury.com/analyze": null,
-"vk.com/videostats.php": null,
-"voxmedia.com/beacon-min.js": null,
-"voxmedia.com/pickup.js": null,
-"vpoweb.com/counter.php": null,
-"vwdealerdigital.com/cdn/sd.js": null,
-"w3track.com/newtrk": null,
-"weather.ca/counter.gif": null,
-"web-soft.in/counters": null,
-"webvoo.com/wt/Track.aspx": null,
-"webworx24.co.uk/123trace.php": null,
-"webzel.com/counter": null,
-"whosread.com/counter": null,
-"widgeo.net/tracking.php": null,
-"widgetbox.com/syndication/track": null,
-"widgethost.com/pax/counter.js": null,
-"widgetserver.com/metrics": null,
-"widgetserver.com/t": null,
-"wondershare.es/jslibs/track.js": null,
-"wpdigital.net/metrics": null,
-"wsf.com/tracking": null,
-"wsj.net/MW5/content/analytics/hooks.js": null,
-"wvnetworkmedia.org/min": null,
-"yellowbrix.com/images/content/cimage.gif": null,
-"yimg.com/wi/ytc.js": null,
-"ywxi.net/meter": null,
-"zapcdn.space/zapret.js": null,
-"zemanta.com/usersync/outbrain": null,
-"zoover.co.uk/tracking": null,
-"123rf.com/tk": null,
-"1e400.net/tracking.js": null,
-"24hourfitness.com/includes/script/siteTracking.js": null,
-"3dcartstores.com/3droi/monstertrack.asp": null,
-"4hds.com/js/camstats.js": null,
-"4info.com/alert/listeners": null,
-"9msn.com.au/share/com/js/fb_google_intercept.js": null,
-"a.huluad.com/beacons": null,
-"abc.net.au/counters": null,
-"abplive.in/analytics": null,
-"accountnow.com/SyslogWriter.ashx": null,
-"accuradio.com/static/track": null,
-"accuterm.com/data/stat.js": null,
-"aclu.org/aclu_statistics_image.php": null,
-"acura.ca/_Global/js/includes/tracker.js": null,
-"ad2links.com/lpajax.php": null,
-"adapd.com/addon/upixel": null,
-"adidas.com/analytics": null,
-"adroll.com/pixel": null,
-"advancedmp3players.co.uk/support/visitor/index.php": null,
-"agendize.com/analytics.js": null,
-"agoda.net/js/abtest/analytics.js": null,
-"akamaihd.net/pixelkabam": null,
-"alibi.com/tracker.gif": null,
-"allafrica.com/img/static/s_trans_nc.gif": null,
-"allcarpictures.com/stat": null,
-"allexperts.com/px": null,
-"allmovieportal.com/hostpagescript.js": null,
-"amazon.com/gp/yourstore/recs": null,
-"amazonaws.com/beacon/vtpixpc.gif": null,
-"amcnets.com/cgi-bin/true-ip.cgi": null,
-"amy.gs/track": null,
-"androidfilehost.com/libs/otf/stats.otf.php": null,
-"any.gs/track": null,
-"aol.ca/track": null,
-"aol.co.uk/track": null,
-"aol.com/articles/traffic": null,
-"aol.com/beacons": null,
-"aol.com/master": null,
-"aol.com/metrics": null,
-"aol.com/track": null,
-"applegate.co.uk/javascript/dcs/track.js": null,
-"appspot.com/tracking": null,
-"ashleymadison.com/app/public/track.p": null,
-"asianblast.com/statx": null,
-"askmen.com/tracking": null,
-"astrology.com/visits": null,
-"atlantis.com/_scripts/tsedge/pagemarker.gif": null,
-"audiusa.com/us/brand/en.usertracking_javascript.js": null,
-"autoblog.com/traffic": null,
-"autobytel.com/content/shared/markerfile.bin": null,
-"autosite.com/scripts/markerfile.bin": null,
-"autotrader.co.uk/page-tracking": null,
-"aviva.co.uk/metrics": null,
-"azfamily.com/images/pixel.gif": null,
-"baidu.com/js/log.js": null,
-"bandstores.co.uk/tracking/scripts": null,
-"barclaycard.co.uk/cs/static/js/esurveys/esurveys.js": null,
-"bbc.co.uk/cbbc/statstracker": null,
-"bbc.co.uk/click/img": null,
-"bbc.co.uk/zaguk.gif": null,
-"bbci.co.uk/archive_stats": null,
-"bermudasun.bm/stats": null,
-"bestofmedia.com/i/tomsguide/a.gif": null,
-"bestofmedia.com/sfp/js/boomerang": null,
-"beyond.com/common/track/trackgeneral.asp": null,
-"bing.com/widget/metrics.js": null,
-"birthvillage.com/watcher": null,
-"blackplanet.com/images/shim.gif": null,
-"blick.ch/stats": null,
-"bluenile.ca/track": null,
-"bluenile.co.uk/track": null,
-"bluenile.com/track": null,
-"boards.ie/timing.php": null,
-"boats.com/images/tracking": null,
-"brandrepublic.com/session-img": null,
-"branica.com/counter.php": null,
-"bridgetrack.com/site": null,
-"bridgetrack.com/track": null,
-"brightcove.com/1pix.gif": null,
-"broadbandchoices.co.uk/track.js": null,
-"bulgari.com/bulgari/wireframe_script/BulgariGa.js": null,
-"business.com/images2/anal.gif": null,
-"businessinsider.com/tracker.js": null,
-"buto.tv/track": null,
-"buzzamedia.com/js/track.js": null,
-"buzzurl.jp/api/counter": null,
-"caller.com/metrics": null,
-"capitalone.com/tracker": null,
-"cardstore.com/affiliate.jsp": null,
-"cartoonnetwork.com/tools/js/clickmap": null,
-"cbc.ca/g/stats": null,
-"cbox.ws/box/relay.swf": null,
-"cbsimg.net/js/cbsi/dw.js": null,
-"cclickvidservgs.com/mattel/cclick.js": null,
-"cellstores.com/tracking": null,
-"cert.org/images/1pxinv.gif": null,
-"chanel.com/js/flashtrack.js": null,
-"channel4.com/foresee_c4": null,
-"charter.com/static/scripts/mock/tracking.js": null,
-"cheapsalesconsulting.com/adaptive.php": null,
-"china.com/statistic.js": null,
-"chron.com/javascript/cider": null,
-"click.news.imdb.com/open.aspx": null,
-"cloudfront.net/amznUrchin.js": null,
-"cloudfront.net/bbc-filter.js": null,
-"cloudfront.net/m/princess/ae.js": null,
-"cloudfront.net/m/princess/ae.live.js": null,
-"cloudfront.net/vis_opt.js": null,
-"cloudfront.net/vis_opt_no_jquery.js": null,
-"codecguide.com/stats.js": null,
-"codeweblog.com/js/count.js": null,
-"collarity.com/ucs/tracker.js": null,
-"collegehumor.com/track.php": null,
-"commercialappeal.com/metrics": null,
-"computershopper.com/wsgac": null,
-"cooliris.com/shared/stats": null,
-"cosmopolitan.co.za/rest/track": null,
-"courierpress.com/metrics": null,
-"cracked.com/tracking": null,
-"crackle.com/tracking": null,
-"creativecommons.org/elog": null,
-"crowdignite.com/img/l.gif": null,
-"crunchsports.com/tracking_fetchinfo.aspx": null,
-"current.com/tracking.htm": null,
-"customerservicejobs.com/common/track": null,
-"cybercoders.com/js/tracker.js": null,
-"cyberlink.com/analytics": null,
-"dailyfinance.com/tmfstatic/vs.gif": null,
-"dailymail.co.uk/tracking": null,
-"dailymotion.com/logger": null,
-"dailymotion.com/track": null,
-"dainikbhaskar.com/tracking": null,
-"deadspin.com/at.js.php": null,
-"dealnews.com/lw/ul.php": null,
-"debtconsolidationcare.com/affiliate/tracker": null,
-"dell.com/metrics": null,
-"depositfiles.com/stats.php": null,
-"designtaxi.com/tracker.php": null,
-"destructoid.com/img2.phtml": null,
-"dictionary.com/track": null,
-"displaymate.com/cgi-bin/stat": null,
-"docstoc.com/metrics": null,
-"domainit.com/scripts/track.js": null,
-"domaintools.com/tracker.php": null,
-"drpeterjones.com/stats": null,
-"dump8.com/js/stat.php": null,
-"dvdempire.com/images/empty2.asp": null,
-"dyo.gs/track": null,
-"eafyfsuh.net/track": null,
-"ebay-us.com/fp": null,
-"economist.com/geoip.php": null,
-"ectnews.com/shared/missing.gif": null,
-"edvantage.com.sg/site/servlet/tracker.jsp": null,
-"egg.com/rum/data.gif": null,
-"ehow.com/services/jslogging/log": null,
-"engadget.com/traffic": null,
-"eporner.com/stats": null,
-"everythinggirl.com/assets/tracker": null,
-"eweek.com/hqxapi": null,
-"ex.ua/counter": null,
-"exalead.com/search/pixel-ref": null,
-"examiner.com/sites/all/modules/custom/ex_stats": null,
-"exchangeandmart.co.uk/js/ga.js": null,
-"experiandirect.com/javascripts/tracking.js": null,
-"experts-exchange.com/pageloaded.jsp": null,
-"ez.no/statjs": null,
-"facebook.com/ct.php": null,
-"facebook.com/search/web/instrumentation.php": null,
-"facebook.com/xti.php": null,
-"fanfiction.net/eye": null,
-"fanhow.com/script/tracker.js": null,
-"fantasticfiction.co.uk/cgi-bin/checker.cgi": null,
-"farecompare.com/trackstar": null,
-"fark.net/imagesnoc": null,
-"farmville.com/trackaction.php": null,
-"fastexercise.com/logging.js": null,
-"favicon.co.uk/stat": null,
-"fc2.com/counter.php": null,
-"fc2.com/counter_img.php": null,
-"fccbrea.org/javascript/stats.js": null,
-"filmlinks4u.net/twatch/jslogger.php": null,
-"financeglobe.com/Visit": null,
-"flickr.com/beacon_client_api_timings.gne": null,
-"flickr.com/beacon_page_timings.gne": null,
-"flipkart.com/bbeacon.php": null,
-"flixist.com/img2.phtml": null,
-"flybmi.com/livetrack": null,
-"fncstatic.com/static/all/js/geo.js": null,
-"foodnavigator.com/tracker": null,
-"fool.com/tracking": null,
-"forbesimg.com/assets/js/forbes/fast_pixel.js": null,
-"ford.com/ngtemplates/ngassets/com/forddirect/ng/newMetrics.js": null,
-"ford.com/ngtemplates/ngassets/ford/general/scripts/js/galleryMetrics.js": null,
-"foxadd.com/addon/upixel": null,
-"foxtel.com.au/cms/fragments/corp_analytics": null,
-"freaksofcock.com/track": null,
-"free-tv-video-online.me/resources/js/counter.js": null,
-"freean.us/track": null,
-"freebiesms.com/tracker.aspx": null,
-"fujifilm.com/js/shared/analyzer.js": null,
-"furk.net/counter.yadro.ru": null,
-"galleries.bz/track": null,
-"gamefront.com/wp-content/plugins/tracker": null,
-"gamerdeals.net/aggbug.aspx": null,
-"gamesgames.com/WebAnalysis": null,
-"gamespot.com/cgi/chkpt.php": null,
-"geico.com/vs/track2.js": null,
-"giganews.com/images/rpp.gif": null,
-"gigya.com/js/gigyaGAIntegration.js": null,
-"globes.co.il/shared/s.ashx": null,
-"go.com/stat": null,
-"godaddy.com/image.aspx": null,
-"godaddy.com/pageevents.aspx": null,
-"googlelabs.com/log": null,
-"gosanangelo.com/metrics": null,
-"groupon.com/analytic": null,
-"hanksgalleries.com/stxt/counter.php": null,
-"haxx.ly/counter": null,
-"healthcarejobsite.com/Common/JavaScript/functions.tracking.js": null,
-"helium.com/javascripts/helium-beacons.js": null,
-"heraldtimesonline.com/js/tk.js": null,
-"heroku.com/track.js": null,
-"herold.at/images/stathbd.gif": null,
-"higheredjobs.com/ClickThru": null,
-"honda.ca/_Global/js/includes/tracker.js": null,
-"hoseasons.co.uk/tracking/js.html": null,
-"hostelbookers.com/track/request": null,
-"hostels.com/includes/lb.php": null,
-"hostels.com/includes/thing.php": null,
-"hothardware.com/stats": null,
-"hotnews.ro/pageCount.htm": null,
-"howcast.com/images/h.gif": null,
-"howtogeek.com/public/stats.php": null,
-"hrblock.com/includes/pixel": null,
-"huffingtonpost.com/geopromo": null,
-"huffingtonpost.com/include/geopromo.php": null,
-"huffingtonpost.com/traffic": null,
-"hulkshare.com/ajax/tracker.php": null,
-"hulkshare.com/stats.php": null,
-"hulu.com/beaconservice.swf": null,
-"hulu.com/google_conversion_video_view_tracking.html": null,
-"hwscdn.com/analytics.js": null,
-"i-am-bored.com/cad.asp": null,
-"i.walmartimages.com/i/icon": null,
-"iafrica.com/php-bin/iac/readcnt.php": null,
-"ibm.com/common/stats": null,
-"ibtimes.com/player/stats.swf": null,
-"icq.com/search/js/stats.js": null,
-"ign.com/global/analytics/drones.js": null,
-"iheart.com/tracking": null,
-"image.providesupport.com/cmd": null,
-"images.military.com/pixel.gif": null,
-"imgur.com/albumview.gif": null,
-"imgur.com/imageview.gif": null,
-"imgur.com/lumbar.gif": null,
-"independentmail.com/metrics": null,
-"infogr.am/js/metrics.js": null,
-"infomine.com/imcounter.js": null,
-"infoq.com/scripts/tracker.js": null,
-"infusionextreme.com/tracker": null,
-"ino.com/img/sites/mkt/click.gif": null,
-"intensedebate.com/empty.php": null,
-"intercom.io/gtm_tracking": null,
-"investegate.co.uk/Weblogs/IGLog.aspx": null,
-"ipetitions.com/img.php": null,
-"irs.gov/js/irs_reporting_cookie.js": null,
-"ixs1.net/s": null,
-"jakpost.net/jptracker": null,
-"javhd.com/click": null,
-"jetsetter.com/tracker.php": null,
-"jeuxjeux2.com/stats.php": null,
-"jobthread.com/js/t.js": null,
-"jobthread.com/t": null,
-"joins.com/hc.aspx": null,
-"kickass.cd/analytics.js": null,
-"kitsapsun.com/metrics": null,
-"klm.com/travel/generic/static/js/measure_async.js": null,
-"kloth.net/images/pixel.gif": null,
-"knoxnews.com/metrics": null,
-"kyte.tv/flash/MarbachMetricsOmniture.swf": null,
-"kyte.tv/flash/MarbachMetricsProvider.swf": null,
-"lancasteronline.com/javascript/ga.php": null,
-"landrover.com/system/logging": null,
-"latimes.com/images/pixel.gif": null,
-"legalmatch.com/scripts/lmtracker.js": null,
-"lendingtree.com/javascript/tracking.js": null,
-"letitbit.net/atercattus/letitbit/counter": null,
-"letitbit.net/counter": null,
-"lexus.com/lexus-share/js/campaign_tracking.js": null,
-"life.com/sm-stat": null,
-"link.codeyear.com/img": null,
-"linkbucks.com/track": null,
-"linkedin.com/analytics": null,
-"lipsy.co.uk/_assets/images/skin/tracking": null,
-"livedoor.com/counter": null,
-"livejournal.com/ljcounter": null,
-"livestrong.com/services/jslogging": null,
-"livesupport.zol.co.zw/image_tracker.php": null,
-"log.player.cntv.cn/stat.html": null,
-"logmein.com/scripts/Tracking": null,
-"lolbin.net/stats.php": null,
-"lovefilm.com/api/ioko/log": null,
-"lovefilm.com/lovefilm/images/dot.gif": null,
-"luxurylink.com/t/hpr.php": null,
-"mail.advantagebusinessmedia.com/open.aspx": null,
-"matchesfashion.com/js/Track.js": null,
-"mayoclinic.org/js/tracker.js": null,
-"mealime.com/assets/mealytics.js": null,
-"meduza.io/stat": null,
-"mercent.com/js/tracker.js": null,
-"merchantcircle.com/static/track.js": null,
-"merck.com/js/mercktracker.js": null,
-"met-art.com/visit.js": null,
-"metro.us/api/trackPage": null,
-"metroweekly.com/tools/blog_add_visitor": null,
-"mf2fm.com/php/stats.php": null,
-"microsoft.com/blankpixel.gif": null,
-"microsoft.com/click": null,
-"microsoft.com/collect": null,
-"microsoft.com/getsilverlight/scripts/silverlight/SilverlightAtlas-MSCOM-Tracking.js": null,
-"microsoft.com/getsilverlight/scripts/Tracker.js": null,
-"microsoft.com/library/svy": null,
-"microsoft.com/LTS/default.aspx": null,
-"miniurls.co/track": null,
-"mod.uk/js/tracker.js": null,
-"modernsalon.com/includes/sc_video_tracking.js": null,
-"momtastic.com/libraries/pebblebed/js/pb.track.js": null,
-"monkeyquest.com/monkeyquest/static/js/ga.js": null,
-"mortgage101.com/tracking": null,
-"mov-world.net/counter": null,
-"mozilla.com/js/track.js": null,
-"msn.com/ro.aspx": null,
-"msn.com/tracker": null,
-"multiply.com/common/dot_clear.gif": null,
-"myanimelist.net/static/logging.html": null,
-"myfitnesspal.com/assets/mfp_localytics.js": null,
-"myspace.com/beacon": null,
-"myspace.com/isf.gif": null,
-"mytravel.co.uk/thomascooktrack.gif": null,
-"nabble.com/static/analytics.js": null,
-"naplesnews.com/metrics": null,
-"naptol.com/usr/local/csp/staticContent/js/ga.js": null,
-"nationalgeographic.com/stats/ax": null,
-"nationalpayday.com/1pix.gif": null,
-"naughtydog.com/beacon": null,
-"naukrigulf.com/logger": null,
-"ncsoft.com/tracker.js": null,
-"net-a-porter.com/intl/trackpage.nap": null,
-"netmag.co.uk/matchbox/traffic": null,
-"netzero.net/account/event.do": null,
-"news.cn/webdig.js": null,
-"news.com.au/track": null,
-"news.com.au/tracking": null,
-"news9.com/beacon": null,
-"newsarama.com/common/track.php": null,
-"newsletter.mybboard.net/open.php": null,
-"newstatesman.com/js/NewStatesmanSDC.js": null,
-"nick.com/common/images/spacer.gif": null,
-"nih.gov/medlineplus/images/mplus_en_survey.js": null,
-"nih.gov/share/scripts/survey.js": null,
-"nike.com/cms/analytics-store-desktop.js": null,
-"nj.com/cgi-bin/stats": null,
-"nj.com/dhtml/stats": null,
-"noip.com/images/em.php": null,
-"nola.com/cgi-bin/stats": null,
-"nola.com/dhtml/stats": null,
-"nova.pub/track.php": null,
-"nydailynews.com/tracker.js": null,
-"nysun.com/tracker.js": null,
-"nyt.com/js/mtr.js": null,
-"nytimes.com/js/mtr.js": null,
-"nzbsrus.com/tracker": null,
-"offers.keynote.com/wt": null,
-"ok.co.uk/tracking": null,
-"olark.com/track": null,
-"oodle.co.uk/event/track-first-view": null,
-"oodle.com/js/suntracking.js": null,
-"optimizely.com/js/geo.js": null,
-"osalt.com/js/track.js": null,
-"oscars.org/scripts/wt_include1.js": null,
-"oscars.org/scripts/wt_include2.js": null,
-"ostkcdn.com/js/p13n.js": null,
-"pages03.net/WTS/event.jpeg": null,
-"pajamasmedia.com/stats": null,
-"papajohns.com/index_files/activityi.html": null,
-"paper.li/javascripts/analytics.js": null,
-"pardot.com/pd.js": null,
-"paypal.com/webapps/beaconweb": null,
-"pbsrc.com/common/pixel.png": null,
-"pcp001.com/media/globalPixel.js": null,
-"pepsi.com/js/pepsi_tracking.js": null,
-"photobucket.com/ss/open.php": null,
-"photobucket.com/track": null,
-"picbucks.com/track": null,
-"pixazza.com/track": null,
-"play.com/analytics": null,
-"play.com/sitetrak": null,
-"playboy.com/libs/analytics": null,
-"playlist.com/scripts/remote_logger.js": null,
-"playserver1.com/analytics": null,
-"playstation.com/beacon": null,
-"plentyoffish.com/tracking.js": null,
-"pokernews.com/track-views.php": null,
-"porndoo.com/lib/ajax/track.php": null,
-"presstv.ir/stat": null,
-"pricegrabber.com/analytics.php": null,
-"princetonreview.com/logging": null,
-"projop.dnsalias.com/intranet-crm-tracking": null,
-"prospects.ac.uk/assets/js/prospectsWebTrends.js": null,
-"ps-deals.com/aggbug.aspx": null,
-"pubarticles.com/add_hits_by_user_click.php": null,
-"puritan.com/images/pixels": null,
-"qbn.com/media/static/js/ga.js": null,
-"questionmarket.com/adsc": null,
-"questionmarket.com/static": null,
-"quickmeme.com/tracker": null,
-"quintcareers.4jobs.com/Common/JavaScript/functions.tracking.js": null,
-"racingbase.com/tracking_fetchinfo.aspx": null,
-"racinguk.com/images/home_sponsors": null,
-"radio-canada.ca/lib/TrueSight/markerFile.gif": null,
-"rakuten-static.com/com/rat": null,
-"rambler.ru/cnt": null,
-"razor.tv/site/servlet/tracker.jsp": null,
-"reachlocal.com/js/tracklandingpage.js": null,
-"realitytvworld.com/images/pixel.gif": null,
-"recomendedsite.com/addon/upixel": null,
-"redding.com/metrics": null,
-"redtube.com/_status/pix.php": null,
-"redtube.com/_status/pixa.php": null,
-"redtube.com/js/track.js": null,
-"redtube.com/pix.php": null,
-"redtube.com/stats": null,
-"reference.com/track": null,
-"rent.com/track/visit": null,
-"reporter-times.com/js/tk.js": null,
-"reporternews.com/metrics": null,
-"resellerclub.com/helpdesk/visitor/index.php": null,
-"retrevo.com/m/vm/tracking": null,
-"reuters.com/tracker": null,
-"rightmove.co.uk/ps/images/logging/timer.gif": null,
-"ringcentral.com/misc/se_track.asp": null,
-"rismedia.com/tracking.js": null,
-"rkdms.com/order.gif": null,
-"rkdms.com/sid.gif": null,
-"rottentomatoes.com/tracking": null,
-"rte.ie/player/playertracker.js": null,
-"rumble.com/l": null,
-"russellgrant.com/hostedsearch/panelcounter.aspx": null,
-"s-msn.com/br/gbl/js/2/report.js": null,
-"s-msn.com/s/js/loader/activity/trackloader.min.js": null,
-"sabah.com.tr/Statistic": null,
-"sabah.com.tr/StatisticImage": null,
-"sabc.co.za/SABC/analytics": null,
-"sap.com/global/ui/js/trackinghelper.js": null,
-"sasontnwc.net/track": null,
-"satellite-tv-guides.com/stat": null,
-"sciencedaily.com/blank.htm": null,
-"sciencedaily.com/cache.php": null,
-"scoop.co.nz/images/pixel.gif": null,
-"scribol.com/traffix-tracker.gif": null,
-"scriptlance.com/cgi-bin/freelancers/ref_click.cgi": null,
-"scripts.snowball.com/scripts/images/pixy.gif": null,
-"sdc.com/sdcdata.js": null,
-"search.usa.gov/javascripts/stats.js": null,
-"searchenginewatch.com/utils/article_track": null,
-"seatgeek.com/tracker.gif": null,
-"securepaynet.net/image.aspx": null,
-"selfip.org/counter": null,
-"sex-flow.com/js/error.js": null,
-"sharecast.com/counter.php": null,
-"shopautoweek.com/js/modules/tracker.js": null,
-"shopify.com/track.js": null,
-"shoplocal.com/dot_clear.gif": null,
-"shopping.com/pixel": null,
-"shopsubmit.co.uk/visitor.ashx": null,
-"shoutcast.com/traffic": null,
-"shvoong.com/images/spacer.gif": null,
-"siberiantimes.com/counter": null,
-"similarsites.com/sbbgate.aspx": null,
-"sinaimg.cn/unipro/pub": null,
-"singer22-static.com/stat": null,
-"sitemeter.com/meter.asp": null,
-"skypeassets.com/i/js/jquery/tracking.js": null,
-"skyrock.net/img/pix.gif": null,
-"skyrock.net/js/stats_blog.js": null,
-"skyrock.net/stats": null,
-"slack.com/clog/track": null,
-"slacker.com/beacon/page": null,
-"slashdot.org/images/js.gif": null,
-"slashgear.com/stats": null,
-"slide.com/tracker": null,
-"smartname.com/scripts/cookies.js": null,
-"snakesworld.com/cgi-bin/hitometer": null,
-"socialcodedev.com/pixel": null,
-"socialstreamingplayer.crystalmedianetworks.com/tracker": null,
-"soe.com/js/web-platform/web-data-tracker.js": null,
-"sofascore.com/geoip.js": null,
-"soonnight.com/stats.htm": null,
-"sourceforge.net/images/mlopen_post.html": null,
-"sovereignbank.com/utils/track.asp": null,
-"speakertext.com/analytics": null,
-"spinback.com/spinback/event/impression": null,
-"spinmedia.com/clarity.min.js": null,
-"spinmediacdn.com/clarity.min.js": null,
-"sporcle.com/adn/yaktrack.php": null,
-"squidoo.com/track": null,
-"staticice.com.au/cgi-bin/stats.cgi": null,
-"staticlp.com/analytics": null,
-"staticworld.net/pixel.gif": null,
-"statravel.co.uk/static/uk_division_web_live/Javascript/wt_gets.js": null,
-"stickpage.com/counter.php": null,
-"storenvy.com/tracking": null,
-"streetdirectory.com/tracking": null,
-"streetfire.net/flash/trackingutility.swf": null,
-"streetfire.net/handlers/logstreamfileimpression.ashx": null,
-"stuff.co.nz/track": null,
-"sublimevideo.net/_.gif": null,
-"sugarvine.com/inc/tracking.asp": null,
-"suite101.com/tracking": null,
-"sun.com/share/metrics": null,
-"surinenglish.com/acceso.php": null,
-"sysomos.com/track": null,
-"t.hulu.com/beacon": null,
-"t3.com/js/trackers.js": null,
-"tacobell.com/tb_files/js/tracker.js": null,
-"targetspot.com/track": null,
-"tarot.com/stats": null,
-"tcpalm.com/metrics": null,
-"tdwaterhouse.ca/includes/javascript/rtesurvey.js": null,
-"tfl.gov.uk/tfl-global/scripts/stats-config.js": null,
-"tfl.gov.uk/tfl-global/scripts/stats.js": null,
-"theconversation.com/javascripts/lib/content_tracker_hook.js": null,
-"thecreatorsproject.com/tracker.html": null,
-"thefreedictionary.com/x/tp.ashx": null,
-"thegameslist.com/wb/t.gif": null,
-"thejc.com/metatraffic2": null,
-"theolivepress.es/cdn-cgi/cl": null,
-"thesaurus.com/track": null,
-"theseforums.com/track": null,
-"theweek.com/decor/track": null,
-"tickco.com/track.js": null,
-"tidaltv.com/Ping.aspx": null,
-"timesrecordnews.com/metrics": null,
-"tinypic.com/track.php": null,
-"topix.com/t6track": null,
-"torrentz.ph/ping": null,
-"tottenhamhotspur.com/media/javascript/google": null,
-"toyota.com/analytics": null,
-"tracking.gfycat.com/viewCount": null,
-"trade-it.co.uk/counter": null,
-"trb.com/hive/swf/analytics.swf": null,
-"trialpay.com/mi": null,
-"tripadvisor.com/uvpages/page_moniker.html": null,
-"trivago.com/tracking": null,
-"trove.com/identity/public/visitor": null,
-"trovus.co.uk/tracker": null,
-"trowel.twitch.tv": null,
-"truste.com/common/js/ga.js": null,
-"tsn.ua/svc/video/stat": null,
-"tubeplus.me/geoip.php": null,
-"tubepornclassic.com/js/111.js": null,
-"tubxporn.com/track.php": null,
-"turn.com/js/module.tracking.js": null,
-"turnsocial.com/track": null,
-"tv-links.eu/qtt_spacer.gif": null,
-"tvshark.com/stats.js": null,
-"twitch.tv/track": null,
-"twitter.com/scribes": null,
-"twitvid.com/api/tracking.php": null,
-"twitvid.com/mediaplayer/players/tracker.swf": null,
-"u.tv/utvplayer/everywhere/tracking.aspx": null,
-"ucoz.com/stat": null,
-"ulogin.ru/stats.html": null,
-"ultimedia.com/deliver/statistiques": null,
-"unrulymedia.com/loader-analytics.html": null,
-"upornia.com/js/0818.js": null,
-"urbanlist.com/event/track-first-view": null,
-"usps.com/survey": null,
-"uts-rss.crystalmedianetworks.com/track.php": null,
-"validome.org/valilogger/track.js": null,
-"vator.tv/tracking": null,
-"vbs.tv/tracker.html": null,
-"vcstar.com/metrics": null,
-"venere.com/common/js/track.js": null,
-"victoriassecret.com/m/a.gif": null,
-"video.msn.com/frauddetect.aspx": null,
-"video.syfy.com/lg.php": null,
-"videopremium.tv/dev/tr.js": null,
-"villarenters.com/inttrack.aspx": null,
-"viralnova.com/track.php": null,
-"viralogy.com/javascript/viralogy_tracker.js": null,
-"virginholidays.co.uk/_assets/js/dc_storm/track.js": null,
-"vixy.net/fb-traffic-pop.js": null,
-"vmware.com/files/include/ga": null,
-"vodpod.com/stats": null,
-"vogue.co.uk/_/logic/statistics.js": null,
-"voyeurhit.com/js/a2210.js": null,
-"vzaar.com/libs/stats": null,
-"walletpop.com/track": null,
-"wallpaperstock.net/partners.js": null,
-"washingtonpost.com/rw/sites/twpweb/js/init/init.track-header-1.0.0.js": null,
-"washingtonpost.com/wp-stat/analytics": null,
-"watch-series.to/analytics.html": null,
-"wavescape.mobi/rest/track": null,
-"wcnc.com/g/g/button": null,
-"weather.com/pagelet/metrics": null,
-"webcamgalore.com/aslog.js": null,
-"webmonkey.com/js/stats": null,
-"weeklyblitz.net/tracker.js": null,
-"wellness.com/proxy.asp": null,
-"wikio.com/shopping/tracking/hit.jsp": null,
-"wikipedia.org/beacon": null,
-"windowsphone.com/scripts/siteTracking.js": null,
-"wired.com/ecom": null,
-"wired.com/js/stats": null,
-"wired.com/tracker.js": null,
-"worldnow.com/global/tools/video/Namespace_VideoReporting_DW.js": null,
-"worldreviewer.com/_search/tracker.png": null,
-"wovencube.com/track": null,
-"wunderground.com/tag.php": null,
-"wwe.com/sites/all/modules/wwe/wwe_analytics": null,
-"xda-cdn.com/analytics.js": null,
-"xhcdn.com/js/track.min.js": null,
-"yahoo.com/_td_api/beacon": null,
-"yahoo.com/beacon": null,
-"yahoo.com/neo/ygbeacon": null,
-"yahoo.com/perf.gif": null,
-"yahoo.com/track": null,
-"yellowpages.com/images/li.gif": null,
-"yellowpages.com/proxy/envoy": null,
-"yellowpages.com/proxy/turn_tags": null,
-"younewstv.com/js/easyxdm.min.js": null,
-"yourfilehost.com/counter.htm": null,
-"youronlinechoices.com/activity": null,
-"yourtv.com.au/share/com/js/fb_google_intercept.js": null,
-"youtube-nocookie.com/robots.txt": null,
-"yyv.co/track": null,
-"zappos.com/onload.cgi": null,
-"zawya.com/zscripts/ajaxztrack.cfm": null,
-"zedo.com/img/bh.gif": null,
-"zoomin.tv/impressions": null,
-"zoomin.tv/impressionsplayers": null,
-"zvents.com/partner_json": null,
-"zytpirwai.net/track": null,
-"aeroplan.com/static/js/omniture/s_code_prod.js": null,
-"aircanada.com/shared/common/sitecatalyst/s_code.js": null,
-"csmonitor.com/extension/csm_base/design/csm_design/javascript/omniture/s_code.js": null,
-"csmonitor.com/extension/csm_base/design/standard/javascript/adobe/s_code.js": null,
-"expressen.se/static/scripts/s_code.js": null,
-"ge.com/sites/all/themes/ge_2012/assets/js/bin/s_code.js": null,
-"lexus.com/lexus-share/js/tracking_omn/s_code.js": null,
-"mercola.com/Assets/js/omniture/sitecatalyst/mercola_s_code.js": null,
-"mercuryinsurance.com/static/js/s_code.js": null,
-"michaelkors.com/common/js/extern/omniture/s_code.js": null,
-"mnginteractive.com/live/omniture/sccore_NEW_JRC.js": null,
-"navyfederal.org/js/s_code.js": null,
-"nyteknik.se/ver02/javascript/2012_s_code_global.js": null,
-"paypal.com/acquisition-app/static/js/s_code.js": null,
-"philly.com/includes/s_code.js": null,
-"playstation.com/pscomauth/groups/public/documents/webasset/community_secured_s_code.js": null,
-"sephora.com/javascripts/analytics/wa2.js": null,
-"sltrib.com/csp/mediapool/sites/Shared/assets/csp/includes/omniture/SiteCatalystCode_H_17.js": null,
-"vitacost.com/Javascripts/s_code.js": null,
-"vmware.com/files/templates/inc/s_code_my.js": null,
-"radio-canada.ca/omniture/omni_stats_base.js": null,
-"watchseries.to/piwik.js": null };
-var bad_da_hostpath_exact_flag = 4252 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+"ymages.org/prepop.php": null };
+var bad_da_hostpath_exact_flag = 4256 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 2002 rules:
-var bad_da_hostpath_regex = `ad.*/jstag^
-doubleclick.net/xbbe/creative/vast
-04stream.com/pop*.js
-advanced-intelligence.com/banner
-akamai.net^*/pics.drugstore.com/prodimg/promo/
-alexa.com^*/promotebuttons/
-allposters.com^*/banners/
-alluremedia.com.au^*/campaigns/
-amazonaws.com^*/player_request_*/get_affiliate_
-anonym.to/*findandtry.com
-aol.co.uk^*/cobrand.js
-aolcdn.com/os/music/img/*-skin.jpg
-apnonline.com.au/img/marketplace/*_ct50x50.gif
-arntrnassets.mediaspanonline.com^*_HP_wings_
-berush.com/images/semrush_banner_
-berush.com/images/whorush_120x120_
-bijk.com^*/banners/
-bitshare.com^*/banner/
-blindferret.com/images/*_skin_
-bosh.tv/hdplugin.
-break.com^*/partnerpublish/
-bullguard.com^*/banners/
-buy.com^*/affiliate/
-byzoo.org/script/tu*.js
-camelmedia.net^*/banners/
-cashmakingpowersites.com^*/banners/
-catholicweb.com^*/banners/
-centralmediaserver.com^*_side_bars.jpg
-chriscasconi.com/nostalgia_ad.
-clicksure.com/img/resources/banner_
-cnhionline.com^*/rtj_ad.jpg
-colorlabsproject.com^*/banner_
-content.ad/Scripts/widget*.aspx
-continent8.com^*/bannerflow/
-coxnewsweb.com^*/ads/
-creativecdn.com/creatives
-d2kbaqwa2nt57l.cloudfront.net/br
-dennis.co.uk^*/siteskins/
-dev-cms.com^*/promobanners/
-disqus.com/listPromoted
-dreamstime.com/refbanner-
-dynw.com/banner
-ebaystatic.com/aw/signin/ebay-signin-toyota-
-ebaystatic.com^*/motorswidgetsv2.swf
-ebladestore.com^*/banners/
-echineselearning.com^*/banner.jpg
-edgecastcdn.net^*.barstoolsports.com/wp-content/banners/
-esport-betting.com^*/betbanner/
-extras.mnginteractive.com^*/todaysdeals.gif
-facebook.com^*/instream/vast.xml
-fantasyplayers.com/templates/banner_code.
-fatburningfurnace.com^*/fbf-banner-
-fileserver1.net/download
-fncstatic.com^*/business-exchange.html
-fortune5minutes.com^*/banner_
-freecycle.org^*/sponsors/
-frontpagemag.com^*/bigadgendabookad.jpg
-frontsight.com^*/banners/
-furiousteam.com^*/external_banner/
-fyiwashtenaw.com/remote_widget
-gamestop.com^*/aflbanners/
-gemini.yahoo.com^*^syndication^
-gmstatic.net^*/amazonbadge.png
-gmstatic.net^*/itunesbadge.png
-goadv.com^*/ads.js
-googlesyndication.com^*/domainpark.cgi
-googlesyndication.com^*/simgad/
-gotraffic.net^*/sponsors/
-haymarket-whistleout.s3.amazonaws.com/*_ad.html
-hitleap.com/assets/banner-
-hubbarddeals.com^*/promo/
-hubbardradio.com^*/my_deals.php
-i.lsimg.net^*/sides_clickable.
-i.lsimg.net^*/takeover/
-images-amazon.com/images/*/associates/widgets/
-infomarine.gr^*/images/banners/
-iselectmedia.com^*/banners/
-iypcdn.com^*/bgbanners/
-iypcdn.com^*/otherbanners/
-iypcdn.com^*/ypbanners/
-kaango.com/fecustomwidgetdisplay
-keep2share.cc/images/i/00468x0060-
-king.com^*/banners/
-kurtgeiger.com^*/linkshare/
-lastlocation.com/images/banner
-leadsleap.com/images/banner_
-lego.com^*/affiliate/
-letmewatchthis.ru/movies/linkbottom
-liutilities.com^*/affiliate/
-llnwd.net/o28/assets/*-sponsored-
-longtailvideo.com*/ltas.swf
-longtailvideo.com^*/yume-h.swf
-longtailvideo.com^*/yume.swf
-lp.longtailvideo.com^*/adaptv*.swf
-luckygunner.com^*/banners/
-magicmembers.com/img/mgm-125x125
-mb-hostservice.de/banner_
-mdpcdn.com^*/gpt/
-mediaspanonline.com^*-Takeover-
-mediaspanonline.com^*-Takeover_
-moneycontrol.co.in^*PopUnder.js
-mosso.com^*/banners/
-mrc.org/sites/default/files/uploads/images/Collusion_Banner
-msnbcmedia.msn.com^*/sponsors/
-multisitelive.com^*/banner_
-multivizyon.tv^*/flysatbanner.swf
-nanobrokers.com/img/banner_
-nanoinvestgroup.com/images/banner*.gif
-nesgamezone.com/syndicate
-nettvplus.com/images/banner_
-nocookie.net^*/wikiasearchads.js
-nzpages.co.nz^*/banners/
-onecache.com/banner_
-oovoo.com^*/banners/
-organicprospects.com^*/banners/
-oriongadgets.com^*/banners/
-osobnosti.cz/images/casharena_
-ownx.com^*/banners/
-pokersavvy.com^*/banners/
-popeoftheplayers.eu/ad
-pro-gmedia.com^*/skins/
-radiotown.com/splash/images/*_960x600_
-rapidgator.net/images/pics/*_300%D1%85250_
-realwritingjobs.com^*/banners/
-rethinkbar.azurewebsites.net^*/ieflyout.js
-roshantv.com/adad.
-s-assets.tp-cdn.com/widgets/*/vwid/*.html
-sailthru.com^*/horizon.js
-schenkelklopfer.org^*pop.js
-secureserver.net^*/event
-shaadi.com^*/get-banner.php
-shaadi.com^*/get-html-banner.php
-shop4tech.com^*/banner/
-shorte.st^*/referral_banners/
-simplifydigital.co.uk^*/widget_premium_bb.htm
-site5.com/creative/*/234x60.gif
-sitegrip.com^*/swagbucks-
-speedbit.com^*-banner1-
-speedppc.com^*/banners/
-sponsorandwin.com/images/banner-
-srwww1.com^*/affiliate/
-static.multiplayuk.com/images/w/w-
-staticworld.net/images/*_skin_
-streamtheworld.com/ondemand/creative
-structuredchannel.com/sw/swchannel/images/MarketingAssets/*/BannerAd
-subliminalmp3s.com^*/banners/
-supersport.com/content/2014_Sponsor
-supersport.com/content/Sponsors
-surf100sites.com/images/banner_
-survivaltop50.com/wp-content/uploads/*/Survival215x150Link.png
-swimg.net^*/banners/
-talkfusion.com^*/banners/
-thaiforlove.com/userfiles/affb-
-themis-media.com^*/sponsorships/
-tigerdirect.com^*/affiliate_
-tmbattle.com/images/promo_
-townnews.com^*/dealwidget.css
-townnews.com^*/upickem-deals.js
-tremormedia.com/embed/js/*_ads.js
-tremormedia.com^*/tpacudeoplugin46.swf
-tremormedia.com^*_preroll_
-tribktla.files.wordpress.com/*-639x125-sponsorship.jpg
-tribwgnam.files.wordpress.com^*reskin2.
-turbotrafficsystem.com^*/banners/
-turner.com^*/ads/
-turner.com^*/promos/
-twivert.com/external/banner234x60.
-u-loader.com/image/hotspot_
-ukrd.com/image/*-160x133.jpg
-ukrd.com/image/*-160x160.png
-ultimatewebtraffic.info/images/fbautocash
-uniblue.com^*/affiliates/
-usenetbucket.com^*-banner/
-vpn4all.com^*/banner/
-vpnxs.nl/images/vpnxs_banner
-walmartimages.com^*/HealthPartner_
-watch-free-movie-online.net/adds-
-website.ws^*/banners/
-worldcdn.net^*/banners/
-xingcloud.com^*/uid_
-xrad.io^*/hotspots/
-yachting.org^*/banner/
-yahoo.net^*/ads/
-yimg.com/gemini/pr/video_
-yimg.com^*/quickplay_maxwellhouse.png
-yimg.com^*/sponsored.js
-ynet.co.il^*/ynetbanneradmin/
-ziffstatic.com/jst/zdsticky.
-ziffstatic.com/jst/zdvtools.
-193.34.134.18^*/banners/
-193.34.134.74^*/banners/
-213.174.140.76^*/ads/
-79.120.183.166^*/banners/
-91.83.237.41^*/banners/
-blogspot.com^*/ad.jpg
-cdn.epom.com^*/940_250.gif
-ddstatic.com^*/banners/
-ero-advertising.com^*/banners/
-escortbook.com/banner_
-hdpornphotos.com/images/728x180_
-hdpornphotos.com/images/banner_
-hentaijunkie.com^*/banners/
-mofomedia.nl/pop-*.js
-paydir.com/images/bnr
-pop6.com/javascript/im_box-*.js
-pornstarnetwork.com^*_660x70.jpg
-saboom.com.pccdn.com^*/banner/
-steadybucks.com^*/banners/
-thumbs.vstreamcdn.com^*/slider.html
-tubefck.com^*/adawe.swf
-viorotica.com^*/banners/
-vodconcepts.com^*/banners/
-youfck.com^*/adawe.swf
-100jamz.com^*-wallpaper-ad-
-1023xlc.com/upload/*_background_
-1043thefan.com^*_Sponsors/
-1077thebone.com^*/banners/
-1430wnav.com/images/300-
-1430wnav.com/images/468-
-22lottery.com/images/lm468
-24hourwristbands.com/*.googleadservices.com/
-2giga.link/jsx/download*.js
-360haven.com/forums/*.advertising.com/
-4fuckr.com/static/*-banner.
-5min.com^*/banners/
-911tabs.com/img/bgd_911tabs_
-911tabs.com/img/takeover_app_
-947.co.za^*-branding.
-977rocks.com/images/300-
-abduzeedo.com^*/mt-banner.jpg
-aboutmyip.com/images/Ad0
-abovetopsecret.com/160_
-abovetopsecret.com/300_
-abovetopsecret.com/728_
-absolutcheats.com/images/changemy*.gif
-absolutewrite.com^*_468x60banner.
-absolutewrite.com^*_ad.jpg
-activewin.com/images/*_ad.gif
-activewin.com^*/blaze_static2.gif
-adamvstheman.com/wp-content/uploads/*/AVTM_banner.jpg
-adifferentleague.co.uk^*/mcad.png
-adpost.com/bannerserver.g.
-adsl2exchanges.com.au/images/spintel
-adswikia.com^*banner
-adswikia.com^*display300x250
-advanced-television.com^*/banners/
-adz.lk^*_ad.
-affiliatesynergy.com^*/banner_
-afloat.ie^*/banners/
-africaonline.com.na^*/banners/
-ahashare.com/cpxt_
-allhiphop.com/site_resources/ui-images/*-conduit-banner.gif
-allkpop.com^*/takeover/
-allmovie.com^*/affiliate_
-allmovieportal.com/dynbanner.
-allmusic.com^*_affiliate_
-allmyvideos.net/js/ad_
-allmyvideos.net^*/pu.js
-allthelyrics.com^*/popup.js
-ambriefonline.com^*/banners/
-amd.com/publishingimages/*/master_
-americanfreepress.net/assets/images/Banner_
-androidpolice.com/wp-content/*/images/das/
-anilinkz.com/img/leftsponsors.
-anilinkz.com/img/rightsponsors
-anilinkz.tv/kwarta-
-annistonstar.com/leaderboard_banner
-anvisoft.com^*/anviad.jpg
-appleinsider.com^*/ai_front_page_google_premium.js
-aps.dz^*/banners/
-arenabg.com^*/banners/
-arenadb.net^*/banners/
-armorgames.com/assets/*_skin_
-armorgames.com/backup_
-armorgames.com^*/banners/
-armorgames.com^*/site-skins/
-armorgames.com^*/siteskin.css
-aroundosceola.com/banner-
-arsenal-mania.com/images/backsplash_
-arstechnica.net/public/shared/scripts/da-
-askbobrankin.com/awpopup*.js
-attitude.co.uk/images/Music_Ticket_Button_
-audioz.download^*/partners/
-autoworld.co.za^*/ads/
-aviationweek.com^*/leader_board.htm
-badongo.com^*_banner_
-baixartv.com/img/bonsdescontos.
-bbc.co.uk^*/bbccom.js
-bcdb.com^*/banners.pl
-beingpc.com^*/banners/
-bellanaija.com^*/wp-banners/
-benchmarkreviews.com^*/banners/
-bestvpn.com/wp-content/uploads/*/mosttrustedname_260x300_
-bitcoinist.net/wp-content/*/630x80-bitcoinist.gif
-bitcoinist.net/wp-content/uploads/*_250x250_
-bitcoinreviewer.com/wp-content/uploads/*/banner-luckybit.jpg
-bitminter.com/images/info/spondoolies
-bizarremag.com/images/skin_
-blackchronicle.com/images/Banners-
-blacklistednews.com/images/*banner
-blbclassic.org/assets/images/*banners/
-blogsmithmedia.com^*_skin.
-blogsmithmedia.com^*_skin_
-bloomberg.com^*/banner.js
-bolandrugby.com/images/sponsors.
-break.com^*/marketguide-
-brecorder.com^*/banners/
-breitlingsource.com/images/govberg*.jpg
-brownfieldonline.com^*/banners/
-bsvc.ebuddy.com/bannerservice/tabsaww
-btdigg.org/images/btguard
-bundesliga.com^*/_partner/
-busiweek.com^*/banners/
-bustocoach.com/*/banner_
-bustocoach.com/*_banner/
-buy-n-shoot.com/images/banners/banner-
-buy.com/*/textlinks.aspx
-bvibeacon.com^*/banners/
-c-sharpcorner.com^*/banners/
-caladvocate.com/images/banner-
-calguns.net/images/ads
-canalboat.co.uk^*/bannerImage.
-canalboat.co.uk^*/Banners/
-canindia.com^*_banner.png
-cannabisjobs.us/wp-content/uploads/*/OCWeedReview.jpg
-capitolfax.com/wp-content/*ad.
-capitolfax.com/wp-content/*Ad_
-cardsharing.info/wp-content/uploads/*/ALLS.jpg
-carpoint.com.au^*/banner.gif
-carsguide.com.au/images/uploads/*_bg.
-cbfsms.com^*-banner.gif
-ccfm.org.za^*/sads/
-cd1025.com/www/img/btn-
-cdcovers.cc/images/external/toolbar
-cdmagurus.com/img/*.gif
-cdn.turner.com^*/groupon/
-ceforum.co.uk/images/misc/PartnerLinks
-celebstoner.com/assets/images/img/sidebar/*/freedomleaf.png
-ceoexpress.com/inc/ads
-ceylontoday.lk^*/banner/
-chinadaily.com.cn/s
-chronicle.lu/images/Sponsor_
-churchmilitant.com^*/ad-
-churchnewssite.com^*-banner1.
-churchnewssite.com^*/banner-
-churchnewssite.com^*/bannercard-
-ciao.com^*/price_link/
-citationmachine.net/images/gr_
-city1016.ae/wp-content/*-Skin_
-citybeat.co.uk^*/ads/
-citywire.co.uk/wealth-manager/marketingcampaign
-citywirecontent.co.uk^*/cw.oas.dx.js
-classic97.net^*/banner/
-classicfeel.co.za^*/banners/
-clubhyper.com/images/hannantsbanner_
-cms.myspacecdn.com^*/splash_assets/
-cnet.com/imp
-cnettv.com.edgesuite.net^*/ads/
-cnn.com/ad-
-cnn.net^*/lawyers.com/
-coastweek.com/banner_
-cocomment.com/banner
-coinwarz.com/content/images/genesis-mining-eth-takeover-
-coloradomedicalmarijuana.com/images/sidebar/banner-
-complaintsboard.com/img/banner-
-complexmedianetwork.com^*/takeovers/
-complexmedianetwork.com^*/toolbarlogo.png
-computerandvideogames.com^*/promos/
-constructionreviewonline.com^*730x90
-constructionreviewonline.com^*banner
-coolmath.net/*-medrect.html
-coolsport.tv/adtadd.
-coolsport.tv/lshadd.
-copblock.org/wp-content/uploads/*/covert-handcuff-key-AD-
-copdfoundation.org^*/images/sponsors/
-cops.com^*/copbanner_
-cphpost.dk^*/banners/
-cricruns.com/images/hioxindia-
-crunchyroll.*/vast
-cruzine.com^*/banners/
-cryptocoinsnews.com/wp-content/uploads/*/7281.gif
-cryptocoinsnews.com/wp-content/uploads/*/728_
-cryptocoinsnews.com/wp-content/uploads/*/ccn.png
-cryptocoinsnews.com/wp-content/uploads/*/cloudbet_
-cryptocoinsnews.com/wp-content/uploads/*/xbt-social.png
-cryptocoinsnews.com/wp-content/uploads/*/xbt.jpg
-cryptocoinsnews.com/wp-content/uploads/*_300x400_
-crystalmedianetworks.com^*-180x150.jpg
-csgobackpack.net/653x50.
-custompcreview.com/wp-content/*-bg-banner.jpg
-d-addicts.com^*/banner/
-d.imwx.com/js/wx-a21-plugthis-
-daily-mail.co.zm^*/sbt.gif
-daily-mail.co.zm^*/side_strip.
-daily-mail.co.zm^*/singapore_auto.
-daily-mail.co.zm^*_1170x120.
-daily-mail.co.zm^*_270x312.
-daily-mail.co.zm^*_banner.
-daily-sun.com^*/banner/
-dailyblogtips.com/wp-content/uploads/*.gif
-dailyherald.com^*/contextual.js
-dailyhome.com/leaderboard_banner
-dailymail.co.uk^*/promoboxes/
-dailymirror.lk/media/images/Nawaloka-
-dailynews.co.zw^*-takeover.
-dailynews.gov.bw^*/banner_
-dailynews.lk^*/webadz/
-dailywritingtips.com^*/publisher2.gif
-darknet.org.uk/images/acunetix_
-davesite.com^*/aff/
-ddccdn.com/js/google_
-deccanchronicle.com^*-banner-
-deccanchronicle.com^*-searchquad-300100.swf
-deccanchronicle.com^*/shaadi.com/
-deepdotweb.com/wp-content/uploads/*/allserviceslogo.gif
-deepdotweb.com/wp-content/uploads/*/banner.gif
-deepdotweb.com/wp-content/uploads/*/billpayhelp2.png
-deepdotweb.com/wp-content/uploads/*/free_ross.jpg
-deepdotweb.com/wp-content/uploads/*/helix.gif
-defensereview.com^*_banner_
-desiretoinspire.net^*/mgbanner.gif
-detroitindependent.net/images/ad_
-digitalreality.co.nz^*/360_hacks_banner.gif
-digitaltveurope.net/wp-content/uploads/*_wallpaper_
-digzip.com^*baner.swf
-dippic.com/images/banner
-dispatch.com^*/dpcpopunder.js
-distrowatch.com^*-*.gif
-distrowatch.com^*/3cx.png
-distrowatch.com^*/advanced-admin.
-dl4all.com^*/hotfile.gif
-dnsstuff.com/dnsmedia/images/*_banner.jpg
-dnsstuff.com/dnsmedia/images/ft.banner.
-dogechain.info/content/img/a
-dominicantoday.com^*/banners/
-dota-trade.com/img/branding_
-drivearchive.co.uk/images/amazon.
-driverdb.com^*/banners/
-drivereasy.com/wp-content/uploads/*/sidebar-DriverEasy-buy.jpg
-dustcoin.com^*/image/ad-
-dvdvideosoft.com^*/banners/
-dwarfgames.com/pub/728_top.
-earthlink.net^*/promos/
-eastonline.eu/images/eng_banner_
-ebaystatic.com/aw/pics/signin/*_signInSkin_
-ebookshare.net^*/streamdirect160x600_
-ebuddy.com/web_banners_
-eco-business.com^*/site_partners/
-economist.com.na^*/banners/
-egamer.co.za^*-background-
-ehow.com/media/ad.html^
-elocallink.tv^*/showgif.php
-environmental-finance.com^*banner
-environmental-finance.com^*rotate.gif
-epictv.com/sites/default/files/290x400_
-eq2flames.com/images/styles/eq2/images/banner
-esportlivescore.com/img/fano_
-esportlivescore.com/img/fanobet_
-esportlivescore.com/img/vitalbet.
-essayinfo.com/img/125x125_
-essayscam.org^*/ads.js
-eteknix.com/wp-content/uploads/*skin
-eteknix.com/wp-content/uploads/*Takeover
-euphonik.dj/img/sponsors-
-eurodict.com/images/banner_
-european-rubber-journal.com/160x600px_
-euroweb.com^*/banner/
-eventful.com/tools/click/url
-everythingsysadmin.com^*_sw_banner120x600_
-eweek.com^*/sponsored-
-exchangerates.org.uk/images/150_60_
-exchangerates.org.uk/images/200x200_
-expertreviews.co.uk^*/skins/
-express.co.uk^*/sponsored/
-ezmoviestv.com^*/ad-for-ezmovies.png
-facenfacts.com^*/ads/
-fastcompany.com/sites/*/interstitial.js
-feed-the-beast.com^*/gamevox.png
-feiwei.tv^*/sandbox.html
-fever.fm^*/campaigns/
-fhm.com^*_banner.png
-file.org^*/images/promo/
-fileflyer.com/img/dap_banner_
-filerio.in^*/jquery.interstitial.
-files.wordpress.com/*-reskin.
-filespazz.com^*/copyartwork_side_banner.gif
-financialsamurai.com/wp-content/uploads/*/sliced-alternative-10000.jpg
-findthebest-sw.com/sponsor_event
-finextra.com^*/leaderboards/
-firingsquad.com^*/sponsor_row.gif
-firsttoknow.com^*/page-criteo-
-flameload.com/onvertise.
-flatpanelshd.com/pictures/*banner
-flopturnriver.com*/banners/
-fncstatic.com^*/sponsored-by.gif
-footballtradedirectory.com^*banner
-forbbodiesonly.com*/vendorbanners/
-foreignersinuk.co.uk^*/banner/
-forumimg.ipmart.com/swf/ipmart_forum/banner
-foxandhoundsdaily.com/wp-content/uploads/*-AD.gif
-foxbusiness.com/html/google_homepage_promo
-foxsoccer2go.com/namedImage/*/backgroundSkin.jpg
-free-torrents.org^*/banners/
-free-tv-video-online.me/episode-buttom-
-free-tv-video-online.me/season-side-
-freeroms.com/bigbox_
-freeroms.com/skyscraper_
-freetv-video.ca^*/popover-load-js.php
-freeworldgroup.com/banner
-ftlauderdalewebcam.com/images/*webcambanner
-ftlauderdalewebcam.com^*-WebCamBannerFall_
-fudzilla.com^*/banners/
-fullrip.net/images/download-
-fulltv.tv/pub_
-gadgetshowlive.net^*/banners/
-galatta.com^*/bannerimages/
-galatta.com^*/banners/
-gallerynova.se^*/jquery.bpopup.min.js
-gallerysense.se/site/getBannerCode
-gamblinginsider.com^*/partner_events.php
-gamecopyworld.com^*/vg_160x120_
-gameplanet.co.nz^*-takeover.jpg
-gamersbook.com^*/banners/
-gameserpent.com/kit*.php
-gameserpent.com/vc*.php
-gamesforwork.com^*/dropalink_small.gif
-gameshark.com^*/pageskin-
-gamingcentral.in^*/banner_
-ganool.com/wp-content/uploads/*/Javtoys300250..gif
-ganool.com/wp-content/uploads/*/matrix303.gif
-gawkerassets.com^*/background.jpg
-gelbooru.com*/frontend*.js
-generalfiles.me^*/download_sponsored.
-geocities.yahoo.*/js/sq.
-gestetnerupdates.com^*/chesed-shel-emes-600x75.gif
-gestetnerupdates.com^*/eagle-sewer.gif
-gestetnerupdates.com^*/Gestetner-Miles.gif
-gestetnerupdates.com^*/perfect-auto-collision_banner.gif
-gethigh.com/wp-content/uploads/*/pass_a_drug_test_get_high_banner.jpg
-getreading.co.uk/static/img/bg_takeover_
-getthekick.eu^*/banners/
-gfi.com/blog/wp-content/uploads/*-BlogBanner
-girlsgames.biz/games/partner*.php
-gizmochina.com^*/kingsing-t8-advert.jpg
-glam.com^*/affiliate/
-glamourviews.com/home/zones
-go4up.com^*/download-buttoned.png
-goal.com^*/branding/
-gocdkeys.com/images/*_400x300_
-gocdkeys.com/images/bg_
-gold-prices.biz^*_400x300.gif
-golf365.co.za^*/site-bg-
-golf365.com^*/site-bg-
-goodanime.net/images/crazy*.jpg
-gopride.com^*/banners/
-gov-auctions.org^*/banner/
-gq.co.za^*/sitetakeover/
-gr8.cc/addons/banners^
-grapevine.is/media/flash/*.swf
-greatandhra.com/images/*_ga_
-gumtree.com^*/dart_wrapper_
-gunfreezone.net^*_ad.jpg
-guns.ru^*/banner/
-guns.ru^*/banners/
-hancinema.net/images/banner_
-hancinema.net/images/watch-now
-happierabroad.com/Images/banner
-hardwareheaven.com/wp-content/*_skin_
-hawaiireporter.com^*/upandruningy.jpg
-hawaiireporter.com^*/winnerscampad.jpg
-hd-bb.org^*/dl4fbanner.gif
-hdtvtest.co.uk^*/pricerunner.php
-healthfreedoms.org/assets/swf/320x320_
-hearse.com^*/billboards/
-heatworld.com/images/*_83x76_
-helsinkitimes.fi^*/banners/
-heraldm.com^*/banner/
-heraldsun.com.au^*/images/sideskins-
-heyjackass.com/wp-content/uploads/*_300x225_
-hostratings.co.uk/zeepeel.
-hotfile.com^*/banners/
-hotfilesearch.com/includes/images/mov_
-hothardware.com^*_staticbanner_*.jpg
-howwe.biz/mgid-
-howwemadeitinafrica.com^*/dhl-hdr.gif
-hqfooty.tv/ad
-hulkshare.com^*/adsmanager.js
-hulkshare.oncdn.com^*/removeads.
-hurriyetdailynews.com/images/*_100x250_
-i-tech.com.au^*/banner/
-i.i.com.com/cnwk.1d/*/tt_post_dl.jpg
-i3investor.com^*/offer_
-i3investor.com^*/partner/
-icydk.com^*/title_visit_sponsors.
-iddin.com/img/chatwing_banner.
-iddin.com/img/chatwing_banner_
-idesitv.com^*/loadbanners.
-ifilm.com/website/*-skin-
-iimg.in^*-banner-
-iimg.in^*/sponsor_
-iloveim.com/cadv
-images-amazon.com/images/*/browser-scripts/da-
-images-amazon.com/images/*/browser-scripts/dae-
-images-amazon.com^*/marqueepushdown/
-images.globes.co.il^*/fixedpromoright.
-images.mmorpg.com/images/*skin
-images.sharkscope.com/acr/*_Ad-
-imageshack.us/images/contests/*/lp-bg.jpg
-imagesnake.com^*/oc.js
-imagevenue.com/interstitial.
-imgburn.com/images/ddigest_
-imgcarry.com^*/oc.js
-impactradio.co.za^*/banners/
-independent.co.uk^*/partners/
-indianexpress.com^*/banner/
-info.break.com^*/sponsors/
-infoq.com^*/banners/
-informationng.com^*-Leaderboard.
-informe.com/img/banner_
-inquirer.net/wp-content/themes/news/images/wallpaper_
-insidebutlercounty.com/images/100-
-insidebutlercounty.com/images/160-
-insidebutlercounty.com/images/180-
-insidebutlercounty.com/images/200-
-insidebutlercounty.com/images/300-
-insidebutlercounty.com/images/468-
-inspirefirst.com^*/banners/
-irctctourism.com/ttrs/railtourism/Designs/html/images/tourism_right_banners/*DealsBanner_
-ironmagazine.com^*/banners.php
-irv2.com/forums/*show_banner
-isitdownrightnow.com/graphics/speedupmypc*.png
-israelidiamond.co.il^*/bannerdisplay.aspx
-itv.com/adexplore/*/config.xml
-iwebtool.com^*/bannerview.php
-ixquick.nl/graphics/banner_
-jango.com/assets/promo/1600x1000-
-javascript-coder.com^*/form-submit-larger.jpg
-javascript-coder.com^*/make-form-without-coding.png
-jdownloader.org^*/smbanner.png
-jewishexponent.com^*/banners/
-jewishnews.co.uk^*banner
-jewishtribune.ca^*/banners/
-johngaltfla.com/wordpress/wp-content/uploads/*/jmcs_specaialbanner.jpg
-johngaltfla.com/wordpress/wp-content/uploads/*/TB2K_LOGO.jpg
-jozikids.co.za/uploadimages/*_140x140_
-jozikids.co.za/uploadimages/140x140_
-justsomething.co/wp-content/uploads/*-250x250.
-kansascity.com/images/touts/ds_
-keenspot.com/images/headerbar-
-keepvid.com/images/ilivid-
-keepvid.com/images/winxdvd-
-kentonline.co.uk/weatherimages/sponsor_
-kexp.org^*/sponsor-
-kexp.org^*/sponsoredby.
-keygen-fm.ru/images/*.swf
-kfog.com^*/banners/
-kitco.com^*/banners/
-kitguru.net/wp-content/uploads/*-Skin.
-kjlhradio.com^*/banners/
-klav1230am.com^*/banners/
-knbr.com^*/banners/
-knowfree.net^*/ezm125x125.gif
-knssradio.com^*/banners/
-kongregate.com/images/help_devs_*.png
-krapps.com^*-banner-
-ktradionetwork.com^*/banners/
-lagacetanewspaper.com^*/banners/
-laliga.es/img/patrocinadores-
-lancasteronline.com^*/done_deal/
-lawprofessorblogs.com/responsive-template/*advert.
-lawprofessors.typepad.com/responsive-template/*advert.jpg
-learn2crack.com/wp-content/*-336x280.jpg
-letitbit.net/images/other/inst_forex_
-lfcimages.com^*/partner-
-lfcimages.com^*/sponsor-
-lfgcomic.com/wp-content/uploads/*/PageSkin_
-lifeinqueensland.com/images/156x183a_
-linkis.com/index/ln-event
-linksafe.info^*/mirror.png
-lionsrugby.co.za^*/sponsors.
-lmgtfy.com/s/images/ls_
-localdirectories.com.au^*/bannerimages/
-loleasy.com^*/adsmanager.js
-londonstockexchange.com^*/fx.gif
-luxury4play.com^*/ads/
-macblurayplayer.com/image/amazon-
-macintouch.com/images/amaz_
-macintouch.com/images/owc_
-maciverse.mangoco.netdna-cdn.com^*banner
-macobserver.com^*/deal_brothers/
-macworld.co.uk^*/textdeals/
-mailinator.com/images/abine/leaderboard-
-mailinator.com^*/clickbanner.jpg
-majorgeeks.com/images/*_336x280.jpg
-majorgeeks.com/images/download_sd_
-majorgeeks.com^*/banners/
-malaysiabay.org^*/creative.js
-malaysiabay.org^*creatives.php
-mangareader.net/images/800-x-100
-mani-admin-plugin.com^*/banners/
-manicapost.com^*/banners/
-manxradio.com^*/banners_
-marijuanapolitics.com/wp-content/*-ad.
-marijuanapolitics.com/wp-content/uploads/*/icbc1.png
-marijuanapolitics.com/wp-content/uploads/*/icbc2.png
-marketingpilgrim.com/wp-content/uploads/*/trackur.com-
-marketingupdate.co.za/temp/banner_
-marketplace.org^*/support_block/
-maxgames.com^*/sponsor_
-maxkeiser.com^*-banner-
-mcstatic.com^*/billboard_
-media-imdb.com/images/*/mptv_banner_
-media-imdb.com^*/affiliates/
-media-imdb.com^*/zergnet-
-media.abc.go.com^*/callouts/
-mediafire.com^*/rockmelt_tabcontent.jpg
-mediaupdate.co.za/temp/banner_
-mediaweek.com.au/storage/*_234x234.jpg
-meetic.com/js/*/site_under_
-menafn.com^*/banner_
-mensxp.com^*/banner/
-merriam-webster.com^*/accipiter.js
-messianictimes.com/images/1-13/ba_mhfinal_
-metradar.ch^*/banner_
-mfcdn.net/media/*left
-mfcdn.net/media/*right
-miamiherald.com^*/dealsaver/
-miamiherald.com^*/teamfanshop/
-mikejung.biz/images/*/728x90xLiquidWeb_
-milanounited.co.za/images/sponsor_
-mixfm.co.za/images/banner
-mlb.com/images/*_videoskin_*.jpg
-mmoculture.com/wp-content/uploads/*-background-
-mmorpg.com/images/*_hots_r0.jpg
-mmorpg.com/images/mr_ss_
-monitor.co.ug/image/view/*/120/
-monitor.co.ug/image/view/*/468/
-morefree.net/wp-content/uploads/*/mauritanie.gif
-movie2kto.ws/popup
-mp3.li/images/md_banner_
-mp3li.net^*banner
-mp3skull.com/call_banner_exec_new.
-msw.ms^*/jquery.MSWPagePeel-
-muchmusic.com/images/*-skin.png
-muchmusic.com^*/leaderboard_frame_obiwan.html
-multiupload.biz/r_ads2
-music.yahoo.com/get-free-html
-musicmaza.com/bannerdyn
-musicplayon.com/banner
-mustangevolution.com/images/300x100_
-mustangevolution.com^*/banner/
-mustangevolution.com^*/banners/
-muthafm.com^*/partners.png
-mygaming.co.za^*/partners/
-mymusic.com.ng/images/supportedby
-mypbrand.com/wp-content/uploads/*banner
-mypremium.tv^*/bpad.htm
-myspacecdn.com/cms/*_skin_
-mysubtitles.com^*_banner.jpg
-naij.com^*/branding/
-nation.lk^*/banners/
-nation.sc/images/pub
-nationalreview.com/images/display_300x600-
-nationalturk.com^*/banner
-nciku.com^*banner
-ncrypt.in/images/banner
-ndtv.com/widget/conv-tb
-ndtv.com^*/banner/
-neowin.net/images/atlas/aww
-nesn.com/img/nesn-nation/bg-
-netupd8.com^*/ads/
-newoxfordreview.org/banners/ad-
-news-leader.com^*/banner.js
-news.com.au^*/images/*-bg.jpg
-newsbusters.org^*/banners/
-newscdn.com.au^*/aldi/
-newsonjapan.com^*/banner/
-nextbigwhat.com/wp-content/uploads/*ccavenue
-nfl.com/assets/images/hp-poweredby-
-nfl.com^*/page-background-image.jpg
-nichepursuits.com/wp-content/uploads/*/long-tail-pro-banner.gif
-nigeriafootball.com/img/affiliate_
-nmimg.net/css/takeover_
-nosteam.ro^*/gamedvprop.js
-notalwaysromantic.com/images/banner-
-notdoppler.com^*-promo-siteskin.
-notebook-driver.com/wp-content/images/banner_
-nu2.nu^*_banner.
-nufc.com^*/The%20Gate_NUFC.com%20banner_%2016.8.13.gif
-nydailynews.com^*-reskin-
-oanda.com/wandacache/wf-banner-
-omgpop.com/dc
-oncyprus.com^*/banners/
-one-delivery.co.uk^*/sensitivedating.png
-onlinekeystore.com/skin1/images/side-
-opednews.com^*/iframe.php
-opencurrency.com/wp-content/uploads/*-aocs-sidebar-commodity-bank.png
-optimum.net/utilities/doubleclicktargeting
-originalweedrecipes.com/wp-content/uploads/*-Medium.jpg
-orissadiary.com/img/*-banner.gif
-oteupload.com/images/iLivid-download-
-outlookindia.com/image/banner_
-ozqul.com^*/webbanners.png
-pagesinventory.com/_data/img/*_125x400_
-paktribune.com^*/banner
-pandora.com^*/mediaserverPublicRedirect.jsp
-paris-update.com^*/banners/
-pcpro.co.uk/images/*_siteskin
-pcpro.co.uk^*/pcprositeskin
-pcworld.co.nz^*_siteskin_
-pcworld.com/images/*_vidmod_316x202_
-pe.com^*/biice2scripts.js
-pechextreme.com^*/banner.
-pechextreme.com^*/banners/
-petri.co.il/wp-content/uploads/banner1000x75_
-petri.co.il/wp-content/uploads/banner700x475_
-pettube.com/images/*-partner.
-pgatour.com^*/featurebillboard_
-phantom.ie^*/banners/
-phnompenhpost.com^*/banner_
-photo.net/equipment/pg-160^
-phuketgazette.net^*/banners/
-pitchero.com^*/toolstation.gif
-planetradiocity.com^*banner
-playgames2.com/ban300-
-pleasurizemusic.com^*/banner/
-pocket-lint.com/images/bytemarkad.
-pocketnow.com*/embeded-adtional-content/
-pogo.com/v/*/js/ad.js
-policeprofessional.com/files/banners-
-policeprofessional.com/files/pictures-
-politicalwire.com/images/*-sponsor.jpg
-pons.eu^*/lingeniobanner.swf
-pornevo.com/events_
-portcanaveralwebcam.com/images/ad_
-portevergladeswebcam.com^*-Ad.jpg
-portevergladeswebcam.com^*-WebCamBannerFall_
-portmiamiwebcam.com/images/sling_
-positivehealth.com^*/TopicbannerAvatar/
-poststar.com^*/dealwidget.php
-power1035fm.com^*/banners/
-powerbot.org^*/ads/
-pqarchiver.com^*/utilstextlinksxml.js
-preppersmallbiz.com/wp-content/uploads/*/PSB-Support.jpg
-prepperwebsite.com/wp-content/uploads/*-250x250.jpg
-prepperwebsite.com/wp-content/uploads/*/250x250-
-prepperwebsite.com/wp-content/uploads/*/apmgoldmembership250x250.jpg
-prepperwebsite.com/wp-content/uploads/*/DeadwoodStove-PW.gif
-prepperwebsite.com/wp-content/uploads/*/FME-Red-CAP.jpg
-prepperwebsite.com/wp-content/uploads/*/jihad.jpg
-prepperwebsite.com/wp-content/uploads/*/PW-Ad.jpg
-prepperwebsite.com/wp-content/uploads/*/tsepulveda-1.jpg
-prepperwebsite.com/wp-content/uploads/*_250x150.png
-prepperwebsite.com/wp-content/uploads/*_250x250.jpg
-primewire.ag/js/jquery*.js
-prisonplanet.com^*banner
-privateproperty.co.za^*/siteTakeover/
-professionalmuscle.com/*banner
-profitconfidential.com/wp-content/themes/PC-child-new/images/*_banners_
-profitconfidential.com/you-may-also-like
-propakistani.pk/wp-content/*/warid.jpg
-proxy-youtube.net/mih_
-proxy-youtube.net/myiphide_
-publicityupdate.co.za/temp/banner_
-publicradio.org^*/banners/
-punch.cdn.ng^*/wp-banners/
-punchng.com^*/wp-banners/
-putlocker.is/images/banner
-qiksilver.net^*/banners/
-qualityhealth.com^*/banner.jsp
-quickmeme.com/media/rostile
-race-dezert.com/images/wrap-
-racinguk.com/images/site/foot_
-racketboy.com/images/racketboy_ad_
-radioreference.com^*_banner_
-rapidfiledownload.com^*/btn-input-download.png
-rapidlibrary.com/baner*.png
-rapidlibrary.com/banner_*.png
-rapidtvnews.com^*BannerAd.
-ratemystrain.com/files/*-300x250.
-rawstory.com^*/ads/
-raysindex.com/wp-content/uploads/*/dolmansept2012flash.swf
-rc.feedsportal.com/r/*/rc.img
-readynutrition.com^*/banners/
-redpepper.org.uk/ad-
-regmender.com^*/banner336x280.
-rejournal.com^*/images/homepage/
-replacementdocs.com^*/popup.js
-reuters.com/reuters_gpt_bootstrap*.js
-rghost.ru/download/a/*/banner_download_
-ringostrack.com^*/amazon-buy.gif
-robhasawebsite.com^*/amazon-
-robhasawebsite.com^*/shop-amazon.
-rocksound.tv/images/uploads/*-rocksound-1920x1000_
-rocktelevision.com^*_banner_
-rockthebells.net/images/bot_banner_
-roseindia.net^*/banners/
-rpgwatch.com^*/banner/
-rtklive.com^*/marketing
-rugbyweek.com^*/sponsors/
-s.imwx.com^*/wx-a21-plugthis.js
-s.yimg.com^*/audience/
-saabsunited.com/wp-content/uploads/*-banner-
-saabsunited.com/wp-content/uploads/*-banner.
-saabsunited.com/wp-content/uploads/*_banner_
-saabsunited.com/wp-content/uploads/180x460_
-saabsunited.com/wp-content/uploads/ban-
-saabsunited.com/wp-content/uploads/werbung-
-saf.org/wp-content/uploads/*/theGunMagbanner.png
-saf.org/wp-content/uploads/*/women_guns192x50.png
-samoaobserver.ws^*/banner/
-samoatimes.co.nz^*/banner468x60/
-sarugbymag.co.za^*-wallpaper2.
-satopsites.com^*/banners/
-sawlive.tv/ad
-saysuncle.com^*ad.jpg
-seatguru.com/deals
-secureupload.eu/images/soundcloud_
-secureupload.eu/images/wpman_
-sexmummy.com/avnadsbanner.
-sfbaytimes.com/img-cont/banners
-sgtreport.com/wp-content/uploads/*-180x350.
-sgtreport.com/wp-content/uploads/*/180_350.
-sgtreport.com/wp-content/uploads/*/180x350.
-sgtreport.com/wp-content/uploads/*_Side_Banner.
-sgtreport.com/wp-content/uploads/*_Side_Banner_
-shadowpool.info/images/banner-
-shanghaiexpat.com^*/wallpaper_
-share-links.biz^*/hisp.gif
-share-links.biz^*/hs.gif
-sherdog.com/index/load-banner
-shop.com/cc.class/dfp
-shopping.stylelist.com/widget
-shoutmeloud.com^*/hostgator-
-showstreet.com/banner.
-sify.com^*/gads_
-silverdoctors.com^*/Silver-Shield-2015.jpg
-siteslike.com/images/celeb
-sk-gaming.com/image/takeover_
-skymetweather.com^*/googleadds/
-skyvalleychronicle.com/999/images/ban
-slacker.com^*/ads.js
-smartearningsecrets.com^*/FameThemes.png
-smartmoney.net^*-sponsor-
-snopes.com^*/casalebanner.asp
-soccerway.com/buttons/120x90_
-sockshare.com^*_728.php
-someecards.com^*/images/skin/
-soundcloud.com/audio-ad
-soundtracklyrics.net^*_az.js
-sourcefed.com/wp-content/uploads/*/netflix4.jpg
-spartoo.eu/footer_tag_iframe_
-speroforum.com/images/sponsor_
-ssl-images-amazon.com/images/*/browser-scripts/da-
-ssl-images-amazon.com^*/dacx/
-stagnitomedia.com/view-banner-
-startribune.com/circulars/advertiser_
-static-economist.com^*/timekeeper-by-rolex-medium.png
-static.nfl.com^*-background-
-staticneo.com/neoassets/iframes/leaderboard_bottom.
-staticworld.net/images/*_pcwskin_
-strategypage.com^*_banner
-stream2watch.co^*_ad_
-stream2watch.me/ed
-student-jobs.co.uk/banner.
-stv.tv/img/player/stvplayer-sponsorstrip-
-succeed.co.za^*/banner_
-sulekha.com^*/bannerhelper.html
-sulekha.com^*/sulekhabanner.aspx
-suntimes.com^*/banners/
-surfmusic.de/anz
-surfmusic.de/banner
-swimnews.com^*/banner_
-sxc.hu/img/banner
-taiwannews.com.tw/etn/images/banner_
-tastro.org/x/ads*.php
-taxsutra.com^*/banner/
-tdfimg.com/go/*.html
-techinsider.net/wp-content/uploads/*-300x500.
-techradar.com^*/img/*_takeover_
-techsupportforum.com^*/banners/
-techtarget.com^*/leaderboard.html
-techtree.com^*/jquery.catfish.js
-teesupport.com/wp-content/themes/ts-blog/images/cp-
-telegraphindia.com^*/banners/
-telegraphindia.com^*/hoabanner.
-templatesbox.com^*/banners/
-theactivetimes.net^*/featured_partners/
-theaquarian.com^*/banners/
-theburningplatform.com/wp-content/uploads/*_180x150.gif
-thecatholicuniverse.com^*-ad.
-thecatholicuniverse.com^*-advert-
-thecatholicuniverse.com^*-banner-
-thecenturion.co.za^*/banners/
-thechive.files.wordpress.com^*-wallpaper-
-thecitizen.co.tz^*/banners/
-thecommonsenseshow.com/siteupload/*/ad-iodine.jpg
-thecommonsenseshow.com/siteupload/*/ad-nutritionrecharge.jpg
-thecommonsenseshow.com/siteupload/*/ad-rangerbucket.jpg
-thecommonsenseshow.com/siteupload/*/ad-survivalapril2017.jpg
-thecommonsenseshow.com/siteupload/*/adamerigeddon2016dvd.jpg
-thecommonsenseshow.com/siteupload/*/adnumana350x250-1.jpg
-thecommonsenseshow.com/siteupload/*/adsqmetals.jpg
-thecommonsenseshow.com/siteupload/*/hagmannbook.jpg
-thecommonsenseshow.com/siteupload/*/nightvisionadnew.jpg
-thecommonsenseshow.com/siteupload/*/numanna-hoiz400x100.jpg
-thecommonsenseshow.com/siteupload/*/panama-300-x-250.jpg
-thecommonsenseshow.com/siteupload/*/trekkerportablewater.jpg
-thecompassionchronicles.com/wp-content/uploads/*-banner-
-thecompassionchronicles.com/wp-content/uploads/*-banner.
-thecsuite.co.uk^*/banners/
-thedailymeal.com^*_sponsoredby.png
-thedailymeal.net^*/featured_partners/
-thedailypaul.com/images/amzn-
-thedailystar.net^*/400-x-120-pixel.jpg
-thedailystar.net^*/Animation-200-X-30.gif
-thedailystar.net^*/aritel-logo.jpg
-thedailystar.net^*/footer-sticky-add/
-thedailystar.net^*/scbbd.gif
-theenglishgarden.co.uk^*/bannerImage.
-thehealthcareblog.com/files/*/American-Resident-Project-Logo-
-thehealthcareblog.com/files/*/athena-300.jpg
-thehealthcareblog.com/files/*/THCB-Validic-jpg-opt.jpg
-thehighstreetweb.com^*/banners/
-thehindu.com/multimedia/*/sivananda_sponsorch_
-theindependentbd.com^*/banner/
-thejointblog.com/wp-content/uploads/*-235x
-thejointblog.com^*/dablab.gif
-thelakewoodscoop.com^*banner
-theleader.info/banner
-theliberianjournal.com/flash/banner
-themittani.com/sites/*-skin
-thenationonlineng.net^*/banners/
-thenonleaguefootballpaper.com^*/image-non-league.jpeg
-thenonleaguefootballpaper.com^*/Lovell-Soccer.jpg
-thepeninsulaqatar.com^*/banners/
-thepreparednessreview.com/wp-content/uploads/*/250x125-
-thepreparednessreview.com/wp-content/uploads/*_175x175.jpg
-thepreparednessreview.com/wp-content/uploads/*_185x185.jpg
-thesentinel.com^*/banners/
-thessdreview.com/wp-content/uploads/*/930x64_
-thessdreview.com^*-bg-banner-
-thessdreview.com^*/owc-full-banner.jpg
-thestandard.com.ph^*/banner/
-thesundaily.my/sites/default/files/twinskyscrapers
-thesurvivalistblog.net^*-banner-
-thewindowsclub.com^*/banner_
-thinkingwithportals.com/images/*-skyscraper.
-thirdage.com^*_banner.php
-time4hemp.com/wp-content/uploads/*-ad.
-time4hemp.com/wp-content/uploads/*-vertical.
-time4hemp.com/wp-content/uploads/*/cannafo.jpg
-time4hemp.com/wp-content/uploads/*/dakine420.png
-time4hemp.com/wp-content/uploads/*/dynamic_banner_
-time4hemp.com/wp-content/uploads/*/gorillabanner728.gif
-time4hemp.com/wp-content/uploads/*/herbies-1.gif
-time4hemp.com/wp-content/uploads/*/Johnson-Grow-Lights.gif
-time4hemp.com/wp-content/uploads/*/Judge-Lenny-001.jpg
-time4hemp.com/wp-content/uploads/*/scrogger.gif
-time4hemp.com/wp-content/uploads/*/sensi2.jpg
-time4hemp.com/wp-content/uploads/*/WeedSeedShop.jpg
-timesofoman.com^*/banner/
-timestalks.com/images/sponsor-
-tinyurl.com/firefox_banner_
-tmz.vo.llnwd.net^*/images/*skin
-toonova.com/images/site/front/xgift-
-topalternate.com/assets/sponsored_links-
-torrent.cd/images/banner-
-torrentz.*/mgid/
-toshiba.com^*/bookingpromowidget/
-toshiba.com^*/toshibapromowidget/
-totalguitar.net/images/*_125X125.jpg
-toucharcade.com/wp-content/themes/*_background_*.jpg
-townhall.com^*/ads/
-trackitdown.net/skins/*_campaign/
-tracksat.com^*/banners/
-tripadvisor.com^*/skyscraper.jpg
-trucknetuk.com^*/sponsors/
-trucktrend.com^*_160x200_
-trunews.com^*/Webbanner.jpg
-trustedreviews.com/mobile/widgets/html/promoted-phones
-tubehome.com/imgs/undressme
-turboimagehost.com/300*.html^
-turboimagehost.com/728*.html^
-turboimagehost.com/b300.
-turboimagehost.com/b300_
-turboimagehost.com/b728.
-turboimagehost.com/b728_
-tvducky.com/imgs/graboid.
-ukfindit.com/images/*_125x125.gif
-ultimate-guitar.com/_img/bgd/bgd_main_
-upload.ee/image/*/B_descarga_tipo12.gif
-uploadcore.com/images/*-Lad.jpg
-uploadcore.com/images/*-mad.jpg
-uploadcore.com/images/*-Rad.png
-uploadlw.com^*/download-now
-uploadlw.com^*/download_button.gif
-urbanchristiannews.com/ucn/sidebar-
-urethanes-technology-international.com^*/banners/
-urlcash.net/random*.php
-urlgone.com^*/banners/
-usatodayhss.com/images/*skin
-uvnc.com/img/housecall.
-vanityfair.com/custom/ebook-ad-bookbiz
-vcdq.com^*/ad.html
-verzing.com/popup
-vfs-uk-in.com/images/webbanner-
-vidds.net/pads*.js
-video.abc.com^*/ads/
-video44.net/gogo/a_d_s.
-videogamer.com/videogamer*/skins/
-videogamesblogger.com^*/scripts/takeover.js
-videopediaworld.com/nuevo/plugins/midroll.
-videos.com/click
-videos.mediaite.com/decor/live/white_alpha_60.
-videositeprofits.com^*/banner.jpg
-videowood.tv/ads
-videowood.tv/pop2
-vidhog.com/images/download_banner_
-vidvib.com/vidvibpopa.
-vidvib.com/vidvibpopb.
-vipbox.tv/js/layer-
-virginislandsthisweek.com/images/336-
-virginislandsthisweek.com/images/728-
-virtual-hideout.net/banner
-vitalfootball.co.uk^*/partners/
-vitalmtb.com/assets/ablock-
-vitalmtb.com/assets/vital.aba-
-vondroid.com/site-img/*-adv-ex-
-walshfreedom.com^*-300x250.
-walshfreedom.com^*/liberty-luxury.png
-wardsauto.com^*/pm_doubleclick/
-washtimes.com/js/dart.
-watchcartoononline.com/inc/siteskin.
-watchcartoononline.com^*/530x90.
-watchuseek.com/media/*-banner-
-watchuseek.com/media/*_250x250
-watchuseek.com/media/1900x220_
-watchuseek.com/media/banner_
-watchwwelive.net^*/big_ban.gif
-watchwwelive.net^*/long_ban2.jpg
-waterford-today.ie^*/banners/
-wavelengthcalculator.com/banner
-way2sms.com/w2sv5/js/fo_
-wbgo.org^*/banners/
-wearetennis.com/img/common/bnp-logo-
-wearetennis.com/img/common/logo_bnp_
-webmastercrunch.com^*/hostgator300x30.gif
-webnewswire.com/images/banner
-weei.com^*_banner.jpg
-weekendpost.co.bw^*/banner_
-werlv.com^*banner
-whatismyip.com/images/vyprvpn_
-whatmyip.co/images/speedcoin_
-whatsnewonnetflix.com/assets/blockless-ad-
-whispersinthecorridors.com/banner
-whistleout.com.au/imagelibrary/ads/wo_skin_
-whoer.net/images/vlab50_
-whoer.net/images/vpnlab20_
-wikinvest.com/wikinvest/images/zap_trade_
-wildtangent.com/leaderboard
-windowsitpro.com^*/roadblock.
-winpcap.org/assets/image/banner_
-winsupersite.com^*/roadblock.
-wipfilms.net^*/amazon.png
-wipfilms.net^*/instant-video.png
-wired.com/images/xrail/*/samsung_layar_
-wjunction.com/images/468x60
-wjunction.com/images/rectangle
-worthofweb.com/images/wow-ad-
-wp.com/wp-content/themes/vip/tctechcrunch/images/tc_*_skin.jpg
-wpdaddy.com^*/banners/
-wrc.com/img/sponsors-
-wrko.com/sites/wrko.com/files/poll/*_285x95.jpg
-wunderground.com^*/wuss_300ad2.php
-xboxgaming.co.za^*/images/background/
-yahoo.com/contextual-shortcuts
-yahoo.com^*/eyc-themis
-yamivideo.com^*/download_video.jpg
-yarisworld.com^*/banners/
-yasni.*/design/relaunch/gfx/elitepartner_
-yimg.com/cv/*/billboard/
-yimg.com/cv/*/config-object-html5billboardfloatexp.js
-yimg.com^*/flash/promotions/
-yimg.com^*/yad.html
-ynaija.com^*/ad.
-youconvertit.com/_images/*ad.png
-yourepeat.com/revive_wrapper
-yourepeat.com^*/skins/
-yourmovies.com.au^*/side_panels_
-youtube.com/get_midroll_info
-yp.mo^*/ads/
-yudu.com^*_intro_ads
-zanews.co.za^*/banners/
-zap2it.com/wp-content/themes/overmind/js/zcode-
-zbc.co.zw^*/banners/
-zigzag.co.za/images/oww-
-zombiegamer.co.za/wp-content/uploads/*-skin-
-zootoday.com/pub/21publish/Zoo-navtop-casino_
-zoover.*/shared/bannerpages/darttagsbanner.aspx
-zophar.net/files/tf_
-hindustantimes.com/res/js/ht-script
-nintendolife.com^*/adblock.jpg
-techweb.com/adblocktrack
-ytconv.net/site/adblock_detect
-3xupdate.com^*/ryushare.gif
-3xupdate.com^*/ryushare2.gif
-3xupdate.com^*/ryusharepremium.gif
-adult-profit-files.com/banner
-alotporn.com^*/js/oopopw.js
-amadorastube.com^*/banner_
-amateur-desire.com/pics/sm_
-amateur-streams.com^*/popup.js
-andtube.com/ban_
-arionmovies.com/*/popup.php
-babepicture.co.uk^*banner
-babeshows.co.uk^*banner
-badjojo.com/js/scripts-
-bangyoulater.com/images/banners_
-befuck.com/js/adpbefuck
-between-legs.com^*/banners/
-bigxvideos.com/js/focus.*.js
-bigxvideos.com/js/pops2.
-bigxvideos.com/js/popu.
-bralesscelebs.com/*banner
-cameltoe.com^*/banners/
-celeb.gate.cc/misc/event_*.js
-celebritypink.com/bannedcelebs-
-coolmovs.com/js/focus.*.js
-creepshots.com^*/250x250_
-damimage.com^*/DocaWedrOJPPx.png
-data18.com^*/banners/
-drtuber.com^*/aff_banner.swf
-dusttube.com/pop*.js
-empireamateurs.com/images/*banner
-eporner.com/pjsall-*.js
-eroprofile.com/js/pu*.js
-extremetube.com/player_related
-fapdick.com/uploads/1fap_
-fapdick.com/uploads/fap_
-fileshare.ro^*/dhtmlwindow.js
-fleshbot.com/wp-content/themes/fbdesktop_aff/images/af
-freebunker.com^*/ex.js
-freebunker.com^*/exa.js
-freebunker.com^*/layer.js
-freebunker.com^*/oc.js
-freebunker.com^*/pops.js
-freebunker.com^*/raw.js
-freeporninhd.com/images/cbside.
-freeporninhd.com/images/cbzide.
-fux.com/assets/adblock
-gayporntimes.com^*/Bel-Ami-Mick-Lovell-July-2012.jpeg
-gayporntimes.com^*/CockyBoys-July-2012.jpg
-girlfriendvideos.com/ad
-girlsfromprague.eu^*468x
-gspcdn.com^*/banners/
-hcomicbook.com^*_banner1.gif
-hdporn.in/js/focus.*.js
-hdporn.in/js/pops2.
-hentai-foundry.com/themes/*Banner
-hentaistream.com/wp-includes/images/bg-
-hentaistream.com/wp-includes/images/mofos/webcams_
-heraldnetdailydeal.com/widgets/DailyDealWidget300x250
-hgimg.com/js/beacon.
-hidefporn.ws/client
-hollyscoop.com/sites/*/skins/
-hollywoodoops.com/img/*banner
-hotdevonmichaels.com^*/pf_640x1001.jpg
-hotdevonmichaels.com^*/streamate2.jpg
-hotdevonmichaels.com^*/wicked.gif
-hotdylanryder.com^*/Big-Tits-Like-Big-Dicks.jpg
-hotdylanryder.com^*/dylan_350x250_01.jpg
-hotdylanryder.com^*/iframes_174.jpg
-hotdylanryder.com^*/pf_640x100.jpg
-hotdylanryder.com^*/wicked.gif
-hotkellymadison.com^*/kelly1.jpg
-hotkellymadison.com^*/kelly4.jpg
-hotkellymadison.com^*/km_300x300.gif
-hotkellymadison.com^*/pf_640x100.jpg
-hotsashagrey.com^*/Anabolic.jpg
-hotsashagrey.com^*/New_Sensations-1091.gif
-hotsashagrey.com^*/PeterNorth-800x350.jpg
-hotsashagrey.com^*/squ-fantasygirlsasha-001.gif
-hotsashagrey.com^*/throated.jpg
-hotshame.com/js/adphotshame
-imagecarry.com/down
-imagecarry.com/top
-imagedunk.com^*_imagedunk.js
-imagefruit.com^*/pops.js
-imageshack.us^*/bannng.jpg
-imagetwist.com/imagetwist*.js
-imgbabes.com^*/splash.php
-imgflare.com^*/splash.php
-indexxx.com^*/banners/
-intporn.com^*/21s.js
-intporn.com^*/asma.js
-iseekgirls.com/rotating_
-iseekgirls.com^*/banners/
-kaotic.com^*/popnew.js
-kyte.tv/flash/MarbachAdvertsDartInstream.
-monstertube.com/images/access_
-monstertube.com/images/vjoin.
-monstertube.com/images/vjoin_
-morazzia.com^*/banners/
-mp3musicengine.com/bearshare_logo.
-mp3musicengine.com/images/freewatchtv1.
-myhentai.tv/popsstuff.
-niceyoungteens.com/ero-advertising
-ns4w.org/images/vod_
-nudevista.com/_/exo_
-nudevista.com/_/pp.
-nudevista.com/_/teasernet
-nudevista.com^*/nv-com.min.js
-oasisactive.com^*/oasis-widget.html
-onhercam.tv^*/banners/
-openjavascript.com/jtools/jads.
-pastime.biz^*/personalad*.jpg
-phncdn.com/iframe
-phncdn.com/images/*_skin.
-phncdn.com/images/*_skin_
-phncdn.com/images/premium_
-picp2.com/img/putv
-picsexhub.com/js/pops.
-picsexhub.com/js/pops2.
-picxme.com/js/pops.
-pimpandhost.com/static/i/*-pah.jpg
-pink-o-rama.com/Blazingbucks
-pink-o-rama.com/Brothersincash
-pink-o-rama.com/Fuckyou
-pink-o-rama.com/Karups
-pink-o-rama.com/Nscash
-pink-o-rama.com/Privatecash
-pixhost.org/image/tmp/linksnappy_
-pnet.co.za/jobsearch_iframe_
-poguide.com/cdn/images/ad*.gif
-porn.com/assets/partner_
-porn4down.com^*/ryuvuong.gif
-pornalized.com/pornalized_html/closetoplay_
-pornarchive.net/images/cb
-pornbb.org/adsnov.
-pornbb.org/images/your_privacy
-pornbraze.com^*/popupbraze.js
-pornfanplace.com/js/pops.
-pornmade.com/images/cb
-pornmaturetube.com/show_adv.
-pornoid.com/iframes/bottom
-pornoid.com/js/adppornoid
-pornomovies.com/js/1/login_bonus
-pornorips.com^*/rda.js
-pornorips.com^*/rotate*.php
-pornper.com^*/pp.js
-pornsharia.com^*/adppornsharia.js
-pornsharia.com^*/exo-
-pornsharia.com^*/js/pcin.js
-pornsharing.com/App_Themes/pornsharianew/js/adppornsharia*.js
-pornsharing.com/App_Themes/pornsharingnew/js/adppornsharia*.js
-pornstarterritory.com^*/alsbanner
-pornxs.com/js/files/jasminNew
-purelynsfw.com^*/banners/
-purepornvids.com/randomadseb.
-purpleporno.com/pop*.js
-pwpwpoker.com/images/*/strip_poker_
-queermenow.net/blog/wp-content/uploads/*-Banner
-queermenow.net/blog/wp-content/uploads/*/banner
-redtube.com^*/banner/
-redtubefiles.com^*/banner/
-redtubefiles.com^*/skins/
-russiasexygirls.com/wp-content/uploads/*/727x90
-russiasexygirls.com/wp-content/uploads/*/cb_
-sex-techniques-and-positions.com/banners
-sex.com/images/*/banner_
-sexpornimg.com/css/images/banner
-sexseeimage.com^*/banner.gif
-sexuhot.com/images/xbanner
-sexvines.co/images/cp
-sexyandfunny.com/images/totem
-sillusions.ws^*/pr0pop.js
-sillusions.ws^*/vpn-banner.gif
-socaseiras.com.br/banner_
-static.flabber.net^*background
-t-51.com^*/banners/
-tabletporn.com/images/pinkvisualpad-
-the-analist.info^*150-150
-the-analist.info^*150sq
-the-analist.info^*150x150
-the-feeding-tube.com^*/Topbanner.php
-thehun.net^*/banners/
-thenewporn.com/js/adpthenewporn
-thepornomatrix.com/images/1-
-twofuckers.com/brazzers
-uflash.tv^*/affiliates/
-updatetube.com/js/adpupdatetube
-videos.com^*/jsp.js
-vidgrab.net/images/adsbar
-viralporn.com^*/popnew.js
-vrsmash.com^*/script.min.js
-vstreamcdn.com^*/ads/
-watch8x.com/JS/rhpop_
-whozacunt.com/images/*-300x250.
-whozacunt.com/images/*_300x200_
-whozacunt.com/images/banner_
-x3xtube.com/banner_rotating_
-xcritic.com/images/buy-
-xcritic.com/images/rent-
-xcritic.com/images/watch-
-xcritic.com/img/200x150_
-xfanz.com^*_banner_
-xhcdn.com^*/ads_
-xxvideo.us/ad728x15
-xxxblink.com/js/pops.
-xxxfile.net^*/netload_premium.gif
-xxxgames.biz^*/sponsors/
-youaresogay.com/*.html
-yumymilf.com^*/banners/
-yuvutu.com^*/banners/
-adclear.*/acc
-b.*/click
-click.*/open.aspx
-email.*/blankpixel.gif
-gdyn.*/1.gif
-tracking.*/beacon/
-google-analytics.com/collect
-google-analytics.com/gtm/js
-google-analytics.com/internal/collect^
-google-analytics.com/r/collect^
-5min.com/flashcookie/StorageCookieSWF_
-9fine.ru/js/counter.
-9msn.com.au^*/tracking/
-actonservice.com^*/tracker/
-adchemy-content.com^*/tracking.js
-admission.net^*/displaytracker.js
-akamai.net/chartbeat.
-akamai.net^*/sitetracking/
-amazonaws.com/analytics.
-amazonaws.com^*.kissinsights.com/
-amazonaws.com^*.kissmetrics.com/
-amazonaws.com^*/pageviews
-aol.com/ping
-appspot.com/stats
-areyouahuman.com/kitten
-azureedge.net/track
-bit.ly/stats
-bitgravity.com^*/tracking/
-bitmovin.com/impression
-bizrate-images.co.uk^*/tracker.js
-bizrate-images.com^*/tracker.js
-bizrate.co.uk/js/survey_
-bizrate.com^*/survey_
-bumpin.com^*/analytics.html
-capture.bi.movideo.com/dc
-capture.camify.com/dc
-centerix.ru^*/count.msl
-click.email.*/open.aspx
-cloudfront.net*/keywee.min.js
-cloudfront.net*/sp.js
-cloudfront.net*/tracker.js
-cloudfront.net*/trk.js
-cloudfront.net/autotracker
-cloudfront.net/dough/*/recipe.js
-cloudfront.net/track
-cnetcontent.com/log
-cnzz.com/stat.
-communicatorcorp.com^*/conversiontracking.js
-content.cpcache.com^*/js/ga.js
-creativecdn.com/tags
-custom.search.yahoo.co.jp/images/window/*.gif
-customerlobby.com/ctrack-
-d1ivexoxmp59q7.cloudfront.net^*/live.js
-d2d5uvkqie1lr5.cloudfront.net^*/analytics-
-d2d5uvkqie1lr5.cloudfront.net^*/analytics.
-dealer.com^*/tracker/
-dealer.com^*/tracking/
-dmdentertainment.com^*/video_debug.gif
-ebaystatic.com^*/tracking_RaptorheaderJS.js
-ecustomeropinions.com^*/i.php
-edgesuite.net^*/googleanalyt
-els-cdn.com^*/analytics.js
-emihosting.com^*/tracking/
-facebook.com*/impression.php
-facebook.com/tr
-fastly.net/collect
-feed.informer.com/fdstats
-flixster.com^*/analytics.
-freecurrencyrates.com/statgif.
-freedom.com^*/analytic/
-freedom.com^*/analytics/
-fwix.com^*/trackclicks_
-fyre.co^*/tracking/
-gamegecko.com/gametrack
-gigya.com^*/cimp.gif
-glam.com^*/log.act
-goadv.com^*/track.js
-googleapis.com^*/gen_204
-googlecode.com^*/tracker.js
-gowatchit.com^*/tracking/
-gravity.com^*/beacons/
-grymco.com^*/event
-gstatic.com/gen_204
-hellobar.com/ping
-hornymatches.com^*/visit.php
-hypercomments.com/widget/*/analytics.html
-images-amazon.com^*/1x1_trans.gif
-images-amazon.com^*/Analytics-
-images-amazon.com^*/AnalyticsReporter-
-imageshack.us^*/thpix.gif
-insnw.net/assets/dsc/dsc.fingerprint-
-instagram.com/logging_client_events
-kaltura.com^*/statisticsPlugin.swf
-kiwari.com^*/impressions.asp
-kununu.com^*/tracking/
-l-host.net/etn/omnilog
-leadpages.net^*/tracking.js
-legacy.com^*/unicaclicktracking.js
-ligatus.com/script/viewtracker-
-livefyre.com^*/tracker.js
-livefyre.com^*/tracking/
-longtailvideo.com^*/yourlytics-
-lsimg.net^*/vs.js
-mail.ebay.com/img/*.gif
-mail.ru/grstat
-mail.ru/k
-mantisadnetwork.com/sync
-maxmind.com^*/geoip.js
-maxmind.com^*/geoip2.js
-mcssl.com^*/track.ashx
-mediaite.com^*/track/
-mixpanel.com/track
-modules.ooyala.com^*/analytics-
-mysdcc.sdccd.edu^*/.log/
-nativly.com^*/track
-netalpaca.com/beacon
-netbiscuits.net^*/analytics/
-neulion.vo.llnwd.net^*/track.js
-ns-cdn.com^*/ns_vmtag.js
-ocp.cnettv.com^*/Request.jsp
-ooyala.com/3rdparty/comscore_
-ooyala.com/sas/analytics
-ooyala.com/verify
-outbrain.com^*/widgetStatistics.js
-partypoker.com^*/tracking-
-paypalobjects.com^*/pixel.gif
-piano-media.com/ping
-player.ooyala.com/errors/report
-plugins.longtailvideo.com/googlytics
-plugins.longtailvideo.com/yourlytics
-purevideo.com^*/pvshim.gif
-pussy.org^*/track.php
-qq.com/stats
-qualtrics.com^*/metrics
-rackcdn.com^*/analytics.js
-realtidbits.com^*/analytics.js
-reevoo.com^*/track/
-relap.io^*/head.js
-replyat.com/gadgetpagecounter*.asp
-richrelevance.com/rrserver/tracking
-ru4.com/click
-sendtonews.com^*/data_logging.php
-shareaholic.com/analytics_
-sharethis.com/increment_clicks
-sharethis.com/pageviews
-signup.advance.net^*affiliate
-spread.ly^*/statistics.php
-statking.net^*/count.js
-streamads.com/view
-synapsys.us^*/tracker.js
-thron.com^*/trackingLibrary.swf
-timeinc.net^*/peopleas2artracker_v1.swf
-tinypass.com^*/track
-totallylayouts.com^*/users-online-counter/online.js
-totallylayouts.com^*/visitor-counter/counter.js
-turner.com^*/1pixel.gif
-twimg.com/jot
-twitter.com/i/jot
-upcat.custvox.org/survey/*/countOpen.gif
-uservoice.com^*/track.js
-vanilladev.com/analytics.
-vapedia.com^*/largebanner.
-virginmedia.com^*/analytics/
-vizual.ai^*/click-stream-event
-webvoo.com^*/logtodb.
-wetpaint.com^*/track
-widgetserver.com^*/image.gif
-widgetserver.com^*/quantcast.swf
-wikinvest.com^*/errorlogger.php
-woolik.com^*^tracker^
-yandex.ru/cycounter
-ypcdn.com/*/webyp
-zemanta.com^*/pageview.js
-3dmark.com^*/ruxitbeacon
-9msn.com.au^*.tracking.udc.
-abc.net.au^*/stats/
-accuratefiles.com/stat
-adidas.com^*/analytics/
-adprimemedia.com^*/video_report/attemptAdReport.php
-adprimemedia.com^*/video_report/videoReport.php
-airbnb.*/tracking/
-akamai.net^*/button.clickability.com/
-alarabiya.net/track_content_
-alarabiya.net^*/googleid.js
-alibaba.com/js/beacon_
-alicdn.com/js/aplus_*.js
-alicdn.com^*/log.js
-aliexpress.com/js/beacon_
-allvoices.com/track_page
-amazon.*/action-impressions/
-amazon.*/ajax/counter
-amazon.*/record-impressions
-amazon.*/uedata/
-amazon.*/uedata
-amazon.com/gp/forum/email/tracking
-amazon.com^*/amazon-clicks/
-amazon.com^*/vap-metrics/
-amazonaws.com^*/pzyche.js
-amazonsupply.com/uedata
-analytics.omgpop.com/log
-anntaylor.com/webassets/*/page_code.js
-anp.se/track
-ap.org^*/webtrendsap_hosted.js
-applifier.com/users/tracking
-archive.org^*/analytics.js
-associatedcontent.com/action_cookie
-atlantafalcons.com/wp-content/*/metrics.js
-audible.com^*/uedata/
-autopartswarehouse.com/thirdparty/tracker
-avg.com^*/stats.js
-avira.com/site/datatracking
-baidu.com/ecom
-barneys.com^*/__analytics-tracking
-bbc.co.uk/analytics
-bbc.co.uk^*/linktrack.js
-bbc.co.uk^*/livestats.js
-bbc.co.uk^*/livestats_v1_1.js
-bbc.co.uk^*/tracker.js
-bbci.co.uk^*/analytics.js
-beacons.vessel-static.com/xff
-beacons.vessel-static.com^*/pageView
-bhg.com^*/tracking-data
-bidz.com/contentarea/BidzHomePixel
-bing.com/partner/primedns
-bing.com^*/GLinkPing.aspx
-biosphoto.com^*/stats/
-bits.wikimedia.org/geoiplookup
-blekko.com/a/track
-blinkbox.com/tracking
-blinkist.com/t
-blip.tv/engagement
-bloxcms.com^*/tracker.js
-booking.com/js_tracking
-businessinsider.com^*/track.js
-buzzfeed.com^*/tracker.js
-carmagazine.co.uk^*/tracking.js
-cars.com^*/analytics.js
-cartoonnetwork.com^*/brandcma.js
-cbs.com/assets/js/*AdvCookie.js
-cbslocal.com^*/cbs1x1.gif
-cctv.com^*/SnoopStat
-cheezburger.com/api/visitor
-chelseafc.com^*/tracking.js
-cjtube.com/tp/*.php
-cl.ly/metrics
-climatedesk.org*/pixel.gif
-commentarymagazine.com^*/track.asp
-computing.co.uk^*/webtrends.js
-cooksunited.co.uk/counter*.php
-creativecommons.org^*/triples
-crunchyroll.com/tracker
-crunchyroll.com^*/breadcrumb.js
-ct.cnet.com/opens
-ctscdn.com/content/tracking-
-dailymotion.com/track-
-dailymotion.com^*/analytics.js
-dailymotion.com^*/tag.gif
-data.ninemsn.com.au/*GetAdCalls
-datehookup.com/strk/dateadvertreg
-db.com^*/stats.js
-deadspin.com^*/trackers.html
-dell.com/images/global/js/s_metrics*.js
-digitalchocolate.com/event/track
-digitalriver.com^*/globaltracking
-divxden.com^*/tracker.js
-dsm.com^*/searchenginetracking.js
-dw.de^*/run.dw
-easy2.com^*/logging/
-edgecastcdn.net^*/pixel_1.png
-ednetz.de/api/public/socialmediacounter.
-email.aol.com/cgi-bin*/flosensing
-engadget.com/click
-espncdn.com^*.tracking.js
-etonline.com/media/*/ctvconviva.swf
-euroleague.tv^*/tracking.js
-exelate.com/pixel
-f-secure.com^*/wtsdc.js
-facebook.com/ajax/*/log.php
-facebook.com/ajax/*logging.
-facebook.com/friends/requests/log_impressions
-facebook.com^*/impression_logging/
-fantom-xp.org^*/toprefs.php
-financialstandardnews.com^*/webstats/
-flipboard.com/usage
-flipkart.com/ajaxlog/visitIdlog
-forbes.com^*/track.php
-foursquare.com^*/logger
-foursquare.com^*/wtrack
-freebase.com/log
-freecause.com^*.png
-freedownloadscenter.com^*/empty.gif
-freemeteo.com^*/log.asp
-freemeteo.com^*/searchlog.asp
-frontdoor.com/_track
-frstatic.net^*/tracking.js
-ft.com^*/ft-tracking.js
-gawker.com^*/trackers.html
-general-files.com/stat
-general-search.com/stat
-geovisites.com^*/geouser.js
-github.com/_private/browser/stats
-github.com/_stats
-gizmodo.com^*/trackers.html
-glamourmagazine.co.uk^*/LogPageView
-globester.com^*/track.js
-go.com/globalelements/utils/tracking
-go.com^*/analytics.js
-google.*/api/sclk
-google.*/client_204
-google.*/gen204
-google.*/gwt/x/ts
-google.*/log204
-google.*/logxhraction
-google.com/appserve/mkt/img/*.gif
-google.com/log
-google.com/reader/logging
-google.com/stream_204
-google.com^*/dlpageping
-google.com^*/log
-google.com^*/urchin_post.js
-google.com^*/viewerimpressions
-gorillanation.com^*/flowplayer.ganalytics.swf
-groupon.com/tracking
-holiday-rentals.co.uk/thirdparty/tag
-holiday-rentals.co.uk^*/tracking-home.html
-homeaway.com^*/tracking-home.html
-hp.com^*/bootstrap/metrics.js
-huffingtonpost.com/click
-huffingtonpost.com/ping
-hulu.com/beacon/v3/error
-hulu.com/beacon/v3/playback
-hulu.com/watch/*track.url-1.com
-hulu.com^*/external_beacon.swf
-hulu.com^*/plustracking/
-hulu.com^*/potentialbugtracking/bigdropframes
-hulu.com^*/potentialbugtracking/contentplaybackresume
-hulu.com^*/potentialbugtracking/dropframes
-hulu.com^*/recommendationTracking/tracking
-hulu.com^*/sitetracking/
-huluim.com^*/sitetracking/
-hwscdn.com^*/brands_analytics.js
-id.google.*/verify/*.gif
-images-amazon.com^*/ClientSideMetricsAUIJavascript*.js
-imdb.com/video/*/metrics_
-imdb.com/video/*metrics
-indeed.com/rpc/preccount
-indiatimes.com/trackjs10.
-informer.com/statistic
-insidesoci.al/track
-instructables.com/counter
-instyle.co.uk^*/tracking.js
-io9.com^*/trackers.html
-jalopnik.com^*/trackers.html
-jezebel.com^*/trackers.html
-joins.com^*/JTracker.js
-jtv.com^*/__analytics-tracking
-kayak.com/k/redirect/tracking
-kelkoo.co.uk/kk_track
-kelkoo.co.uk^*/tracker/
-kelkoo.com/kk_track
-killerstartups.com^*/adsensev
-kodakgallery.com^*/analytics_
-kotaku.com^*/trackers.html
-lendingtree.com/forms/eventtracking
-lifehacker.com^*/trackers.html
-likes.com/api/track_pv
-linguee.com*/white_pixel.gif
-link.ex.fm/img/*.gif
-linkedin.com^*/tracker.gif
-list.ru/counter
-livestation.com^*/akamaimediaanalytics.swf
-livestation.com^*/statistics.swf
-livestream.com^*/analytics/
-lm.pcworld.com/db/*/1.gif
-lovefilm.com^*/lf-perf-beacon.png
-lucidchart.com/analytics_
-ly.lygo.com^*/jquery.lycostrack.js
-mail.ru/counter
-maps.nokia.com^*/tracking.c.js
-marriott.com^*/mi_customer_survey.js
-mastercard.com^*/Analytics/
-mate1.com^*/iframe/pixel/
-mate1.com^*/reg.logging.js
-media-imdb.com^*/adblock.swf
-mediaplex.com^*/universal.html
-metacafe.com^*/statsrecorder.php
-microsoft.com^*/bimapping.js
-microsoft.com^*/surveytrigger.js
-miniclip.com^*/swhsproxy.swf
-miniusa.com^*/trackDeeplink.gif
-mirror.co.uk^*/stats/
-moneysupermarket.com^*/ProphetInsert.js
-mozilla.net^*/webtrends/
-mp3lyrics.org^*/cnt.php
-msecnd.net^*/wt.js
-msn.com/script/tracking*.js
-msn.com^*/report.js
-msn.com^*/track.js
-msnbc.msn.com^*/analytics.js
-mto.mediatakeout.com/viewer
-nationmobi.com/*/analyse.php
-nature.com^*/marker-file.nocache
-nbcnews.com^*/analytics.js
-nbcudigitaladops.com/hosted/js/*_com.js
-nbcudigitaladops.com/hosted/js/*_com_header.js
-netlog.com/track
-newegg.com/tracking
-news-leader.com^*/analytics.js
-ninemsn.com.au^*.tracking.udc.
-nola.com/content/*/tracklinks.js
-novatech.co.uk^*/tracking
-novell.com^*/metrics.js
-nydailynews.com^*/tracker.js
-nymag.com^*/analytics.js
-nyse.com^*/stats/
-nzonscreen.com/track_video_item
-nzpages.co.nz^*/track.js
-nzs.com/sliscripts_
-officelivecontent.com^*/Survey/
-okcupid.com/poststat
-oload.tv/log
-openload.co/log
-optionsxpress.com^*/tracking.js
-papajohns.com/index_files/activityi_data/ct-*.js
-pch.com^*/scripts/Analytics/
-pch.com^*/SpectrumAnalytics.js
-pcmag.com^*/analytics.js
-peacocks.co.uk^*/analytics.js
-pearltrees.com/s/track
-perezhilton.com^*/stat/
-perfectmarket.com/pm/track
-petersons.com^*/trackBeta.asp
-petersons.com^*/trackFunctionsBeta.asp
-photobucket.com^*/tracklite.php
-popcap.com^*/interstitial_zones.js
-pornhd.com/api/user/tracking
-porntube.com^*/track
-potterybarn.com/pbimgs/*/external/thirdparty.js
-potterybarnkids.com/pkimgs/*/external/thirdparty.js
-priceline.com^*/beaconHandler
-priceline.com^*/impression/
-prudential.com^*/metrics_1px.gif
-pw.org/sites/all/*/ga.js
-ralphlauren.com^*/icg.metrics.js
-rangers.co.uk^*/tracking.js
-rarefilmfinder.com^*/cnt-gif1x1.php
-real.com^*/track.htm
-redditmedia.com/gtm/jail
-redtube.com/trackimps
-redtube.com/trackplay
-redtube.com^*/jscount.php
-refinery29.com/api/stats
-register.it/scripts/track_
-reuters.com^*/rcom-wt-mlt.js
-reuters.com^*/tracker_video.js
-reuters.com^*/widget-rta-poc.js
-reutersmedia.net^*/tracker-article*.js
-riverisland.com^*/mindshare.min.js
-roadandtrack.com^*/RTdartSite.js
-runnersworld.com^*/universalpixel.html
-sagepub.com^*/login_hit_hidden.gif
-samsung.com^*/scripts/tracking.js
-scribd.com^*/tracker.gif
-search.yahoo.com/ra/click
-seeclickfix.com^*/text_widgets_analytics.html
-sella.co.nz^*/sella_stats_
-sevenload.com/som_
-sh.st/bundles/smeweb/img/tracking-
-shareaholic.com^*/bake.gif
-shopzilla-images.com/s2static/*/js/tracker.js
-sky.com^*/hightrafficsurveycode.js
-skype.com^*/inclient/
-skype.com^*/track_channel.js
-skypeassets.com^*/inclient/
-skypeassets.com^*/track_channel.js
-smallcapnetwork.com^*/viewtracker/
-soundcloud.com/event
-spoonful.com^*/tracking.js
-spreaker.com^*/statistics/
-statesmanjournal.com^*/articlepageview.php
-static.ow.ly^*/click.gz.js
-staticwhich.co.uk/assets/*/track.js
-statravel.com^*/Javascript/wt_gets.js
-stomp.com.sg/site/servlet/tracker
-store.yahoo.net^*/ywa.js
-stuff.co.nz^*/track.min.js
-supermediastore.com/web/track
-superpages.com/ct/clickThrough
-tab.co.nz/track
-talktalk.co.uk^*/tracking/
-tdwaterhouse.co.uk^*/track.js
-telegraph.co.uk^*/tmglmultitrackselector.js
-thedeal.com/oas_
-thefashionspot.com^*/pb.track.js
-thefreedictionary.com^*/track.ashx
-thegumtree.com^*/tracking.js
-thrillist.com/track
-tiaa-cref.org^*/js_tiaacref_analytics.
-tinyupload.com^*/ct_adkontekst.js
-tivo.com/__ssobj/track
-tmagazine.com/js/track_
-torrentz.eu/ping
-torrentz.in/ping
-torrentz.li/ping
-torrentz.me/ping
-toshibadirect.com^*/remarketing_google.js
-tradetrucks.com.au/ga.
-treato.com/api/analytics
-triond.com/cntimp
-tripadvisor.*/PageMoniker
-trivago.com/check-session-state
-truecar.com/tct
-twitter.com/abacus
-twitter.com/i/csp_report
-twitter.com/scribe
-twitter.com^*/log.json
-twitter.com^*/prompts/impress
-twitter.com^*/scribe^
-typepad.com/t/stats
-ultra-gamerz-zone.cz.cc/b/stats
-unisys.com^*/tracking.js
-united.com^*/hp_mediaplexunited.html
-upi.com/*/stat/
-upsellit.com^*/visitor
-viamichelin.co.uk^*/stats.js
-viamichelin.de^*/stats.js
-vice.com*/mb_tracker.html
-vice.com*/tracker.html
-vid.io^*/mejs-feature-analytics.js
-video.nbc.com^*/metrics_viral.xml
-videoplaza.com/proxy/tracker
-vidxden.com^*/tracker.js
-vietnamnet.vn^*/tracking.js
-voxmedia.com/needle
-wachovia.com^*/stats.js
-washingtonpost.com/wp-srv/javascript/placeSiteMetrix.
-watchmouse.com^*/jsrum/
-whstatic.com^*/ga.js
-wikihow.com/visit_info
-wired.com/event
-worldgolf.com^*/js/track.js
-xbox.com^*/vortex_tracking.js
-yahoo.com/__perf_log_
-yahoo.com/b
-yahoo.com/neo/stat
-yahoo.com/neo/ymstat
-yahoo.com^*/pageview/
-yahoo.com^*/rt.gif
-yahoo.com^*/ultLog
-yahoo.net^*/hittail.js
-yahooapis.com/get/Valueclick/CapAnywhere.getAnnotationCallback
-yimg.com/nq/ued/assets/flash/wsclient_
-yimg.com^*/yabcs.js
-yimg.com^*/ywa.js
-yobt.tv/js/timerotation*.js
-youandyourwedding.co.uk^*/EAS_tag.
-youandyourwedding.co.uk^*/socialtracking/
-youporn.com^*/tracker.js
-youtube-nocookie.com/device_204
-youtube-nocookie.com/gen_204
-youtube-nocookie.com/ptracking
-youtube.com/api/stats/ads
-youtube.com/get_video
-youtube.com/ptracking
-youtube.com/s
-youtube.com/set_awesome
-ypcdn.com/webyp/javascripts/client_side_analytics_
-yuku.com/stats
-yupptv.com/yupptvreports/stats.php^
-zap2it.com^*/editorial-partner/
-zdnet.com/wi
-zulily.com/action/track
-zvents.com/za
-zvents.com/zat
-zylom.com^*/global_tracking.jsp
-zylom.com^*/tracking_spotlight.js
-adobe.com^*/omniture_s_code.js
-announcements.uk.com^*/s_code.js
-bitdefender.com/resources/scripts/omniture/*/code.js
-bleacherreport.net/pkg/javascripts/*_omniture.js
-consumerreports.org^*/s_code.js
-disneylandparis.fr^*/s_code.js
-eltiempo.com/js/produccion/s_code_*.js
-loc.gov/js/*/s_code.js
-redbox.com^*/scripts/s_code.js
-ticketmaster.eu^*/omniture_tracker.js
-westernunion.*/_globalAssets/js/omniture/AppMeasurement.js`;
+var bad_da_hostpath_regex_Array = [ "adclear.*/acc",
+"b.*/click",
+"click.*/open.aspx",
+"email.*/blankpixel.gif",
+"gdyn.*/1.gif",
+"tracking.*/beacon/",
+"google-analytics.com/collect",
+"google-analytics.com/gtm/js",
+"google-analytics.com/internal/collect^",
+"google-analytics.com/r/collect^",
+"5min.com/flashcookie/StorageCookieSWF_",
+"9fine.ru/js/counter.",
+"9msn.com.au^*/tracking/",
+"actonservice.com^*/tracker/",
+"adchemy-content.com^*/tracking.js",
+"admission.net^*/displaytracker.js",
+"akamai.net/chartbeat.",
+"akamai.net^*/sitetracking/",
+"amazonaws.com/analytics.",
+"amazonaws.com^*.kissinsights.com/",
+"amazonaws.com^*.kissmetrics.com/",
+"amazonaws.com^*/pageviews",
+"aol.com/ping",
+"appspot.com/stats",
+"areyouahuman.com/kitten",
+"azureedge.net/track",
+"bit.ly/stats",
+"bitgravity.com^*/tracking/",
+"bitmovin.com/impression",
+"bizrate-images.co.uk^*/tracker.js",
+"bizrate-images.com^*/tracker.js",
+"bizrate.co.uk/js/survey_",
+"bizrate.com^*/survey_",
+"bumpin.com^*/analytics.html",
+"capture.bi.movideo.com/dc",
+"capture.camify.com/dc",
+"centerix.ru^*/count.msl",
+"click.email.*/open.aspx",
+"cloudfront.net*/keywee.min.js",
+"cloudfront.net*/sp.js",
+"cloudfront.net*/tracker.js",
+"cloudfront.net*/trk.js",
+"cloudfront.net/autotracker",
+"cloudfront.net/dough/*/recipe.js",
+"cloudfront.net/track",
+"cnetcontent.com/log",
+"cnzz.com/stat.",
+"communicatorcorp.com^*/conversiontracking.js",
+"content.cpcache.com^*/js/ga.js",
+"creativecdn.com/tags",
+"custom.search.yahoo.co.jp/images/window/*.gif",
+"customerlobby.com/ctrack-",
+"d1ivexoxmp59q7.cloudfront.net^*/live.js",
+"d2d5uvkqie1lr5.cloudfront.net^*/analytics-",
+"d2d5uvkqie1lr5.cloudfront.net^*/analytics.",
+"dealer.com^*/tracker/",
+"dealer.com^*/tracking/",
+"dmdentertainment.com^*/video_debug.gif",
+"ebaystatic.com^*/tracking_RaptorheaderJS.js",
+"ecustomeropinions.com^*/i.php",
+"edgesuite.net^*/googleanalyt",
+"els-cdn.com^*/analytics.js",
+"emihosting.com^*/tracking/",
+"facebook.com*/impression.php",
+"facebook.com/tr",
+"fastly.net/collect",
+"feed.informer.com/fdstats",
+"flixster.com^*/analytics.",
+"freecurrencyrates.com/statgif.",
+"freedom.com^*/analytic/",
+"freedom.com^*/analytics/",
+"fwix.com^*/trackclicks_",
+"fyre.co^*/tracking/",
+"gamegecko.com/gametrack",
+"gigya.com^*/cimp.gif",
+"glam.com^*/log.act",
+"goadv.com^*/track.js",
+"googleapis.com^*/gen_204",
+"googlecode.com^*/tracker.js",
+"gowatchit.com^*/tracking/",
+"gravity.com^*/beacons/",
+"grymco.com^*/event",
+"gstatic.com/gen_204",
+"hellobar.com/ping",
+"hornymatches.com^*/visit.php",
+"hypercomments.com/widget/*/analytics.html",
+"images-amazon.com^*/1x1_trans.gif",
+"images-amazon.com^*/Analytics-",
+"images-amazon.com^*/AnalyticsReporter-",
+"imageshack.us^*/thpix.gif",
+"insnw.net/assets/dsc/dsc.fingerprint-",
+"instagram.com/logging_client_events",
+"kaltura.com^*/statisticsPlugin.swf",
+"kiwari.com^*/impressions.asp",
+"kununu.com^*/tracking/",
+"l-host.net/etn/omnilog",
+"leadpages.net^*/tracking.js",
+"legacy.com^*/unicaclicktracking.js",
+"ligatus.com/script/viewtracker-",
+"livefyre.com^*/tracker.js",
+"livefyre.com^*/tracking/",
+"longtailvideo.com^*/yourlytics-",
+"lsimg.net^*/vs.js",
+"mail.ebay.com/img/*.gif",
+"mail.ru/grstat",
+"mail.ru/k",
+"mantisadnetwork.com/sync",
+"maxmind.com^*/geoip.js",
+"maxmind.com^*/geoip2.js",
+"mcssl.com^*/track.ashx",
+"mediaite.com^*/track/",
+"mixpanel.com/track",
+"modules.ooyala.com^*/analytics-",
+"mysdcc.sdccd.edu^*/.log/",
+"nativly.com^*/track",
+"netalpaca.com/beacon",
+"netbiscuits.net^*/analytics/",
+"neulion.vo.llnwd.net^*/track.js",
+"ns-cdn.com^*/ns_vmtag.js",
+"ocp.cnettv.com^*/Request.jsp",
+"ooyala.com/3rdparty/comscore_",
+"ooyala.com/sas/analytics",
+"ooyala.com/verify",
+"outbrain.com^*/widgetStatistics.js",
+"partypoker.com^*/tracking-",
+"paypalobjects.com^*/pixel.gif",
+"piano-media.com/ping",
+"player.ooyala.com/errors/report",
+"plugins.longtailvideo.com/googlytics",
+"plugins.longtailvideo.com/yourlytics",
+"purevideo.com^*/pvshim.gif",
+"pussy.org^*/track.php",
+"qq.com/stats",
+"qualtrics.com^*/metrics",
+"rackcdn.com^*/analytics.js",
+"realtidbits.com^*/analytics.js",
+"reevoo.com^*/track/",
+"relap.io^*/head.js",
+"replyat.com/gadgetpagecounter*.asp",
+"richrelevance.com/rrserver/tracking",
+"ru4.com/click",
+"sendtonews.com^*/data_logging.php",
+"shareaholic.com/analytics_",
+"sharethis.com/increment_clicks",
+"sharethis.com/pageviews",
+"signup.advance.net^*affiliate",
+"spread.ly^*/statistics.php",
+"statking.net^*/count.js",
+"streamads.com/view",
+"synapsys.us^*/tracker.js",
+"thron.com^*/trackingLibrary.swf",
+"timeinc.net^*/peopleas2artracker_v1.swf",
+"tinypass.com^*/track",
+"totallylayouts.com^*/users-online-counter/online.js",
+"totallylayouts.com^*/visitor-counter/counter.js",
+"turner.com^*/1pixel.gif",
+"twimg.com/jot",
+"twitter.com/i/jot",
+"upcat.custvox.org/survey/*/countOpen.gif",
+"uservoice.com^*/track.js",
+"vanilladev.com/analytics.",
+"vapedia.com^*/largebanner.",
+"virginmedia.com^*/analytics/",
+"vizual.ai^*/click-stream-event",
+"webvoo.com^*/logtodb.",
+"wetpaint.com^*/track",
+"widgetserver.com^*/image.gif",
+"widgetserver.com^*/quantcast.swf",
+"wikinvest.com^*/errorlogger.php",
+"woolik.com^*^tracker^",
+"yandex.ru/cycounter",
+"ypcdn.com/*/webyp",
+"zemanta.com^*/pageview.js",
+"3dmark.com^*/ruxitbeacon",
+"9msn.com.au^*.tracking.udc.",
+"abc.net.au^*/stats/",
+"accuratefiles.com/stat",
+"adidas.com^*/analytics/",
+"adprimemedia.com^*/video_report/attemptAdReport.php",
+"adprimemedia.com^*/video_report/videoReport.php",
+"airbnb.*/tracking/",
+"akamai.net^*/button.clickability.com/",
+"alarabiya.net/track_content_",
+"alarabiya.net^*/googleid.js",
+"alibaba.com/js/beacon_",
+"alicdn.com/js/aplus_*.js",
+"alicdn.com^*/log.js",
+"aliexpress.com/js/beacon_",
+"allvoices.com/track_page",
+"amazon.*/action-impressions/",
+"amazon.*/ajax/counter",
+"amazon.*/record-impressions",
+"amazon.*/uedata/",
+"amazon.*/uedata",
+"amazon.com/gp/forum/email/tracking",
+"amazon.com^*/amazon-clicks/",
+"amazon.com^*/vap-metrics/",
+"amazonaws.com^*/pzyche.js",
+"amazonsupply.com/uedata",
+"analytics.omgpop.com/log",
+"anntaylor.com/webassets/*/page_code.js",
+"anp.se/track",
+"ap.org^*/webtrendsap_hosted.js",
+"applifier.com/users/tracking",
+"archive.org^*/analytics.js",
+"associatedcontent.com/action_cookie",
+"atlantafalcons.com/wp-content/*/metrics.js",
+"audible.com^*/uedata/",
+"autopartswarehouse.com/thirdparty/tracker",
+"avg.com^*/stats.js",
+"avira.com/site/datatracking",
+"baidu.com/ecom",
+"barneys.com^*/__analytics-tracking",
+"bbc.co.uk/analytics",
+"bbc.co.uk^*/linktrack.js",
+"bbc.co.uk^*/livestats.js",
+"bbc.co.uk^*/livestats_v1_1.js",
+"bbc.co.uk^*/tracker.js",
+"bbci.co.uk^*/analytics.js",
+"beacons.vessel-static.com/xff",
+"beacons.vessel-static.com^*/pageView",
+"bhg.com^*/tracking-data",
+"bidz.com/contentarea/BidzHomePixel",
+"bing.com/partner/primedns",
+"bing.com^*/GLinkPing.aspx",
+"biosphoto.com^*/stats/",
+"bits.wikimedia.org/geoiplookup",
+"blekko.com/a/track",
+"blinkbox.com/tracking",
+"blinkist.com/t",
+"blip.tv/engagement",
+"bloxcms.com^*/tracker.js",
+"booking.com/js_tracking",
+"businessinsider.com^*/track.js",
+"buzzfeed.com^*/tracker.js",
+"carmagazine.co.uk^*/tracking.js",
+"cars.com^*/analytics.js",
+"cartoonnetwork.com^*/brandcma.js",
+"cbs.com/assets/js/*AdvCookie.js",
+"cbslocal.com^*/cbs1x1.gif",
+"cctv.com^*/SnoopStat",
+"cheezburger.com/api/visitor",
+"chelseafc.com^*/tracking.js",
+"cjtube.com/tp/*.php",
+"cl.ly/metrics",
+"climatedesk.org*/pixel.gif",
+"commentarymagazine.com^*/track.asp",
+"computing.co.uk^*/webtrends.js",
+"cooksunited.co.uk/counter*.php",
+"creativecommons.org^*/triples",
+"crunchyroll.com/tracker",
+"crunchyroll.com^*/breadcrumb.js",
+"ct.cnet.com/opens",
+"ctscdn.com/content/tracking-",
+"dailymotion.com/track-",
+"dailymotion.com^*/analytics.js",
+"dailymotion.com^*/tag.gif",
+"data.ninemsn.com.au/*GetAdCalls",
+"datehookup.com/strk/dateadvertreg",
+"db.com^*/stats.js",
+"deadspin.com^*/trackers.html",
+"dell.com/images/global/js/s_metrics*.js",
+"digitalchocolate.com/event/track",
+"digitalriver.com^*/globaltracking",
+"divxden.com^*/tracker.js",
+"dsm.com^*/searchenginetracking.js",
+"dw.de^*/run.dw",
+"easy2.com^*/logging/",
+"edgecastcdn.net^*/pixel_1.png",
+"ednetz.de/api/public/socialmediacounter.",
+"email.aol.com/cgi-bin*/flosensing",
+"engadget.com/click",
+"espncdn.com^*.tracking.js",
+"etonline.com/media/*/ctvconviva.swf",
+"euroleague.tv^*/tracking.js",
+"exelate.com/pixel",
+"f-secure.com^*/wtsdc.js",
+"facebook.com/ajax/*/log.php",
+"facebook.com/ajax/*logging.",
+"facebook.com/friends/requests/log_impressions",
+"facebook.com^*/impression_logging/",
+"fantom-xp.org^*/toprefs.php",
+"financialstandardnews.com^*/webstats/",
+"flipboard.com/usage",
+"flipkart.com/ajaxlog/visitIdlog",
+"forbes.com^*/track.php",
+"foursquare.com^*/logger",
+"foursquare.com^*/wtrack",
+"freebase.com/log",
+"freecause.com^*.png",
+"freedownloadscenter.com^*/empty.gif",
+"freemeteo.com^*/log.asp",
+"freemeteo.com^*/searchlog.asp",
+"frontdoor.com/_track",
+"frstatic.net^*/tracking.js",
+"ft.com^*/ft-tracking.js",
+"gawker.com^*/trackers.html",
+"general-files.com/stat",
+"general-search.com/stat",
+"geovisites.com^*/geouser.js",
+"github.com/_private/browser/stats",
+"github.com/_stats",
+"gizmodo.com^*/trackers.html",
+"glamourmagazine.co.uk^*/LogPageView",
+"globester.com^*/track.js",
+"go.com/globalelements/utils/tracking",
+"go.com^*/analytics.js",
+"google.*/api/sclk",
+"google.*/client_204",
+"google.*/gen204",
+"google.*/gwt/x/ts",
+"google.*/log204",
+"google.*/logxhraction",
+"google.com/appserve/mkt/img/*.gif",
+"google.com/log",
+"google.com/reader/logging",
+"google.com/stream_204",
+"google.com^*/dlpageping",
+"google.com^*/log",
+"google.com^*/urchin_post.js",
+"google.com^*/viewerimpressions",
+"gorillanation.com^*/flowplayer.ganalytics.swf",
+"groupon.com/tracking",
+"holiday-rentals.co.uk/thirdparty/tag",
+"holiday-rentals.co.uk^*/tracking-home.html",
+"homeaway.com^*/tracking-home.html",
+"hp.com^*/bootstrap/metrics.js",
+"huffingtonpost.com/click",
+"huffingtonpost.com/ping",
+"hulu.com/beacon/v3/error",
+"hulu.com/beacon/v3/playback",
+"hulu.com/watch/*track.url-1.com",
+"hulu.com^*/external_beacon.swf",
+"hulu.com^*/plustracking/",
+"hulu.com^*/potentialbugtracking/bigdropframes",
+"hulu.com^*/potentialbugtracking/contentplaybackresume",
+"hulu.com^*/potentialbugtracking/dropframes",
+"hulu.com^*/recommendationTracking/tracking",
+"hulu.com^*/sitetracking/",
+"huluim.com^*/sitetracking/",
+"hwscdn.com^*/brands_analytics.js",
+"id.google.*/verify/*.gif",
+"images-amazon.com^*/ClientSideMetricsAUIJavascript*.js",
+"imdb.com/video/*/metrics_",
+"imdb.com/video/*metrics",
+"indeed.com/rpc/preccount",
+"indiatimes.com/trackjs10.",
+"informer.com/statistic",
+"insidesoci.al/track",
+"instructables.com/counter",
+"instyle.co.uk^*/tracking.js",
+"io9.com^*/trackers.html",
+"jalopnik.com^*/trackers.html",
+"jezebel.com^*/trackers.html",
+"joins.com^*/JTracker.js",
+"jtv.com^*/__analytics-tracking",
+"kayak.com/k/redirect/tracking",
+"kelkoo.co.uk/kk_track",
+"kelkoo.co.uk^*/tracker/",
+"kelkoo.com/kk_track",
+"killerstartups.com^*/adsensev",
+"kodakgallery.com^*/analytics_",
+"kotaku.com^*/trackers.html",
+"lendingtree.com/forms/eventtracking",
+"lifehacker.com^*/trackers.html",
+"likes.com/api/track_pv",
+"linguee.com*/white_pixel.gif",
+"link.ex.fm/img/*.gif",
+"linkedin.com^*/tracker.gif",
+"list.ru/counter",
+"livestation.com^*/akamaimediaanalytics.swf",
+"livestation.com^*/statistics.swf",
+"livestream.com^*/analytics/",
+"lm.pcworld.com/db/*/1.gif",
+"lovefilm.com^*/lf-perf-beacon.png",
+"lucidchart.com/analytics_",
+"ly.lygo.com^*/jquery.lycostrack.js",
+"mail.ru/counter",
+"maps.nokia.com^*/tracking.c.js",
+"marriott.com^*/mi_customer_survey.js",
+"mastercard.com^*/Analytics/",
+"mate1.com^*/iframe/pixel/",
+"mate1.com^*/reg.logging.js",
+"media-imdb.com^*/adblock.swf",
+"mediaplex.com^*/universal.html",
+"metacafe.com^*/statsrecorder.php",
+"microsoft.com^*/bimapping.js",
+"microsoft.com^*/surveytrigger.js",
+"miniclip.com^*/swhsproxy.swf",
+"miniusa.com^*/trackDeeplink.gif",
+"mirror.co.uk^*/stats/",
+"moneysupermarket.com^*/ProphetInsert.js",
+"mozilla.net^*/webtrends/",
+"mp3lyrics.org^*/cnt.php",
+"msecnd.net^*/wt.js",
+"msn.com/script/tracking*.js",
+"msn.com^*/report.js",
+"msn.com^*/track.js",
+"msnbc.msn.com^*/analytics.js",
+"mto.mediatakeout.com/viewer",
+"nationmobi.com/*/analyse.php",
+"nature.com^*/marker-file.nocache",
+"nbcnews.com^*/analytics.js",
+"nbcudigitaladops.com/hosted/js/*_com.js",
+"nbcudigitaladops.com/hosted/js/*_com_header.js",
+"netlog.com/track",
+"newegg.com/tracking",
+"news-leader.com^*/analytics.js",
+"ninemsn.com.au^*.tracking.udc.",
+"nola.com/content/*/tracklinks.js",
+"novatech.co.uk^*/tracking",
+"novell.com^*/metrics.js",
+"nydailynews.com^*/tracker.js",
+"nymag.com^*/analytics.js",
+"nyse.com^*/stats/",
+"nzonscreen.com/track_video_item",
+"nzpages.co.nz^*/track.js",
+"nzs.com/sliscripts_",
+"officelivecontent.com^*/Survey/",
+"okcupid.com/poststat",
+"oload.tv/log",
+"openload.co/log",
+"optionsxpress.com^*/tracking.js",
+"papajohns.com/index_files/activityi_data/ct-*.js",
+"pch.com^*/scripts/Analytics/",
+"pch.com^*/SpectrumAnalytics.js",
+"pcmag.com^*/analytics.js",
+"peacocks.co.uk^*/analytics.js",
+"pearltrees.com/s/track",
+"perezhilton.com^*/stat/",
+"perfectmarket.com/pm/track",
+"petersons.com^*/trackBeta.asp",
+"petersons.com^*/trackFunctionsBeta.asp",
+"photobucket.com^*/tracklite.php",
+"popcap.com^*/interstitial_zones.js",
+"pornhd.com/api/user/tracking",
+"porntube.com^*/track",
+"potterybarn.com/pbimgs/*/external/thirdparty.js",
+"potterybarnkids.com/pkimgs/*/external/thirdparty.js",
+"priceline.com^*/beaconHandler",
+"priceline.com^*/impression/",
+"prudential.com^*/metrics_1px.gif",
+"pw.org/sites/all/*/ga.js",
+"ralphlauren.com^*/icg.metrics.js",
+"rangers.co.uk^*/tracking.js",
+"rarefilmfinder.com^*/cnt-gif1x1.php",
+"real.com^*/track.htm",
+"redditmedia.com/gtm/jail",
+"redtube.com/trackimps",
+"redtube.com/trackplay",
+"redtube.com^*/jscount.php",
+"refinery29.com/api/stats",
+"register.it/scripts/track_",
+"reuters.com^*/rcom-wt-mlt.js",
+"reuters.com^*/tracker_video.js",
+"reuters.com^*/widget-rta-poc.js",
+"reutersmedia.net^*/tracker-article*.js",
+"riverisland.com^*/mindshare.min.js",
+"roadandtrack.com^*/RTdartSite.js",
+"runnersworld.com^*/universalpixel.html",
+"sagepub.com^*/login_hit_hidden.gif",
+"samsung.com^*/scripts/tracking.js",
+"scribd.com^*/tracker.gif",
+"search.yahoo.com/ra/click",
+"seeclickfix.com^*/text_widgets_analytics.html",
+"sella.co.nz^*/sella_stats_",
+"sevenload.com/som_",
+"sh.st/bundles/smeweb/img/tracking-",
+"shareaholic.com^*/bake.gif",
+"shopzilla-images.com/s2static/*/js/tracker.js",
+"sky.com^*/hightrafficsurveycode.js",
+"skype.com^*/inclient/",
+"skype.com^*/track_channel.js",
+"skypeassets.com^*/inclient/",
+"skypeassets.com^*/track_channel.js",
+"smallcapnetwork.com^*/viewtracker/",
+"soundcloud.com/event",
+"spoonful.com^*/tracking.js",
+"spreaker.com^*/statistics/",
+"statesmanjournal.com^*/articlepageview.php",
+"static.ow.ly^*/click.gz.js",
+"staticwhich.co.uk/assets/*/track.js",
+"statravel.com^*/Javascript/wt_gets.js",
+"stomp.com.sg/site/servlet/tracker",
+"store.yahoo.net^*/ywa.js",
+"stuff.co.nz^*/track.min.js",
+"supermediastore.com/web/track",
+"superpages.com/ct/clickThrough",
+"tab.co.nz/track",
+"talktalk.co.uk^*/tracking/",
+"tdwaterhouse.co.uk^*/track.js",
+"telegraph.co.uk^*/tmglmultitrackselector.js",
+"thedeal.com/oas_",
+"thefashionspot.com^*/pb.track.js",
+"thefreedictionary.com^*/track.ashx",
+"thegumtree.com^*/tracking.js",
+"thrillist.com/track",
+"tiaa-cref.org^*/js_tiaacref_analytics.",
+"tinyupload.com^*/ct_adkontekst.js",
+"tivo.com/__ssobj/track",
+"tmagazine.com/js/track_",
+"torrentz.eu/ping",
+"torrentz.in/ping",
+"torrentz.li/ping",
+"torrentz.me/ping",
+"toshibadirect.com^*/remarketing_google.js",
+"tradetrucks.com.au/ga.",
+"treato.com/api/analytics",
+"triond.com/cntimp",
+"tripadvisor.*/PageMoniker",
+"trivago.com/check-session-state",
+"truecar.com/tct",
+"twitter.com/abacus",
+"twitter.com/i/csp_report",
+"twitter.com/scribe",
+"twitter.com^*/log.json",
+"twitter.com^*/prompts/impress",
+"twitter.com^*/scribe^",
+"typepad.com/t/stats",
+"ultra-gamerz-zone.cz.cc/b/stats",
+"unisys.com^*/tracking.js",
+"united.com^*/hp_mediaplexunited.html",
+"upi.com/*/stat/",
+"upsellit.com^*/visitor",
+"viamichelin.co.uk^*/stats.js",
+"viamichelin.de^*/stats.js",
+"vice.com*/mb_tracker.html",
+"vice.com*/tracker.html",
+"vid.io^*/mejs-feature-analytics.js",
+"video.nbc.com^*/metrics_viral.xml",
+"videoplaza.com/proxy/tracker",
+"vidxden.com^*/tracker.js",
+"vietnamnet.vn^*/tracking.js",
+"voxmedia.com/needle",
+"wachovia.com^*/stats.js",
+"washingtonpost.com/wp-srv/javascript/placeSiteMetrix.",
+"watchmouse.com^*/jsrum/",
+"whstatic.com^*/ga.js",
+"wikihow.com/visit_info",
+"wired.com/event",
+"worldgolf.com^*/js/track.js",
+"xbox.com^*/vortex_tracking.js",
+"yahoo.com/__perf_log_",
+"yahoo.com/b",
+"yahoo.com/neo/stat",
+"yahoo.com/neo/ymstat",
+"yahoo.com^*/pageview/",
+"yahoo.com^*/rt.gif",
+"yahoo.com^*/ultLog",
+"yahoo.net^*/hittail.js",
+"yahooapis.com/get/Valueclick/CapAnywhere.getAnnotationCallback",
+"yimg.com/nq/ued/assets/flash/wsclient_",
+"yimg.com^*/yabcs.js",
+"yimg.com^*/ywa.js",
+"yobt.tv/js/timerotation*.js",
+"youandyourwedding.co.uk^*/EAS_tag.",
+"youandyourwedding.co.uk^*/socialtracking/",
+"youporn.com^*/tracker.js",
+"youtube-nocookie.com/device_204",
+"youtube-nocookie.com/gen_204",
+"youtube-nocookie.com/ptracking",
+"youtube.com/api/stats/ads",
+"youtube.com/get_video",
+"youtube.com/ptracking",
+"youtube.com/s",
+"youtube.com/set_awesome",
+"ypcdn.com/webyp/javascripts/client_side_analytics_",
+"yuku.com/stats",
+"yupptv.com/yupptvreports/stats.php^",
+"zap2it.com^*/editorial-partner/",
+"zdnet.com/wi",
+"zulily.com/action/track",
+"zvents.com/za",
+"zvents.com/zat",
+"zylom.com^*/global_tracking.jsp",
+"zylom.com^*/tracking_spotlight.js",
+"adobe.com^*/omniture_s_code.js",
+"announcements.uk.com^*/s_code.js",
+"bitdefender.com/resources/scripts/omniture/*/code.js",
+"bleacherreport.net/pkg/javascripts/*_omniture.js",
+"consumerreports.org^*/s_code.js",
+"disneylandparis.fr^*/s_code.js",
+"eltiempo.com/js/produccion/s_code_*.js",
+"loc.gov/js/*/s_code.js",
+"redbox.com^*/scripts/s_code.js",
+"ticketmaster.eu^*/omniture_tracker.js",
+"westernunion.*/_globalAssets/js/omniture/AppMeasurement.js",
+"ad.*/jstag^",
+"doubleclick.net/xbbe/creative/vast",
+"04stream.com/pop*.js",
+"advanced-intelligence.com/banner",
+"akamai.net^*/pics.drugstore.com/prodimg/promo/",
+"alexa.com^*/promotebuttons/",
+"allposters.com^*/banners/",
+"alluremedia.com.au^*/campaigns/",
+"amazonaws.com^*/player_request_*/get_affiliate_",
+"anonym.to/*findandtry.com",
+"aol.co.uk^*/cobrand.js",
+"aolcdn.com/os/music/img/*-skin.jpg",
+"apnonline.com.au/img/marketplace/*_ct50x50.gif",
+"arntrnassets.mediaspanonline.com^*_HP_wings_",
+"berush.com/images/semrush_banner_",
+"berush.com/images/whorush_120x120_",
+"bijk.com^*/banners/",
+"bitshare.com^*/banner/",
+"blindferret.com/images/*_skin_",
+"bosh.tv/hdplugin.",
+"break.com^*/partnerpublish/",
+"bullguard.com^*/banners/",
+"buy.com^*/affiliate/",
+"byzoo.org/script/tu*.js",
+"camelmedia.net^*/banners/",
+"cashmakingpowersites.com^*/banners/",
+"catholicweb.com^*/banners/",
+"centralmediaserver.com^*_side_bars.jpg",
+"chriscasconi.com/nostalgia_ad.",
+"clicksure.com/img/resources/banner_",
+"cnhionline.com^*/rtj_ad.jpg",
+"colorlabsproject.com^*/banner_",
+"content.ad/Scripts/widget*.aspx",
+"continent8.com^*/bannerflow/",
+"coxnewsweb.com^*/ads/",
+"creativecdn.com/creatives",
+"d2kbaqwa2nt57l.cloudfront.net/br",
+"dennis.co.uk^*/siteskins/",
+"dev-cms.com^*/promobanners/",
+"disqus.com/listPromoted",
+"dreamstime.com/refbanner-",
+"dynw.com/banner",
+"ebaystatic.com/aw/signin/ebay-signin-toyota-",
+"ebaystatic.com^*/motorswidgetsv2.swf",
+"ebladestore.com^*/banners/",
+"echineselearning.com^*/banner.jpg",
+"edgecastcdn.net^*.barstoolsports.com/wp-content/banners/",
+"esport-betting.com^*/betbanner/",
+"extras.mnginteractive.com^*/todaysdeals.gif",
+"facebook.com^*/instream/vast.xml",
+"fantasyplayers.com/templates/banner_code.",
+"fatburningfurnace.com^*/fbf-banner-",
+"fileserver1.net/download",
+"fncstatic.com^*/business-exchange.html",
+"fortune5minutes.com^*/banner_",
+"freecycle.org^*/sponsors/",
+"frontpagemag.com^*/bigadgendabookad.jpg",
+"frontsight.com^*/banners/",
+"furiousteam.com^*/external_banner/",
+"fyiwashtenaw.com/remote_widget",
+"gamestop.com^*/aflbanners/",
+"gemini.yahoo.com^*^syndication^",
+"gmstatic.net^*/amazonbadge.png",
+"gmstatic.net^*/itunesbadge.png",
+"goadv.com^*/ads.js",
+"googlesyndication.com^*/domainpark.cgi",
+"googlesyndication.com^*/simgad/",
+"gotraffic.net^*/sponsors/",
+"haymarket-whistleout.s3.amazonaws.com/*_ad.html",
+"hitleap.com/assets/banner-",
+"hubbarddeals.com^*/promo/",
+"hubbardradio.com^*/my_deals.php",
+"i.lsimg.net^*/sides_clickable.",
+"i.lsimg.net^*/takeover/",
+"images-amazon.com/images/*/associates/widgets/",
+"infomarine.gr^*/images/banners/",
+"iselectmedia.com^*/banners/",
+"iypcdn.com^*/bgbanners/",
+"iypcdn.com^*/otherbanners/",
+"iypcdn.com^*/ypbanners/",
+"kaango.com/fecustomwidgetdisplay",
+"keep2share.cc/images/i/00468x0060-",
+"king.com^*/banners/",
+"kurtgeiger.com^*/linkshare/",
+"lastlocation.com/images/banner",
+"leadsleap.com/images/banner_",
+"lego.com^*/affiliate/",
+"letmewatchthis.ru/movies/linkbottom",
+"liutilities.com^*/affiliate/",
+"llnwd.net/o28/assets/*-sponsored-",
+"longtailvideo.com*/ltas.swf",
+"longtailvideo.com^*/yume-h.swf",
+"longtailvideo.com^*/yume.swf",
+"lp.longtailvideo.com^*/adaptv*.swf",
+"luckygunner.com^*/banners/",
+"magicmembers.com/img/mgm-125x125",
+"mb-hostservice.de/banner_",
+"mdpcdn.com^*/gpt/",
+"mediaspanonline.com^*-Takeover-",
+"mediaspanonline.com^*-Takeover_",
+"moneycontrol.co.in^*PopUnder.js",
+"mosso.com^*/banners/",
+"mrc.org/sites/default/files/uploads/images/Collusion_Banner",
+"msnbcmedia.msn.com^*/sponsors/",
+"multisitelive.com^*/banner_",
+"multivizyon.tv^*/flysatbanner.swf",
+"nanobrokers.com/img/banner_",
+"nanoinvestgroup.com/images/banner*.gif",
+"nesgamezone.com/syndicate",
+"nettvplus.com/images/banner_",
+"nocookie.net^*/wikiasearchads.js",
+"nzpages.co.nz^*/banners/",
+"onecache.com/banner_",
+"oovoo.com^*/banners/",
+"organicprospects.com^*/banners/",
+"oriongadgets.com^*/banners/",
+"osobnosti.cz/images/casharena_",
+"ownx.com^*/banners/",
+"pokersavvy.com^*/banners/",
+"popeoftheplayers.eu/ad",
+"pro-gmedia.com^*/skins/",
+"radiotown.com/splash/images/*_960x600_",
+"rapidgator.net/images/pics/*_300%D1%85250_",
+"realwritingjobs.com^*/banners/",
+"rethinkbar.azurewebsites.net^*/ieflyout.js",
+"roshantv.com/adad.",
+"s-assets.tp-cdn.com/widgets/*/vwid/*.html",
+"sailthru.com^*/horizon.js",
+"schenkelklopfer.org^*pop.js",
+"secureserver.net^*/event",
+"shaadi.com^*/get-banner.php",
+"shaadi.com^*/get-html-banner.php",
+"shop4tech.com^*/banner/",
+"shorte.st^*/referral_banners/",
+"simplifydigital.co.uk^*/widget_premium_bb.htm",
+"site5.com/creative/*/234x60.gif",
+"sitegrip.com^*/swagbucks-",
+"speedbit.com^*-banner1-",
+"speedppc.com^*/banners/",
+"sponsorandwin.com/images/banner-",
+"srwww1.com^*/affiliate/",
+"static.multiplayuk.com/images/w/w-",
+"staticworld.net/images/*_skin_",
+"streamtheworld.com/ondemand/creative",
+"structuredchannel.com/sw/swchannel/images/MarketingAssets/*/BannerAd",
+"subliminalmp3s.com^*/banners/",
+"supersport.com/content/2014_Sponsor",
+"supersport.com/content/Sponsors",
+"surf100sites.com/images/banner_",
+"survivaltop50.com/wp-content/uploads/*/Survival215x150Link.png",
+"swimg.net^*/banners/",
+"talkfusion.com^*/banners/",
+"thaiforlove.com/userfiles/affb-",
+"themis-media.com^*/sponsorships/",
+"tigerdirect.com^*/affiliate_",
+"tmbattle.com/images/promo_",
+"townnews.com^*/dealwidget.css",
+"townnews.com^*/upickem-deals.js",
+"tremormedia.com/embed/js/*_ads.js",
+"tremormedia.com^*/tpacudeoplugin46.swf",
+"tremormedia.com^*_preroll_",
+"tribktla.files.wordpress.com/*-639x125-sponsorship.jpg",
+"tribwgnam.files.wordpress.com^*reskin2.",
+"turbotrafficsystem.com^*/banners/",
+"turner.com^*/ads/",
+"turner.com^*/promos/",
+"twivert.com/external/banner234x60.",
+"u-loader.com/image/hotspot_",
+"ukrd.com/image/*-160x133.jpg",
+"ukrd.com/image/*-160x160.png",
+"ultimatewebtraffic.info/images/fbautocash",
+"uniblue.com^*/affiliates/",
+"usenetbucket.com^*-banner/",
+"vpn4all.com^*/banner/",
+"vpnxs.nl/images/vpnxs_banner",
+"walmartimages.com^*/HealthPartner_",
+"watch-free-movie-online.net/adds-",
+"website.ws^*/banners/",
+"worldcdn.net^*/banners/",
+"xingcloud.com^*/uid_",
+"xrad.io^*/hotspots/",
+"yachting.org^*/banner/",
+"yahoo.net^*/ads/",
+"yimg.com/gemini/pr/video_",
+"yimg.com^*/quickplay_maxwellhouse.png",
+"yimg.com^*/sponsored.js",
+"ynet.co.il^*/ynetbanneradmin/",
+"ziffstatic.com/jst/zdsticky.",
+"ziffstatic.com/jst/zdvtools.",
+"193.34.134.18^*/banners/",
+"193.34.134.74^*/banners/",
+"213.174.140.76^*/ads/",
+"79.120.183.166^*/banners/",
+"91.83.237.41^*/banners/",
+"blogspot.com^*/ad.jpg",
+"cdn.epom.com^*/940_250.gif",
+"ddstatic.com^*/banners/",
+"ero-advertising.com^*/banners/",
+"escortbook.com/banner_",
+"hdpornphotos.com/images/728x180_",
+"hdpornphotos.com/images/banner_",
+"hentaijunkie.com^*/banners/",
+"mofomedia.nl/pop-*.js",
+"paydir.com/images/bnr",
+"pop6.com/javascript/im_box-*.js",
+"pornstarnetwork.com^*_660x70.jpg",
+"saboom.com.pccdn.com^*/banner/",
+"steadybucks.com^*/banners/",
+"thumbs.vstreamcdn.com^*/slider.html",
+"tubefck.com^*/adawe.swf",
+"viorotica.com^*/banners/",
+"vodconcepts.com^*/banners/",
+"youfck.com^*/adawe.swf",
+"100jamz.com^*-wallpaper-ad-",
+"1023xlc.com/upload/*_background_",
+"1043thefan.com^*_Sponsors/",
+"1077thebone.com^*/banners/",
+"1430wnav.com/images/300-",
+"1430wnav.com/images/468-",
+"22lottery.com/images/lm468",
+"24hourwristbands.com/*.googleadservices.com/",
+"2giga.link/jsx/download*.js",
+"360haven.com/forums/*.advertising.com/",
+"4fuckr.com/static/*-banner.",
+"5min.com^*/banners/",
+"911tabs.com/img/bgd_911tabs_",
+"911tabs.com/img/takeover_app_",
+"947.co.za^*-branding.",
+"977rocks.com/images/300-",
+"abduzeedo.com^*/mt-banner.jpg",
+"aboutmyip.com/images/Ad0",
+"abovetopsecret.com/160_",
+"abovetopsecret.com/300_",
+"abovetopsecret.com/728_",
+"absolutcheats.com/images/changemy*.gif",
+"absolutewrite.com^*_468x60banner.",
+"absolutewrite.com^*_ad.jpg",
+"activewin.com/images/*_ad.gif",
+"activewin.com^*/blaze_static2.gif",
+"adamvstheman.com/wp-content/uploads/*/AVTM_banner.jpg",
+"adifferentleague.co.uk^*/mcad.png",
+"adpost.com/bannerserver.g.",
+"adsl2exchanges.com.au/images/spintel",
+"adswikia.com^*banner",
+"adswikia.com^*display300x250",
+"advanced-television.com^*/banners/",
+"adz.lk^*_ad.",
+"affiliatesynergy.com^*/banner_",
+"afloat.ie^*/banners/",
+"africaonline.com.na^*/banners/",
+"ahashare.com/cpxt_",
+"allhiphop.com/site_resources/ui-images/*-conduit-banner.gif",
+"allkpop.com^*/takeover/",
+"allmovie.com^*/affiliate_",
+"allmovieportal.com/dynbanner.",
+"allmusic.com^*_affiliate_",
+"allmyvideos.net/js/ad_",
+"allmyvideos.net^*/pu.js",
+"allthelyrics.com^*/popup.js",
+"ambriefonline.com^*/banners/",
+"amd.com/publishingimages/*/master_",
+"americanfreepress.net/assets/images/Banner_",
+"androidpolice.com/wp-content/*/images/das/",
+"anilinkz.com/img/leftsponsors.",
+"anilinkz.com/img/rightsponsors",
+"anilinkz.tv/kwarta-",
+"annistonstar.com/leaderboard_banner",
+"anvisoft.com^*/anviad.jpg",
+"appleinsider.com^*/ai_front_page_google_premium.js",
+"aps.dz^*/banners/",
+"arenabg.com^*/banners/",
+"arenadb.net^*/banners/",
+"armorgames.com/assets/*_skin_",
+"armorgames.com/backup_",
+"armorgames.com^*/banners/",
+"armorgames.com^*/site-skins/",
+"armorgames.com^*/siteskin.css",
+"aroundosceola.com/banner-",
+"arsenal-mania.com/images/backsplash_",
+"arstechnica.net/public/shared/scripts/da-",
+"askbobrankin.com/awpopup*.js",
+"attitude.co.uk/images/Music_Ticket_Button_",
+"audioz.download^*/partners/",
+"autoworld.co.za^*/ads/",
+"aviationweek.com^*/leader_board.htm",
+"badongo.com^*_banner_",
+"baixartv.com/img/bonsdescontos.",
+"bbc.co.uk^*/bbccom.js",
+"bcdb.com^*/banners.pl",
+"beingpc.com^*/banners/",
+"bellanaija.com^*/wp-banners/",
+"benchmarkreviews.com^*/banners/",
+"bestvpn.com/wp-content/uploads/*/mosttrustedname_260x300_",
+"bitcoinist.net/wp-content/*/630x80-bitcoinist.gif",
+"bitcoinist.net/wp-content/uploads/*_250x250_",
+"bitcoinreviewer.com/wp-content/uploads/*/banner-luckybit.jpg",
+"bitminter.com/images/info/spondoolies",
+"bizarremag.com/images/skin_",
+"blackchronicle.com/images/Banners-",
+"blacklistednews.com/images/*banner",
+"blbclassic.org/assets/images/*banners/",
+"blogsmithmedia.com^*_skin.",
+"blogsmithmedia.com^*_skin_",
+"bloomberg.com^*/banner.js",
+"bolandrugby.com/images/sponsors.",
+"break.com^*/marketguide-",
+"brecorder.com^*/banners/",
+"breitlingsource.com/images/govberg*.jpg",
+"brownfieldonline.com^*/banners/",
+"bsvc.ebuddy.com/bannerservice/tabsaww",
+"btdigg.org/images/btguard",
+"bundesliga.com^*/_partner/",
+"busiweek.com^*/banners/",
+"bustocoach.com/*/banner_",
+"bustocoach.com/*_banner/",
+"buy-n-shoot.com/images/banners/banner-",
+"buy.com/*/textlinks.aspx",
+"bvibeacon.com^*/banners/",
+"c-sharpcorner.com^*/banners/",
+"caladvocate.com/images/banner-",
+"calguns.net/images/ads",
+"canalboat.co.uk^*/bannerImage.",
+"canalboat.co.uk^*/Banners/",
+"canindia.com^*_banner.png",
+"cannabisjobs.us/wp-content/uploads/*/OCWeedReview.jpg",
+"capitolfax.com/wp-content/*ad.",
+"capitolfax.com/wp-content/*Ad_",
+"cardsharing.info/wp-content/uploads/*/ALLS.jpg",
+"carpoint.com.au^*/banner.gif",
+"carsguide.com.au/images/uploads/*_bg.",
+"cbfsms.com^*-banner.gif",
+"ccfm.org.za^*/sads/",
+"cd1025.com/www/img/btn-",
+"cdcovers.cc/images/external/toolbar",
+"cdmagurus.com/img/*.gif",
+"cdn.turner.com^*/groupon/",
+"ceforum.co.uk/images/misc/PartnerLinks",
+"celebstoner.com/assets/images/img/sidebar/*/freedomleaf.png",
+"ceoexpress.com/inc/ads",
+"ceylontoday.lk^*/banner/",
+"chinadaily.com.cn/s",
+"chronicle.lu/images/Sponsor_",
+"churchmilitant.com^*/ad-",
+"churchnewssite.com^*-banner1.",
+"churchnewssite.com^*/banner-",
+"churchnewssite.com^*/bannercard-",
+"ciao.com^*/price_link/",
+"citationmachine.net/images/gr_",
+"city1016.ae/wp-content/*-Skin_",
+"citybeat.co.uk^*/ads/",
+"citywire.co.uk/wealth-manager/marketingcampaign",
+"citywirecontent.co.uk^*/cw.oas.dx.js",
+"classic97.net^*/banner/",
+"classicfeel.co.za^*/banners/",
+"clubhyper.com/images/hannantsbanner_",
+"cms.myspacecdn.com^*/splash_assets/",
+"cnet.com/imp",
+"cnettv.com.edgesuite.net^*/ads/",
+"cnn.com/ad-",
+"cnn.net^*/lawyers.com/",
+"coastweek.com/banner_",
+"cocomment.com/banner",
+"coinwarz.com/content/images/genesis-mining-eth-takeover-",
+"coloradomedicalmarijuana.com/images/sidebar/banner-",
+"complaintsboard.com/img/banner-",
+"complexmedianetwork.com^*/takeovers/",
+"complexmedianetwork.com^*/toolbarlogo.png",
+"computerandvideogames.com^*/promos/",
+"constructionreviewonline.com^*730x90",
+"constructionreviewonline.com^*banner",
+"coolmath.net/*-medrect.html",
+"coolsport.tv/adtadd.",
+"coolsport.tv/lshadd.",
+"copblock.org/wp-content/uploads/*/covert-handcuff-key-AD-",
+"copdfoundation.org^*/images/sponsors/",
+"cops.com^*/copbanner_",
+"cphpost.dk^*/banners/",
+"cricruns.com/images/hioxindia-",
+"crunchyroll.*/vast",
+"cruzine.com^*/banners/",
+"cryptocoinsnews.com/wp-content/uploads/*/7281.gif",
+"cryptocoinsnews.com/wp-content/uploads/*/728_",
+"cryptocoinsnews.com/wp-content/uploads/*/ccn.png",
+"cryptocoinsnews.com/wp-content/uploads/*/cloudbet_",
+"cryptocoinsnews.com/wp-content/uploads/*/xbt-social.png",
+"cryptocoinsnews.com/wp-content/uploads/*/xbt.jpg",
+"cryptocoinsnews.com/wp-content/uploads/*_300x400_",
+"crystalmedianetworks.com^*-180x150.jpg",
+"csgobackpack.net/653x50.",
+"custompcreview.com/wp-content/*-bg-banner.jpg",
+"d-addicts.com^*/banner/",
+"d.imwx.com/js/wx-a21-plugthis-",
+"daily-mail.co.zm^*/sbt.gif",
+"daily-mail.co.zm^*/side_strip.",
+"daily-mail.co.zm^*/singapore_auto.",
+"daily-mail.co.zm^*_1170x120.",
+"daily-mail.co.zm^*_270x312.",
+"daily-mail.co.zm^*_banner.",
+"daily-sun.com^*/banner/",
+"dailyblogtips.com/wp-content/uploads/*.gif",
+"dailyherald.com^*/contextual.js",
+"dailyhome.com/leaderboard_banner",
+"dailymail.co.uk^*/promoboxes/",
+"dailymirror.lk/media/images/Nawaloka-",
+"dailynews.co.zw^*-takeover.",
+"dailynews.gov.bw^*/banner_",
+"dailynews.lk^*/webadz/",
+"dailywritingtips.com^*/publisher2.gif",
+"darknet.org.uk/images/acunetix_",
+"davesite.com^*/aff/",
+"ddccdn.com/js/google_",
+"deccanchronicle.com^*-banner-",
+"deccanchronicle.com^*-searchquad-300100.swf",
+"deccanchronicle.com^*/shaadi.com/",
+"deepdotweb.com/wp-content/uploads/*/allserviceslogo.gif",
+"deepdotweb.com/wp-content/uploads/*/banner.gif",
+"deepdotweb.com/wp-content/uploads/*/billpayhelp2.png",
+"deepdotweb.com/wp-content/uploads/*/free_ross.jpg",
+"deepdotweb.com/wp-content/uploads/*/helix.gif",
+"defensereview.com^*_banner_",
+"desiretoinspire.net^*/mgbanner.gif",
+"detroitindependent.net/images/ad_",
+"digitalreality.co.nz^*/360_hacks_banner.gif",
+"digitaltveurope.net/wp-content/uploads/*_wallpaper_",
+"digzip.com^*baner.swf",
+"dippic.com/images/banner",
+"dispatch.com^*/dpcpopunder.js",
+"distrowatch.com^*-*.gif",
+"distrowatch.com^*/3cx.png",
+"distrowatch.com^*/advanced-admin.",
+"dl4all.com^*/hotfile.gif",
+"dnsstuff.com/dnsmedia/images/*_banner.jpg",
+"dnsstuff.com/dnsmedia/images/ft.banner.",
+"dogechain.info/content/img/a",
+"dominicantoday.com^*/banners/",
+"dota-trade.com/img/branding_",
+"drivearchive.co.uk/images/amazon.",
+"driverdb.com^*/banners/",
+"drivereasy.com/wp-content/uploads/*/sidebar-DriverEasy-buy.jpg",
+"dustcoin.com^*/image/ad-",
+"dvdvideosoft.com^*/banners/",
+"dwarfgames.com/pub/728_top.",
+"earthlink.net^*/promos/",
+"eastonline.eu/images/eng_banner_",
+"ebaystatic.com/aw/pics/signin/*_signInSkin_",
+"ebookshare.net^*/streamdirect160x600_",
+"ebuddy.com/web_banners_",
+"eco-business.com^*/site_partners/",
+"economist.com.na^*/banners/",
+"egamer.co.za^*-background-",
+"ehow.com/media/ad.html^",
+"elocallink.tv^*/showgif.php",
+"environmental-finance.com^*banner",
+"environmental-finance.com^*rotate.gif",
+"epictv.com/sites/default/files/290x400_",
+"eq2flames.com/images/styles/eq2/images/banner",
+"esportlivescore.com/img/fano_",
+"esportlivescore.com/img/fanobet_",
+"esportlivescore.com/img/vitalbet.",
+"essayinfo.com/img/125x125_",
+"essayscam.org^*/ads.js",
+"eteknix.com/wp-content/uploads/*skin",
+"eteknix.com/wp-content/uploads/*Takeover",
+"euphonik.dj/img/sponsors-",
+"eurodict.com/images/banner_",
+"european-rubber-journal.com/160x600px_",
+"euroweb.com^*/banner/",
+"eventful.com/tools/click/url",
+"everythingsysadmin.com^*_sw_banner120x600_",
+"eweek.com^*/sponsored-",
+"exchangerates.org.uk/images/150_60_",
+"exchangerates.org.uk/images/200x200_",
+"expertreviews.co.uk^*/skins/",
+"express.co.uk^*/sponsored/",
+"ezmoviestv.com^*/ad-for-ezmovies.png",
+"facenfacts.com^*/ads/",
+"fastcompany.com/sites/*/interstitial.js",
+"feed-the-beast.com^*/gamevox.png",
+"feiwei.tv^*/sandbox.html",
+"fever.fm^*/campaigns/",
+"fhm.com^*_banner.png",
+"file.org^*/images/promo/",
+"fileflyer.com/img/dap_banner_",
+"filerio.in^*/jquery.interstitial.",
+"files.wordpress.com/*-reskin.",
+"filespazz.com^*/copyartwork_side_banner.gif",
+"financialsamurai.com/wp-content/uploads/*/sliced-alternative-10000.jpg",
+"findthebest-sw.com/sponsor_event",
+"finextra.com^*/leaderboards/",
+"firingsquad.com^*/sponsor_row.gif",
+"firsttoknow.com^*/page-criteo-",
+"flameload.com/onvertise.",
+"flatpanelshd.com/pictures/*banner",
+"flopturnriver.com*/banners/",
+"fncstatic.com^*/sponsored-by.gif",
+"footballtradedirectory.com^*banner",
+"forbbodiesonly.com*/vendorbanners/",
+"foreignersinuk.co.uk^*/banner/",
+"forumimg.ipmart.com/swf/ipmart_forum/banner",
+"foxandhoundsdaily.com/wp-content/uploads/*-AD.gif",
+"foxbusiness.com/html/google_homepage_promo",
+"foxsoccer2go.com/namedImage/*/backgroundSkin.jpg",
+"free-torrents.org^*/banners/",
+"free-tv-video-online.me/episode-buttom-",
+"free-tv-video-online.me/season-side-",
+"freeroms.com/bigbox_",
+"freeroms.com/skyscraper_",
+"freetv-video.ca^*/popover-load-js.php",
+"freeworldgroup.com/banner",
+"ftlauderdalewebcam.com/images/*webcambanner",
+"ftlauderdalewebcam.com^*-WebCamBannerFall_",
+"fudzilla.com^*/banners/",
+"fullrip.net/images/download-",
+"fulltv.tv/pub_",
+"gadgetshowlive.net^*/banners/",
+"galatta.com^*/bannerimages/",
+"galatta.com^*/banners/",
+"gallerynova.se^*/jquery.bpopup.min.js",
+"gallerysense.se/site/getBannerCode",
+"gamblinginsider.com^*/partner_events.php",
+"gamecopyworld.com^*/vg_160x120_",
+"gameplanet.co.nz^*-takeover.jpg",
+"gamersbook.com^*/banners/",
+"gameserpent.com/kit*.php",
+"gameserpent.com/vc*.php",
+"gamesforwork.com^*/dropalink_small.gif",
+"gameshark.com^*/pageskin-",
+"gamingcentral.in^*/banner_",
+"ganool.com/wp-content/uploads/*/Javtoys300250..gif",
+"ganool.com/wp-content/uploads/*/matrix303.gif",
+"gawkerassets.com^*/background.jpg",
+"gelbooru.com*/frontend*.js",
+"generalfiles.me^*/download_sponsored.",
+"geocities.yahoo.*/js/sq.",
+"gestetnerupdates.com^*/chesed-shel-emes-600x75.gif",
+"gestetnerupdates.com^*/eagle-sewer.gif",
+"gestetnerupdates.com^*/Gestetner-Miles.gif",
+"gestetnerupdates.com^*/perfect-auto-collision_banner.gif",
+"gethigh.com/wp-content/uploads/*/pass_a_drug_test_get_high_banner.jpg",
+"getreading.co.uk/static/img/bg_takeover_",
+"getthekick.eu^*/banners/",
+"gfi.com/blog/wp-content/uploads/*-BlogBanner",
+"girlsgames.biz/games/partner*.php",
+"gizmochina.com^*/kingsing-t8-advert.jpg",
+"glam.com^*/affiliate/",
+"glamourviews.com/home/zones",
+"go4up.com^*/download-buttoned.png",
+"goal.com^*/branding/",
+"gocdkeys.com/images/*_400x300_",
+"gocdkeys.com/images/bg_",
+"gold-prices.biz^*_400x300.gif",
+"golf365.co.za^*/site-bg-",
+"golf365.com^*/site-bg-",
+"goodanime.net/images/crazy*.jpg",
+"gopride.com^*/banners/",
+"gov-auctions.org^*/banner/",
+"gq.co.za^*/sitetakeover/",
+"gr8.cc/addons/banners^",
+"grapevine.is/media/flash/*.swf",
+"greatandhra.com/images/*_ga_",
+"gumtree.com^*/dart_wrapper_",
+"gunfreezone.net^*_ad.jpg",
+"guns.ru^*/banner/",
+"guns.ru^*/banners/",
+"hancinema.net/images/banner_",
+"hancinema.net/images/watch-now",
+"happierabroad.com/Images/banner",
+"hardwareheaven.com/wp-content/*_skin_",
+"hawaiireporter.com^*/upandruningy.jpg",
+"hawaiireporter.com^*/winnerscampad.jpg",
+"hd-bb.org^*/dl4fbanner.gif",
+"hdtvtest.co.uk^*/pricerunner.php",
+"healthfreedoms.org/assets/swf/320x320_",
+"hearse.com^*/billboards/",
+"heatworld.com/images/*_83x76_",
+"helsinkitimes.fi^*/banners/",
+"heraldm.com^*/banner/",
+"heraldsun.com.au^*/images/sideskins-",
+"heyjackass.com/wp-content/uploads/*_300x225_",
+"hostratings.co.uk/zeepeel.",
+"hotfile.com^*/banners/",
+"hotfilesearch.com/includes/images/mov_",
+"hothardware.com^*_staticbanner_*.jpg",
+"howwe.biz/mgid-",
+"howwemadeitinafrica.com^*/dhl-hdr.gif",
+"hqfooty.tv/ad",
+"hulkshare.com^*/adsmanager.js",
+"hulkshare.oncdn.com^*/removeads.",
+"hurriyetdailynews.com/images/*_100x250_",
+"i-tech.com.au^*/banner/",
+"i.i.com.com/cnwk.1d/*/tt_post_dl.jpg",
+"i3investor.com^*/offer_",
+"i3investor.com^*/partner/",
+"icydk.com^*/title_visit_sponsors.",
+"iddin.com/img/chatwing_banner.",
+"iddin.com/img/chatwing_banner_",
+"idesitv.com^*/loadbanners.",
+"ifilm.com/website/*-skin-",
+"iimg.in^*-banner-",
+"iimg.in^*/sponsor_",
+"iloveim.com/cadv",
+"images-amazon.com/images/*/browser-scripts/da-",
+"images-amazon.com/images/*/browser-scripts/dae-",
+"images-amazon.com^*/marqueepushdown/",
+"images.globes.co.il^*/fixedpromoright.",
+"images.mmorpg.com/images/*skin",
+"images.sharkscope.com/acr/*_Ad-",
+"imageshack.us/images/contests/*/lp-bg.jpg",
+"imagesnake.com^*/oc.js",
+"imagevenue.com/interstitial.",
+"imgburn.com/images/ddigest_",
+"imgcarry.com^*/oc.js",
+"impactradio.co.za^*/banners/",
+"independent.co.uk^*/partners/",
+"indianexpress.com^*/banner/",
+"info.break.com^*/sponsors/",
+"infoq.com^*/banners/",
+"informationng.com^*-Leaderboard.",
+"informe.com/img/banner_",
+"inquirer.net/wp-content/themes/news/images/wallpaper_",
+"insidebutlercounty.com/images/100-",
+"insidebutlercounty.com/images/160-",
+"insidebutlercounty.com/images/180-",
+"insidebutlercounty.com/images/200-",
+"insidebutlercounty.com/images/300-",
+"insidebutlercounty.com/images/468-",
+"inspirefirst.com^*/banners/",
+"irctctourism.com/ttrs/railtourism/Designs/html/images/tourism_right_banners/*DealsBanner_",
+"ironmagazine.com^*/banners.php",
+"irv2.com/forums/*show_banner",
+"isitdownrightnow.com/graphics/speedupmypc*.png",
+"israelidiamond.co.il^*/bannerdisplay.aspx",
+"itv.com/adexplore/*/config.xml",
+"iwebtool.com^*/bannerview.php",
+"ixquick.nl/graphics/banner_",
+"jango.com/assets/promo/1600x1000-",
+"javascript-coder.com^*/form-submit-larger.jpg",
+"javascript-coder.com^*/make-form-without-coding.png",
+"jdownloader.org^*/smbanner.png",
+"jewishexponent.com^*/banners/",
+"jewishnews.co.uk^*banner",
+"jewishtribune.ca^*/banners/",
+"johngaltfla.com/wordpress/wp-content/uploads/*/jmcs_specaialbanner.jpg",
+"johngaltfla.com/wordpress/wp-content/uploads/*/TB2K_LOGO.jpg",
+"jozikids.co.za/uploadimages/*_140x140_",
+"jozikids.co.za/uploadimages/140x140_",
+"justsomething.co/wp-content/uploads/*-250x250.",
+"kansascity.com/images/touts/ds_",
+"keenspot.com/images/headerbar-",
+"keepvid.com/images/ilivid-",
+"keepvid.com/images/winxdvd-",
+"kentonline.co.uk/weatherimages/sponsor_",
+"kexp.org^*/sponsor-",
+"kexp.org^*/sponsoredby.",
+"keygen-fm.ru/images/*.swf",
+"kfog.com^*/banners/",
+"kitco.com^*/banners/",
+"kitguru.net/wp-content/uploads/*-Skin.",
+"kjlhradio.com^*/banners/",
+"klav1230am.com^*/banners/",
+"knbr.com^*/banners/",
+"knowfree.net^*/ezm125x125.gif",
+"knssradio.com^*/banners/",
+"kongregate.com/images/help_devs_*.png",
+"krapps.com^*-banner-",
+"ktradionetwork.com^*/banners/",
+"lagacetanewspaper.com^*/banners/",
+"laliga.es/img/patrocinadores-",
+"lancasteronline.com^*/done_deal/",
+"lawprofessorblogs.com/responsive-template/*advert.",
+"lawprofessors.typepad.com/responsive-template/*advert.jpg",
+"learn2crack.com/wp-content/*-336x280.jpg",
+"letitbit.net/images/other/inst_forex_",
+"lfcimages.com^*/partner-",
+"lfcimages.com^*/sponsor-",
+"lfgcomic.com/wp-content/uploads/*/PageSkin_",
+"lifeinqueensland.com/images/156x183a_",
+"linkis.com/index/ln-event",
+"linksafe.info^*/mirror.png",
+"lionsrugby.co.za^*/sponsors.",
+"lmgtfy.com/s/images/ls_",
+"localdirectories.com.au^*/bannerimages/",
+"loleasy.com^*/adsmanager.js",
+"londonstockexchange.com^*/fx.gif",
+"luxury4play.com^*/ads/",
+"macblurayplayer.com/image/amazon-",
+"macintouch.com/images/amaz_",
+"macintouch.com/images/owc_",
+"maciverse.mangoco.netdna-cdn.com^*banner",
+"macobserver.com^*/deal_brothers/",
+"macworld.co.uk^*/textdeals/",
+"mailinator.com/images/abine/leaderboard-",
+"mailinator.com^*/clickbanner.jpg",
+"majorgeeks.com/images/*_336x280.jpg",
+"majorgeeks.com/images/download_sd_",
+"majorgeeks.com^*/banners/",
+"malaysiabay.org^*/creative.js",
+"malaysiabay.org^*creatives.php",
+"mangareader.net/images/800-x-100",
+"mani-admin-plugin.com^*/banners/",
+"manicapost.com^*/banners/",
+"manxradio.com^*/banners_",
+"marijuanapolitics.com/wp-content/*-ad.",
+"marijuanapolitics.com/wp-content/uploads/*/icbc1.png",
+"marijuanapolitics.com/wp-content/uploads/*/icbc2.png",
+"marketingpilgrim.com/wp-content/uploads/*/trackur.com-",
+"marketingupdate.co.za/temp/banner_",
+"marketplace.org^*/support_block/",
+"maxgames.com^*/sponsor_",
+"maxkeiser.com^*-banner-",
+"mcstatic.com^*/billboard_",
+"media-imdb.com/images/*/mptv_banner_",
+"media-imdb.com^*/affiliates/",
+"media-imdb.com^*/zergnet-",
+"media.abc.go.com^*/callouts/",
+"mediafire.com^*/rockmelt_tabcontent.jpg",
+"mediaupdate.co.za/temp/banner_",
+"mediaweek.com.au/storage/*_234x234.jpg",
+"meetic.com/js/*/site_under_",
+"menafn.com^*/banner_",
+"mensxp.com^*/banner/",
+"merriam-webster.com^*/accipiter.js",
+"messianictimes.com/images/1-13/ba_mhfinal_",
+"metradar.ch^*/banner_",
+"mfcdn.net/media/*left",
+"mfcdn.net/media/*right",
+"miamiherald.com^*/dealsaver/",
+"miamiherald.com^*/teamfanshop/",
+"mikejung.biz/images/*/728x90xLiquidWeb_",
+"milanounited.co.za/images/sponsor_",
+"mixfm.co.za/images/banner",
+"mlb.com/images/*_videoskin_*.jpg",
+"mmoculture.com/wp-content/uploads/*-background-",
+"mmorpg.com/images/*_hots_r0.jpg",
+"mmorpg.com/images/mr_ss_",
+"monitor.co.ug/image/view/*/120/",
+"monitor.co.ug/image/view/*/468/",
+"morefree.net/wp-content/uploads/*/mauritanie.gif",
+"movie2kto.ws/popup",
+"mp3.li/images/md_banner_",
+"mp3li.net^*banner",
+"mp3skull.com/call_banner_exec_new.",
+"msw.ms^*/jquery.MSWPagePeel-",
+"muchmusic.com/images/*-skin.png",
+"muchmusic.com^*/leaderboard_frame_obiwan.html",
+"multiupload.biz/r_ads2",
+"music.yahoo.com/get-free-html",
+"musicmaza.com/bannerdyn",
+"musicplayon.com/banner",
+"mustangevolution.com/images/300x100_",
+"mustangevolution.com^*/banner/",
+"mustangevolution.com^*/banners/",
+"muthafm.com^*/partners.png",
+"mygaming.co.za^*/partners/",
+"mymusic.com.ng/images/supportedby",
+"mypbrand.com/wp-content/uploads/*banner",
+"mypremium.tv^*/bpad.htm",
+"myspacecdn.com/cms/*_skin_",
+"mysubtitles.com^*_banner.jpg",
+"naij.com^*/branding/",
+"nation.lk^*/banners/",
+"nation.sc/images/pub",
+"nationalreview.com/images/display_300x600-",
+"nationalturk.com^*/banner",
+"nciku.com^*banner",
+"ncrypt.in/images/banner",
+"ndtv.com/widget/conv-tb",
+"ndtv.com^*/banner/",
+"neowin.net/images/atlas/aww",
+"nesn.com/img/nesn-nation/bg-",
+"netupd8.com^*/ads/",
+"newoxfordreview.org/banners/ad-",
+"news-leader.com^*/banner.js",
+"news.com.au^*/images/*-bg.jpg",
+"newsbusters.org^*/banners/",
+"newscdn.com.au^*/aldi/",
+"newsonjapan.com^*/banner/",
+"nextbigwhat.com/wp-content/uploads/*ccavenue",
+"nfl.com/assets/images/hp-poweredby-",
+"nfl.com^*/page-background-image.jpg",
+"nichepursuits.com/wp-content/uploads/*/long-tail-pro-banner.gif",
+"nigeriafootball.com/img/affiliate_",
+"nmimg.net/css/takeover_",
+"nosteam.ro^*/gamedvprop.js",
+"notalwaysromantic.com/images/banner-",
+"notdoppler.com^*-promo-siteskin.",
+"notebook-driver.com/wp-content/images/banner_",
+"nu2.nu^*_banner.",
+"nufc.com^*/The%20Gate_NUFC.com%20banner_%2016.8.13.gif",
+"nydailynews.com^*-reskin-",
+"oanda.com/wandacache/wf-banner-",
+"omgpop.com/dc",
+"oncyprus.com^*/banners/",
+"one-delivery.co.uk^*/sensitivedating.png",
+"onlinekeystore.com/skin1/images/side-",
+"opednews.com^*/iframe.php",
+"opencurrency.com/wp-content/uploads/*-aocs-sidebar-commodity-bank.png",
+"optimum.net/utilities/doubleclicktargeting",
+"originalweedrecipes.com/wp-content/uploads/*-Medium.jpg",
+"orissadiary.com/img/*-banner.gif",
+"oteupload.com/images/iLivid-download-",
+"outlookindia.com/image/banner_",
+"ozqul.com^*/webbanners.png",
+"pagesinventory.com/_data/img/*_125x400_",
+"paktribune.com^*/banner",
+"pandora.com^*/mediaserverPublicRedirect.jsp",
+"paris-update.com^*/banners/",
+"pcpro.co.uk/images/*_siteskin",
+"pcpro.co.uk^*/pcprositeskin",
+"pcworld.co.nz^*_siteskin_",
+"pcworld.com/images/*_vidmod_316x202_",
+"pe.com^*/biice2scripts.js",
+"pechextreme.com^*/banner.",
+"pechextreme.com^*/banners/",
+"petri.co.il/wp-content/uploads/banner1000x75_",
+"petri.co.il/wp-content/uploads/banner700x475_",
+"pettube.com/images/*-partner.",
+"pgatour.com^*/featurebillboard_",
+"phantom.ie^*/banners/",
+"phnompenhpost.com^*/banner_",
+"photo.net/equipment/pg-160^",
+"phuketgazette.net^*/banners/",
+"pitchero.com^*/toolstation.gif",
+"planetradiocity.com^*banner",
+"playgames2.com/ban300-",
+"pleasurizemusic.com^*/banner/",
+"pocket-lint.com/images/bytemarkad.",
+"pocketnow.com*/embeded-adtional-content/",
+"pogo.com/v/*/js/ad.js",
+"policeprofessional.com/files/banners-",
+"policeprofessional.com/files/pictures-",
+"politicalwire.com/images/*-sponsor.jpg",
+"pons.eu^*/lingeniobanner.swf",
+"pornevo.com/events_",
+"portcanaveralwebcam.com/images/ad_",
+"portevergladeswebcam.com^*-Ad.jpg",
+"portevergladeswebcam.com^*-WebCamBannerFall_",
+"portmiamiwebcam.com/images/sling_",
+"positivehealth.com^*/TopicbannerAvatar/",
+"poststar.com^*/dealwidget.php",
+"power1035fm.com^*/banners/",
+"powerbot.org^*/ads/",
+"pqarchiver.com^*/utilstextlinksxml.js",
+"preppersmallbiz.com/wp-content/uploads/*/PSB-Support.jpg",
+"prepperwebsite.com/wp-content/uploads/*-250x250.jpg",
+"prepperwebsite.com/wp-content/uploads/*/250x250-",
+"prepperwebsite.com/wp-content/uploads/*/apmgoldmembership250x250.jpg",
+"prepperwebsite.com/wp-content/uploads/*/DeadwoodStove-PW.gif",
+"prepperwebsite.com/wp-content/uploads/*/FME-Red-CAP.jpg",
+"prepperwebsite.com/wp-content/uploads/*/jihad.jpg",
+"prepperwebsite.com/wp-content/uploads/*/PW-Ad.jpg",
+"prepperwebsite.com/wp-content/uploads/*/tsepulveda-1.jpg",
+"prepperwebsite.com/wp-content/uploads/*_250x150.png",
+"prepperwebsite.com/wp-content/uploads/*_250x250.jpg",
+"primewire.ag/js/jquery*.js",
+"prisonplanet.com^*banner",
+"privateproperty.co.za^*/siteTakeover/",
+"professionalmuscle.com/*banner",
+"profitconfidential.com/wp-content/themes/PC-child-new/images/*_banners_",
+"profitconfidential.com/you-may-also-like",
+"propakistani.pk/wp-content/*/warid.jpg",
+"proxy-youtube.net/mih_",
+"proxy-youtube.net/myiphide_",
+"publicityupdate.co.za/temp/banner_",
+"publicradio.org^*/banners/",
+"punch.cdn.ng^*/wp-banners/",
+"punchng.com^*/wp-banners/",
+"putlocker.is/images/banner",
+"qiksilver.net^*/banners/",
+"qualityhealth.com^*/banner.jsp",
+"quickmeme.com/media/rostile",
+"race-dezert.com/images/wrap-",
+"racinguk.com/images/site/foot_",
+"racketboy.com/images/racketboy_ad_",
+"radioreference.com^*_banner_",
+"rapidfiledownload.com^*/btn-input-download.png",
+"rapidlibrary.com/baner*.png",
+"rapidlibrary.com/banner_*.png",
+"rapidtvnews.com^*BannerAd.",
+"ratemystrain.com/files/*-300x250.",
+"rawstory.com^*/ads/",
+"raysindex.com/wp-content/uploads/*/dolmansept2012flash.swf",
+"rc.feedsportal.com/r/*/rc.img",
+"readynutrition.com^*/banners/",
+"redpepper.org.uk/ad-",
+"regmender.com^*/banner336x280.",
+"rejournal.com^*/images/homepage/",
+"replacementdocs.com^*/popup.js",
+"reuters.com/reuters_gpt_bootstrap*.js",
+"rghost.ru/download/a/*/banner_download_",
+"ringostrack.com^*/amazon-buy.gif",
+"robhasawebsite.com^*/amazon-",
+"robhasawebsite.com^*/shop-amazon.",
+"rocksound.tv/images/uploads/*-rocksound-1920x1000_",
+"rocktelevision.com^*_banner_",
+"rockthebells.net/images/bot_banner_",
+"roseindia.net^*/banners/",
+"rpgwatch.com^*/banner/",
+"rtklive.com^*/marketing",
+"rugbyweek.com^*/sponsors/",
+"s.imwx.com^*/wx-a21-plugthis.js",
+"s.yimg.com^*/audience/",
+"saabsunited.com/wp-content/uploads/*-banner-",
+"saabsunited.com/wp-content/uploads/*-banner.",
+"saabsunited.com/wp-content/uploads/*_banner_",
+"saabsunited.com/wp-content/uploads/180x460_",
+"saabsunited.com/wp-content/uploads/ban-",
+"saabsunited.com/wp-content/uploads/werbung-",
+"saf.org/wp-content/uploads/*/theGunMagbanner.png",
+"saf.org/wp-content/uploads/*/women_guns192x50.png",
+"samoaobserver.ws^*/banner/",
+"samoatimes.co.nz^*/banner468x60/",
+"sarugbymag.co.za^*-wallpaper2.",
+"satopsites.com^*/banners/",
+"sawlive.tv/ad",
+"saysuncle.com^*ad.jpg",
+"seatguru.com/deals",
+"secureupload.eu/images/soundcloud_",
+"secureupload.eu/images/wpman_",
+"sexmummy.com/avnadsbanner.",
+"sfbaytimes.com/img-cont/banners",
+"sgtreport.com/wp-content/uploads/*-180x350.",
+"sgtreport.com/wp-content/uploads/*/180_350.",
+"sgtreport.com/wp-content/uploads/*/180x350.",
+"sgtreport.com/wp-content/uploads/*_Side_Banner.",
+"sgtreport.com/wp-content/uploads/*_Side_Banner_",
+"shadowpool.info/images/banner-",
+"shanghaiexpat.com^*/wallpaper_",
+"share-links.biz^*/hisp.gif",
+"share-links.biz^*/hs.gif",
+"sherdog.com/index/load-banner",
+"shop.com/cc.class/dfp",
+"shopping.stylelist.com/widget",
+"shoutmeloud.com^*/hostgator-",
+"showstreet.com/banner.",
+"sify.com^*/gads_",
+"silverdoctors.com^*/Silver-Shield-2015.jpg",
+"siteslike.com/images/celeb",
+"sk-gaming.com/image/takeover_",
+"skymetweather.com^*/googleadds/",
+"skyvalleychronicle.com/999/images/ban",
+"slacker.com^*/ads.js",
+"smartearningsecrets.com^*/FameThemes.png",
+"smartmoney.net^*-sponsor-",
+"snopes.com^*/casalebanner.asp",
+"soccerway.com/buttons/120x90_",
+"sockshare.com^*_728.php",
+"someecards.com^*/images/skin/",
+"soundcloud.com/audio-ad",
+"soundtracklyrics.net^*_az.js",
+"sourcefed.com/wp-content/uploads/*/netflix4.jpg",
+"spartoo.eu/footer_tag_iframe_",
+"speroforum.com/images/sponsor_",
+"ssl-images-amazon.com/images/*/browser-scripts/da-",
+"ssl-images-amazon.com^*/dacx/",
+"stagnitomedia.com/view-banner-",
+"startribune.com/circulars/advertiser_",
+"static-economist.com^*/timekeeper-by-rolex-medium.png",
+"static.nfl.com^*-background-",
+"staticneo.com/neoassets/iframes/leaderboard_bottom.",
+"staticworld.net/images/*_pcwskin_",
+"strategypage.com^*_banner",
+"stream2watch.co^*_ad_",
+"stream2watch.me/ed",
+"student-jobs.co.uk/banner.",
+"stv.tv/img/player/stvplayer-sponsorstrip-",
+"succeed.co.za^*/banner_",
+"sulekha.com^*/bannerhelper.html",
+"sulekha.com^*/sulekhabanner.aspx",
+"suntimes.com^*/banners/",
+"surfmusic.de/anz",
+"surfmusic.de/banner",
+"swimnews.com^*/banner_",
+"sxc.hu/img/banner",
+"taiwannews.com.tw/etn/images/banner_",
+"tastro.org/x/ads*.php",
+"taxsutra.com^*/banner/",
+"tdfimg.com/go/*.html",
+"techinsider.net/wp-content/uploads/*-300x500.",
+"techradar.com^*/img/*_takeover_",
+"techsupportforum.com^*/banners/",
+"techtarget.com^*/leaderboard.html",
+"techtree.com^*/jquery.catfish.js",
+"teesupport.com/wp-content/themes/ts-blog/images/cp-",
+"telegraphindia.com^*/banners/",
+"telegraphindia.com^*/hoabanner.",
+"templatesbox.com^*/banners/",
+"theactivetimes.net^*/featured_partners/",
+"theaquarian.com^*/banners/",
+"theburningplatform.com/wp-content/uploads/*_180x150.gif",
+"thecatholicuniverse.com^*-ad.",
+"thecatholicuniverse.com^*-advert-",
+"thecatholicuniverse.com^*-banner-",
+"thecenturion.co.za^*/banners/",
+"thechive.files.wordpress.com^*-wallpaper-",
+"thecitizen.co.tz^*/banners/",
+"thecommonsenseshow.com/siteupload/*/ad-iodine.jpg",
+"thecommonsenseshow.com/siteupload/*/ad-nutritionrecharge.jpg",
+"thecommonsenseshow.com/siteupload/*/ad-rangerbucket.jpg",
+"thecommonsenseshow.com/siteupload/*/ad-survivalapril2017.jpg",
+"thecommonsenseshow.com/siteupload/*/adamerigeddon2016dvd.jpg",
+"thecommonsenseshow.com/siteupload/*/adnumana350x250-1.jpg",
+"thecommonsenseshow.com/siteupload/*/adsqmetals.jpg",
+"thecommonsenseshow.com/siteupload/*/hagmannbook.jpg",
+"thecommonsenseshow.com/siteupload/*/nightvisionadnew.jpg",
+"thecommonsenseshow.com/siteupload/*/numanna-hoiz400x100.jpg",
+"thecommonsenseshow.com/siteupload/*/panama-300-x-250.jpg",
+"thecommonsenseshow.com/siteupload/*/trekkerportablewater.jpg",
+"thecompassionchronicles.com/wp-content/uploads/*-banner-",
+"thecompassionchronicles.com/wp-content/uploads/*-banner.",
+"thecsuite.co.uk^*/banners/",
+"thedailymeal.com^*_sponsoredby.png",
+"thedailymeal.net^*/featured_partners/",
+"thedailypaul.com/images/amzn-",
+"thedailystar.net^*/400-x-120-pixel.jpg",
+"thedailystar.net^*/Animation-200-X-30.gif",
+"thedailystar.net^*/aritel-logo.jpg",
+"thedailystar.net^*/footer-sticky-add/",
+"thedailystar.net^*/scbbd.gif",
+"theenglishgarden.co.uk^*/bannerImage.",
+"thehealthcareblog.com/files/*/American-Resident-Project-Logo-",
+"thehealthcareblog.com/files/*/athena-300.jpg",
+"thehealthcareblog.com/files/*/THCB-Validic-jpg-opt.jpg",
+"thehighstreetweb.com^*/banners/",
+"thehindu.com/multimedia/*/sivananda_sponsorch_",
+"theindependentbd.com^*/banner/",
+"thejointblog.com/wp-content/uploads/*-235x",
+"thejointblog.com^*/dablab.gif",
+"thelakewoodscoop.com^*banner",
+"theleader.info/banner",
+"theliberianjournal.com/flash/banner",
+"themittani.com/sites/*-skin",
+"thenationonlineng.net^*/banners/",
+"thenonleaguefootballpaper.com^*/image-non-league.jpeg",
+"thenonleaguefootballpaper.com^*/Lovell-Soccer.jpg",
+"thepeninsulaqatar.com^*/banners/",
+"thepreparednessreview.com/wp-content/uploads/*/250x125-",
+"thepreparednessreview.com/wp-content/uploads/*_175x175.jpg",
+"thepreparednessreview.com/wp-content/uploads/*_185x185.jpg",
+"thesentinel.com^*/banners/",
+"thessdreview.com/wp-content/uploads/*/930x64_",
+"thessdreview.com^*-bg-banner-",
+"thessdreview.com^*/owc-full-banner.jpg",
+"thestandard.com.ph^*/banner/",
+"thesundaily.my/sites/default/files/twinskyscrapers",
+"thesurvivalistblog.net^*-banner-",
+"thewindowsclub.com^*/banner_",
+"thinkingwithportals.com/images/*-skyscraper.",
+"thirdage.com^*_banner.php",
+"time4hemp.com/wp-content/uploads/*-ad.",
+"time4hemp.com/wp-content/uploads/*-vertical.",
+"time4hemp.com/wp-content/uploads/*/cannafo.jpg",
+"time4hemp.com/wp-content/uploads/*/dakine420.png",
+"time4hemp.com/wp-content/uploads/*/dynamic_banner_",
+"time4hemp.com/wp-content/uploads/*/gorillabanner728.gif",
+"time4hemp.com/wp-content/uploads/*/herbies-1.gif",
+"time4hemp.com/wp-content/uploads/*/Johnson-Grow-Lights.gif",
+"time4hemp.com/wp-content/uploads/*/Judge-Lenny-001.jpg",
+"time4hemp.com/wp-content/uploads/*/scrogger.gif",
+"time4hemp.com/wp-content/uploads/*/sensi2.jpg",
+"time4hemp.com/wp-content/uploads/*/WeedSeedShop.jpg",
+"timesofoman.com^*/banner/",
+"timestalks.com/images/sponsor-",
+"tinyurl.com/firefox_banner_",
+"tmz.vo.llnwd.net^*/images/*skin",
+"toonova.com/images/site/front/xgift-",
+"topalternate.com/assets/sponsored_links-",
+"torrent.cd/images/banner-",
+"torrentz.*/mgid/",
+"toshiba.com^*/bookingpromowidget/",
+"toshiba.com^*/toshibapromowidget/",
+"totalguitar.net/images/*_125X125.jpg",
+"toucharcade.com/wp-content/themes/*_background_*.jpg",
+"townhall.com^*/ads/",
+"trackitdown.net/skins/*_campaign/",
+"tracksat.com^*/banners/",
+"tripadvisor.com^*/skyscraper.jpg",
+"trucknetuk.com^*/sponsors/",
+"trucktrend.com^*_160x200_",
+"trunews.com^*/Webbanner.jpg",
+"trustedreviews.com/mobile/widgets/html/promoted-phones",
+"tubehome.com/imgs/undressme",
+"turboimagehost.com/300*.html^",
+"turboimagehost.com/728*.html^",
+"turboimagehost.com/b300.",
+"turboimagehost.com/b300_",
+"turboimagehost.com/b728.",
+"turboimagehost.com/b728_",
+"tvducky.com/imgs/graboid.",
+"ukfindit.com/images/*_125x125.gif",
+"ultimate-guitar.com/_img/bgd/bgd_main_",
+"upload.ee/image/*/B_descarga_tipo12.gif",
+"uploadcore.com/images/*-Lad.jpg",
+"uploadcore.com/images/*-mad.jpg",
+"uploadcore.com/images/*-Rad.png",
+"uploadlw.com^*/download-now",
+"uploadlw.com^*/download_button.gif",
+"urbanchristiannews.com/ucn/sidebar-",
+"urethanes-technology-international.com^*/banners/",
+"urlcash.net/random*.php",
+"urlgone.com^*/banners/",
+"usatodayhss.com/images/*skin",
+"uvnc.com/img/housecall.",
+"vanityfair.com/custom/ebook-ad-bookbiz",
+"vcdq.com^*/ad.html",
+"verzing.com/popup",
+"vfs-uk-in.com/images/webbanner-",
+"vidds.net/pads*.js",
+"video.abc.com^*/ads/",
+"video44.net/gogo/a_d_s.",
+"videogamer.com/videogamer*/skins/",
+"videogamesblogger.com^*/scripts/takeover.js",
+"videopediaworld.com/nuevo/plugins/midroll.",
+"videos.com/click",
+"videos.mediaite.com/decor/live/white_alpha_60.",
+"videositeprofits.com^*/banner.jpg",
+"videowood.tv/ads",
+"videowood.tv/pop2",
+"vidhog.com/images/download_banner_",
+"vidvib.com/vidvibpopa.",
+"vidvib.com/vidvibpopb.",
+"vipbox.tv/js/layer-",
+"virginislandsthisweek.com/images/336-",
+"virginislandsthisweek.com/images/728-",
+"virtual-hideout.net/banner",
+"vitalfootball.co.uk^*/partners/",
+"vitalmtb.com/assets/ablock-",
+"vitalmtb.com/assets/vital.aba-",
+"vondroid.com/site-img/*-adv-ex-",
+"walshfreedom.com^*-300x250.",
+"walshfreedom.com^*/liberty-luxury.png",
+"wardsauto.com^*/pm_doubleclick/",
+"washtimes.com/js/dart.",
+"watchcartoononline.com/inc/siteskin.",
+"watchcartoononline.com^*/530x90.",
+"watchuseek.com/media/*-banner-",
+"watchuseek.com/media/*_250x250",
+"watchuseek.com/media/1900x220_",
+"watchuseek.com/media/banner_",
+"watchwwelive.net^*/big_ban.gif",
+"watchwwelive.net^*/long_ban2.jpg",
+"waterford-today.ie^*/banners/",
+"wavelengthcalculator.com/banner",
+"way2sms.com/w2sv5/js/fo_",
+"wbgo.org^*/banners/",
+"wearetennis.com/img/common/bnp-logo-",
+"wearetennis.com/img/common/logo_bnp_",
+"webmastercrunch.com^*/hostgator300x30.gif",
+"webnewswire.com/images/banner",
+"weei.com^*_banner.jpg",
+"weekendpost.co.bw^*/banner_",
+"werlv.com^*banner",
+"whatismyip.com/images/vyprvpn_",
+"whatmyip.co/images/speedcoin_",
+"whatsnewonnetflix.com/assets/blockless-ad-",
+"whispersinthecorridors.com/banner",
+"whistleout.com.au/imagelibrary/ads/wo_skin_",
+"whoer.net/images/vlab50_",
+"whoer.net/images/vpnlab20_",
+"wikinvest.com/wikinvest/images/zap_trade_",
+"wildtangent.com/leaderboard",
+"windowsitpro.com^*/roadblock.",
+"winpcap.org/assets/image/banner_",
+"winsupersite.com^*/roadblock.",
+"wipfilms.net^*/amazon.png",
+"wipfilms.net^*/instant-video.png",
+"wired.com/images/xrail/*/samsung_layar_",
+"wjunction.com/images/468x60",
+"wjunction.com/images/rectangle",
+"worthofweb.com/images/wow-ad-",
+"wp.com/wp-content/themes/vip/tctechcrunch/images/tc_*_skin.jpg",
+"wpdaddy.com^*/banners/",
+"wrc.com/img/sponsors-",
+"wrko.com/sites/wrko.com/files/poll/*_285x95.jpg",
+"wunderground.com^*/wuss_300ad2.php",
+"xboxgaming.co.za^*/images/background/",
+"yahoo.com/contextual-shortcuts",
+"yahoo.com^*/eyc-themis",
+"yamivideo.com^*/download_video.jpg",
+"yarisworld.com^*/banners/",
+"yasni.*/design/relaunch/gfx/elitepartner_",
+"yimg.com/cv/*/billboard/",
+"yimg.com/cv/*/config-object-html5billboardfloatexp.js",
+"yimg.com^*/flash/promotions/",
+"yimg.com^*/yad.html",
+"ynaija.com^*/ad.",
+"youconvertit.com/_images/*ad.png",
+"yourepeat.com/revive_wrapper",
+"yourepeat.com^*/skins/",
+"yourmovies.com.au^*/side_panels_",
+"youtube.com/get_midroll_info",
+"yp.mo^*/ads/",
+"yudu.com^*_intro_ads",
+"zanews.co.za^*/banners/",
+"zap2it.com/wp-content/themes/overmind/js/zcode-",
+"zbc.co.zw^*/banners/",
+"zigzag.co.za/images/oww-",
+"zombiegamer.co.za/wp-content/uploads/*-skin-",
+"zootoday.com/pub/21publish/Zoo-navtop-casino_",
+"zoover.*/shared/bannerpages/darttagsbanner.aspx",
+"zophar.net/files/tf_",
+"hindustantimes.com/res/js/ht-script",
+"nintendolife.com^*/adblock.jpg",
+"techweb.com/adblocktrack",
+"ytconv.net/site/adblock_detect",
+"3xupdate.com^*/ryushare.gif",
+"3xupdate.com^*/ryushare2.gif",
+"3xupdate.com^*/ryusharepremium.gif",
+"adult-profit-files.com/banner",
+"alotporn.com^*/js/oopopw.js",
+"amadorastube.com^*/banner_",
+"amateur-desire.com/pics/sm_",
+"amateur-streams.com^*/popup.js",
+"andtube.com/ban_",
+"arionmovies.com/*/popup.php",
+"babepicture.co.uk^*banner",
+"babeshows.co.uk^*banner",
+"badjojo.com/js/scripts-",
+"bangyoulater.com/images/banners_",
+"befuck.com/js/adpbefuck",
+"between-legs.com^*/banners/",
+"bigxvideos.com/js/focus.*.js",
+"bigxvideos.com/js/pops2.",
+"bigxvideos.com/js/popu.",
+"bralesscelebs.com/*banner",
+"cameltoe.com^*/banners/",
+"celeb.gate.cc/misc/event_*.js",
+"celebritypink.com/bannedcelebs-",
+"coolmovs.com/js/focus.*.js",
+"creepshots.com^*/250x250_",
+"damimage.com^*/DocaWedrOJPPx.png",
+"data18.com^*/banners/",
+"drtuber.com^*/aff_banner.swf",
+"dusttube.com/pop*.js",
+"empireamateurs.com/images/*banner",
+"eporner.com/pjsall-*.js",
+"eroprofile.com/js/pu*.js",
+"extremetube.com/player_related",
+"fapdick.com/uploads/1fap_",
+"fapdick.com/uploads/fap_",
+"fileshare.ro^*/dhtmlwindow.js",
+"fleshbot.com/wp-content/themes/fbdesktop_aff/images/af",
+"freebunker.com^*/ex.js",
+"freebunker.com^*/exa.js",
+"freebunker.com^*/layer.js",
+"freebunker.com^*/oc.js",
+"freebunker.com^*/pops.js",
+"freebunker.com^*/raw.js",
+"freeporninhd.com/images/cbside.",
+"freeporninhd.com/images/cbzide.",
+"fux.com/assets/adblock",
+"gayporntimes.com^*/Bel-Ami-Mick-Lovell-July-2012.jpeg",
+"gayporntimes.com^*/CockyBoys-July-2012.jpg",
+"girlfriendvideos.com/ad",
+"girlsfromprague.eu^*468x",
+"gspcdn.com^*/banners/",
+"hcomicbook.com^*_banner1.gif",
+"hdporn.in/js/focus.*.js",
+"hdporn.in/js/pops2.",
+"hentai-foundry.com/themes/*Banner",
+"hentaistream.com/wp-includes/images/bg-",
+"hentaistream.com/wp-includes/images/mofos/webcams_",
+"heraldnetdailydeal.com/widgets/DailyDealWidget300x250",
+"hgimg.com/js/beacon.",
+"hidefporn.ws/client",
+"hollyscoop.com/sites/*/skins/",
+"hollywoodoops.com/img/*banner",
+"hotdevonmichaels.com^*/pf_640x1001.jpg",
+"hotdevonmichaels.com^*/streamate2.jpg",
+"hotdevonmichaels.com^*/wicked.gif",
+"hotdylanryder.com^*/Big-Tits-Like-Big-Dicks.jpg",
+"hotdylanryder.com^*/dylan_350x250_01.jpg",
+"hotdylanryder.com^*/iframes_174.jpg",
+"hotdylanryder.com^*/pf_640x100.jpg",
+"hotdylanryder.com^*/wicked.gif",
+"hotkellymadison.com^*/kelly1.jpg",
+"hotkellymadison.com^*/kelly4.jpg",
+"hotkellymadison.com^*/km_300x300.gif",
+"hotkellymadison.com^*/pf_640x100.jpg",
+"hotsashagrey.com^*/Anabolic.jpg",
+"hotsashagrey.com^*/New_Sensations-1091.gif",
+"hotsashagrey.com^*/PeterNorth-800x350.jpg",
+"hotsashagrey.com^*/squ-fantasygirlsasha-001.gif",
+"hotsashagrey.com^*/throated.jpg",
+"hotshame.com/js/adphotshame",
+"imagecarry.com/down",
+"imagecarry.com/top",
+"imagedunk.com^*_imagedunk.js",
+"imagefruit.com^*/pops.js",
+"imageshack.us^*/bannng.jpg",
+"imagetwist.com/imagetwist*.js",
+"imgbabes.com^*/splash.php",
+"imgflare.com^*/splash.php",
+"indexxx.com^*/banners/",
+"intporn.com^*/21s.js",
+"intporn.com^*/asma.js",
+"iseekgirls.com/rotating_",
+"iseekgirls.com^*/banners/",
+"kaotic.com^*/popnew.js",
+"kyte.tv/flash/MarbachAdvertsDartInstream.",
+"monstertube.com/images/access_",
+"monstertube.com/images/vjoin.",
+"monstertube.com/images/vjoin_",
+"morazzia.com^*/banners/",
+"mp3musicengine.com/bearshare_logo.",
+"mp3musicengine.com/images/freewatchtv1.",
+"myhentai.tv/popsstuff.",
+"niceyoungteens.com/ero-advertising",
+"ns4w.org/images/vod_",
+"nudevista.com/_/exo_",
+"nudevista.com/_/pp.",
+"nudevista.com/_/teasernet",
+"nudevista.com^*/nv-com.min.js",
+"oasisactive.com^*/oasis-widget.html",
+"onhercam.tv^*/banners/",
+"openjavascript.com/jtools/jads.",
+"pastime.biz^*/personalad*.jpg",
+"phncdn.com/iframe",
+"phncdn.com/images/*_skin.",
+"phncdn.com/images/*_skin_",
+"phncdn.com/images/premium_",
+"picp2.com/img/putv",
+"picsexhub.com/js/pops.",
+"picsexhub.com/js/pops2.",
+"picxme.com/js/pops.",
+"pimpandhost.com/static/i/*-pah.jpg",
+"pink-o-rama.com/Blazingbucks",
+"pink-o-rama.com/Brothersincash",
+"pink-o-rama.com/Fuckyou",
+"pink-o-rama.com/Karups",
+"pink-o-rama.com/Nscash",
+"pink-o-rama.com/Privatecash",
+"pixhost.org/image/tmp/linksnappy_",
+"pnet.co.za/jobsearch_iframe_",
+"poguide.com/cdn/images/ad*.gif",
+"porn.com/assets/partner_",
+"porn4down.com^*/ryuvuong.gif",
+"pornalized.com/pornalized_html/closetoplay_",
+"pornarchive.net/images/cb",
+"pornbb.org/adsnov.",
+"pornbb.org/images/your_privacy",
+"pornbraze.com^*/popupbraze.js",
+"pornfanplace.com/js/pops.",
+"pornmade.com/images/cb",
+"pornmaturetube.com/show_adv.",
+"pornoid.com/iframes/bottom",
+"pornoid.com/js/adppornoid",
+"pornomovies.com/js/1/login_bonus",
+"pornorips.com^*/rda.js",
+"pornorips.com^*/rotate*.php",
+"pornper.com^*/pp.js",
+"pornsharia.com^*/adppornsharia.js",
+"pornsharia.com^*/exo-",
+"pornsharia.com^*/js/pcin.js",
+"pornsharing.com/App_Themes/pornsharianew/js/adppornsharia*.js",
+"pornsharing.com/App_Themes/pornsharingnew/js/adppornsharia*.js",
+"pornstarterritory.com^*/alsbanner",
+"pornxs.com/js/files/jasminNew",
+"purelynsfw.com^*/banners/",
+"purepornvids.com/randomadseb.",
+"purpleporno.com/pop*.js",
+"pwpwpoker.com/images/*/strip_poker_",
+"queermenow.net/blog/wp-content/uploads/*-Banner",
+"queermenow.net/blog/wp-content/uploads/*/banner",
+"redtube.com^*/banner/",
+"redtubefiles.com^*/banner/",
+"redtubefiles.com^*/skins/",
+"russiasexygirls.com/wp-content/uploads/*/727x90",
+"russiasexygirls.com/wp-content/uploads/*/cb_",
+"sex-techniques-and-positions.com/banners",
+"sex.com/images/*/banner_",
+"sexpornimg.com/css/images/banner",
+"sexseeimage.com^*/banner.gif",
+"sexuhot.com/images/xbanner",
+"sexvines.co/images/cp",
+"sexyandfunny.com/images/totem",
+"sillusions.ws^*/pr0pop.js",
+"sillusions.ws^*/vpn-banner.gif",
+"socaseiras.com.br/banner_",
+"static.flabber.net^*background",
+"t-51.com^*/banners/",
+"tabletporn.com/images/pinkvisualpad-",
+"the-analist.info^*150-150",
+"the-analist.info^*150sq",
+"the-analist.info^*150x150",
+"the-feeding-tube.com^*/Topbanner.php",
+"thehun.net^*/banners/",
+"thenewporn.com/js/adpthenewporn",
+"thepornomatrix.com/images/1-",
+"twofuckers.com/brazzers",
+"uflash.tv^*/affiliates/",
+"updatetube.com/js/adpupdatetube",
+"videos.com^*/jsp.js",
+"vidgrab.net/images/adsbar",
+"viralporn.com^*/popnew.js",
+"vrsmash.com^*/script.min.js",
+"vstreamcdn.com^*/ads/",
+"watch8x.com/JS/rhpop_",
+"whozacunt.com/images/*-300x250.",
+"whozacunt.com/images/*_300x200_",
+"whozacunt.com/images/banner_",
+"x3xtube.com/banner_rotating_",
+"xcritic.com/images/buy-",
+"xcritic.com/images/rent-",
+"xcritic.com/images/watch-",
+"xcritic.com/img/200x150_",
+"xfanz.com^*_banner_",
+"xhcdn.com^*/ads_",
+"xxvideo.us/ad728x15",
+"xxxblink.com/js/pops.",
+"xxxfile.net^*/netload_premium.gif",
+"xxxgames.biz^*/sponsors/",
+"youaresogay.com/*.html",
+"yumymilf.com^*/banners/",
+"yuvutu.com^*/banners/" ];
 var bad_da_hostpath_regex_flag = 2002 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 386 rules:
-var bad_da_regex = `affiliate.
-affiliates.
-banner.
-banners.
-oas.*@
-ox-*/jstag^
-pop-over.
-promo.
-synad.
-online.*/promoredirect?key=
-ox-d.*^auid=
-ads.
-adv.
-doubleclick.net/adj/*.collegehumor/sec=videos_originalcontent;
-doubleclick.net/pfadx/*adcat=
-doubleclick.net^*;afv_flvurl=http://cdn.c.ooyala.com/
-metaffiliation.com^*^maff=
-metaffiliation.com^*^taff=
-35.184.137.181^popup,third-party
-35.184.98.90^popup,third-party
-247hd.net/ad|
-amazon.com/?_encoding*&linkcode
-api.ticketnetwork.com/Events/TopSelling/domain=nytimes.com
-associmg.com^*.gif?tag-
-augine.com/widget|
-babylon.com/trans_box/*&affiliate=
-babylon.com^*?affid=
-booking.com^*;tmpl=banner_
-clipdealer.com/?action=widget&*&partner=
-cloudfront.net/?tid=
-contentcastsyndication.com^*&banner
-cts.tradepub.com/cts4/?ptnr=*&tm=
-cursecdn.com/shared-assets/current/anchor.js?id=
-d2kbaqwa2nt57l.cloudfront.net/?qabkd=
-deals4thecure.com/widgets/*?affiliateurl=
-depositfiles.com^*.php?ref=
-download-provider.org/?aff.id=
-downloadprovider.me/en/search/*?aff.id=*&iframe=
-everestpoker.com^*/?adv=
-fancybar.net/ac/fancybar.js?zoneid
-farm.plista.com/widgetdata.php?*%22pictureads%22%7D
-filefactory.com^*/refer.php?hash=
-freakshare.com/?ref=
-generic4all.com^*?refid=
-get.*.website/static/get-js?stid=
-glam.com^*?affiliateid=
-grammarly.com/embedded?aff=
-heyoya.com^*&aff_id=
-kallout.com^*.php?id=
-l.yimg.com^*&partner=*&url=
-ladbrokes.com^*&aff_id=
-mmo4rpg.com^*.gif|
-moosify.com/widgets/explorer/?partner=
-msm.mysavings.com^*.asp?afid=
-myspace.com/play/myspace/*&locationId
-nativly.com/tds/widget?wid=
-red-tube.com^*.php?wmid=*&kamid=*&wsid=
-rehost.to/?ref=
-rover.ebay.com^*&adtype=
-seatplans.com/widget|
-shragle.com^*?ref=
-stacksocial.com^*?aid=
-static.plista.com/jsmodule/flash|
-streamtheworld.com/ondemand/ars?type=preroll
-sweed.to/?pid=
-sweeva.com/widget.php?w=
-theselfdefenseco.com/?affid=
-tipico.*?affiliateId=
-townsquareblogs.com^*=sponsor&
-trialpay.com^*&dw-ptid=
-tritondigital.com/lt?sid*&hasads=
-widgets.itunes.apple.com^*&affiliate_id=
-winpalace.com/?affid=
-zazzle.com^*?rf
-6angebot.ch/?ref=
-aliexpress.com/?af=
-babylon.com/welcome/index.html?affID=
-bet365.com^*affiliate=
-casino-x.com^*?partner=
-dateoffer.net/?s=*&subid=
-erotikdeal.com/?ref=
-fleshlight.com/?link=
-fulltiltpoker.com/?key=
-generic4all.com^*.dhtml?refid=
-hyperlinksecure.com/back?token=
-lovepoker.de^*/?pid=
-maxedtube.com/video_play?*&utm_campaign=
-media.mybet.com/redirect.aspx?pid=*&bid=
-reviversoft.com^*&utm_source=
-stake7.com^*?a_aid=
-stargames.com/bridge.asp?idr=
-stargames.com/web/*&cid=*&pid=
-theseforums.com^*/?ref=
-tipico.com^*?affiliateid=
-urmediazone.com/play?ref=
-vidds.net/?s=promo
-vkpass.com/*.php?*=
-amarotic.com^*?wmid=*&kamid=*&wsid=
-eurolive.com/?module=public_eurolive_onlinehostess&
-eurolive.com/index.php?module=public_eurolive_onlinetool&
-firestormmedia.tv^*?affid=
-fuckhub.net^*?pid=
-gallery.deskbabes.com^*.php?dir=*&ids=
-manhunt.net/?dm=
-my-dirty-hobby.com/?sub=
-pinkvisualgames.com/?revid=
-privatehomeclips.com/privatehomeclips.php?t_sid=
-zubehost.com/*?zoneid=
-777livecams.com/?id=
-amarotic.com^*?wmid=
-camcity.com/rtr.php?aid=
-chaturbate.com/*/?join_overlay=
-cpm.amateurcommunity.*?cp=
-epornerlive.com/index.php?*=punder
-exposedwebcams.com/?token=
-fleshlight-international.eu^*?link=
-flirt4free.com^*&utm_campaign
-fuckshow.org^*&adr=
-ipornia.com/scj/cgi/out.php?scheme_id=
-media.campartner.com/index.php?cpID=*&cpMID=
-media.campartner.com^*?cp=
-mjtlive.com/exports/golive/?lp=*&afno=
-myfreecams.com/?co_id=
-online.mydirtyhobby.com^*?naff=
-pornhub.com^*&utm_campaign=*-pop|
-pornme.com^*.php?ref=
-postselfies.com^*?nats=
-redlightcenter.com/?trq=
-seeme.com^*?aid=*&art=
-sexier.com^*_popunder&
-tube911.com/scj/cgi/out.php?scheme_id=
-tuberl.com^*=
-videobox.com/?tid=
-videosz.com^*&tracker_id=
-visit-x.net/cams/*.html?*&s=*&ws=
-xrounds.com/?lmid=
-xvideoslive.com/?AFNO
-2oceansvibe.com/?custom=takeover
-64.245.1.134/search/v2/jsp/pcwframe.jsp?provider=
-977music.com/index.php?p=get_loading_banner
-answerology.com/index.aspx?*=ads.ascx
-awkwardfamilyphotos.com*/?ad=
-cdmediaworld.com*/!
-cnn.com^*/banner.html?&csiid=
-comicgenesis.com/tcontent.php?out=
-crazymotion.net/video_*.php?key=
-dictionary.cambridge.org/info/frame.html?zone=
-diytrade.com/diyep/dir?page=common/ppadv&
-duckduckgo.com/i.js?o=a&
-duckduckgo.com/m.js?*&o=a
-ebayrtm.com/rtm?RtmCmd*&enc=
-ebayrtm.com/rtm?RtmIt
-expertreviews.co.uk/?act=widgets.
-fileshut.com/etc/links.php?q=
-firstrow*/pu.js
-gamecopyworld.com*/!
-gamecopyworld.eu*/!
-gameknot.com/amaster.pl?j=
-hentaistream.com/wp-includes/images/$object
-herold.at/fs/orgimg/*.swf?baseurl=http%3a%2f%2fwww.*&amp;linktarget=_blank$object
-herold.at^*.swf?*&linktarget=_blank
-hipforums.com/newforums/calendarcolumn.php?cquery=bush
-hulu.com/beacon/*=adauditerror
-ibtimes.com^*&popunder
-kitguru.net/?kitguru_wrapjs=1&ver=
-kovideo.net^*.php?user_
-macmillandictionary.com/info/frame.html?zone=
-mail.yahoo.com/neo/mbimg?av/curveball/ds/
-mediaspanonline.com/inc.php?uri=/&bannerPositions=
-meteomedia.com^*&placement
-mirrorstack.com/?q=r_ads
-monster.com/null&pp
-mp3mediaworld.com*/!
-msn.com/?adunitid
-musictarget.com*/!
-news.com.au/news/vodafone/$object
-nutritionhorizon.com/content/flash_loaders/$object
-preev.com/ads|
-preev.com/ad|
-psgroove.com/images/*.jpg|
-radiocaroline.co.uk/swf/ACET&ACSP_RadioCaroline_teg.swf
-rawstory.com^*.php?code=bottom
-retrevo.com/m/google?q=
-scmagazine.com.au/Utils/SkinCSS.ashx?skinID=
-search.triadcareers.news-record.com/jobs/search/results?*&isfeatured=y&
-sendspace.com/defaults/framer.html?z=
-sendspace.com^*?zone=
-shops.tgdaily.com^*&widget=
-shortcuts.search.yahoo.com^*&callback=yahoo.shortcuts.utils.setdittoadcontents&
-slacker.com^*/getspot/?spotid=
-softpedia-static.com/images/*.jpg?v
-softpedia-static.com/images/*.png?v
-spa.dictionary.com^$object
-static.hd-trailers.net/js/javascript_*.js|
-thefile.me^*.php?*zoneid
-tigerdroppings.com^*&adcode=
-twitch.tv/ad/*=preroll
-twitter.com/i/cards/tfw/*?advertiser_name=
-uploadbaz.com^*-728-$object
-vogue.in/node/*?section=
-wikia.com/__are?r=
-yahoo.*/serv?s=
-zabasearch.com/search_box.php?*&adword=
-zoozle.org/if.php?q=
-tweaktown.com/zyx?p=
-tweaktown.com^$object
-allmyvideos.net/*=
-casino-x.com^*&promo
-deb.gs^*?ref=
-eafyfsuh.net^*/?name=
-edomz.com/re.php?mid=
-exashare.com^*&h=
-filmon.com^*&adn=
-freean.us^*?ref=
-ifly.com/trip-plan/ifly-trip?*&ad=
-linkbucks.com^*/?*=
-miniurls.co^*?ref=
-oddschecker.com/clickout.htm?type=takeover-
-plarium.com/play/*adCampaign=
-sponsorselect.com/Common/LandingPage.aspx?eu=
-thevideo.me/*:
-torrentz.eu/search*=
-vkpass.com/goo.php?link=
-2hot4fb.com/img/*.gif?r=
-2hot4fb.com/img/*.jpg?r=
-fritchy.com^*&zoneid=
-hdzog.com/hdzog.php?t_sid=
-julesjordanvideo.com/flash/$object
-krasview.ru/content/$object
-myvidster.com^*.php?idzone=
-olderhill.com^*.html|
-porntube.com/ads|
-tnaflix.com/*.php?t=footer
-tubecup.org/?t_sid=
-voyeurhit.com/related/voyeurhit.php?t_sid=
-waybig.com/blog/wp-content/uploads/*?pas=
-xxnxx.eu/index.php?xyz_lbx=
-fantasti.cc^*?ad=
-movies.askjolene.com/c64?clickid=
-ivwextern.
-mint.*/?js
-piwik.
-doubleclick.net/imp;
-quantserve.com^*^a=
-visiblemeasures.com/swf/*/vmcdmplugin.swf?key*pixel
-24option.com/?oftc=
-6waves.com/edm.php?uid=
-ad.atdmt.com/i/*=
-ad.atdmt.com/i/go;
-addthis.com^*/p.json?*&ref=
-addthiscdn.com/*.gif?uid=
-amazon.com/gp/*&linkCode
-amazonaws.com/?wsid=
-anvato.com/anvatoloader.swf?analytics=
-assoc-amazon.*^e/ir?t=
-auctiva.com/Default.aspx?query
-bufferapp.com/wf/open?upn=
-c.ypcdn.com^*&ptid
-c.ypcdn.com^*?ptid
-cloudfront.net/?a=
-dditscdn.com/?a=
-ebayrtm.com/rtm?RtmCmd&a=img&
-elb.amazonaws.com/?page=
-elb.amazonaws.com/g.aspx?surl=
-etahub.com^*/track?site_id
-events.eyeviewdigital.com^*.gif?r=
-forms.aweber.com^*/displays.htm?id=
-freehostedscripts.net^*.php?site=*&s=*&h=
-heroku.com/?callback=getip
-imagepix.okoshechka.net^*/?sid=
-inq.com^*/onEvent?_
-jangomail.com^*?UID
-k7-labelgroup.com/g.html?uid=
-lijit.com/blog_wijits?*=trakr&
-liverail.com/?metric=
-mediaplex.com^*?mpt=
-metaffiliation.com^*^mclic=
-ooyala.com/authorized?analytics
-ooyala.com^*/report?log
-p.po.st/p?pub=
-p.po.st/p?t=view&
-p.po.st^*&pub=
-p.po.st^*&vguid=
-pussy.org^*.cgi?pid=
-r.ypcdn.com^*/rtd?ptid
-redplum.com^*&pixid=
-s5labs.io/common/i?impressionId
-secureprovide1.com/*=tracking
-shopify.com/storefront/page?*&eventType=
-socialreader.com^*?event=email_open^
-soundcloud.com^*/plays?referer=
-speedtestbeta.com/*.gif?cb
-sugarops.com/w?action=impression
-trove.com^*&uid=
-tsk5.com/17*?*=ex-
-ui-portal.com^*;ns_referrer=
-vds_dyn.rightster.com/v/*?rand=
-wikinvest.com/plugin/*=metricpv
-ws.amazon.com/widgets/*=gettrackingid|
-yellowpages.com^*.gif?tid
-yimg.com^*/l?ig=
-ziffprod.com^*/zdcse.min.js?referrer=
-zoomtv.me^*?pixel=
-airfrance.com/s/?tcs=
-alipay.com/web/bi.do?ref=
-amazon.*/batch/*uedata=
-androidcommunity.com/ws/?js
-api.tinypic.com/api.php?action=track
-arstechnica.com/*.ars$object
-arstechnica.com/|$object
-arstechnica.com^*.gif?id=
-arstechnica.com^*/|$object
-banggood.com/?p=
-binaries4all.nl/misc/misc.php?*&url=http
-bloomberg.com/apps/data?referrer
-brobible.com/?ACT
-businessseek.biz/cgi-bin/*.pl?trans.gif&ref=
-c.ypcdn.com^*/webyp?rid=
-cbox.ws^*/relay.swf?host=
-cgi.nch.com.au^*&referrer
-computerarts.co.uk/*.php?cmd=site-stats
-djtunes.com^*&__utma=
-dropbox.com/el/?b=open:
-dx.com/?utm_rid=
-ebay.com/op/t.do?event
-ebayobjects.com/*;dc_pixel_url=
-efukt.com^*?hub=
-email-tickets.com/dt?e=PageView
-freelotto.com/offer.asp?offer=
-freeones.com/cd/?cookies=
-freeones.com^*/cd/?cookies=
-gamezone.com/?act=
-gawker.com/?op=hyperion_useragent_data
-giffgaff.com/r/?id=
-google.*/stats?frame=
-gumtree.com.au/?pc=
-hulu.com/*&beaconevent
-huluim.com/*&beaconevent
-humanclick.com/hc/*/?visitor=
-imagetwist.com/?op=
-imdb.com/rd/?q
-infospace.com^*=pageview&
-ip-adress.com/gl?r=
-juno.com/start/javascript.do?message=
-kosmix.com^*.txt?pvid=
-linkbucks.com/clean.aspx?task=record
-liveperson.net/hc/*/?visitor=
-mail.yahoo.com/dc/rs?log=
-mozilla.org/includes/min/*=js_stats
-musicstack.com/livezilla/server.php?request=track
-neatorama.com/story/view/*.gif?hash
-netflix.com/beacons?*&ssizeCat=*&vsizeCat=
-optimum.net^*=pageview&
-orain.org/w/index.php/Special:RecordImpression?
-overstock.com/dlp?cci=
-p.ctpost.com/article?i=
-photobucket.com^*/api.php?*&method=track&
-photographyblog.com/?ACT
-pluto.airbnb.com^*.php?uuid=
-quantserve.com/pixel;
-rediff.com^*/?rkey=
-redtube.com/blockcount|
-rover.ebay.com.au^*&cguid=
-servedby.yell.com/t.js?cq
-stylelist.com/ping?ts=
-tesco.com/cgi-bin3/buyrate?type=
-thefilter.com^*/CaptureRest.ashx?cmd=
-thefrisky.com/?act=
-tinypic.com/api.php?*&action=track
-totalporn.com/videos/tracking/?url=
-truste.com/notice?*consent-track
-u.bb/omni*.swf|
-uploadrocket.net/downloadfiles.php?*&ip
-usage.zattoo.com/?adblock=
-wellsphere.com/?hit=
-wikimedia.org/wiki/Special:RecordImpression?
-wikinvest.com/plugin/api.php?*=metricld&
-ws.elance.com^*&referrer=
-www.imdb.*/rd/?q=
-xhamster.com/ajax.php?act=track_event
-xnxx.com/in.php?referer
-yahoo.com/p.gif;
-yahoo.com/serv?s
-yahoo.com/sig=
-yahoo.com/yi?bv=
-yimg.com^*/swfproxy-$object`;
-var bad_da_regex_flag = 386 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+// 376 rules:
+var bad_da_regex_Array = [ "ivwextern.",
+"mint.*/?js",
+"piwik.",
+"doubleclick.net/imp;",
+"quantserve.com^*^a=",
+"visiblemeasures.com/swf/*/vmcdmplugin.swf?key*pixel",
+"24option.com/?oftc=",
+"6waves.com/edm.php?uid=",
+"ad.atdmt.com/i/*=",
+"ad.atdmt.com/i/go;",
+"addthis.com^*/p.json?*&ref=",
+"addthiscdn.com/*.gif?uid=",
+"amazon.com/gp/*&linkCode",
+"amazonaws.com/?wsid=",
+"anvato.com/anvatoloader.swf?analytics=",
+"assoc-amazon.*^e/ir?t=",
+"auctiva.com/Default.aspx?query",
+"bufferapp.com/wf/open?upn=",
+"c.ypcdn.com^*&ptid",
+"c.ypcdn.com^*?ptid",
+"cloudfront.net/?a=",
+"dditscdn.com/?a=",
+"ebayrtm.com/rtm?RtmCmd&a=img&",
+"elb.amazonaws.com/?page=",
+"elb.amazonaws.com/g.aspx?surl=",
+"etahub.com^*/track?site_id",
+"events.eyeviewdigital.com^*.gif?r=",
+"forms.aweber.com^*/displays.htm?id=",
+"freehostedscripts.net^*.php?site=*&s=*&h=",
+"heroku.com/?callback=getip",
+"imagepix.okoshechka.net^*/?sid=",
+"inq.com^*/onEvent?_",
+"jangomail.com^*?UID",
+"k7-labelgroup.com/g.html?uid=",
+"lijit.com/blog_wijits?*=trakr&",
+"liverail.com/?metric=",
+"mediaplex.com^*?mpt=",
+"metaffiliation.com^*^mclic=",
+"ooyala.com/authorized?analytics",
+"ooyala.com^*/report?log",
+"p.po.st/p?pub=",
+"p.po.st/p?t=view&",
+"p.po.st^*&pub=",
+"p.po.st^*&vguid=",
+"pussy.org^*.cgi?pid=",
+"r.ypcdn.com^*/rtd?ptid",
+"redplum.com^*&pixid=",
+"s5labs.io/common/i?impressionId",
+"secureprovide1.com/*=tracking",
+"shopify.com/storefront/page?*&eventType=",
+"socialreader.com^*?event=email_open^",
+"soundcloud.com^*/plays?referer=",
+"speedtestbeta.com/*.gif?cb",
+"sugarops.com/w?action=impression",
+"trove.com^*&uid=",
+"tsk5.com/17*?*=ex-",
+"ui-portal.com^*;ns_referrer=",
+"vds_dyn.rightster.com/v/*?rand=",
+"wikinvest.com/plugin/*=metricpv",
+"ws.amazon.com/widgets/*=gettrackingid|",
+"yellowpages.com^*.gif?tid",
+"yimg.com^*/l?ig=",
+"ziffprod.com^*/zdcse.min.js?referrer=",
+"zoomtv.me^*?pixel=",
+"airfrance.com/s/?tcs=",
+"alipay.com/web/bi.do?ref=",
+"amazon.*/batch/*uedata=",
+"androidcommunity.com/ws/?js",
+"api.tinypic.com/api.php?action=track",
+"arstechnica.com/|",
+"arstechnica.com^*.gif?id=",
+"arstechnica.com^*/|",
+"banggood.com/?p=",
+"binaries4all.nl/misc/misc.php?*&url=http",
+"bloomberg.com/apps/data?referrer",
+"brobible.com/?ACT",
+"businessseek.biz/cgi-bin/*.pl?trans.gif&ref=",
+"c.ypcdn.com^*/webyp?rid=",
+"cbox.ws^*/relay.swf?host=",
+"cgi.nch.com.au^*&referrer",
+"computerarts.co.uk/*.php?cmd=site-stats",
+"djtunes.com^*&__utma=",
+"dropbox.com/el/?b=open:",
+"dx.com/?utm_rid=",
+"ebay.com/op/t.do?event",
+"ebayobjects.com/*;dc_pixel_url=",
+"efukt.com^*?hub=",
+"email-tickets.com/dt?e=PageView",
+"freelotto.com/offer.asp?offer=",
+"freeones.com/cd/?cookies=",
+"freeones.com^*/cd/?cookies=",
+"gamezone.com/?act=",
+"gawker.com/?op=hyperion_useragent_data",
+"giffgaff.com/r/?id=",
+"google.*/stats?frame=",
+"gumtree.com.au/?pc=",
+"hulu.com/*&beaconevent",
+"huluim.com/*&beaconevent",
+"humanclick.com/hc/*/?visitor=",
+"imagetwist.com/?op=",
+"imdb.com/rd/?q",
+"infospace.com^*=pageview&",
+"ip-adress.com/gl?r=",
+"juno.com/start/javascript.do?message=",
+"kosmix.com^*.txt?pvid=",
+"linkbucks.com/clean.aspx?task=record",
+"liveperson.net/hc/*/?visitor=",
+"mail.yahoo.com/dc/rs?log=",
+"mozilla.org/includes/min/*=js_stats",
+"musicstack.com/livezilla/server.php?request=track",
+"neatorama.com/story/view/*.gif?hash",
+"netflix.com/beacons?*&ssizeCat=*&vsizeCat=",
+"optimum.net^*=pageview&",
+"orain.org/w/index.php/Special:RecordImpression?",
+"overstock.com/dlp?cci=",
+"p.ctpost.com/article?i=",
+"photobucket.com^*/api.php?*&method=track&",
+"photographyblog.com/?ACT",
+"pluto.airbnb.com^*.php?uuid=",
+"quantserve.com/pixel;",
+"rediff.com^*/?rkey=",
+"redtube.com/blockcount|",
+"rover.ebay.com.au^*&cguid=",
+"servedby.yell.com/t.js?cq",
+"stylelist.com/ping?ts=",
+"tesco.com/cgi-bin3/buyrate?type=",
+"thefilter.com^*/CaptureRest.ashx?cmd=",
+"thefrisky.com/?act=",
+"tinypic.com/api.php?*&action=track",
+"totalporn.com/videos/tracking/?url=",
+"truste.com/notice?*consent-track",
+"u.bb/omni*.swf|",
+"uploadrocket.net/downloadfiles.php?*&ip",
+"usage.zattoo.com/?adblock=",
+"wellsphere.com/?hit=",
+"wikimedia.org/wiki/Special:RecordImpression?",
+"wikinvest.com/plugin/api.php?*=metricld&",
+"ws.elance.com^*&referrer=",
+"www.imdb.*/rd/?q=",
+"xhamster.com/ajax.php?act=track_event",
+"xnxx.com/in.php?referer",
+"yahoo.com/p.gif;",
+"yahoo.com/serv?s",
+"yahoo.com/sig=",
+"yahoo.com/yi?bv=",
+"affiliate.",
+"affiliates.",
+"banner.",
+"banners.",
+"oas.*@",
+"ox-*/jstag^",
+"pop-over.",
+"promo.",
+"synad.",
+"online.*/promoredirect?key=",
+"ox-d.*^auid=",
+"ads.",
+"adv.",
+"doubleclick.net/adj/*.collegehumor/sec=videos_originalcontent;",
+"doubleclick.net/pfadx/*adcat=",
+"doubleclick.net^*;afv_flvurl=http://cdn.c.ooyala.com/",
+"metaffiliation.com^*^maff=",
+"metaffiliation.com^*^taff=",
+"35.184.137.181^popup,third-party",
+"35.184.98.90^popup,third-party",
+"247hd.net/ad|",
+"amazon.com/?_encoding*&linkcode",
+"api.ticketnetwork.com/Events/TopSelling/domain=nytimes.com",
+"associmg.com^*.gif?tag-",
+"augine.com/widget|",
+"babylon.com/trans_box/*&affiliate=",
+"babylon.com^*?affid=",
+"booking.com^*;tmpl=banner_",
+"clipdealer.com/?action=widget&*&partner=",
+"cloudfront.net/?tid=",
+"contentcastsyndication.com^*&banner",
+"cts.tradepub.com/cts4/?ptnr=*&tm=",
+"cursecdn.com/shared-assets/current/anchor.js?id=",
+"d2kbaqwa2nt57l.cloudfront.net/?qabkd=",
+"deals4thecure.com/widgets/*?affiliateurl=",
+"depositfiles.com^*.php?ref=",
+"download-provider.org/?aff.id=",
+"downloadprovider.me/en/search/*?aff.id=*&iframe=",
+"everestpoker.com^*/?adv=",
+"fancybar.net/ac/fancybar.js?zoneid",
+"farm.plista.com/widgetdata.php?*%22pictureads%22%7D",
+"filefactory.com^*/refer.php?hash=",
+"freakshare.com/?ref=",
+"generic4all.com^*?refid=",
+"get.*.website/static/get-js?stid=",
+"glam.com^*?affiliateid=",
+"grammarly.com/embedded?aff=",
+"heyoya.com^*&aff_id=",
+"kallout.com^*.php?id=",
+"l.yimg.com^*&partner=*&url=",
+"ladbrokes.com^*&aff_id=",
+"mmo4rpg.com^*.gif|",
+"moosify.com/widgets/explorer/?partner=",
+"msm.mysavings.com^*.asp?afid=",
+"myspace.com/play/myspace/*&locationId",
+"nativly.com/tds/widget?wid=",
+"red-tube.com^*.php?wmid=*&kamid=*&wsid=",
+"rehost.to/?ref=",
+"rover.ebay.com^*&adtype=",
+"seatplans.com/widget|",
+"shragle.com^*?ref=",
+"stacksocial.com^*?aid=",
+"static.plista.com/jsmodule/flash|",
+"streamtheworld.com/ondemand/ars?type=preroll",
+"sweed.to/?pid=",
+"sweeva.com/widget.php?w=",
+"theselfdefenseco.com/?affid=",
+"tipico.*?affiliateId=",
+"townsquareblogs.com^*=sponsor&",
+"trialpay.com^*&dw-ptid=",
+"tritondigital.com/lt?sid*&hasads=",
+"widgets.itunes.apple.com^*&affiliate_id=",
+"winpalace.com/?affid=",
+"zazzle.com^*?rf",
+"6angebot.ch/?ref=",
+"aliexpress.com/?af=",
+"babylon.com/welcome/index.html?affID=",
+"bet365.com^*affiliate=",
+"casino-x.com^*?partner=",
+"dateoffer.net/?s=*&subid=",
+"erotikdeal.com/?ref=",
+"fleshlight.com/?link=",
+"fulltiltpoker.com/?key=",
+"generic4all.com^*.dhtml?refid=",
+"hyperlinksecure.com/back?token=",
+"lovepoker.de^*/?pid=",
+"maxedtube.com/video_play?*&utm_campaign=",
+"media.mybet.com/redirect.aspx?pid=*&bid=",
+"reviversoft.com^*&utm_source=",
+"stake7.com^*?a_aid=",
+"stargames.com/bridge.asp?idr=",
+"stargames.com/web/*&cid=*&pid=",
+"theseforums.com^*/?ref=",
+"tipico.com^*?affiliateid=",
+"urmediazone.com/play?ref=",
+"vidds.net/?s=promo",
+"vkpass.com/*.php?*=",
+"amarotic.com^*?wmid=*&kamid=*&wsid=",
+"eurolive.com/?module=public_eurolive_onlinehostess&",
+"eurolive.com/index.php?module=public_eurolive_onlinetool&",
+"firestormmedia.tv^*?affid=",
+"fuckhub.net^*?pid=",
+"gallery.deskbabes.com^*.php?dir=*&ids=",
+"manhunt.net/?dm=",
+"my-dirty-hobby.com/?sub=",
+"pinkvisualgames.com/?revid=",
+"privatehomeclips.com/privatehomeclips.php?t_sid=",
+"zubehost.com/*?zoneid=",
+"777livecams.com/?id=",
+"amarotic.com^*?wmid=",
+"camcity.com/rtr.php?aid=",
+"chaturbate.com/*/?join_overlay=",
+"cpm.amateurcommunity.*?cp=",
+"epornerlive.com/index.php?*=punder",
+"exposedwebcams.com/?token=",
+"fleshlight-international.eu^*?link=",
+"flirt4free.com^*&utm_campaign",
+"fuckshow.org^*&adr=",
+"ipornia.com/scj/cgi/out.php?scheme_id=",
+"media.campartner.com/index.php?cpID=*&cpMID=",
+"media.campartner.com^*?cp=",
+"mjtlive.com/exports/golive/?lp=*&afno=",
+"myfreecams.com/?co_id=",
+"online.mydirtyhobby.com^*?naff=",
+"pornhub.com^*&utm_campaign=*-pop|",
+"pornme.com^*.php?ref=",
+"postselfies.com^*?nats=",
+"redlightcenter.com/?trq=",
+"seeme.com^*?aid=*&art=",
+"sexier.com^*_popunder&",
+"tube911.com/scj/cgi/out.php?scheme_id=",
+"tuberl.com^*=",
+"videobox.com/?tid=",
+"videosz.com^*&tracker_id=",
+"visit-x.net/cams/*.html?*&s=*&ws=",
+"xrounds.com/?lmid=",
+"xvideoslive.com/?AFNO",
+"2oceansvibe.com/?custom=takeover",
+"64.245.1.134/search/v2/jsp/pcwframe.jsp?provider=",
+"977music.com/index.php?p=get_loading_banner",
+"answerology.com/index.aspx?*=ads.ascx",
+"awkwardfamilyphotos.com*/?ad=",
+"cdmediaworld.com*/!",
+"cnn.com^*/banner.html?&csiid=",
+"comicgenesis.com/tcontent.php?out=",
+"crazymotion.net/video_*.php?key=",
+"dictionary.cambridge.org/info/frame.html?zone=",
+"diytrade.com/diyep/dir?page=common/ppadv&",
+"duckduckgo.com/i.js?o=a&",
+"duckduckgo.com/m.js?*&o=a",
+"ebayrtm.com/rtm?RtmCmd*&enc=",
+"ebayrtm.com/rtm?RtmIt",
+"expertreviews.co.uk/?act=widgets.",
+"fileshut.com/etc/links.php?q=",
+"firstrow*/pu.js",
+"gamecopyworld.com*/!",
+"gamecopyworld.eu*/!",
+"gameknot.com/amaster.pl?j=",
+"herold.at/fs/orgimg/*.swf?baseurl=http%3a%2f%2fwww.*&amp;linktarget=_blank",
+"herold.at^*.swf?*&linktarget=_blank",
+"hipforums.com/newforums/calendarcolumn.php?cquery=bush",
+"hulu.com/beacon/*=adauditerror",
+"ibtimes.com^*&popunder",
+"kitguru.net/?kitguru_wrapjs=1&ver=",
+"kovideo.net^*.php?user_",
+"macmillandictionary.com/info/frame.html?zone=",
+"mail.yahoo.com/neo/mbimg?av/curveball/ds/",
+"mediaspanonline.com/inc.php?uri=/&bannerPositions=",
+"meteomedia.com^*&placement",
+"mirrorstack.com/?q=r_ads",
+"monster.com/null&pp",
+"mp3mediaworld.com*/!",
+"msn.com/?adunitid",
+"musictarget.com*/!",
+"preev.com/ads|",
+"preev.com/ad|",
+"psgroove.com/images/*.jpg|",
+"radiocaroline.co.uk/swf/ACET&ACSP_RadioCaroline_teg.swf",
+"rawstory.com^*.php?code=bottom",
+"retrevo.com/m/google?q=",
+"scmagazine.com.au/Utils/SkinCSS.ashx?skinID=",
+"search.triadcareers.news-record.com/jobs/search/results?*&isfeatured=y&",
+"sendspace.com/defaults/framer.html?z=",
+"sendspace.com^*?zone=",
+"shops.tgdaily.com^*&widget=",
+"shortcuts.search.yahoo.com^*&callback=yahoo.shortcuts.utils.setdittoadcontents&",
+"slacker.com^*/getspot/?spotid=",
+"softpedia-static.com/images/*.jpg?v",
+"softpedia-static.com/images/*.png?v",
+"static.hd-trailers.net/js/javascript_*.js|",
+"thefile.me^*.php?*zoneid",
+"tigerdroppings.com^*&adcode=",
+"twitch.tv/ad/*=preroll",
+"twitter.com/i/cards/tfw/*?advertiser_name=",
+"vogue.in/node/*?section=",
+"wikia.com/__are?r=",
+"yahoo.*/serv?s=",
+"zabasearch.com/search_box.php?*&adword=",
+"zoozle.org/if.php?q=",
+"tweaktown.com/zyx?p=",
+"allmyvideos.net/*=",
+"casino-x.com^*&promo",
+"deb.gs^*?ref=",
+"eafyfsuh.net^*/?name=",
+"edomz.com/re.php?mid=",
+"exashare.com^*&h=",
+"filmon.com^*&adn=",
+"freean.us^*?ref=",
+"ifly.com/trip-plan/ifly-trip?*&ad=",
+"linkbucks.com^*/?*=",
+"miniurls.co^*?ref=",
+"oddschecker.com/clickout.htm?type=takeover-",
+"plarium.com/play/*adCampaign=",
+"sponsorselect.com/Common/LandingPage.aspx?eu=",
+"thevideo.me/*:",
+"torrentz.eu/search*=",
+"vkpass.com/goo.php?link=",
+"2hot4fb.com/img/*.gif?r=",
+"2hot4fb.com/img/*.jpg?r=",
+"fritchy.com^*&zoneid=",
+"hdzog.com/hdzog.php?t_sid=",
+"myvidster.com^*.php?idzone=",
+"olderhill.com^*.html|",
+"porntube.com/ads|",
+"tnaflix.com/*.php?t=footer",
+"tubecup.org/?t_sid=",
+"voyeurhit.com/related/voyeurhit.php?t_sid=",
+"waybig.com/blog/wp-content/uploads/*?pas=",
+"xxnxx.eu/index.php?xyz_lbx=",
+"fantasti.cc^*?ad=",
+"movies.askjolene.com/c64?clickid=" ];
+var bad_da_regex_flag = 376 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 0 rules:
-var good_url_parts = "";
+var good_url_parts_Array = [  ];
 var good_url_parts_flag = 0 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 1941 rules:
-var bad_url_parts = `&trackingserver=
--analitycs/fab.
--analitycs/ga.
--analitycs/metrica.
--analytics-tagserver-
--analytics/insight.
--asset-tag.
--bluekai.
--comscore.
--criteo.
--event-tracking.
--ga-track.
--gatracker.
--google-analytics.
--google-analytics/
--logging/log?
--mediaplex_
--optimost-
--page-analytics.
--rttracking.
--sa-tracker-
--scroll-tracker.js
--seo-tracker.
--social-tracking.
--stat/collect/
--stats/fab.
--stats/ga.
--stats/imr.
--stats/metrica.
--tracking-pixel.
--tracking.gtm.
--tracking.js?
--trackingScript.
--xtcore.js
-.analytics.min.
-.beacon.min.js
-.cc/s.gif?
-.cn/1.gif?
-.cn/2.gif?
-.cn/a.gif?
-.cn/b.gif?
-.cn/gs.gif?
-.cn/r.gif?
-.cn/s.gif?
-.cn/xy.gif?
-.cn/z.gif?
-.com/a.gif?
-.com/analytics?
-.com/counter?
-.com/log?event
-.com/p.gif?
-.com/pagelogger/
-.com/s/at?site
-.com/stats.ashx?
-.com/stats.aspx?
-.com/t.gif?
-.com/track?$~object
-.com/tracker.jsp
-.com/tracking?
-.com/traffic/?t=*&cb=
-.com/v.gif?
-.com/vtrack|
-.core.tracking-min-
-.do_tracking&
-.gatracker.
-.gatracking.js
-.googleanalytics.js
-.gov/stat?
-.idge/js/analytics/
-.io/track?
-.lms-analytics/
-.me/geoip/
-.net/p.gif?
-.net/vtrack|
-.ntpagetag.
-.php?p=stats&
-.php?tracking=
-.PixelNedstatStatistic/
-.ru/0.gif?
-.sitecatalyst.js
-.siteclarity.
-.sitetracking.
-.skimlinks.js
-.social_tracking.
-.stats?action=
-.to/vtrack|
-.track_Visit?
-.trackArticleAction&
-.tracking.js?dpv=
-.trackUserAction&
-.tv/log?event
-.tv/t.png?
-.uk/track?
-.uk/traffic/?
-.usertracking_script.js
-.webmetrics.js
-.webstats.
-/!crd_prm!.
-/1x1.gif?tracking
-/1x1.gif?utm
-/1x1tracker.
-/3rd-party-stats/
-/?com=visit*=record&
-/?essb_counter_
-/__ssobj/core.js
-/__utm.gif
-/__utm.js
-/__varnish_geoip
-/_topic_stats?
-/_tracking/
-/abp-analytics.
-/acbeacon2.
-/accAnal.js
-/AccessCounter/
-/accesstracking/
-/AccessTrackingLogServlet?
-/acclog.cgi?
-/acecounter/
-/acecounter_
-/acounter.php?
-/act_pagetrack.
-/activetrackphp.php?
-/activity-track/?
-/adb/track.php?
-/add_stats
-/adds/counter.js
-/adlog.
-/adlogger.
-/adlogger_
-/adloggertracker.
-/adm_tracking.js
-/admantx-
-/admantx.
-/admantx/
-/adonis_event/
-/adplogger/
-/adrum-
-/adrum.
-/ads/counter.
-/ads/track/
-/ads?cookie_
-/ads_tracker.
-/ads_tracking.
-/adsct?
-/adstat.
-/adstats.
-/adstrack.
-/adv/tracking.
-/adviewtrack.
-/advstats/
-/adwords-conversion-tracking.
-/adwords-tracker.
-/aegis_tracking.
-/affil/tracker/
-/affiliate-track.
-/affiliate-tracker.
-/affiliate.1800flowers.
-/affiliate/track?
-/affiliateTracking.
-/affiliatetracking/
-/affilinetRetargeting.
-/afftrack.
-/afftracking.
-/aftrack.
-/aftrackingplugin.swf
-/ajax-hits-counter/
-/ajax/analytics/
-/ajax/heatmap-
-/ajax/stat/
-/ajax/track.php?
-/ajax_store_analytics?
-/ajax_video_counter.php?
-/ajaxClicktrack.
-/ajaxstat/
-/ajaxtracker.
-/ajx/ptrack/
-/akamai_analytics_
-/alllinksclicktracker.js
-/amazon-affiliate-
-/amptrack.
-/analiz.php3?
-/analyse.js
-/analysis-logger/
-/analytic/count.
-/analytic?publisher
-/analytic_data_
-/analyticReporting.
-/analytics-assets/
-/analytics-beacon-
-/analytics-dotcom/
-/analytics-event-
-/analytics-js.
-/analytics-plugin/
-/analytics-post-
-/analytics-tag.
-/analytics-v1.
-/analytics.ad.
-/analytics.ashx
-/analytics.bundled.js
-/analytics.compressed.js
-/analytics.do
-/analytics.gif?
-/analytics.google.js
-/analytics.html?
-/analytics.min.
-/analytics.php.
-/analytics.php?
-/analytics.swf?
-/analytics.v1.js
-/analytics/*satellitelib.js
-/analytics/activity.
-/analytics/cms/
-/analytics/core.
-/analytics/dist/
-/analytics/eloqua/
-/analytics/events
-/analytics/eventTrack
-/analytics/ga/
-/analytics/ga?
-/analytics/gw.
-/analytics/hit
-/analytics/hmac-
-/analytics/idg_
-/analytics/js/
-/analytics/mbox.js
-/analytics/mouse_
-/analytics/p.gif?
-/analytics/pageview.
-/analytics/pv.gif?
-/analytics/report/
-/analytics/smarttag-
-/analytics/socialTracking.js
-/analytics/tagx-
-/analytics/track-
-/analytics/track.
-/analytics/track/
-/analytics/track?
-/analytics/tracker.
-/analytics/trackers?
-/analytics/tracking/
-/analytics/track|
-/analytics/urlTracker.
-/analytics/visit/
-/analytics/yell-
-/analytics3.
-/analytics?body=
-/analytics?http_referer
-/analytics?token=
-/analytics_embed.
-/analytics_frame.
-/analytics_id.
-/analytics_js/
-/analytics_ping.
-/analytics_prod.
-/analytics_tag.
-/analytics_tracker
-/analytics_v2.js
-/analyticsfeed.ashx?
-/analyticsid.
-/analyticsjs.
-/analyticsjs/
-/analyticsmediator.
-/analyticsscript_
-/analyticstick.
-/analyticstrack.
-/analyticstracking.
-/analyticstracking_
-/analyticstrain-
-/analyticsUnitaire?
-/analyze.js
-/analyzer.gif?
-/analyzer2.
-/anycent_tracker_
-/api/*/visitor?
-/api/0/stats
-/api/analytics/
-/api/stat?
-/api/tracking/
-/apitracking.
-/argtk.min.
-/arstat?
-/article-tracking.js
-/article_counter.php?
-/asknet_tracking.
-/aspenanalytics.
-/aspstats/index.asp?
-/assets/analytics:
-/assets/tracking-
-/assets/uts/
-/astrack.js
-/astracker.
-/astracker/
-/asyncggtracking.
-/atlas_track.
-/audience-meter.
-/autotag.
-/avmws_*.js
-/avtstats.
-/aw-tracker.
-/aws-analytics.js
-/awstats.js
-/awstats_misc_tracker
-/aztrack.
-/b/ss/*&events=
-/b/ss/*=event36&
-/b/ss/*?aqb=1&pccr=
-/b2bsdc.js
-/backlink.php?
-/backlink2.
-/banner-tracker.
-/banner.stats?
-/banners-stat.
-/basesdc.js
-/bcn.gif?
-/bcn?
-/beacon-cookie.
-/beacon.cgi?
-/beacon.gif?
-/beacon.html?
-/beacon.js
-/beacon/b.ashx?
-/beacon/track/
-/beacon/vtn_loader.gif?
-/beacon?
-/beacon_async.
-/beaconconfigs/
-/beaconimg.php?
-/betamax_tracker.gif?
-/betamax_tracker.js
-/bh_counter.js
-/bi.tracking/
-/bicomscore.
-/bicomscore_
-/biddr-analytics.
-/bin/stats?
-/bitrix/spread.php?
-/blockstat?
-/blog/traffic/?
-/blogsectiontracking.
-/blogtotal_stats_
-/bluekai.
-/bluekai/
-/bluekaicookieinfo.
-/bluetracker/
-/bm-analytics-trk.js
-/bm-analytics/
-/bn/tracker/
-/boost_stats.
-/brandAnalytics.js
-/brightcove/tracking/
-/brightcoveGoogleAnalytics.
-/brightedge.js
-/britetrack/
-/bstat.js
-/btn_tracking_pixel.
-/bugcounter.php?
-/bugsnag-
-/bundles/tracciamento?
-/buzz_stats.
-/c_track.php?
-/calameo-beacon.
-/callbacks/stats?
-/campaign_tracker.
-/campaign_trax.
-/cbanalytics.
-/cc?a=
-/cclickTracking.
-/cct?
-/cdn-monitoring-pixel.
-/cdn.stats2?
-/cdn5.js?
-/cds-webanalytics.
-/cdx.gif?
-/cedexis.js
-/cedexis/
-/cedexisus.
-/certona.
-/cfformprotect/
-/cgi-bin/cnt/
-/cgi/stats.pl?
-/chan_slidesurvey.js
-/chanalytics.
-/chartbeat-
-/chartbeat.jhtml
-/chartbeat.js
-/chartbeat.min.js
-/chartbeat/
-/chartbeat_
-/chartbeatCode.
-/chartbeatftr.
-/chcounter/
-/checkstat.asp
-/citycounter.
-/cjtracker2.
-/ckimg_1x1.gif?
-/cklink.gif?
-/class.tracking.js
-/clear.gif?
-/clicevent.php?
-/click-count.
-/click-logger.
-/click-stat.js
-/click-tracker
-/click.cgi?callback=
-/click_metrics-jquery.js
-/click_stat/
-/click_statistics/
-/click_stats.
-/click_track.js
-/click_tracking
-/clickability-
-/clickability/
-/clickability2/
-/clickability?
-/clickAnalyse.
-/clickcount.cfm?
-/clickcount_
-/clickctrl.js
-/clickheat.js
-/clickheat^
-/clicklog.
-/clicklog4pc.
-/clicklog_
-/clickLogger?
-/clicklognew.
-/clickmap.js
-/clickpathmedia.
-/clickpathmedia_
-/clickrecord.php?
-/clicks/servlet/
-/clickscript.
-/clickstats.
-/clickstream.aspx?
-/clickstream.js
-/clicktale-
-/clicktale.
-/clicktale/
-/clicktale_
-/clicktrack-*.gif?
-/clicktrack?
-/clicktracker.
-/clicktracking-global.
-/clicktracking.
-/clicktracking/
-/clicktrends/
-/clicky.js
-/client-event-logger.
-/clientdatacollector/
-/clientstat?
-/cms/stats/
-/cn-fe-stats/
-/cnstats.
-/cnstats/
-/cnt-combined.php?
-/cnt.aspx?
-/cnt.cgi?
-/cnt.js
-/cnt.php?rf=
-/cnt/cnt.php?
-/cnt/start.php?
-/cntpixel.
-/cnvtr.js
-/cnwk.1d/*/apex.js
-/cognitive_match/
-/collect_data.php?
-/collection.php?data=
-/com_joomla-visites/
-/com_joomlawatch/
-/comscore.
-/comscore/pageview_
-/comscore_beacon.
-/comscore_engine.
-/comscore_stats.
-/comscorebeacon.
-/condenet-metric.
-/connect_counter.js
-/content-targeting-staging.js
-/contentanalytics/
-/contentiq.js
-/control/tracking.php?
-/cookie.crumb
-/cookie/visitor/
-/cookie?affiliate
-/Cookie?merchant=
-/coradiant.js
-/core-tracking.js
-/coretracking.php?
-/count.exe?
-/count_stats/
-/counter.asp?
-/counter.aspx?
-/counter.cgi/
-/counter.cgi?
-/counter.do?
-/counter.lt?
-/counter.php?chcounter_mode=
-/counter.pl?
-/counter.visit?
-/counter/action_
-/counter/article?
-/counter/ct.php?
-/counter/process.asp?
-/counter/r.pl
-/counter/stat.
-/counter?id=
-/counter_1.php
-/counter_2.php?
-/counter_3.php
-/counter_image.gif?
-/countercgi.
-/countercollector/
-/counterFooterFlash.
-/countertab.js?
-/countstat.php?
-/cqcounter.
-/crai_tracker.
-/criteo.
-/criteo_
-/criteoRTA.
-/crtracker.
-/csc-event?
-/csm/analytics;
-/ctr_tracking.
-/custom-tracking.
-/cx-video-analytics.js
-/cx_tracking.js
-/cxense-video/
-/cyberestat/
-/dc-storm-track.
-/dc-storm/track.
-/dcs.gif?
-/dcstorm-track.
-/dcstorm/track.
-/demandbase.
-/demandbase_
-/demdex.js
-/deskanalytics.js
-/disp_cnt.
-/dl_counter.
-/dla_tracker.
-/dltrack.
-/dltrack/
-/dmp-tracking-
-/dmtracking2.
-/dotomi_abandon.
-/dotomi_tracking/
-/doubleclickCheck/
-/dow_analytics.
-/downloadAndOutboundLinksTracking.
-/drads?referrer=
-/dstracking.
-/dtmtag.js
-/dtrack.js
-/dwanalytics-
-/dwanalytics.
-/e.gif?data=
-/ea-analytics/
-/eae-logger/
-/ecanalytics.js
-/ecom/status.jsp?
-/econa-site-search-ajax-log-referrer.php
-/econa-site-search/log.php?
-/ecos-surveycode.
-/ecos_survey.
-/ecos_surveycode_
-/ecossurvey.
-/edata.js
-/eftracking.
-/elex.track.
-/elqcfg.js
-/elqcfg.min.js
-/elqimg.js
-/elqnow/
-/elqtracking.
-/eluminate?
-/emstrack.
-/endpoint/stats.
-/entry.count.image?
-/entry_stats?
-/estatistica.js
-/estatnativeflashtag.swf
-/etracker.
-/etracker/
-/etrackercode.
-/eu-survey.js
-/ev/co/*?eventid=
-/event-log/
-/event-report?*&uid=
-/event-tracking.js
-/event.gif?
-/event/*/*?*&euidl=*&url=
-/event/pageview?
-/event/rumdata?
-/event?auditLinkReceived=
-/event?pmo=
-/event?stat_
-/event?t=*&__seed=
-/eventLogServlet?
-/events?data=
-/eventtracker.js
-/evtrack-
-/ewtrack.
-/exaonclick.js
-/exelate.htm?
-/exelate.html?
-/exittracker.
-/exittraffic.
-/expcount/
-/external-promo-metrics.
-/external-tracking.
-/external/nielsen_
-/external_teaser_impression?
-/ezytrack.
-/fairfax_tracking.js
-/fastcounter.
-/favcyanalytics?
-/fb-app-tracker.
-/fb-ga-track-
-/fb-tracking.js
-/fbanalytics/
-/fbcounter/
-/fe/track/
-/federated-analytics.
-/files/ga.js
-/finalizestats.
-/firestats/
-/flash-stats.php?
-/flip-stats-queue?
-/flv_tracking.
-/footer-tracking.js
-/footer_tag_iframe.
-/footerpixel.gif?
-/fora_player_tracking.
-/foresee/
-/fp/clear.png?
-/fpcount.exe
-/freecgi/count.cgi?
-/frtrack.
-/fsrscripts/
-/g-track/
-/g=analytics&
-/g_track.php?
-/ga-affiliates.
-/ga-beacon.*/UA-
-/ga-custom-tracking.
-/ga-explorations.
-/ga-links.js
-/ga-script.
-/ga-socialtracker.
-/ga-track.
-/ga-tracker.
-/ga-tracking-
-/ga-tracking/
-/ga/trackevent.
-/ga_anonym.js
-/ga_dpc_youtube.
-/ga_dualcode_tracking.
-/ga_event_frame?
-/ga_event_tracking.
-/ga_link_tracker_
-/ga_outgoinglinks.
-/ga_social.
-/ga_social_tracking_
-/ga_track.php?adurl=
-/ga_tracker.
-/ga_tracking-
-/ga_tracklinks.
-/gaaddons-
-/gaaddons.js
-/gaclicktracking.
-/gadsfuncs.
-/galinks-
-/gallerystats.
-/galtracklib.
-/ganalytics.
-/gapagetracker.
-/gascript.
-/gasocialtracking.
-/gatrack.
-/gatracking.
-/gatrackingcampaigns/
-/gatrackthis.
-/gatrackwww.
-/gcui_vidtracker/
-/generictracking.
-/geocc.
-/geocounter.
-/geoip.html
-/geoip?
-/geoip_cc
-/geoip_script?
-/geoipAPI.js?
-/get_geoip?
-/get_statistics.php?screen_width=
-/get_tracking_id?
-/getclicky.
-/getclicky_
-/gifbanner?
-/gifstats.
-/glbltrackjs.
-/global-analytics.js
-/global/tracker.
-/globalpagetracking.js
-/gn_analytics.
-/gn_tracking.
-/google-analyticator/
-/google-analytics-
-/google-analytics.
-/google-analytics/
-/google-nielsen-analytics.
-/google.analytics.
-/google/analytics.js
-/google/analytics_
-/google/autotrack.
-/google_analitycs.
-/google_analytics-bc.swf
-/google_analytics.
-/google_analytics/
-/google_analytics_
-/google_page_track
-/google_tracker.
-/googleana.
-/googleAnal.js
-/googleanalytics-
-/googleanalytics.js
-/googleanalytics/
-/googleAnalytics1.
-/googleAnalytics2.
-/GoogleAnalytics?utmac=
-/googleAnalytics_
-/googleAnalyticsBase_
-/googleAnalyticsBottom.
-/googleanalyticsmanagement.swf
-/googleAnalyticsOutgoingLinks.
-/googleAnalyticsTracking.
-/googleanalyze1.
-/googleanalyze2.
-/googletrack.js
-/googleTracker.
-/googletracker/
-/googleTracking.js
-/googlytics-
-/gosquared-livestats/
-/gravity-beacon-
-/gravity-beacon.js
-/gs-analytics-
-/gscounters.
-/gtrack.
-/gweb/analytics/
-/hash_stat_bulk/
-/hc_pixel.gif?
-/headerpixel.gif?
-/headupstats.gif?
-/heatmap.*?
-/heatmap.js
-/heatmap_log.js
-/hints.netflame.cc/
-/histats/
-/hit-counter.
-/hit/tracker
-/hit_counter
-/hit_img.cfm?
-/hits/logger?
-/hitslink.
-/hittrack.cgi?
-/horizon.*/track?
-/horizon/track?
-/hpanalytics_
-/hpmetrics.
-/hrtrackjs.gif?
-/hs_track.
-/i?siteid=
-/iframe.tracker.js
-/iframe_googleAnalytics
-/iframetracker.
-/IGA.linktagger.
-/image.articleview?
-/image.ng/
-/images/1px.gif?
-/images/mxl.gif?
-/images/uc.GIF?
-/imageTracking.
-/img.aspx?q=l3mkwgak
-/img.gif?
-/img.mqcdn.com/a/a
-/img/gnt.gif?
-/img/gut.gif?
-/img?eid=
-/imgcount.cgi?
-/imgcount.php?
-/imgtracker.
-/imp?imgid=
-/imp_cnt.gif?
-/imp_img.php?
-/impression.ashx
-/impression.gif?
-/impression.js?
-/impression.php?
-/impression.pl?
-/impression.track?
-/impression/widget?
-/impression_tracker.
-/impression_tracking.
-/impressioncount.
-/impressions/servlet/
-/impressions3.asp?
-/impressions?
-/impressionTrackerV2.
-/in.getclicky.com/
-/includes/tracker/
-/increment_page_counter.
-/index.track?
-/inetlog.ru/
-/insales_counter.
-/insert_impressions.
-/insitemetrics/
-/intellitracker.js
-/iperceptions.
-/iperceptions/
-/iperceptions_
-/iporganictrack.
-/ips-invite.iperceptions.com/
-/istat.aspx?
-/itrack.php?
-/iva_analytics.
-/iva_thefilterjwanalytics.
-/ivw_analytics_
-/iwstat.js
-/javascript/analytics/
-/Javascript/ga.js
-/javascripts/ga.js
-/javascripts/tracking_
-/jcaffiliatesystem/
-/jquery.analytics.js|
-/jquery.google-analytics.
-/jquery.trackstar.
-/jquery.unica.
-/js/analitycs_
-/js/analytics.
-/js/counter.js?
-/js/dart.js
-/js/google_stats.
-/js/hbx.js
-/js/livestats_
-/js/logger?
-/js/quantcast-
-/js/tagging/tagtrack.js
-/js/tracking.js
-/js/tracking.min.js?
-/js/tracking/
-/js_hotlink.php?
-/js_logger.
-/js_tracker.
-/jscounter.
-/jslogger.php?ref=
-/json/stats?
-/json/tracking/
-/jsonp_geoip?
-/jsstat.
-/jstatphp.
-/jstats.php
-/jstats/js/
-/jtracking/
-/kaiseki/script.php
-/kaiseki/track.php?
-/kaizentrack/
-/keen-tracker.
-/keen-tracking-
-/kejobscounter.
-/keywordlogger.
-/khan_analystics.js
-/kissmetrics.
-/kissmetrics/
-/KISSmetricsTrackCode.
-/kontera.js
-/konterayahoooo.
-/krux.js
-/leadgen_track
-/lib/analytics.
-/libs/tracker.js
-/link_track.
-/link_tracking/
-/linkcountdata/
-/linkinformer.js
-/linktracker.js
-/linktracker/
-/linktracking.
-/livezilla/server.php?request=track&
-/load.gif?
-/load.js.gz?
-/loadcounter.
-/loader-counter.
-/locotrack.js
-/log-ads.
-/log/ad-
-/log/impression/
-/log?data=
-/log?event=
-/log_event?
-/log_impression/
-/log_stats.php?
-/log_tracker.
-/log_view.
-/log_zon_img.
-/logaholictracker.
-/logclick.
-/logcollectscript_
-/logcounter.
-/logevent.action?
-/logextrastats.
-/logger.ashx?
-/logger.dll/
-/logger.pageperf?
-/logger/?et=
-/logger/?referer=
-/logger/p.gif?
-/logger?d=
-/logger?description=
-/logging-code.
-/logging/pixel?
-/logging_requests.
-/logging_save.
-/loggingService.js
-/loggly.tracker.js
-/logpstatus.
-/logstat.
-/logstat?
-/lunametrics-
-/lycostrack.js
-/lzdtracker.
-/mail_tracking-cg.php
-/mail_tracking.php
-/mailstatstrk/
-/mapstats.
-/marketing-analytics.js
-/mbcom.tracking.
-/mdwtc/click_thru/
-/media_viewed_tracking.
-/mediateGA.js
-/megacounter/
-/mendelstats.
-/meta-analytics/
-/metatraffic/track.asp?
-/metrics-ga.
-/metrics.xml
-/metrics/ga.html?
-/metrics/image.gif?
-/metrics/metrics
-/metrics/onload
-/metrics/stat.
-/metrics/survey/
-/metrics/vanity/?
-/metricsISCS.
-/metrika/watch_
-/mi/insite/
-/mianalytics.
-/minder-tracker.
-/mindshare-tracking.
-/mintstats/?js
-/mistats/
-/mixpanel_beacon.
-/mixpanel_tracker.
-/mktg_metrics/
-/ml.track.me?
-/mlopen_track.
-/mm-metrics.
-/mm_track/
-/mngi/tracking/
-/mobify_ga.gif
-/mobileanalytics.
-/modoweb-tracking/
-/module/analytics/
-/momentum-tracking/
-/mouseover-tracker.
-/mpf-mediator.
-/mstartracking/
-/mstats.
-/mstrack/
-/mtrack.nl/js/
-/mtracking.
-/mtvi_reporting.js
-/myasg/stats_js.asp
-/mycounter/counter_in.php?
-/myImage.track?
-/myopslogger.
-/mystats.asp?
-/mystats/track.js
-/mystats2.px?
-/nbc-stats/
-/nedstat.
-/neocounter.
-/neocounter/
-/netcounter?
-/netizen_track.
-/netstat.
-/nettracker.js
-/nettracker/
-/neustar.beacon.
-/new.cnt.aspx?
-/newstat/
-/newstatsinc.
-/nextPerformanceRetargeting.
-/nielsen.htm
-/nielsen.js
-/nielsen.min.
-/nielsen.track
-/nielsen_geotarget/
-/nielsen_v53.
-/nielson/track
-/nielson_stats.
-/ninemsn.tracking.
-/nm_track.js
-/no-impression.gif?
-/npssurvey.
-/ntpagetag-
-/ntpagetag.
-/ntpagetag_
-/ntpagetaghttps.
-/ntrack.asp?
-/oas_analytics.
-/object_stats.
-/ocounter.
-/olx/tracker.
-/om_ctrack.
-/om_tracking_
-/omnidiggthis|
-/omnipagetrack.
-/omniture/tracking.
-/oms_analytics_
-/onestat.js
-/onsitegeo.
-/opentag-
-/opentag/
-/openxtargeting.js
-/opinionlab.js
-/optimost-
-/optimost.
-/optimost_
-/optimostBody1.
-/optimostBody2.
-/optimostfoot.
-/optimosthead.
-/optimosthead/
-/optimostHeader.
-/optimostHeader1.
-/optimostHeader2.
-/ordertrack/
-/ovstats.
-/ow_analytics.
-/owa.tracker-combined-min.js
-/ox_stats.
-/oxtracker.
-/page-analytics.
-/page-track.
-/page_analytics.
-/page_counter.
-/pageeventcounter;
-/pagelogger/connector.php?
-/pageloggerobyx.
-/pagestat?
-/pagestats/
-/pagetrack.php?
-/pageviews-counter-
-/pageviews_counter.
-/pbasitetracker.
-/performance_tracker-
-/permalink-tracker.html?
-/pgtracking.
-/pgtrackingV3.
-/php-stats.js
-/php-stats.php?
-/php-stats.phpjs.php?
-/php-stats.recjs.php?
-/phpmyvisites.js
-/ping.gif?
-/ping_hotclick.js
-/pistats/cgi-bin/
-/piwik.php
-/piwik1.
-/piwik2.js
-/piwik_
-/piwikapi.js
-/piwikC_
-/piwikTracker.
-/pix.gif?
-/pixall.min.js
-/pixel-events.
-/pixel-page.html
-/pixel.*/track/*
-/pixel.gif?
-/pixel.png?
-/pixel.track2?
-/pixel.track?
-/pixel/?__tracker
-/pixel/img/
-/pixel/impression/
-/pixel/visit?
-/pixel1/impression.
-/pixel?google_
-/pixel_iframe.
-/pixel_track.
-/pixel_tracking.
-/pixelcounter.
-/PixelNedstat.
-/pixelstats/
-/pixeltrack.php?
-/pixeltracker.
-/pixeltracking/
-/pladtrack.
-/planetstat.
-/player_counter.ashx?
-/PlayerDashboardLoggingService.svc/json/StartSession?
-/playerlogger.
-/playerstats.gif?
-/playertracking/
-/plgtrafic.
-/plingatracker.
-/pluck-tracking.
-/plugins/stat-dfp/
-/plugins/status.gif?
-/plugins/wordfence/visitor.php?
-/popanalytics.
-/popupCookieWriter.
-/popuplog/
-/pphlogger.
-/printtracker.js
-/prnx_track.
-/probance_tracker.
-/prodtracker?
-/profile_tracker.
-/promo_tracking/
-/prum.
-/pstats.
-/ptrack.
-/public/visitor.json?
-/public/visitor/create?
-/pubstats.
-/pvcounter.
-/pvcounter/
-/pvcounter?
-/pvevent_
-/pview?event
-/pxa.min.js
-/pzn/proxysignature
-/qtracker-
-/quant.js
-/quant.swf?
-/quantcast.js
-/quantcast.xml
-/quantcast/
-/quantcast_
-/quantcastjs/
-/quantserve.com/
-/quantv2.swf?
-/qubittracker/
-/ra_track.
-/rcdntpagetag.js
-/readcounter.aspx?
-/readtracker-
-/recommendtrack?
-/record-impressions.
-/record_clicks.
-/record_visitor.
-/recstatsv2.
-/redirectexittrack.php?
-/ref_analytics.
-/refer-tracking.
-/referral_tracker.
-/referral_tracking.
-/referrer_tracking.
-/refstats.asp?
-/reg_stat.php?
-/register_stats.php?
-/register_video_*&server=
-/registeradevent?
-/remoteTrackingManager.cfc?*trackPage&
-/render?trackingId=
-/repdata.*/b/ss/*
-/report?event_
-/reporting/analytics.js
-/resmeter.js
-/resourcestat.
-/rest/analytics/
-/restats_
-/resxclsa.
-/resxclsa_
-/retargetingScript/
-/revsci.
-/revtracking/
-/rkrt_tracker-
-/roi_tracker.
-/roitrack.
-/roitracker.
-/roitracker2.
-/rolluptracker_
-/rtkbeacon.gif?
-/rtracker.
-/rtt-log-data?
-/rubics_trk
-/rubicsimp/c.gif?
-/rum-dytrc.
-/rum-track?
-/rum/id?
-/rumstat.
-/runtimejs/intercept/
-/sage_tracker.
-/save_stats.php?
-/savetracking?
-/sb.logger.js
-/sb.trackers.js
-/sbtracking/pageview2?
-/sclanalyticstag.
-/scmetrics.*/b/ss/*
-/script/analytics.
-/script/analytics/
-/script_log.
-/scriptAnalytics.
-/scripts.kissmetrics.com/
-/scripts/analytics.
-/scripts/analytics_
-/scripts/clickjs.php
-/scripts/contador.
-/scripts/ga.js
-/scripts/hbx.js
-/scripts/log.
-/scripts/statistics/
-/scripts/stats/
-/scripts/xiti/
-/sctracker.
-/sdxp1/dru4/meta?_hc=
-/securetracker.
-/send-impressions.html
-/sensor/statistic?
-/seosite-tracker/
-/seostats/
-/seotracker/
-/server.php?request=track&output=
-/services/analytics/
-/services/counter/
-/services/counters/
-/session-hit.
-/session-tracker/tracking-
-/sessioncam/
-/set_tracking.js
-/shareCounts.
-/shareTrackClient.
-/shinystat.
-/shinystat_
-/shopify_stats.js
-/showcounter.
-/si-tracking.
-/sidtracker.
-/sikcomscore_
-/sikquantcast_
-/silverpop/
-/simplereach_counts/
-/simtracker.min.js
-/siq-analytics.
-/site-tracker-
-/site-tracker.
-/site-tracker_
-/site_statistics.
-/site_stats.
-/site_stats/
-/site_tracking.
-/siteAnalytics-
-/siteAnalytics.
-/siteanalytics_
-/sitecatalist.js
-/sitecounter/counter.
-/sitecrm.js
-/sitecrm2.js
-/siteskan.com/
-/sitestat.
-/sitestat_
-/sitestatforms.
-/sitestats.gif?
-/sitetracker21.
-/sitetrek.js
-/skstats-
-/skstats_
-/skype-analytics.
-/slimstat/
-/smetrics.*/b/ss/*
-/social_tracking.
-/socialButtonTracker.
-/socialtracking.min.js
-/softclick.js
-/softpage/stats_registerhit.asp?
-/sometrics/
-/sophus/logging.js
-/sophus3_logging.js
-/sp-analytics-
-/sp_logging.
-/sp_tracker.
-/spannerworks-tracking-
-/spip.php?page=stats.js
-/springmetrics.
-/sstat_plugin.js
-/stat-analytics/
-/stat.aspx?
-/stat.gif?
-/stat.htm?
-/stat.js?
-/stat.php?
-/stat.png?
-/stat.tiff?
-/stat/ad?
-/stat/count
-/stat/event?
-/stat/fe?
-/stat/inserthit.
-/stat/track.php?mode=js
-/stat/track_
-/stat/tracker.
-/stat/uvstat?
-/stat2.aspx?
-/stat2.js
-/stat36/stat/track.php
-/stat?sid=
-/stat?SiteID=
-/stat?track=
-/stat_js.asp?
-/stat_page.
-/stat_page2.
-/stat_search.
-/stat_visits.
-/stat_vue.php?
-/stataffs/track.php?
-/statcapture.
-/statcollector.
-/statcount.
-/statcounter.asp
-/statcounter.js
-/statcountex/count.asp?
-/stateye/
-/static/tracking/
-/statics/analytics.js?
-/statistics-page-view/
-/statistics.asp?
-/statistics.aspx?profile
-/statistics.js?
-/statistics/fab.
-/statistics/ga.
-/statistics/get?
-/statistics/getcook.php?
-/statistics/imr.
-/statistics/logging/
-/statistics/metrica.
-/statistics/pageStat/
-/statistics/set?
-/statistics?counter=
-/statistics?eventType=
-/statlogger.
-/stats-js.cgi?
-/stats-tracking.js
-/stats.asp?id
-/stats.gif?
-/stats.hitbox.com/
-/stats.php?*http
-/stats.php?type=
-/stats.php?uri=
-/stats/?js
-/stats/?ref=
-/stats/add/
-/stats/adonis_
-/stats/collector.js
-/stats/counter.
-/stats/CounterPage.
-/stats/dlcount_
-/stats/et_track.asp?
-/stats/ga.
-/stats/impression
-/stats/imr.
-/stats/init.
-/stats/log.
-/stats/mark?
-/stats/metrica.
-/stats/metrics/
-/stats/mixpanel-
-/stats/page_view_
-/stats/pgview.
-/stats/ping?
-/stats/record.php?
-/stats/services/
-/stats/track.asp?
-/stats/tracker.gif?
-/stats/tracker.js
-/stats/welcome.php?
-/stats?aid=
-/stats?blog_
-/stats?callback=
-/stats?ev=
-/stats?object
-/stats?sid=
-/stats_blog.js?
-/stats_brand.js
-/stats_js.asp?
-/stats_tracker.
-/statsadvance.js
-/statscounter/
-/statscript.js
-/statsd_proxy
-/statspider?
-/statspixel.
-/statstracker?
-/statsupdater.
-/stattracker-
-/stracking.js
-/stt/track.
-/stt/track/
-/stwc-counter/
-/supercookie.
-/superstats.
-/supertracking.
-/surphace_track.
-/survey_invite_
-/surveyoverlay/
-/swfaddress.js?tracker=
-/syndication/metrics/
-/syndstats.
-/tacoda.
-/tacoda_
-/taevents-
-/tbuy/tracker/
-/tc_logging.js
-/tc_targeting.
-/tc_throttle.js
-/tealium.js
-/textlink.php?text
-/thbeacon/
-/thetracker.js
-/third-party-analitycs/
-/third-party-stats/
-/third-party/tracking.
-/thirdpartyCookie.
-/tiara/tracker/
-/tide_stat.js
-/timeslog.
-/tmpstats.gif?
-/tncms/tracking.js
-/tops-counter?
-/touchclarity/
-/tpix.gif?
-/tracciamento.php?
-/track-compiled.js
-/track-referrals.js
-/track.ads/
-/track.ashx?*=http
-/track.aspx?
-/track.cgi?
-/track.gif?
-/track.js?referrer
-/track.js?screen=
-/track.php?*&uid=
-/track.png?
-/track.srv.
-/track/*&CheckCookieId=
-/track/?site
-/track/a.gif?
-/track/aggregate?
-/track/component/
-/track/count*js
-/track/dot.gif?
-/track/event/
-/track/imp?
-/track/impression/
-/track/impression?
-/track/jsinfo
-/track/mygreendot/
-/track/pix.asp?
-/track/pixel.
-/track/pixel/
-/track/read/
-/track/site/
-/track/track-
-/track/track.php?
-/track/view/
-/track/visitors/?
-/track/visits/?
-/track2.php
-/track;adv
-/track?browserId
-/track?event=
-/track?referer=
-/track_clicks_
-/track_event.php?
-/track_js/?
-/track_metric/
-/track_pageview?
-/track_proxy?
-/track_social.
-/track_stat?
-/track_views.
-/track_visit.
-/track_visit?
-/trackad.
-/trackAdHit.
-/trackClickEvent.js
-/trackContentViews.
-/trackconversion?
-/tracker-config.js
-/tracker-ev-sdk.js
-/tracker-pb-min-rem.js
-/tracker-r1.js
-/tracker.do?
-/tracker.js.php?
-/tracker.json.php?
-/tracker.log?
-/tracker.min.js
-/tracker.pack.
-/tracker.php?
-/tracker.pl?
-/tracker.tsp?
-/tracker/aptimized-
-/tracker/event?
-/tracker/eventBatch/
-/tracker/imp?
-/tracker/index.jsp?
-/tracker/log?
-/tracker/p.gif?
-/tracker/ping/
-/tracker/receiver/
-/tracker/referrer/
-/tracker/story.jpg?
-/tracker/t.php?
-/tracker/track.php?
-/tracker/tracker.js
-/tracker2.js
-/tracker?*=
-/tracker_activityStream.
-/tracker_article
-/tracker_czn.tsp?
-/tracker_gif.
-/tracker_pageview.
-/tracker_pixel.
-/trackerGif?
-/trackerpixel.js
-/trackerstatistik.
-/trackEvent.js?
-/trackEvent.min.js?
-/trackga.
-/trackGAEvents.
-/trackhandler.ashx?
-/trackimage/
-/trackImpression/
-/trackimps?
-/tracking-active/
-/tracking-ad/
-/tracking-cookie.
-/tracking-hits.
-/tracking-info.gif?
-/tracking-init.
-/tracking-pixel.
-/tracking-pixel/
-/tracking-portlet/
-/tracking-v3.
-/tracking-widget.
-/tracking.ashx?
-/tracking.cgi?
-/tracking.fcgi?
-/tracking.gif?
-/tracking.jsp
-/tracking.php?id
-/tracking.php?q=
-/tracking.phtml?
-/tracking.relead.
-/tracking.vidt
-/tracking/*/agof-
-/tracking/addview/
-/tracking/adobe.js
-/tracking/ads.
-/tracking/article.
-/tracking/article/
-/tracking/at.js
-/tracking/beacon/?
-/tracking/clicks
-/tracking/create?
-/tracking/csp?
-/tracking/epixels.
-/tracking/fingerprint/
-/tracking/impression/
-/tracking/index.
-/tracking/log.php?
-/tracking/open?
-/tracking/pageview.
-/tracking/pixel.
-/tracking/pixel/
-/tracking/pixel_
-/tracking/pixels.
-/tracking/referrer?
-/tracking/setTracker/
-/tracking/simplified_
-/tracking/t.srv?
-/tracking/tag_commander.php?
-/tracking/track.jsp?
-/tracking/track.php?
-/tracking/tracking.
-/tracking/tracking_
-/tracking/trk-
-/tracking/tynt_
-/tracking/user_sync_widget?
-/tracking/views/
-/tracking/widget/
-/tracking202/
-/tracking_add_ons.
-/tracking_ajax.
-/tracking_clic.
-/tracking_clickevents.
-/tracking_cookie_baker.
-/tracking_frame_
-/tracking_headerJS_
-/tracking_id_
-/tracking_iframe.
-/tracking_link_cookie.
-/tracking_pix.
-/tracking_pixel
-/tracking_super_hot.js
-/trackingCode-
-/trackingCode.js
-/trackingcookies.
-/trackingDTM.js
-/trackingfilter.json?
-/trackingFooter.
-/trackingheader.
-/trackingImpression/
-/trackingp.gif
-/trackingPixel.
-/trackingPixelForIframe.
-/trackingpixels/get?referrer=
-/trackings/addview/
-/trackingScript1.
-/trackingScript2.
-/trackingService.min.js
-/trackingService/
-/trackIt.js
-/trackit.php?
-/trackit.pl?
-/trackjs.
-/trackjs1.
-/trackjs6.
-/trackjs_
-/trackmerchant.js
-/tracknat.
-/trackopen.cgi?
-/trackpagecover?
-/trackpageview.
-/trackPageView/
-/trackpidv3.
-/trackpix.
-/trackpixel.
-/trackpxl?
-/trackr.swf
-/trackstats?
-/tracksubprop.
-/trackTimings.gif?
-/trackuity.
-/TrackView/?track
-/trackVisit/
-/trackvisit?
-/traffic.asmx/
-/traffic/status.gif?
-/traffic/track^
-/traffic4u.
-/traffic_link_client.php?
-/traffic_record.php?
-/traffic_tracker.
-/traffictracker.
-/traffictrade/
-/traffix-track.
-/trafic.js
-/trakksocial.js
-/trans_pixel.asp
-/transparent1x1.
-/traxis-logger.
-/triggertag.js
-/triggit-analytics.
-/trkpixel.gif
-/trovit-analytics.js
-/truehits.php?
-/tse/tracking.
-/turn-proxy.html?
-/tw-track.js
-/tynt.js
-/udctrack.
-/uds/stats?
-/ui/analytics/
-/ultra_track/
-/universal-tracking-
-/urchinstats.
-/userfly.js
-/usertrack.aspx?
-/usertracking.js
-/usertrackingajax.php?
-/usr.gif?openratetracking=
-/utag.ga.
-/utag.loader-
-/utag.loader.
-/utrack.js?
-/utrack?
-/utracker.js
-/uvstat.js
-/uxm_tracking.
-/valueclickbrands/
-/vanillastats/
-/vblntpagetag.
-/vertical-stats.
-/vglnk.js
-/video_count.php?
-/videoanalytic/
-/videoAnalytics.
-/videolog?vid=
-/videotracking/
-/vidtrack.
-/view_stats.js.php
-/viewcounterjqueryproxy.
-/viewcounterproxy.
-/viewstats.aspx?
-/viewtracking.aspx?
-/viglink_
-/vip-analytics.
-/viperbar/stats.php?
-/visistat.js
-/visit-tracker.js
-/visit.gif?
-/visit/log.js?
-/visit/record.gif?
-/visit?id=
-/visit_pixel?
-/visit_tracking.
-/visitor-event?
-/visitor.cgi?aff
-/visitor.gif?ts=
-/visitor.js?key=
-/visitor.min.js
-/visitor/identity?
-/visitor/segment?*=
-/visitorCookie.
-/visitortrack?
-/visitortracker.pl?
-/visits/pixel?
-/visits_contor.
-/visitWebPage?_
-/visualstat/stat.php
-/vmtracking.
-/vpstats.
-/vptrack_
-/vs-track.js
-/vs/track.
-/vs_track.
-/vstat.php
-/vstats/counter.php
-/vstrack.
-/vtrack.aspx
-/vtrack.php?
-/vtracker.
-/vztrack.gif?
-/wanalytics/
-/wdg/tracking-
-/wdg_tracking-
-/web-analytics.
-/web_analytics/
-/web_traffic_capture.js
-/webanalytics3.
-/webcounter/
-/webiq.
-/webiq/
-/webiq_
-/weblog.*?cookie
-/weblog.js?
-/weblog.php?
-/weblog/*&refer=
-/weblog_*&wlog_
-/webmetricstracking.
-/webstat/cei_count.asp?
-/webstat_
-/webstatistics.php?
-/webstatistik/track.asp
-/webstats.js
-/webstats.php
-/webstats/index?
-/webstats/stat
-/webstats/track.php?
-/webstats_counter/
-/webtrack.
-/webtracker.
-/webtraffic.js
-/wholinked.com/track
-/whoson_*_trackingonly.js
-/widget/s.gif?
-/wjcounter-
-/wjcounter.
-/wjcountercore.
-/wlexpert_tracker.
-/wlexpert_tracker/
-/wmxtracker.js
-/woopra.js
-/worldwide_analytics/
-/wp-click-track/
-/wp-clickmap/
-/wp-content/plugins/stats/count.php?
-/wp-content/tracker.
-/wp-counter.php
-/wp-js/analytics.
-/wp-powerstat/
-/wp-slimstat/
-/wp_stat.php?
-/wprum.
-/wrapper/quantcast.swf
-/written-analytics.
-/wstat.pl
-/wstats.php?
-/wtbase.js
-/wtcore.js
-/wtid.js
-/wtinit.js
-/wysistat.js
-/wz_logging.
-/xiti.js
-/xitistatus.js
-/xn_track.
-/xstat.aspx?
-/xtanalyzer_roi.
-/xtclick.
-/xtclicks.
-/xtclicks_
-/xtrack.php?
-/xtrack.png?
-/yahoo-beacon.js
-/yahoo_marketing.js
-/yahooBeacon.
-/yahooTracker/
-/ybn_pixel/
-/yell-analytics-
-/yell-analytics.
-/youtube-track-event_
-/ystat.do
-/ystat.js
-/zag.gif?
-/zemtracker.
-/ztagtrackedevent/
-/~utm_gif?
-;manifest-analytics.js
-=ATAtracker&
-=googleanalytics_
-=stats&action=
-=stats&apiVersion=
-=track_view&
-=widgetimpression&
-?&anticache=*filename.gif
-?_siteid=
-?act=counter&
-?action=event&
-?action=track_visitor&
-?action=tracking_script
-?bstat=
-?criteoTrack=
-?event=General.track
-?event=log&
-?eventtype=impression&pid=
-?eventtype=request&pid=
-?googleTrack=
-?hmtrackerjs=
-?log=stats&
-?ref=*&itemcnt=
-?token=*&sessionid=*&visitorid=
-?trackingCategory=
-?triggertags=
-^name=atatracker^
-_247seotracking.
-_analytics.php?
-_astatspro/
-_beacon?
-_cedexis.
-_chartbeat.js
-_clickability/
-_clicktrack.asp?
-_clickTracking.
-_directtrack.js
-_event_stats.
-_global_analytics_
-_google_analytics.
-_googleAnalytics.
-_googleAnalytics_
-_imp_logging?
-_impressions.gif?
-_logimpressions.
-_m10banners/tracking.php?
-_metricsTagging.
-_minder_tracking/
-_nedstat.js
-_nielsen.js
-_ntpagetag.
-_pages_tracker.
-_performance_tracker-
-_quantcast.swf
-_quantcast_tag.
-_resource/analytics.js
-_social_tracking.
-_stat_counter.php?
-_stats.js?
-_stats/Logger?
-_stats_log.
-_tracker-active/
-_tracker.js.
-_tracker.js?
-_tracker.php?*http
-_tracker_min.
-_trafficTracking.
-_url_tracking.
-_web_stat.js
-_webanalytics.
-_webiq.
-cgi-bin/counter
--logabpstatus.
-/adblock?action=
-_adblock_stat.
-_mongo_stats/
-/cdn-cgi/pe/bag2?*.google-analytics.com
-/cdn-cgi/pe/bag2?*bluekai.com
-/cdn-cgi/pe/bag2?*bounceexchange.com
-/cdn-cgi/pe/bag2?*cdn.onthe.io%2Fio.js
-/cdn-cgi/pe/bag2?*chartbeat.js
-/cdn-cgi/pe/bag2?*dnn506yrbagrg.cloudfront.net
-/cdn-cgi/pe/bag2?*geoiplookup
-/cdn-cgi/pe/bag2?*getblueshift.com
-/cdn-cgi/pe/bag2?*google-analytics.com%2Fanalytics.js
-/cdn-cgi/pe/bag2?*histats.com
-/cdn-cgi/pe/bag2?*hs-analytics.net
-/cdn-cgi/pe/bag2?*log.outbrain.com
-/cdn-cgi/pe/bag2?*mc.yandex.ru
-/cdn-cgi/pe/bag2?*newrelic.com
-/cdn-cgi/pe/bag2?*nr-data.net
-/cdn-cgi/pe/bag2?*optimizely.com
-/cdn-cgi/pe/bag2?*piwik.js
-/cdn-cgi/pe/bag2?*quantserve.com
-/cdn-cgi/pe/bag2?*radarurl.com
-/cdn-cgi/pe/bag2?*scorecardresearch.com
-/cdn-cgi/pe/bag2?*static.getclicky.com%2Fjs
-/cdn-cgi/pe/bag2?*viglink.com
-/cdn-cgi/pe/bag2?*yieldbot.intent.js`;
-var bad_url_parts_flag = 1941 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+// 1940 rules:
+var bad_url_parts_Array = [ "&trackingserver=",
+"-analitycs/fab.",
+"-analitycs/ga.",
+"-analitycs/metrica.",
+"-analytics-tagserver-",
+"-analytics/insight.",
+"-asset-tag.",
+"-bluekai.",
+"-comscore.",
+"-criteo.",
+"-event-tracking.",
+"-ga-track.",
+"-gatracker.",
+"-google-analytics.",
+"-google-analytics/",
+"-logging/log?",
+"-mediaplex_",
+"-optimost-",
+"-page-analytics.",
+"-rttracking.",
+"-sa-tracker-",
+"-scroll-tracker.js",
+"-seo-tracker.",
+"-social-tracking.",
+"-stat/collect/",
+"-stats/fab.",
+"-stats/ga.",
+"-stats/imr.",
+"-stats/metrica.",
+"-tracking-pixel.",
+"-tracking.gtm.",
+"-tracking.js?",
+"-trackingScript.",
+"-xtcore.js",
+".analytics.min.",
+".beacon.min.js",
+".cc/s.gif?",
+".cn/1.gif?",
+".cn/2.gif?",
+".cn/a.gif?",
+".cn/b.gif?",
+".cn/gs.gif?",
+".cn/r.gif?",
+".cn/s.gif?",
+".cn/xy.gif?",
+".cn/z.gif?",
+".com/a.gif?",
+".com/analytics?",
+".com/counter?",
+".com/log?event",
+".com/p.gif?",
+".com/pagelogger/",
+".com/s/at?site",
+".com/stats.ashx?",
+".com/stats.aspx?",
+".com/t.gif?",
+".com/tracker.jsp",
+".com/tracking?",
+".com/traffic/?t=*&cb=",
+".com/v.gif?",
+".com/vtrack|",
+".core.tracking-min-",
+".do_tracking&",
+".gatracker.",
+".gatracking.js",
+".googleanalytics.js",
+".gov/stat?",
+".idge/js/analytics/",
+".io/track?",
+".lms-analytics/",
+".me/geoip/",
+".net/p.gif?",
+".net/vtrack|",
+".ntpagetag.",
+".php?p=stats&",
+".php?tracking=",
+".PixelNedstatStatistic/",
+".ru/0.gif?",
+".sitecatalyst.js",
+".siteclarity.",
+".sitetracking.",
+".skimlinks.js",
+".social_tracking.",
+".stats?action=",
+".to/vtrack|",
+".track_Visit?",
+".trackArticleAction&",
+".tracking.js?dpv=",
+".trackUserAction&",
+".tv/log?event",
+".tv/t.png?",
+".uk/track?",
+".uk/traffic/?",
+".usertracking_script.js",
+".webmetrics.js",
+".webstats.",
+"/!crd_prm!.",
+"/1x1.gif?tracking",
+"/1x1.gif?utm",
+"/1x1tracker.",
+"/3rd-party-stats/",
+"/?com=visit*=record&",
+"/?essb_counter_",
+"/__ssobj/core.js",
+"/__utm.gif",
+"/__utm.js",
+"/__varnish_geoip",
+"/_topic_stats?",
+"/_tracking/",
+"/abp-analytics.",
+"/acbeacon2.",
+"/accAnal.js",
+"/AccessCounter/",
+"/accesstracking/",
+"/AccessTrackingLogServlet?",
+"/acclog.cgi?",
+"/acecounter/",
+"/acecounter_",
+"/acounter.php?",
+"/act_pagetrack.",
+"/activetrackphp.php?",
+"/activity-track/?",
+"/adb/track.php?",
+"/add_stats",
+"/adds/counter.js",
+"/adlog.",
+"/adlogger.",
+"/adlogger_",
+"/adloggertracker.",
+"/adm_tracking.js",
+"/admantx-",
+"/admantx.",
+"/admantx/",
+"/adonis_event/",
+"/adplogger/",
+"/adrum-",
+"/adrum.",
+"/ads/counter.",
+"/ads/track/",
+"/ads?cookie_",
+"/ads_tracker.",
+"/ads_tracking.",
+"/adsct?",
+"/adstat.",
+"/adstats.",
+"/adstrack.",
+"/adv/tracking.",
+"/adviewtrack.",
+"/advstats/",
+"/adwords-conversion-tracking.",
+"/adwords-tracker.",
+"/aegis_tracking.",
+"/affil/tracker/",
+"/affiliate-track.",
+"/affiliate-tracker.",
+"/affiliate.1800flowers.",
+"/affiliate/track?",
+"/affiliateTracking.",
+"/affiliatetracking/",
+"/affilinetRetargeting.",
+"/afftrack.",
+"/afftracking.",
+"/aftrack.",
+"/aftrackingplugin.swf",
+"/ajax-hits-counter/",
+"/ajax/analytics/",
+"/ajax/heatmap-",
+"/ajax/stat/",
+"/ajax/track.php?",
+"/ajax_store_analytics?",
+"/ajax_video_counter.php?",
+"/ajaxClicktrack.",
+"/ajaxstat/",
+"/ajaxtracker.",
+"/ajx/ptrack/",
+"/akamai_analytics_",
+"/alllinksclicktracker.js",
+"/amazon-affiliate-",
+"/amptrack.",
+"/analiz.php3?",
+"/analyse.js",
+"/analysis-logger/",
+"/analytic/count.",
+"/analytic?publisher",
+"/analytic_data_",
+"/analyticReporting.",
+"/analytics-assets/",
+"/analytics-beacon-",
+"/analytics-dotcom/",
+"/analytics-event-",
+"/analytics-js.",
+"/analytics-plugin/",
+"/analytics-post-",
+"/analytics-tag.",
+"/analytics-v1.",
+"/analytics.ad.",
+"/analytics.ashx",
+"/analytics.bundled.js",
+"/analytics.compressed.js",
+"/analytics.do",
+"/analytics.gif?",
+"/analytics.google.js",
+"/analytics.html?",
+"/analytics.min.",
+"/analytics.php.",
+"/analytics.php?",
+"/analytics.swf?",
+"/analytics.v1.js",
+"/analytics/*satellitelib.js",
+"/analytics/activity.",
+"/analytics/cms/",
+"/analytics/core.",
+"/analytics/dist/",
+"/analytics/eloqua/",
+"/analytics/events",
+"/analytics/eventTrack",
+"/analytics/ga/",
+"/analytics/ga?",
+"/analytics/gw.",
+"/analytics/hit",
+"/analytics/hmac-",
+"/analytics/idg_",
+"/analytics/js/",
+"/analytics/mbox.js",
+"/analytics/mouse_",
+"/analytics/p.gif?",
+"/analytics/pageview.",
+"/analytics/pv.gif?",
+"/analytics/report/",
+"/analytics/smarttag-",
+"/analytics/socialTracking.js",
+"/analytics/tagx-",
+"/analytics/track-",
+"/analytics/track.",
+"/analytics/track/",
+"/analytics/track?",
+"/analytics/tracker.",
+"/analytics/trackers?",
+"/analytics/tracking/",
+"/analytics/track|",
+"/analytics/urlTracker.",
+"/analytics/visit/",
+"/analytics/yell-",
+"/analytics3.",
+"/analytics?body=",
+"/analytics?http_referer",
+"/analytics?token=",
+"/analytics_embed.",
+"/analytics_frame.",
+"/analytics_id.",
+"/analytics_js/",
+"/analytics_ping.",
+"/analytics_prod.",
+"/analytics_tag.",
+"/analytics_tracker",
+"/analytics_v2.js",
+"/analyticsfeed.ashx?",
+"/analyticsid.",
+"/analyticsjs.",
+"/analyticsjs/",
+"/analyticsmediator.",
+"/analyticsscript_",
+"/analyticstick.",
+"/analyticstrack.",
+"/analyticstracking.",
+"/analyticstracking_",
+"/analyticstrain-",
+"/analyticsUnitaire?",
+"/analyze.js",
+"/analyzer.gif?",
+"/analyzer2.",
+"/anycent_tracker_",
+"/api/*/visitor?",
+"/api/0/stats",
+"/api/analytics/",
+"/api/stat?",
+"/api/tracking/",
+"/apitracking.",
+"/argtk.min.",
+"/arstat?",
+"/article-tracking.js",
+"/article_counter.php?",
+"/asknet_tracking.",
+"/aspenanalytics.",
+"/aspstats/index.asp?",
+"/assets/analytics:",
+"/assets/tracking-",
+"/assets/uts/",
+"/astrack.js",
+"/astracker.",
+"/astracker/",
+"/asyncggtracking.",
+"/atlas_track.",
+"/audience-meter.",
+"/autotag.",
+"/avmws_*.js",
+"/avtstats.",
+"/aw-tracker.",
+"/aws-analytics.js",
+"/awstats.js",
+"/awstats_misc_tracker",
+"/aztrack.",
+"/b/ss/*&events=",
+"/b/ss/*=event36&",
+"/b/ss/*?aqb=1&pccr=",
+"/b2bsdc.js",
+"/backlink.php?",
+"/backlink2.",
+"/banner-tracker.",
+"/banner.stats?",
+"/banners-stat.",
+"/basesdc.js",
+"/bcn.gif?",
+"/bcn?",
+"/beacon-cookie.",
+"/beacon.cgi?",
+"/beacon.gif?",
+"/beacon.html?",
+"/beacon.js",
+"/beacon/b.ashx?",
+"/beacon/track/",
+"/beacon/vtn_loader.gif?",
+"/beacon?",
+"/beacon_async.",
+"/beaconconfigs/",
+"/beaconimg.php?",
+"/betamax_tracker.gif?",
+"/betamax_tracker.js",
+"/bh_counter.js",
+"/bi.tracking/",
+"/bicomscore.",
+"/bicomscore_",
+"/biddr-analytics.",
+"/bin/stats?",
+"/bitrix/spread.php?",
+"/blockstat?",
+"/blog/traffic/?",
+"/blogsectiontracking.",
+"/blogtotal_stats_",
+"/bluekai.",
+"/bluekai/",
+"/bluekaicookieinfo.",
+"/bluetracker/",
+"/bm-analytics-trk.js",
+"/bm-analytics/",
+"/bn/tracker/",
+"/boost_stats.",
+"/brandAnalytics.js",
+"/brightcove/tracking/",
+"/brightcoveGoogleAnalytics.",
+"/brightedge.js",
+"/britetrack/",
+"/bstat.js",
+"/btn_tracking_pixel.",
+"/bugcounter.php?",
+"/bugsnag-",
+"/bundles/tracciamento?",
+"/buzz_stats.",
+"/c_track.php?",
+"/calameo-beacon.",
+"/callbacks/stats?",
+"/campaign_tracker.",
+"/campaign_trax.",
+"/cbanalytics.",
+"/cc?a=",
+"/cclickTracking.",
+"/cct?",
+"/cdn-monitoring-pixel.",
+"/cdn.stats2?",
+"/cdn5.js?",
+"/cds-webanalytics.",
+"/cdx.gif?",
+"/cedexis.js",
+"/cedexis/",
+"/cedexisus.",
+"/certona.",
+"/cfformprotect/",
+"/cgi-bin/cnt/",
+"/cgi/stats.pl?",
+"/chan_slidesurvey.js",
+"/chanalytics.",
+"/chartbeat-",
+"/chartbeat.jhtml",
+"/chartbeat.js",
+"/chartbeat.min.js",
+"/chartbeat/",
+"/chartbeat_",
+"/chartbeatCode.",
+"/chartbeatftr.",
+"/chcounter/",
+"/checkstat.asp",
+"/citycounter.",
+"/cjtracker2.",
+"/ckimg_1x1.gif?",
+"/cklink.gif?",
+"/class.tracking.js",
+"/clear.gif?",
+"/clicevent.php?",
+"/click-count.",
+"/click-logger.",
+"/click-stat.js",
+"/click-tracker",
+"/click.cgi?callback=",
+"/click_metrics-jquery.js",
+"/click_stat/",
+"/click_statistics/",
+"/click_stats.",
+"/click_track.js",
+"/click_tracking",
+"/clickability-",
+"/clickability/",
+"/clickability2/",
+"/clickability?",
+"/clickAnalyse.",
+"/clickcount.cfm?",
+"/clickcount_",
+"/clickctrl.js",
+"/clickheat.js",
+"/clickheat^",
+"/clicklog.",
+"/clicklog4pc.",
+"/clicklog_",
+"/clickLogger?",
+"/clicklognew.",
+"/clickmap.js",
+"/clickpathmedia.",
+"/clickpathmedia_",
+"/clickrecord.php?",
+"/clicks/servlet/",
+"/clickscript.",
+"/clickstats.",
+"/clickstream.aspx?",
+"/clickstream.js",
+"/clicktale-",
+"/clicktale.",
+"/clicktale/",
+"/clicktale_",
+"/clicktrack-*.gif?",
+"/clicktrack?",
+"/clicktracker.",
+"/clicktracking-global.",
+"/clicktracking.",
+"/clicktracking/",
+"/clicktrends/",
+"/clicky.js",
+"/client-event-logger.",
+"/clientdatacollector/",
+"/clientstat?",
+"/cms/stats/",
+"/cn-fe-stats/",
+"/cnstats.",
+"/cnstats/",
+"/cnt-combined.php?",
+"/cnt.aspx?",
+"/cnt.cgi?",
+"/cnt.js",
+"/cnt.php?rf=",
+"/cnt/cnt.php?",
+"/cnt/start.php?",
+"/cntpixel.",
+"/cnvtr.js",
+"/cnwk.1d/*/apex.js",
+"/cognitive_match/",
+"/collect_data.php?",
+"/collection.php?data=",
+"/com_joomla-visites/",
+"/com_joomlawatch/",
+"/comscore.",
+"/comscore/pageview_",
+"/comscore_beacon.",
+"/comscore_engine.",
+"/comscore_stats.",
+"/comscorebeacon.",
+"/condenet-metric.",
+"/connect_counter.js",
+"/content-targeting-staging.js",
+"/contentanalytics/",
+"/contentiq.js",
+"/control/tracking.php?",
+"/cookie.crumb",
+"/cookie/visitor/",
+"/cookie?affiliate",
+"/Cookie?merchant=",
+"/coradiant.js",
+"/core-tracking.js",
+"/coretracking.php?",
+"/count.exe?",
+"/count_stats/",
+"/counter.asp?",
+"/counter.aspx?",
+"/counter.cgi/",
+"/counter.cgi?",
+"/counter.do?",
+"/counter.lt?",
+"/counter.php?chcounter_mode=",
+"/counter.pl?",
+"/counter.visit?",
+"/counter/action_",
+"/counter/article?",
+"/counter/ct.php?",
+"/counter/process.asp?",
+"/counter/r.pl",
+"/counter/stat.",
+"/counter?id=",
+"/counter_1.php",
+"/counter_2.php?",
+"/counter_3.php",
+"/counter_image.gif?",
+"/countercgi.",
+"/countercollector/",
+"/counterFooterFlash.",
+"/countertab.js?",
+"/countstat.php?",
+"/cqcounter.",
+"/crai_tracker.",
+"/criteo.",
+"/criteo_",
+"/criteoRTA.",
+"/crtracker.",
+"/csc-event?",
+"/csm/analytics;",
+"/ctr_tracking.",
+"/custom-tracking.",
+"/cx-video-analytics.js",
+"/cx_tracking.js",
+"/cxense-video/",
+"/cyberestat/",
+"/dc-storm-track.",
+"/dc-storm/track.",
+"/dcs.gif?",
+"/dcstorm-track.",
+"/dcstorm/track.",
+"/demandbase.",
+"/demandbase_",
+"/demdex.js",
+"/deskanalytics.js",
+"/disp_cnt.",
+"/dl_counter.",
+"/dla_tracker.",
+"/dltrack.",
+"/dltrack/",
+"/dmp-tracking-",
+"/dmtracking2.",
+"/dotomi_abandon.",
+"/dotomi_tracking/",
+"/doubleclickCheck/",
+"/dow_analytics.",
+"/downloadAndOutboundLinksTracking.",
+"/drads?referrer=",
+"/dstracking.",
+"/dtmtag.js",
+"/dtrack.js",
+"/dwanalytics-",
+"/dwanalytics.",
+"/e.gif?data=",
+"/ea-analytics/",
+"/eae-logger/",
+"/ecanalytics.js",
+"/ecom/status.jsp?",
+"/econa-site-search-ajax-log-referrer.php",
+"/econa-site-search/log.php?",
+"/ecos-surveycode.",
+"/ecos_survey.",
+"/ecos_surveycode_",
+"/ecossurvey.",
+"/edata.js",
+"/eftracking.",
+"/elex.track.",
+"/elqcfg.js",
+"/elqcfg.min.js",
+"/elqimg.js",
+"/elqnow/",
+"/elqtracking.",
+"/eluminate?",
+"/emstrack.",
+"/endpoint/stats.",
+"/entry.count.image?",
+"/entry_stats?",
+"/estatistica.js",
+"/estatnativeflashtag.swf",
+"/etracker.",
+"/etracker/",
+"/etrackercode.",
+"/eu-survey.js",
+"/ev/co/*?eventid=",
+"/event-log/",
+"/event-report?*&uid=",
+"/event-tracking.js",
+"/event.gif?",
+"/event/*/*?*&euidl=*&url=",
+"/event/pageview?",
+"/event/rumdata?",
+"/event?auditLinkReceived=",
+"/event?pmo=",
+"/event?stat_",
+"/event?t=*&__seed=",
+"/eventLogServlet?",
+"/events?data=",
+"/eventtracker.js",
+"/evtrack-",
+"/ewtrack.",
+"/exaonclick.js",
+"/exelate.htm?",
+"/exelate.html?",
+"/exittracker.",
+"/exittraffic.",
+"/expcount/",
+"/external-promo-metrics.",
+"/external-tracking.",
+"/external/nielsen_",
+"/external_teaser_impression?",
+"/ezytrack.",
+"/fairfax_tracking.js",
+"/fastcounter.",
+"/favcyanalytics?",
+"/fb-app-tracker.",
+"/fb-ga-track-",
+"/fb-tracking.js",
+"/fbanalytics/",
+"/fbcounter/",
+"/fe/track/",
+"/federated-analytics.",
+"/files/ga.js",
+"/finalizestats.",
+"/firestats/",
+"/flash-stats.php?",
+"/flip-stats-queue?",
+"/flv_tracking.",
+"/footer-tracking.js",
+"/footer_tag_iframe.",
+"/footerpixel.gif?",
+"/fora_player_tracking.",
+"/foresee/",
+"/fp/clear.png?",
+"/fpcount.exe",
+"/freecgi/count.cgi?",
+"/frtrack.",
+"/fsrscripts/",
+"/g-track/",
+"/g=analytics&",
+"/g_track.php?",
+"/ga-affiliates.",
+"/ga-beacon.*/UA-",
+"/ga-custom-tracking.",
+"/ga-explorations.",
+"/ga-links.js",
+"/ga-script.",
+"/ga-socialtracker.",
+"/ga-track.",
+"/ga-tracker.",
+"/ga-tracking-",
+"/ga-tracking/",
+"/ga/trackevent.",
+"/ga_anonym.js",
+"/ga_dpc_youtube.",
+"/ga_dualcode_tracking.",
+"/ga_event_frame?",
+"/ga_event_tracking.",
+"/ga_link_tracker_",
+"/ga_outgoinglinks.",
+"/ga_social.",
+"/ga_social_tracking_",
+"/ga_track.php?adurl=",
+"/ga_tracker.",
+"/ga_tracking-",
+"/ga_tracklinks.",
+"/gaaddons-",
+"/gaaddons.js",
+"/gaclicktracking.",
+"/gadsfuncs.",
+"/galinks-",
+"/gallerystats.",
+"/galtracklib.",
+"/ganalytics.",
+"/gapagetracker.",
+"/gascript.",
+"/gasocialtracking.",
+"/gatrack.",
+"/gatracking.",
+"/gatrackingcampaigns/",
+"/gatrackthis.",
+"/gatrackwww.",
+"/gcui_vidtracker/",
+"/generictracking.",
+"/geocc.",
+"/geocounter.",
+"/geoip.html",
+"/geoip?",
+"/geoip_cc",
+"/geoip_script?",
+"/geoipAPI.js?",
+"/get_geoip?",
+"/get_statistics.php?screen_width=",
+"/get_tracking_id?",
+"/getclicky.",
+"/getclicky_",
+"/gifbanner?",
+"/gifstats.",
+"/glbltrackjs.",
+"/global-analytics.js",
+"/global/tracker.",
+"/globalpagetracking.js",
+"/gn_analytics.",
+"/gn_tracking.",
+"/google-analyticator/",
+"/google-analytics-",
+"/google-analytics.",
+"/google-analytics/",
+"/google-nielsen-analytics.",
+"/google.analytics.",
+"/google/analytics.js",
+"/google/analytics_",
+"/google/autotrack.",
+"/google_analitycs.",
+"/google_analytics-bc.swf",
+"/google_analytics.",
+"/google_analytics/",
+"/google_analytics_",
+"/google_page_track",
+"/google_tracker.",
+"/googleana.",
+"/googleAnal.js",
+"/googleanalytics-",
+"/googleanalytics.js",
+"/googleanalytics/",
+"/googleAnalytics1.",
+"/googleAnalytics2.",
+"/GoogleAnalytics?utmac=",
+"/googleAnalytics_",
+"/googleAnalyticsBase_",
+"/googleAnalyticsBottom.",
+"/googleanalyticsmanagement.swf",
+"/googleAnalyticsOutgoingLinks.",
+"/googleAnalyticsTracking.",
+"/googleanalyze1.",
+"/googleanalyze2.",
+"/googletrack.js",
+"/googleTracker.",
+"/googletracker/",
+"/googleTracking.js",
+"/googlytics-",
+"/gosquared-livestats/",
+"/gravity-beacon-",
+"/gravity-beacon.js",
+"/gs-analytics-",
+"/gscounters.",
+"/gtrack.",
+"/gweb/analytics/",
+"/hash_stat_bulk/",
+"/hc_pixel.gif?",
+"/headerpixel.gif?",
+"/headupstats.gif?",
+"/heatmap.*?",
+"/heatmap.js",
+"/heatmap_log.js",
+"/hints.netflame.cc/",
+"/histats/",
+"/hit-counter.",
+"/hit/tracker",
+"/hit_counter",
+"/hit_img.cfm?",
+"/hits/logger?",
+"/hitslink.",
+"/hittrack.cgi?",
+"/horizon.*/track?",
+"/horizon/track?",
+"/hpanalytics_",
+"/hpmetrics.",
+"/hrtrackjs.gif?",
+"/hs_track.",
+"/i?siteid=",
+"/iframe.tracker.js",
+"/iframe_googleAnalytics",
+"/iframetracker.",
+"/IGA.linktagger.",
+"/image.articleview?",
+"/image.ng/",
+"/images/1px.gif?",
+"/images/mxl.gif?",
+"/images/uc.GIF?",
+"/imageTracking.",
+"/img.aspx?q=l3mkwgak",
+"/img.gif?",
+"/img.mqcdn.com/a/a",
+"/img/gnt.gif?",
+"/img/gut.gif?",
+"/img?eid=",
+"/imgcount.cgi?",
+"/imgcount.php?",
+"/imgtracker.",
+"/imp?imgid=",
+"/imp_cnt.gif?",
+"/imp_img.php?",
+"/impression.ashx",
+"/impression.gif?",
+"/impression.js?",
+"/impression.php?",
+"/impression.pl?",
+"/impression.track?",
+"/impression/widget?",
+"/impression_tracker.",
+"/impression_tracking.",
+"/impressioncount.",
+"/impressions/servlet/",
+"/impressions3.asp?",
+"/impressions?",
+"/impressionTrackerV2.",
+"/in.getclicky.com/",
+"/includes/tracker/",
+"/increment_page_counter.",
+"/index.track?",
+"/inetlog.ru/",
+"/insales_counter.",
+"/insert_impressions.",
+"/insitemetrics/",
+"/intellitracker.js",
+"/iperceptions.",
+"/iperceptions/",
+"/iperceptions_",
+"/iporganictrack.",
+"/ips-invite.iperceptions.com/",
+"/istat.aspx?",
+"/itrack.php?",
+"/iva_analytics.",
+"/iva_thefilterjwanalytics.",
+"/ivw_analytics_",
+"/iwstat.js",
+"/javascript/analytics/",
+"/Javascript/ga.js",
+"/javascripts/ga.js",
+"/javascripts/tracking_",
+"/jcaffiliatesystem/",
+"/jquery.analytics.js|",
+"/jquery.google-analytics.",
+"/jquery.trackstar.",
+"/jquery.unica.",
+"/js/analitycs_",
+"/js/analytics.",
+"/js/counter.js?",
+"/js/dart.js",
+"/js/google_stats.",
+"/js/hbx.js",
+"/js/livestats_",
+"/js/logger?",
+"/js/quantcast-",
+"/js/tagging/tagtrack.js",
+"/js/tracking.js",
+"/js/tracking.min.js?",
+"/js/tracking/",
+"/js_hotlink.php?",
+"/js_logger.",
+"/js_tracker.",
+"/jscounter.",
+"/jslogger.php?ref=",
+"/json/stats?",
+"/json/tracking/",
+"/jsonp_geoip?",
+"/jsstat.",
+"/jstatphp.",
+"/jstats.php",
+"/jstats/js/",
+"/jtracking/",
+"/kaiseki/script.php",
+"/kaiseki/track.php?",
+"/kaizentrack/",
+"/keen-tracker.",
+"/keen-tracking-",
+"/kejobscounter.",
+"/keywordlogger.",
+"/khan_analystics.js",
+"/kissmetrics.",
+"/kissmetrics/",
+"/KISSmetricsTrackCode.",
+"/kontera.js",
+"/konterayahoooo.",
+"/krux.js",
+"/leadgen_track",
+"/lib/analytics.",
+"/libs/tracker.js",
+"/link_track.",
+"/link_tracking/",
+"/linkcountdata/",
+"/linkinformer.js",
+"/linktracker.js",
+"/linktracker/",
+"/linktracking.",
+"/livezilla/server.php?request=track&",
+"/load.gif?",
+"/load.js.gz?",
+"/loadcounter.",
+"/loader-counter.",
+"/locotrack.js",
+"/log-ads.",
+"/log/ad-",
+"/log/impression/",
+"/log?data=",
+"/log?event=",
+"/log_event?",
+"/log_impression/",
+"/log_stats.php?",
+"/log_tracker.",
+"/log_view.",
+"/log_zon_img.",
+"/logaholictracker.",
+"/logclick.",
+"/logcollectscript_",
+"/logcounter.",
+"/logevent.action?",
+"/logextrastats.",
+"/logger.ashx?",
+"/logger.dll/",
+"/logger.pageperf?",
+"/logger/?et=",
+"/logger/?referer=",
+"/logger/p.gif?",
+"/logger?d=",
+"/logger?description=",
+"/logging-code.",
+"/logging/pixel?",
+"/logging_requests.",
+"/logging_save.",
+"/loggingService.js",
+"/loggly.tracker.js",
+"/logpstatus.",
+"/logstat.",
+"/logstat?",
+"/lunametrics-",
+"/lycostrack.js",
+"/lzdtracker.",
+"/mail_tracking-cg.php",
+"/mail_tracking.php",
+"/mailstatstrk/",
+"/mapstats.",
+"/marketing-analytics.js",
+"/mbcom.tracking.",
+"/mdwtc/click_thru/",
+"/media_viewed_tracking.",
+"/mediateGA.js",
+"/megacounter/",
+"/mendelstats.",
+"/meta-analytics/",
+"/metatraffic/track.asp?",
+"/metrics-ga.",
+"/metrics.xml",
+"/metrics/ga.html?",
+"/metrics/image.gif?",
+"/metrics/metrics",
+"/metrics/onload",
+"/metrics/stat.",
+"/metrics/survey/",
+"/metrics/vanity/?",
+"/metricsISCS.",
+"/metrika/watch_",
+"/mi/insite/",
+"/mianalytics.",
+"/minder-tracker.",
+"/mindshare-tracking.",
+"/mintstats/?js",
+"/mistats/",
+"/mixpanel_beacon.",
+"/mixpanel_tracker.",
+"/mktg_metrics/",
+"/ml.track.me?",
+"/mlopen_track.",
+"/mm-metrics.",
+"/mm_track/",
+"/mngi/tracking/",
+"/mobify_ga.gif",
+"/mobileanalytics.",
+"/modoweb-tracking/",
+"/module/analytics/",
+"/momentum-tracking/",
+"/mouseover-tracker.",
+"/mpf-mediator.",
+"/mstartracking/",
+"/mstats.",
+"/mstrack/",
+"/mtrack.nl/js/",
+"/mtracking.",
+"/mtvi_reporting.js",
+"/myasg/stats_js.asp",
+"/mycounter/counter_in.php?",
+"/myImage.track?",
+"/myopslogger.",
+"/mystats.asp?",
+"/mystats/track.js",
+"/mystats2.px?",
+"/nbc-stats/",
+"/nedstat.",
+"/neocounter.",
+"/neocounter/",
+"/netcounter?",
+"/netizen_track.",
+"/netstat.",
+"/nettracker.js",
+"/nettracker/",
+"/neustar.beacon.",
+"/new.cnt.aspx?",
+"/newstat/",
+"/newstatsinc.",
+"/nextPerformanceRetargeting.",
+"/nielsen.htm",
+"/nielsen.js",
+"/nielsen.min.",
+"/nielsen.track",
+"/nielsen_geotarget/",
+"/nielsen_v53.",
+"/nielson/track",
+"/nielson_stats.",
+"/ninemsn.tracking.",
+"/nm_track.js",
+"/no-impression.gif?",
+"/npssurvey.",
+"/ntpagetag-",
+"/ntpagetag.",
+"/ntpagetag_",
+"/ntpagetaghttps.",
+"/ntrack.asp?",
+"/oas_analytics.",
+"/object_stats.",
+"/ocounter.",
+"/olx/tracker.",
+"/om_ctrack.",
+"/om_tracking_",
+"/omnidiggthis|",
+"/omnipagetrack.",
+"/omniture/tracking.",
+"/oms_analytics_",
+"/onestat.js",
+"/onsitegeo.",
+"/opentag-",
+"/opentag/",
+"/openxtargeting.js",
+"/opinionlab.js",
+"/optimost-",
+"/optimost.",
+"/optimost_",
+"/optimostBody1.",
+"/optimostBody2.",
+"/optimostfoot.",
+"/optimosthead.",
+"/optimosthead/",
+"/optimostHeader.",
+"/optimostHeader1.",
+"/optimostHeader2.",
+"/ordertrack/",
+"/ovstats.",
+"/ow_analytics.",
+"/owa.tracker-combined-min.js",
+"/ox_stats.",
+"/oxtracker.",
+"/page-analytics.",
+"/page-track.",
+"/page_analytics.",
+"/page_counter.",
+"/pageeventcounter;",
+"/pagelogger/connector.php?",
+"/pageloggerobyx.",
+"/pagestat?",
+"/pagestats/",
+"/pagetrack.php?",
+"/pageviews-counter-",
+"/pageviews_counter.",
+"/pbasitetracker.",
+"/performance_tracker-",
+"/permalink-tracker.html?",
+"/pgtracking.",
+"/pgtrackingV3.",
+"/php-stats.js",
+"/php-stats.php?",
+"/php-stats.phpjs.php?",
+"/php-stats.recjs.php?",
+"/phpmyvisites.js",
+"/ping.gif?",
+"/ping_hotclick.js",
+"/pistats/cgi-bin/",
+"/piwik.php",
+"/piwik1.",
+"/piwik2.js",
+"/piwik_",
+"/piwikapi.js",
+"/piwikC_",
+"/piwikTracker.",
+"/pix.gif?",
+"/pixall.min.js",
+"/pixel-events.",
+"/pixel-page.html",
+"/pixel.*/track/*",
+"/pixel.gif?",
+"/pixel.png?",
+"/pixel.track2?",
+"/pixel.track?",
+"/pixel/?__tracker",
+"/pixel/img/",
+"/pixel/impression/",
+"/pixel/visit?",
+"/pixel1/impression.",
+"/pixel?google_",
+"/pixel_iframe.",
+"/pixel_track.",
+"/pixel_tracking.",
+"/pixelcounter.",
+"/PixelNedstat.",
+"/pixelstats/",
+"/pixeltrack.php?",
+"/pixeltracker.",
+"/pixeltracking/",
+"/pladtrack.",
+"/planetstat.",
+"/player_counter.ashx?",
+"/PlayerDashboardLoggingService.svc/json/StartSession?",
+"/playerlogger.",
+"/playerstats.gif?",
+"/playertracking/",
+"/plgtrafic.",
+"/plingatracker.",
+"/pluck-tracking.",
+"/plugins/stat-dfp/",
+"/plugins/status.gif?",
+"/plugins/wordfence/visitor.php?",
+"/popanalytics.",
+"/popupCookieWriter.",
+"/popuplog/",
+"/pphlogger.",
+"/printtracker.js",
+"/prnx_track.",
+"/probance_tracker.",
+"/prodtracker?",
+"/profile_tracker.",
+"/promo_tracking/",
+"/prum.",
+"/pstats.",
+"/ptrack.",
+"/public/visitor.json?",
+"/public/visitor/create?",
+"/pubstats.",
+"/pvcounter.",
+"/pvcounter/",
+"/pvcounter?",
+"/pvevent_",
+"/pview?event",
+"/pxa.min.js",
+"/pzn/proxysignature",
+"/qtracker-",
+"/quant.js",
+"/quant.swf?",
+"/quantcast.js",
+"/quantcast.xml",
+"/quantcast/",
+"/quantcast_",
+"/quantcastjs/",
+"/quantserve.com/",
+"/quantv2.swf?",
+"/qubittracker/",
+"/ra_track.",
+"/rcdntpagetag.js",
+"/readcounter.aspx?",
+"/readtracker-",
+"/recommendtrack?",
+"/record-impressions.",
+"/record_clicks.",
+"/record_visitor.",
+"/recstatsv2.",
+"/redirectexittrack.php?",
+"/ref_analytics.",
+"/refer-tracking.",
+"/referral_tracker.",
+"/referral_tracking.",
+"/referrer_tracking.",
+"/refstats.asp?",
+"/reg_stat.php?",
+"/register_stats.php?",
+"/register_video_*&server=",
+"/registeradevent?",
+"/remoteTrackingManager.cfc?*trackPage&",
+"/render?trackingId=",
+"/repdata.*/b/ss/*",
+"/report?event_",
+"/reporting/analytics.js",
+"/resmeter.js",
+"/resourcestat.",
+"/rest/analytics/",
+"/restats_",
+"/resxclsa.",
+"/resxclsa_",
+"/retargetingScript/",
+"/revsci.",
+"/revtracking/",
+"/rkrt_tracker-",
+"/roi_tracker.",
+"/roitrack.",
+"/roitracker.",
+"/roitracker2.",
+"/rolluptracker_",
+"/rtkbeacon.gif?",
+"/rtracker.",
+"/rtt-log-data?",
+"/rubics_trk",
+"/rubicsimp/c.gif?",
+"/rum-dytrc.",
+"/rum-track?",
+"/rum/id?",
+"/rumstat.",
+"/runtimejs/intercept/",
+"/sage_tracker.",
+"/save_stats.php?",
+"/savetracking?",
+"/sb.logger.js",
+"/sb.trackers.js",
+"/sbtracking/pageview2?",
+"/sclanalyticstag.",
+"/scmetrics.*/b/ss/*",
+"/script/analytics.",
+"/script/analytics/",
+"/script_log.",
+"/scriptAnalytics.",
+"/scripts.kissmetrics.com/",
+"/scripts/analytics.",
+"/scripts/analytics_",
+"/scripts/clickjs.php",
+"/scripts/contador.",
+"/scripts/ga.js",
+"/scripts/hbx.js",
+"/scripts/log.",
+"/scripts/statistics/",
+"/scripts/stats/",
+"/scripts/xiti/",
+"/sctracker.",
+"/sdxp1/dru4/meta?_hc=",
+"/securetracker.",
+"/send-impressions.html",
+"/sensor/statistic?",
+"/seosite-tracker/",
+"/seostats/",
+"/seotracker/",
+"/server.php?request=track&output=",
+"/services/analytics/",
+"/services/counter/",
+"/services/counters/",
+"/session-hit.",
+"/session-tracker/tracking-",
+"/sessioncam/",
+"/set_tracking.js",
+"/shareCounts.",
+"/shareTrackClient.",
+"/shinystat.",
+"/shinystat_",
+"/shopify_stats.js",
+"/showcounter.",
+"/si-tracking.",
+"/sidtracker.",
+"/sikcomscore_",
+"/sikquantcast_",
+"/silverpop/",
+"/simplereach_counts/",
+"/simtracker.min.js",
+"/siq-analytics.",
+"/site-tracker-",
+"/site-tracker.",
+"/site-tracker_",
+"/site_statistics.",
+"/site_stats.",
+"/site_stats/",
+"/site_tracking.",
+"/siteAnalytics-",
+"/siteAnalytics.",
+"/siteanalytics_",
+"/sitecatalist.js",
+"/sitecounter/counter.",
+"/sitecrm.js",
+"/sitecrm2.js",
+"/siteskan.com/",
+"/sitestat.",
+"/sitestat_",
+"/sitestatforms.",
+"/sitestats.gif?",
+"/sitetracker21.",
+"/sitetrek.js",
+"/skstats-",
+"/skstats_",
+"/skype-analytics.",
+"/slimstat/",
+"/smetrics.*/b/ss/*",
+"/social_tracking.",
+"/socialButtonTracker.",
+"/socialtracking.min.js",
+"/softclick.js",
+"/softpage/stats_registerhit.asp?",
+"/sometrics/",
+"/sophus/logging.js",
+"/sophus3_logging.js",
+"/sp-analytics-",
+"/sp_logging.",
+"/sp_tracker.",
+"/spannerworks-tracking-",
+"/spip.php?page=stats.js",
+"/springmetrics.",
+"/sstat_plugin.js",
+"/stat-analytics/",
+"/stat.aspx?",
+"/stat.gif?",
+"/stat.htm?",
+"/stat.js?",
+"/stat.php?",
+"/stat.png?",
+"/stat.tiff?",
+"/stat/ad?",
+"/stat/count",
+"/stat/event?",
+"/stat/fe?",
+"/stat/inserthit.",
+"/stat/track.php?mode=js",
+"/stat/track_",
+"/stat/tracker.",
+"/stat/uvstat?",
+"/stat2.aspx?",
+"/stat2.js",
+"/stat36/stat/track.php",
+"/stat?sid=",
+"/stat?SiteID=",
+"/stat?track=",
+"/stat_js.asp?",
+"/stat_page.",
+"/stat_page2.",
+"/stat_search.",
+"/stat_visits.",
+"/stat_vue.php?",
+"/stataffs/track.php?",
+"/statcapture.",
+"/statcollector.",
+"/statcount.",
+"/statcounter.asp",
+"/statcounter.js",
+"/statcountex/count.asp?",
+"/stateye/",
+"/static/tracking/",
+"/statics/analytics.js?",
+"/statistics-page-view/",
+"/statistics.asp?",
+"/statistics.aspx?profile",
+"/statistics.js?",
+"/statistics/fab.",
+"/statistics/ga.",
+"/statistics/get?",
+"/statistics/getcook.php?",
+"/statistics/imr.",
+"/statistics/logging/",
+"/statistics/metrica.",
+"/statistics/pageStat/",
+"/statistics/set?",
+"/statistics?counter=",
+"/statistics?eventType=",
+"/statlogger.",
+"/stats-js.cgi?",
+"/stats-tracking.js",
+"/stats.asp?id",
+"/stats.gif?",
+"/stats.hitbox.com/",
+"/stats.php?*http",
+"/stats.php?type=",
+"/stats.php?uri=",
+"/stats/?js",
+"/stats/?ref=",
+"/stats/add/",
+"/stats/adonis_",
+"/stats/collector.js",
+"/stats/counter.",
+"/stats/CounterPage.",
+"/stats/dlcount_",
+"/stats/et_track.asp?",
+"/stats/ga.",
+"/stats/impression",
+"/stats/imr.",
+"/stats/init.",
+"/stats/log.",
+"/stats/mark?",
+"/stats/metrica.",
+"/stats/metrics/",
+"/stats/mixpanel-",
+"/stats/page_view_",
+"/stats/pgview.",
+"/stats/ping?",
+"/stats/record.php?",
+"/stats/services/",
+"/stats/track.asp?",
+"/stats/tracker.gif?",
+"/stats/tracker.js",
+"/stats/welcome.php?",
+"/stats?aid=",
+"/stats?blog_",
+"/stats?callback=",
+"/stats?ev=",
+"/stats?object",
+"/stats?sid=",
+"/stats_blog.js?",
+"/stats_brand.js",
+"/stats_js.asp?",
+"/stats_tracker.",
+"/statsadvance.js",
+"/statscounter/",
+"/statscript.js",
+"/statsd_proxy",
+"/statspider?",
+"/statspixel.",
+"/statstracker?",
+"/statsupdater.",
+"/stattracker-",
+"/stracking.js",
+"/stt/track.",
+"/stt/track/",
+"/stwc-counter/",
+"/supercookie.",
+"/superstats.",
+"/supertracking.",
+"/surphace_track.",
+"/survey_invite_",
+"/surveyoverlay/",
+"/swfaddress.js?tracker=",
+"/syndication/metrics/",
+"/syndstats.",
+"/tacoda.",
+"/tacoda_",
+"/taevents-",
+"/tbuy/tracker/",
+"/tc_logging.js",
+"/tc_targeting.",
+"/tc_throttle.js",
+"/tealium.js",
+"/textlink.php?text",
+"/thbeacon/",
+"/thetracker.js",
+"/third-party-analitycs/",
+"/third-party-stats/",
+"/third-party/tracking.",
+"/thirdpartyCookie.",
+"/tiara/tracker/",
+"/tide_stat.js",
+"/timeslog.",
+"/tmpstats.gif?",
+"/tncms/tracking.js",
+"/tops-counter?",
+"/touchclarity/",
+"/tpix.gif?",
+"/tracciamento.php?",
+"/track-compiled.js",
+"/track-referrals.js",
+"/track.ads/",
+"/track.ashx?*=http",
+"/track.aspx?",
+"/track.cgi?",
+"/track.gif?",
+"/track.js?referrer",
+"/track.js?screen=",
+"/track.php?*&uid=",
+"/track.png?",
+"/track.srv.",
+"/track/*&CheckCookieId=",
+"/track/?site",
+"/track/a.gif?",
+"/track/aggregate?",
+"/track/component/",
+"/track/count*js",
+"/track/dot.gif?",
+"/track/event/",
+"/track/imp?",
+"/track/impression/",
+"/track/impression?",
+"/track/jsinfo",
+"/track/mygreendot/",
+"/track/pix.asp?",
+"/track/pixel.",
+"/track/pixel/",
+"/track/read/",
+"/track/site/",
+"/track/track-",
+"/track/track.php?",
+"/track/view/",
+"/track/visitors/?",
+"/track/visits/?",
+"/track2.php",
+"/track;adv",
+"/track?browserId",
+"/track?event=",
+"/track?referer=",
+"/track_clicks_",
+"/track_event.php?",
+"/track_js/?",
+"/track_metric/",
+"/track_pageview?",
+"/track_proxy?",
+"/track_social.",
+"/track_stat?",
+"/track_views.",
+"/track_visit.",
+"/track_visit?",
+"/trackad.",
+"/trackAdHit.",
+"/trackClickEvent.js",
+"/trackContentViews.",
+"/trackconversion?",
+"/tracker-config.js",
+"/tracker-ev-sdk.js",
+"/tracker-pb-min-rem.js",
+"/tracker-r1.js",
+"/tracker.do?",
+"/tracker.js.php?",
+"/tracker.json.php?",
+"/tracker.log?",
+"/tracker.min.js",
+"/tracker.pack.",
+"/tracker.php?",
+"/tracker.pl?",
+"/tracker.tsp?",
+"/tracker/aptimized-",
+"/tracker/event?",
+"/tracker/eventBatch/",
+"/tracker/imp?",
+"/tracker/index.jsp?",
+"/tracker/log?",
+"/tracker/p.gif?",
+"/tracker/ping/",
+"/tracker/receiver/",
+"/tracker/referrer/",
+"/tracker/story.jpg?",
+"/tracker/t.php?",
+"/tracker/track.php?",
+"/tracker/tracker.js",
+"/tracker2.js",
+"/tracker?*=",
+"/tracker_activityStream.",
+"/tracker_article",
+"/tracker_czn.tsp?",
+"/tracker_gif.",
+"/tracker_pageview.",
+"/tracker_pixel.",
+"/trackerGif?",
+"/trackerpixel.js",
+"/trackerstatistik.",
+"/trackEvent.js?",
+"/trackEvent.min.js?",
+"/trackga.",
+"/trackGAEvents.",
+"/trackhandler.ashx?",
+"/trackimage/",
+"/trackImpression/",
+"/trackimps?",
+"/tracking-active/",
+"/tracking-ad/",
+"/tracking-cookie.",
+"/tracking-hits.",
+"/tracking-info.gif?",
+"/tracking-init.",
+"/tracking-pixel.",
+"/tracking-pixel/",
+"/tracking-portlet/",
+"/tracking-v3.",
+"/tracking-widget.",
+"/tracking.ashx?",
+"/tracking.cgi?",
+"/tracking.fcgi?",
+"/tracking.gif?",
+"/tracking.jsp",
+"/tracking.php?id",
+"/tracking.php?q=",
+"/tracking.phtml?",
+"/tracking.relead.",
+"/tracking.vidt",
+"/tracking/*/agof-",
+"/tracking/addview/",
+"/tracking/adobe.js",
+"/tracking/ads.",
+"/tracking/article.",
+"/tracking/article/",
+"/tracking/at.js",
+"/tracking/beacon/?",
+"/tracking/clicks",
+"/tracking/create?",
+"/tracking/csp?",
+"/tracking/epixels.",
+"/tracking/fingerprint/",
+"/tracking/impression/",
+"/tracking/index.",
+"/tracking/log.php?",
+"/tracking/open?",
+"/tracking/pageview.",
+"/tracking/pixel.",
+"/tracking/pixel/",
+"/tracking/pixel_",
+"/tracking/pixels.",
+"/tracking/referrer?",
+"/tracking/setTracker/",
+"/tracking/simplified_",
+"/tracking/t.srv?",
+"/tracking/tag_commander.php?",
+"/tracking/track.jsp?",
+"/tracking/track.php?",
+"/tracking/tracking.",
+"/tracking/tracking_",
+"/tracking/trk-",
+"/tracking/tynt_",
+"/tracking/user_sync_widget?",
+"/tracking/views/",
+"/tracking/widget/",
+"/tracking202/",
+"/tracking_add_ons.",
+"/tracking_ajax.",
+"/tracking_clic.",
+"/tracking_clickevents.",
+"/tracking_cookie_baker.",
+"/tracking_frame_",
+"/tracking_headerJS_",
+"/tracking_id_",
+"/tracking_iframe.",
+"/tracking_link_cookie.",
+"/tracking_pix.",
+"/tracking_pixel",
+"/tracking_super_hot.js",
+"/trackingCode-",
+"/trackingCode.js",
+"/trackingcookies.",
+"/trackingDTM.js",
+"/trackingfilter.json?",
+"/trackingFooter.",
+"/trackingheader.",
+"/trackingImpression/",
+"/trackingp.gif",
+"/trackingPixel.",
+"/trackingPixelForIframe.",
+"/trackingpixels/get?referrer=",
+"/trackings/addview/",
+"/trackingScript1.",
+"/trackingScript2.",
+"/trackingService.min.js",
+"/trackingService/",
+"/trackIt.js",
+"/trackit.php?",
+"/trackit.pl?",
+"/trackjs.",
+"/trackjs1.",
+"/trackjs6.",
+"/trackjs_",
+"/trackmerchant.js",
+"/tracknat.",
+"/trackopen.cgi?",
+"/trackpagecover?",
+"/trackpageview.",
+"/trackPageView/",
+"/trackpidv3.",
+"/trackpix.",
+"/trackpixel.",
+"/trackpxl?",
+"/trackr.swf",
+"/trackstats?",
+"/tracksubprop.",
+"/trackTimings.gif?",
+"/trackuity.",
+"/TrackView/?track",
+"/trackVisit/",
+"/trackvisit?",
+"/traffic.asmx/",
+"/traffic/status.gif?",
+"/traffic/track^",
+"/traffic4u.",
+"/traffic_link_client.php?",
+"/traffic_record.php?",
+"/traffic_tracker.",
+"/traffictracker.",
+"/traffictrade/",
+"/traffix-track.",
+"/trafic.js",
+"/trakksocial.js",
+"/trans_pixel.asp",
+"/transparent1x1.",
+"/traxis-logger.",
+"/triggertag.js",
+"/triggit-analytics.",
+"/trkpixel.gif",
+"/trovit-analytics.js",
+"/truehits.php?",
+"/tse/tracking.",
+"/turn-proxy.html?",
+"/tw-track.js",
+"/tynt.js",
+"/udctrack.",
+"/uds/stats?",
+"/ui/analytics/",
+"/ultra_track/",
+"/universal-tracking-",
+"/urchinstats.",
+"/userfly.js",
+"/usertrack.aspx?",
+"/usertracking.js",
+"/usertrackingajax.php?",
+"/usr.gif?openratetracking=",
+"/utag.ga.",
+"/utag.loader-",
+"/utag.loader.",
+"/utrack.js?",
+"/utrack?",
+"/utracker.js",
+"/uvstat.js",
+"/uxm_tracking.",
+"/valueclickbrands/",
+"/vanillastats/",
+"/vblntpagetag.",
+"/vertical-stats.",
+"/vglnk.js",
+"/video_count.php?",
+"/videoanalytic/",
+"/videoAnalytics.",
+"/videolog?vid=",
+"/videotracking/",
+"/vidtrack.",
+"/view_stats.js.php",
+"/viewcounterjqueryproxy.",
+"/viewcounterproxy.",
+"/viewstats.aspx?",
+"/viewtracking.aspx?",
+"/viglink_",
+"/vip-analytics.",
+"/viperbar/stats.php?",
+"/visistat.js",
+"/visit-tracker.js",
+"/visit.gif?",
+"/visit/log.js?",
+"/visit/record.gif?",
+"/visit?id=",
+"/visit_pixel?",
+"/visit_tracking.",
+"/visitor-event?",
+"/visitor.cgi?aff",
+"/visitor.gif?ts=",
+"/visitor.js?key=",
+"/visitor.min.js",
+"/visitor/identity?",
+"/visitor/segment?*=",
+"/visitorCookie.",
+"/visitortrack?",
+"/visitortracker.pl?",
+"/visits/pixel?",
+"/visits_contor.",
+"/visitWebPage?_",
+"/visualstat/stat.php",
+"/vmtracking.",
+"/vpstats.",
+"/vptrack_",
+"/vs-track.js",
+"/vs/track.",
+"/vs_track.",
+"/vstat.php",
+"/vstats/counter.php",
+"/vstrack.",
+"/vtrack.aspx",
+"/vtrack.php?",
+"/vtracker.",
+"/vztrack.gif?",
+"/wanalytics/",
+"/wdg/tracking-",
+"/wdg_tracking-",
+"/web-analytics.",
+"/web_analytics/",
+"/web_traffic_capture.js",
+"/webanalytics3.",
+"/webcounter/",
+"/webiq.",
+"/webiq/",
+"/webiq_",
+"/weblog.*?cookie",
+"/weblog.js?",
+"/weblog.php?",
+"/weblog/*&refer=",
+"/weblog_*&wlog_",
+"/webmetricstracking.",
+"/webstat/cei_count.asp?",
+"/webstat_",
+"/webstatistics.php?",
+"/webstatistik/track.asp",
+"/webstats.js",
+"/webstats.php",
+"/webstats/index?",
+"/webstats/stat",
+"/webstats/track.php?",
+"/webstats_counter/",
+"/webtrack.",
+"/webtracker.",
+"/webtraffic.js",
+"/wholinked.com/track",
+"/whoson_*_trackingonly.js",
+"/widget/s.gif?",
+"/wjcounter-",
+"/wjcounter.",
+"/wjcountercore.",
+"/wlexpert_tracker.",
+"/wlexpert_tracker/",
+"/wmxtracker.js",
+"/woopra.js",
+"/worldwide_analytics/",
+"/wp-click-track/",
+"/wp-clickmap/",
+"/wp-content/plugins/stats/count.php?",
+"/wp-content/tracker.",
+"/wp-counter.php",
+"/wp-js/analytics.",
+"/wp-powerstat/",
+"/wp-slimstat/",
+"/wp_stat.php?",
+"/wprum.",
+"/wrapper/quantcast.swf",
+"/written-analytics.",
+"/wstat.pl",
+"/wstats.php?",
+"/wtbase.js",
+"/wtcore.js",
+"/wtid.js",
+"/wtinit.js",
+"/wysistat.js",
+"/wz_logging.",
+"/xiti.js",
+"/xitistatus.js",
+"/xn_track.",
+"/xstat.aspx?",
+"/xtanalyzer_roi.",
+"/xtclick.",
+"/xtclicks.",
+"/xtclicks_",
+"/xtrack.php?",
+"/xtrack.png?",
+"/yahoo-beacon.js",
+"/yahoo_marketing.js",
+"/yahooBeacon.",
+"/yahooTracker/",
+"/ybn_pixel/",
+"/yell-analytics-",
+"/yell-analytics.",
+"/youtube-track-event_",
+"/ystat.do",
+"/ystat.js",
+"/zag.gif?",
+"/zemtracker.",
+"/ztagtrackedevent/",
+"/~utm_gif?",
+";manifest-analytics.js",
+"=ATAtracker&",
+"=googleanalytics_",
+"=stats&action=",
+"=stats&apiVersion=",
+"=track_view&",
+"=widgetimpression&",
+"?&anticache=*filename.gif",
+"?_siteid=",
+"?act=counter&",
+"?action=event&",
+"?action=track_visitor&",
+"?action=tracking_script",
+"?bstat=",
+"?criteoTrack=",
+"?event=General.track",
+"?event=log&",
+"?eventtype=impression&pid=",
+"?eventtype=request&pid=",
+"?googleTrack=",
+"?hmtrackerjs=",
+"?log=stats&",
+"?ref=*&itemcnt=",
+"?token=*&sessionid=*&visitorid=",
+"?trackingCategory=",
+"?triggertags=",
+"^name=atatracker^",
+"_247seotracking.",
+"_analytics.php?",
+"_astatspro/",
+"_beacon?",
+"_cedexis.",
+"_chartbeat.js",
+"_clickability/",
+"_clicktrack.asp?",
+"_clickTracking.",
+"_directtrack.js",
+"_event_stats.",
+"_global_analytics_",
+"_google_analytics.",
+"_googleAnalytics.",
+"_googleAnalytics_",
+"_imp_logging?",
+"_impressions.gif?",
+"_logimpressions.",
+"_m10banners/tracking.php?",
+"_metricsTagging.",
+"_minder_tracking/",
+"_nedstat.js",
+"_nielsen.js",
+"_ntpagetag.",
+"_pages_tracker.",
+"_performance_tracker-",
+"_quantcast.swf",
+"_quantcast_tag.",
+"_resource/analytics.js",
+"_social_tracking.",
+"_stat_counter.php?",
+"_stats.js?",
+"_stats/Logger?",
+"_stats_log.",
+"_tracker-active/",
+"_tracker.js.",
+"_tracker.js?",
+"_tracker.php?*http",
+"_tracker_min.",
+"_trafficTracking.",
+"_url_tracking.",
+"_web_stat.js",
+"_webanalytics.",
+"_webiq.",
+"cgi-bin/counter",
+"-logabpstatus.",
+"/adblock?action=",
+"_adblock_stat.",
+"_mongo_stats/",
+"/cdn-cgi/pe/bag2?*.google-analytics.com",
+"/cdn-cgi/pe/bag2?*bluekai.com",
+"/cdn-cgi/pe/bag2?*bounceexchange.com",
+"/cdn-cgi/pe/bag2?*cdn.onthe.io%2Fio.js",
+"/cdn-cgi/pe/bag2?*chartbeat.js",
+"/cdn-cgi/pe/bag2?*dnn506yrbagrg.cloudfront.net",
+"/cdn-cgi/pe/bag2?*geoiplookup",
+"/cdn-cgi/pe/bag2?*getblueshift.com",
+"/cdn-cgi/pe/bag2?*google-analytics.com%2Fanalytics.js",
+"/cdn-cgi/pe/bag2?*histats.com",
+"/cdn-cgi/pe/bag2?*hs-analytics.net",
+"/cdn-cgi/pe/bag2?*log.outbrain.com",
+"/cdn-cgi/pe/bag2?*mc.yandex.ru",
+"/cdn-cgi/pe/bag2?*newrelic.com",
+"/cdn-cgi/pe/bag2?*nr-data.net",
+"/cdn-cgi/pe/bag2?*optimizely.com",
+"/cdn-cgi/pe/bag2?*piwik.js",
+"/cdn-cgi/pe/bag2?*quantserve.com",
+"/cdn-cgi/pe/bag2?*radarurl.com",
+"/cdn-cgi/pe/bag2?*scorecardresearch.com",
+"/cdn-cgi/pe/bag2?*static.getclicky.com%2Fjs",
+"/cdn-cgi/pe/bag2?*viglink.com",
+"/cdn-cgi/pe/bag2?*yieldbot.intent.js" ];
+var bad_url_parts_flag = 1940 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 0 rules:
-var good_url_regex = "";
+var good_url_regex_Array = [  ];
 var good_url_regex_flag = 0 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 0 rules:
-var bad_url_regex = "";
+var bad_url_regex_Array = [  ];
 var bad_url_regex_flag = 0 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+
+// Add any good networks here. Format is network folowed by a comma and
+// optional white space, and then the netmask.
+// LAN, loopback, Apple (direct and Akamai e.g. e4805.a.akamaiedge.net), Microsoft (updates and services)
+var GoodNetworks_Array = [ "10.0.0.0,     255.0.0.0",
+"172.16.0.0,        255.240.0.0",
+"192.168.0.0,       255.255.0.0",
+"127.0.0.0,         255.0.0.0",
+"17.0.0.0,          255.0.0.0",
+"23.2.8.68,         255.255.255.255",
+"23.39.179.17,      255.255.255.255",
+"23.2.145.78,       255.255.255.255",
+"104.70.71.223,     255.255.255.255",
+"104.96.184.235,    255.255.255.255",
+"65.52.0.0,         255.255.252.0" ];
+
+// Apple iAd, Microsoft telemetry
+var GoodNetworks_Exceptions_Array = [ "17.172.28.11,     255.255.255.255",
+"134.170.30.202,    255.255.255.255",
+"137.116.81.24,     255.255.255.255",
+"157.56.106.189,    255.255.255.255",
+"184.86.53.99,      255.255.255.255",
+"2.22.61.43,        255.255.255.255",
+"2.22.61.66,        255.255.255.255",
+"204.79.197.200,    255.255.255.255",
+"23.218.212.69,     255.255.255.255",
+"65.39.117.230,     255.255.255.255",
+"65.52.108.33,      255.255.255.255",
+"65.55.108.23,      255.255.255.255",
+"64.4.54.254,       255.255.255.255" ];
+
+// Akamai: 23.64.0.0/14, 23.0.0.0/12, 23.32.0.0/11, 104.64.0.0/10
+
+// Add any bad networks here. Format is network folowed by a comma and
+// optional white space, and then the netmask.
+// From securemecca.com: Adobe marketing cloud, 2o7, omtrdc, Sedo domain parking, flyingcroc, accretive
+var BadNetworks_Array = [ "61.139.105.128,    255.255.255.192",
+"63.140.35.160,  255.255.255.248",
+"63.140.35.168,  255.255.255.252",
+"63.140.35.172,  255.255.255.254",
+"63.140.35.174,  255.255.255.255",
+"66.150.161.32,  255.255.255.224",
+"66.235.138.0,   255.255.254.0",
+"66.235.141.0,   255.255.255.0",
+"66.235.143.48,  255.255.255.254",
+"66.235.143.64,  255.255.255.254",
+"66.235.153.16,  255.255.255.240",
+"66.235.153.32,  255.255.255.248",
+"81.31.38.0,     255.255.255.128",
+"82.98.86.0,     255.255.255.0",
+"89.185.224.0,   255.255.224.0",
+"207.66.128.0,   255.255.128.0" ];
 
 // block these schemes; use the command line for ftp, rsync, etc. instead
 var bad_schemes_RegExp = RegExp("^(?:ftp|sftp|tftp|ftp-data|rsync|finger|gopher)", "i")
@@ -19040,40 +19161,40 @@ function easylist2re(pat,offset) {
 // Compile efficient NFA RegExp's
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_host_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var good_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_host_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_hostpath_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var good_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_hostpath_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var good_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_regex_Array.map(easylist2re).join("|") + ")", "i");
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_host_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var bad_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_host_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_hostpath_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var bad_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_hostpath_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var bad_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_regex_Array.map(easylist2re).join("|") + ")", "i");
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_url_parts_RegExp = new RegExp("(?:" + good_url_parts.split("\n").map(easylist2re).join("|") + ")", "i");
+var good_url_parts_RegExp = new RegExp("(?:" + good_url_parts_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_url_parts_RegExp = new RegExp("(?:" + bad_url_parts.split("\n").map(easylist2re).join("|") + ")", "i");
+var bad_url_parts_RegExp = new RegExp("(?:" + bad_url_parts_Array.map(easylist2re).join("|") + ")", "i");
 
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_url_regex_RegExp = new RegExp("(?:" + good_url_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var good_url_regex_RegExp = new RegExp("(?:" + good_url_regex_Array.map(easylist2re).join("|") + ")", "i");
 n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_url_regex_RegExp = new RegExp("(?:" + bad_url_regex.split("\n").map(easylist2re).join("|") + ")", "i");
+var bad_url_regex_RegExp = new RegExp("(?:" + bad_url_regex_Array.map(easylist2re).join("|") + ")", "i");
 
 // Post-processing: Dereference large strings (perhaps unnecessarily) to allow garbage collection
-good_da_host_regex = null;
-good_da_hostpath_regex = null;
-good_da_regex = null;
-bad_da_host_regex = null;
-bad_da_hostpath_regex = null;
-bad_da_regex = null;
-good_url_parts = null;
-bad_url_parts = null;
-good_url_regex = null;
-bad_url_regex = null;
+good_da_host_regex_Array = null;
+good_da_hostpath_regex_Array = null;
+good_da_regex_Array = null;
+bad_da_host_regex_Array = null;
+bad_da_hostpath_regex_Array = null;
+bad_da_regex_Array = null;
+good_url_parts_Array = null;
+bad_url_parts_Array = null;
+good_url_regex_Array = null;
+bad_url_regex_Array = null;
 
 //////////////////////////////////////////////////
 // Define the is_ipv4_address function and vars //
@@ -19115,6 +19236,7 @@ var debug_flag = false;               // use for short-circuit '&&' to print deb
 function FindProxyForURL(url, host)
 {
     var host_is_ipv4 = is_ipv4_address(host);
+    var host_ipv4_address;
     
     alert_flag && alert("url is: " + url);
     alert_flag && alert("host is: " + host);
@@ -19157,6 +19279,64 @@ function FindProxyForURL(url, host)
         alert("host_noserver is: " + host_noserver);
     }
 
+    // Short circuit to blackhole for good_da_host_exceptions
+    if ( hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
+        alert_flag && alert("good_da_host_exceptions_JSON blackhole!");
+        // Redefine url and host to avoid leaking information to the blackhole
+        url = "http://127.0.0.1:80";
+        host = "127.0.0.1";
+        return blackhole;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    // Check to make sure we can get an IPv4 address from the given host //
+    // name.  If we cannot do that then skip the Networks tests.         //
+    ///////////////////////////////////////////////////////////////////////
+    
+    host_ipv4_address = host_is_ipv4 ? host : (isResolvable(host) ? dnsResolve(host) : false);
+
+    if (host_ipv4_address) {
+        alert_flag && alert("host ipv4 address is: " + host_ipv4_address);
+        /////////////////////////////////////////////////////////////////////////////
+        // If the IP translates to one of the GoodNetworks_Array (with exceptions) //
+        // we pass it because it is considered safe.                               //
+        /////////////////////////////////////////////////////////////////////////////
+    
+        for (i in GoodNetworks_Exceptions_Array) {
+            tmpNet = GoodNetworks_Exceptions_Array[i].split(/,\s*/);
+            if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
+                alert_flag && alert("GoodNetworks_Exceptions_Array Blackhole!");
+                // Redefine url and host to avoid leaking information to the blackhole
+                url = "http://127.0.0.1:80";
+                host = "127.0.0.1";
+                return blackhole;
+            }
+        }
+        for (i in GoodNetworks_Array) {
+            tmpNet = GoodNetworks_Array[i].split(/,\s*/);
+            if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
+                alert_flag && alert("GoodNetworks_Array PASS!");
+                return MyFindProxyForURL(url.toString(), host);
+            }
+        }
+    
+        ///////////////////////////////////////////////////////////////////////
+        // If the IP translates to one of the BadNetworks_Array we fail it   //
+        // because it is not considered safe.                                //
+        ///////////////////////////////////////////////////////////////////////
+    
+        for (i in BadNetworks_Array) {
+            tmpNet = BadNetworks_Array[i].split(/,\s*/);
+            if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
+                alert_flag && alert("BadNetworks_Array Blackhole!");
+                // Redefine url and host to avoid leaking information to the blackhole
+                url = "http://127.0.0.1:80";
+                host = "127.0.0.1";
+                return blackhole;
+            }
+        }
+    }
+
     //////////////////////////////////////////////////////////////////////////////
     // HTTPS: https scheme can only use domain information                      //
     // unless PacHttpsUrlStrippingEnabled == false [Chrome] or                  //
@@ -19173,7 +19353,8 @@ function FindProxyForURL(url, host)
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
 
-        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ) {
+        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host)))
+            && !hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
                 alert_flag && alert("HTTPS PASS!");
             return MyFindProxyForURL(url.toString(), host);
         }
@@ -19201,15 +19382,16 @@ function FindProxyForURL(url, host)
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
 
-        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ||  // fastest test first
-            (use_pass_rules_parts_flag &&
-                (good_da_hostpath_exact_flag && (hasOwnProperty(good_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(good_da_hostpath_JSON,url_noquery)) ) ||
-                // test logic: only do the slower test if the host has a (non)suspect fqdn
-                (good_da_host_regex_flag && (good_da_host_RegExp.test(host_noserver)||good_da_host_RegExp.test(host))) ||
-                (good_da_hostpath_regex_flag && (good_da_hostpath_RegExp.test(url_noservernoquery)||good_da_hostpath_RegExp.test(url_noquery))) ||
-                (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
-                (good_url_parts_flag && good_url_parts_RegExp.test(url_pathonly)) ||
-                (good_url_regex_flag && good_url_regex_RegExp.test(url))) ) {
+        if ( !hasOwnProperty(good_da_host_exceptions_JSON,host)
+            && ((good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ||  // fastest test first
+                (use_pass_rules_parts_flag &&
+                    (good_da_hostpath_exact_flag && (hasOwnProperty(good_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(good_da_hostpath_JSON,url_noquery)) ) ||
+                    // test logic: only do the slower test if the host has a (non)suspect fqdn
+                    (good_da_host_regex_flag && (good_da_host_RegExp.test(host_noserver)||good_da_host_RegExp.test(host))) ||
+                    (good_da_hostpath_regex_flag && (good_da_hostpath_RegExp.test(url_noservernoquery)||good_da_hostpath_RegExp.test(url_noquery))) ||
+                    (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
+                    (good_url_parts_flag && good_url_parts_RegExp.test(url_pathonly)) ||
+                    (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
             return MyFindProxyForURL(url.toString(), host);
         }
     
