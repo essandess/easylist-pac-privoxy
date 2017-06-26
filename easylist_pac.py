@@ -757,13 +757,13 @@ good_da_host_exceptions_exact = [ 'iad.apple.com',
 
 comment_re = re.compile(r'^!\s*')   # ! commment
 configuration_re = re.compile(r'^\[[^]]*?\]')  # [Adblock Plus 2.0]
-easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object(?!-subrequest)|object-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
+easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
 option_re = re.compile(r'^(.*?)(\$' + easylist_opts + r'.*?)$')
 # regex's used to exclude options for specific cases
 domain_option = r'(?:domain=)'  # discards rules specific to links from specific domains
 alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
 notdm3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
-not3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:domain|script|stylesheet|object[^-]|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+not3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
 scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
 selector_re = re.compile(r'^(.*?)#\@{0,1}#*?.*?$') # #@##div [should be #+?, but old style still used]
@@ -2559,11 +2559,15 @@ def re_test(regex,string):
 def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
     ignore_rules_flag = False
     for line in fd:
+        line = line.rstrip()
         line_orig = line
+        if False:
+            debug_this_rule_string = '||arstechnica.com^*/|$object'
+            if line.find(debug_this_rule_string) != -1:
+                pass
         exception_flag = False  # block default; pass if True
         option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
         opts = ''  # default: no options in the rule
-        line = line.strip()  # remove \n
         # ignore these cases
         # comment case: ignore
         if re_test(comment_re,line):
@@ -2715,7 +2719,7 @@ def js_init_object(object_name):
 
 // {:d} rules:
 var {}_JSON = {}{}{};
-var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
 '''.format(len(obj),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
 
 # Use to define '\n'-separated regex alternatives

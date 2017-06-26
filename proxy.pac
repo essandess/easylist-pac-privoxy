@@ -212,13 +212,13 @@ var good_da_host_JSON = { "apple.com": null,
 "adv.welaika.com": null,
 "ads.fuckingmachines.com": null,
 "ads.ultimatesurrender.com": null };
-var good_da_host_exact_flag = 120 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var good_da_host_exact_flag = 120 > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
 
 // 0 rules:
 var good_da_host_regex_Array = [  ];
 var good_da_host_regex_flag = 0 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 1117 rules:
+// 1105 rules:
 var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "analytics.atomiconline.com/services/jquery.js": null,
 "anthem.com/includes/foresee/foresee-trigger.js": null,
@@ -546,7 +546,6 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "cameralabs.com/PG_library/Regional/US/Love_a_Coffee_120x240.jpg": null,
 "candystand.com/assets/images/ads": null,
 "caranddriver.com/assets/js/ads/ads-combined.min.js": null,
-"casino.com/banners/flash": null,
 "cctv.com/js/cntv_Advertise.js": null,
 "cdn.complexmedianetwork.com/cdn/agenda.complex.com/js/jquery.writecapture.js": null,
 "cdn.complexmedianetwork.com/cdn/agenda.complex.com/js/jwplayerl.js": null,
@@ -613,7 +612,6 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "englishanimes.com/wp-content/themes/englishanimes/js/pop.js": null,
 "epicgameads.com/crossdomain.xml": null,
 "eplayerhtml5.performgroup.com/js/tsEplayerHtml5/js/Eplayer/js/modules/bannerview/bannerview.main.js": null,
-"espn.co.uk/ads/gamemodule_v0.2.swf": null,
 "evanscycles.com/ads": null,
 "eventim.de/obj/basic/ad2_obj/layout": null,
 "ewallpapers.eu/ads/logo.jpg": null,
@@ -631,11 +629,8 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "forums.realgm.com/banners": null,
 "freeads.in/classifieds/common/postad.css": null,
 "freeads.in/freead.png": null,
-"freeonlinegames.com/advertising/adaptv-as3.swf": null,
-"freeonlinegames.com/advertising/google-loader.swf": null,
 "freeride.co.uk/img/admarket": null,
 "fs-freeware.net/images/jdownloads/downloadimages/banner_ads.png": null,
-"gameitnow.com/ads/google_loader.swf": null,
 "gcultra.com/js/exit_popup.js": null,
 "getgamesgo.com/Banners": null,
 "glamour.com/aspen/components/cn-fe-ads/js/cn.dart.js": null,
@@ -888,7 +883,6 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "tnol.com/adimages/digitaledition": null,
 "tooltrucks.com/ads": null,
 "tooltrucks.com/banners": null,
-"toongames.com/advertising/toon-google-preloader.swf": null,
 "topusajobs.com/banners": null,
 "torontosun.com/assets/js/dfp.js": null,
 "trade-a-plane.com/AdBox/js/jquery.TAP_AdBox.js": null,
@@ -947,7 +941,6 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "yumenetworks.com/crossdomain.xml": null,
 "zap2it.com/ads/newsletter": null,
 "zedo.com/crossdomain.xml": null,
-"zeenews.india.com/ads/jw/player.swf": null,
 "ziehl-abegg.com/images/img_adverts": null,
 "10-download.com/ad/adframe.js": null,
 "95.211.184.210/js/advertisement.js": null,
@@ -1209,11 +1202,9 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "felcia.co.uk/css/advert-view.css": null,
 "felcia.co.uk/js/ads_common.js": null,
 "filmon.com/ad/affiliateimages/banner-250x350.png": null,
-"flashgames247.com/advertising/preroll/google-fg247-preloader.swf": null,
 "folha.uol.com.br/paywall/js/1/publicidade.ads.js": null,
 "fotolog.com/styles/flags/ad.gif": null,
 "freeride.se/img/admarket": null,
-"haberler.com/video-haber/adsense_news_politics.swf": null,
 "happymtb.org/annonser": null,
 "hizlial.com/banners": null,
 "hry.cz/ad/adcode.js": null,
@@ -1284,12 +1275,10 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "fucktube.com/work/videoad.php": null,
 "gaynetwork.co.uk/Images/ads/bg": null,
 "hdzog.com/js/advertising.js": null,
-"hostedadsp.realitykings.com/hosted/flash/rk_player_1.5_300x250.swf": null,
 "iafd.com/graphics/headshots/thumbs/th_iafd_ad.gif": null,
 "manhuntshop.com/affimages": null,
 "manhuntshop.com/images/affbanners": null,
 "nonktube.com/img/adyea.jpg": null,
-"panicporn.com/Bannerads/player/player_flv_multi.swf": null,
 "sextoyfun.com/admin/aff_files/BannerManager": null,
 "sextoyfun.com/control/aff_banners": null,
 "skimtube.com/advertisements.php": null,
@@ -1328,7 +1317,6 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "sexix.net/adframe.js": null,
 "sexvidx.tv/js/eroex.js": null,
 "sexwebvideo.com/js/ads.js": null,
-"submityourflicks.com/player/player-ads.swf": null,
 "tube8.com/js/advertisement.js": null,
 "voyeurperversion.com/inc/showads.js": null,
 "watchingmysistergoblack.com/pop.js": null,
@@ -1336,7 +1324,7 @@ var good_da_hostpath_JSON = { "aliyun.com/nocaptcha/analyze.jsonp": null,
 "xibitnet.com/check/advertisements.js": null,
 "ads.b10f.jp/flv": null,
 "imagebam.com/image": null };
-var good_da_hostpath_exact_flag = 1117 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var good_da_hostpath_exact_flag = 1105 > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
 
 // 434 rules:
 var good_da_hostpath_regex_Array = [ "4game.com^*/yandex-metrika.js",
@@ -1775,7 +1763,7 @@ var good_da_hostpath_regex_Array = [ "4game.com^*/yandex-metrika.js",
 "phncdn.com^*/ads.js" ];
 var good_da_hostpath_regex_flag = 434 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 96 rules:
+// 89 rules:
 var good_da_regex_Array = [ "abclocal.go.com/combiner/c?js=*/visitorAPI.js",
 "adblockanalytics.com/ads.js|",
 "link.theplatform.com/*?affiliate=",
@@ -1808,16 +1796,12 @@ var good_da_regex_Array = [ "abclocal.go.com/combiner/c?js=*/visitorAPI.js",
 "flyerservices.com/cached_banner_pages/*bannerid=",
 "funiaste.net/obrazki/*&adtype=",
 "g.doubleclick.net/pagead/ads?ad_type=text_dynamicimage_flash^",
-"game.zylom.com^*.swf?*&adURL=",
 "godtube.com/resource/mediaplayer/*&adzone=",
 "healthline.com/v2/ad-mr2-iframe?useAdsHost=*&dfpAdSite=",
-"ifeelgoood.com/tapcontent-*.swf?clicktag=",
 "koaa.com/videoplayer/iframe.cfm?*&hide_ads=",
-"lightningcast.net/servlets/getplaylist?*&responsetype=asx&",
 "nationalgeographic.com/channel/videos/satellite/*.swf?adsite=",
 "ox-d.sbnation.com/w/1.0/jstag|",
 "ping.indieclicktv.com/www/delivery/ajs.php?zoneid",
-"pinkbike.org^*.swf?ad=0&",
 "player.onescreen.net/*/MediaPlayer.swf?ads=",
 "player.streamtheworld.com/liveplayer.php?*adstype=",
 "radioguide.fm/minify/?*/Advertising/webroot/css/advertising.css",
@@ -1828,8 +1812,6 @@ var good_da_regex_Array = [ "abclocal.go.com/combiner/c?js=*/visitorAPI.js",
 "terraristik.com^*&ad_type=",
 "trutv.com/includes/banners/de/video/*.ad|",
 "tudouui.com/bin/player2/*&adsourceid=",
-"upc-cablecom.ch^*.swf?clicktag=http",
-"vombasavers.com^*.swf?clickTAG=",
 "washingtonpost.com/wpost/css/combo?*/ads.css",
 "washingtonpost.com/wpost2/css/combo?*/ads.css",
 "washingtonpost.com^*=/ad/audsci.js",
@@ -1840,7 +1822,6 @@ var good_da_regex_Array = [ "abclocal.go.com/combiner/c?js=*/visitorAPI.js",
 "channel4.com/ad/l/1?|",
 "coinurl.com/get.php?id=18045",
 "majorleaguegaming.com^*.png?*=",
-"moje-dzialdowo.pl/images/*.swf|",
 "monsoonads.com:8080/crossdomain.xml",
 "ads.peteava.ro/www/serve_ads/serve2.php?campaign=",
 "autotube.cz/ui/player/ad.php?id=",
@@ -1872,7 +1853,7 @@ var good_da_regex_Array = [ "abclocal.go.com/combiner/c?js=*/visitorAPI.js",
 "pornteengirl.com/temporaire/image.php?*/virtuagirl/",
 "img.pornhub.com/gif/*.gif|",
 "redtube.com/htmllogin|" ];
-var good_da_regex_flag = 96 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var good_da_regex_flag = 89 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 37 rules:
 var good_da_host_exceptions_JSON = { "iad.apple.com": null,
@@ -1912,7 +1893,7 @@ var good_da_host_exceptions_JSON = { "iad.apple.com": null,
 "wes.df.telemetry.microsoft.com": null,
 "win10.ipv6.microsoft.com": null,
 "www.bingads.microsoft.com": null };
-var good_da_host_exceptions_exact_flag = 37 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var good_da_host_exceptions_exact_flag = 37 > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
 
 // 8455 rules:
 var bad_da_host_JSON = { "meetrics.netbb-": null,
@@ -10370,7 +10351,7 @@ var bad_da_host_JSON = { "meetrics.netbb-": null,
 "pop.fapxl.com": null,
 "pop.mrstiff.com": null,
 "rd.cockhero.info": null };
-var bad_da_host_exact_flag = 8455 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var bad_da_host_exact_flag = 8455 > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
 
 // 21 rules:
 var bad_da_host_regex_Array = [ "analytics-beacon-*.amazonaws.com",
@@ -10396,7 +10377,7 @@ var bad_da_host_regex_Array = [ "analytics-beacon-*.amazonaws.com",
 "plundermedia.com*rectangle-" ];
 var bad_da_host_regex_flag = 21 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 4256 rules:
+// 4252 rules:
 var bad_da_hostpath_JSON = { "google-analytics.com/analytics.js": null,
 "google-analytics.com/cx/api.js": null,
 "google-analytics.com/ga_exp.js": null,
@@ -12898,7 +12879,6 @@ var bad_da_hostpath_JSON = { "google-analytics.com/analytics.js": null,
 "hdtvtest.co.uk/image/partner": null,
 "hentai2read.com/ios/swf": null,
 "hentaihaven.org/wp-content/banners": null,
-"hentaistream.com/wp-includes/images": null,
 "heraldm.com/iframe": null,
 "herold.at/images/dealofday.swf": null,
 "herzeleid.com/files/images/banners": null,
@@ -13319,7 +13299,6 @@ var bad_da_hostpath_JSON = { "google-analytics.com/analytics.js": null,
 "nufc.com/forddirectbanner.js": null,
 "numberempire.com/images/b": null,
 "nutritionhorizon.com/content/banners": null,
-"nutritionhorizon.com/content/flash_loaders": null,
 "nuttynewstoday.com/images/hostwink.jpg": null,
 "nuttynewstoday.com/images/percento-banner.jpg": null,
 "nydailynews.com/img/sponsor": null,
@@ -14333,12 +14312,10 @@ var bad_da_hostpath_JSON = { "google-analytics.com/analytics.js": null,
 "javhub.net/img/r.jpg": null,
 "javporn.in/clicunder.js": null,
 "javstreaming.net/app/forad.js": null,
-"julesjordanvideo.com/flash": null,
 "justporno.tv/ad": null,
 "keezmovies.com/iframe.html": null,
 "kindgirls.com/banners2": null,
 "konachan.com/images/bam": null,
-"krasview.ru/content": null,
 "krasview.ru/resource/a.php": null,
 "kuntfutube.com/kellyban.gif": null,
 "lesbian.hu/banners": null,
@@ -14653,7 +14630,7 @@ var bad_da_hostpath_JSON = { "google-analytics.com/analytics.js": null,
 "pinporn.com/popunder": null,
 "pornuppz.info/out.php": null,
 "ymages.org/prepop.php": null };
-var bad_da_hostpath_exact_flag = 4256 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var bad_da_hostpath_exact_flag = 4252 > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
 
 // 2002 rules:
 var bad_da_hostpath_regex_Array = [ "adclear.*/acc",
@@ -16660,7 +16637,7 @@ var bad_da_hostpath_regex_Array = [ "adclear.*/acc",
 "yuvutu.com^*/banners/" ];
 var bad_da_hostpath_regex_flag = 2002 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
-// 376 rules:
+// 373 rules:
 var bad_da_regex_Array = [ "ivwextern.",
 "mint.*/?js",
 "piwik.",
@@ -16730,9 +16707,7 @@ var bad_da_regex_Array = [ "ivwextern.",
 "amazon.*/batch/*uedata=",
 "androidcommunity.com/ws/?js",
 "api.tinypic.com/api.php?action=track",
-"arstechnica.com/|",
 "arstechnica.com^*.gif?id=",
-"arstechnica.com^*/|",
 "banggood.com/?p=",
 "binaries4all.nl/misc/misc.php?*&url=http",
 "bloomberg.com/apps/data?referrer",
@@ -16964,7 +16939,6 @@ var bad_da_regex_Array = [ "ivwextern.",
 "gamecopyworld.com*/!",
 "gamecopyworld.eu*/!",
 "gameknot.com/amaster.pl?j=",
-"herold.at/fs/orgimg/*.swf?baseurl=http%3a%2f%2fwww.*&amp;linktarget=_blank",
 "herold.at^*.swf?*&linktarget=_blank",
 "hipforums.com/newforums/calendarcolumn.php?cquery=bush",
 "hulu.com/beacon/*=adauditerror",
@@ -17037,7 +17011,7 @@ var bad_da_regex_Array = [ "ivwextern.",
 "xxnxx.eu/index.php?xyz_lbx=",
 "fantasti.cc^*?ad=",
 "movies.askjolene.com/c64?clickid=" ];
-var bad_da_regex_flag = 376 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
+var bad_da_regex_flag = 373 > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
 
 // 0 rules:
 var good_url_parts_Array = [  ];
