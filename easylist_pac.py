@@ -145,7 +145,10 @@ var blackhole = "PROXY " + blackhole_ip_port;
 // EasyList format references:
 // https://adblockplus.org/filters
 // https://adblockplus.org/filter-cheatsheet
-    
+
+// Create object hashes or compile efficient NFA's from all filters
+// Various alternate filtering and regex approaches were timed using node and at jsperf.com
+
 // Too many rules (>~ 10k) bog down the browser; make reasonable exclusions here:
 
 '''.format(blackhole_ip_port)
@@ -163,7 +166,9 @@ var GoodNetworks_Array = [ "10.0.0.0,     255.0.0.0",
 "23.39.179.17,      255.255.255.255",
 "23.2.145.78,       255.255.255.255",
 "104.70.71.223,     255.255.255.255",
+"104.73.77.224,     255.255.255.255",
 "104.96.184.235,    255.255.255.255",
+"104.96.188.194,    255.255.255.255",
 "65.52.0.0,         255.255.252.0" ];
 
 // Apple iAd, Microsoft telemetry
@@ -214,145 +219,6 @@ var querypart_RegExp = RegExp("^((?:[\\\\w-]+\\\\.)+[a-zA-Z0-9-]{2,24}\\\\.?[\\\
 var domainpart_RegExp = RegExp("^(?:[\\\\w-]+\\\\.)*((?:[\\\\w-]+\\\\.)[a-zA-Z0-9-]{2,24}\\\\.?)", "i");
 var slashend_RegExp = RegExp("\\\\/$", "i");
 
-// da_hostonly_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?)(?:$|[/^?])$');
-// da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]+?)\??$');
-
-// object hashes
-// https://stackoverflow.com/questions/135448/how-do-i-check-if-an-object-has-a-property-in-javascript
-function hasOwnProperty(obj, prop) {
-    var proto = obj.__proto__ || obj.constructor.prototype;
-    return (prop in obj) &&
-        (!(prop in proto) || proto[prop] !== obj[prop]);
-}
-
-if ( Object.prototype.hasOwnProperty ) {
-    var hasOwnProperty = function(obj, prop) {
-        return obj.hasOwnProperty(prop);
-    }
-}
-
-// unique arrays
-// https://stackoverflow.com/questions/11688692/most-elegant-way-to-create-a-list-of-unique-items-in-javascript
-// function unique_nonempty(arr) {
-//     var u = {}, a = [];
-//     for(var i = 0, l = arr.length; i < l; ++i){
-//         if(arr[i].length > 0 && !u.hasOwnProperty(arr[i])) {
-//             a.push(arr[i]);
-//             u[arr[i]] = 1;
-//         }
-//     }
-//     return a;
-// }
-
-// convert EasyList wildcard '*', separator '^', and anchor '|' to regexp; ignore '?' globbing 
-// http://blogs.perl.org/users/mauke/2017/05/converting-glob-patterns-to-efficient-regexes-in-perl-and-javascript.html
-
-var domain_anchor_RegExp = RegExp("^\\\\|\\\\|");
-// performance: use a simplified, less inclusive of subdomains, regex for domain anchors
-// also assume that RexgExp("^https?//") stripped from url string beforehand
-//var domain_anchor_replace = "^(?:[\\\\w\\-]+\\\\.)*?";
-var domain_anchor_replace = "^";
-var n_wildcard = 1;
-function easylist2re(pat,offset) {
-    function tr(pat) {                                                          
-        return pat.replace(/[/.?+@^|]/g, function (m0, mp, ms) {  // url, regex, EasyList special chars
-            // res = m0 === '?' ? '[\\s\\S]' : '\\\\' + m0;                   
-            // https://adblockplus.org/filters#regexps, separator '^' == [^\\w.%-]
-            var res = '\\\\' + m0;
-            switch (m0) {
-            case '^':
-                res = '[^\\\\w-]';
-                break;
-            case '|':
-                res = mp + m0.length === ms.length ? '$' : '^';
-                break;
-            default:
-                res = '\\\\' + m0;  // escape special characters
-            }
-            return res;
-        });
-    }
-
-    // EasyList domain anchor '||'
-    var bos = '';
-    if (domain_anchor_RegExp.test(pat)) {
-        pat = pat.replace(domain_anchor_RegExp, "");  // strip "^||"
-        bos = domain_anchor_replace;
-    }
-
-    // EasyList wildcards '*', separators '^', and start/end anchors '|'
-    // define n_wildcard outside the function for concatenation of these patterns
-    // var n_wildcard = 1;
-    pat = bos + pat.replace(/\W[^*]*/g, function (m0, mp, ms) {
-        if (m0.charAt(0) !== '*') {
-            return tr(m0);
-        }
-        // var eos = mp + m0.length === ms.length ? '$' : '';
-        var eos = '';
-        return '(?=([\\\\s\\\\S]*?' + tr(m0.substr(1)) + eos + '))\\\\' + n_wildcard++;
-    });
-    return pat;
-}
-
-// inclusive example -- step through at regex101.com to decode
-// var res = easylist2re('||' + 'a*'.repeat(2) + 'b.com/?q=1^ad_box_|')
-// console.log(res);
-// ^(?:https?:\\/\\/){0,1}(?:[\\w\\-]+\\.)*[^\\w\\-]?a(?=([\\s\\S]*?a))\\1(?=([\\s\\S]*?b\.com\\/\\?q=1[^\\w-]ad_box_$))\\2
-
-// Create object hashes or compile efficient NFA's from all filters
-// Various alternate filtering and regex approaches were timed using node and at jsperf.com
-
-// || domain anchor
-
-// ||host is exact e.g. ||a.b^ ? then hasOwnProperty(hash,host)
-// ||host/path is exact e.g. ||a.b/c? ? then hasOwnProperty(hash,url_path_noquery) [strip ?'s]
-// ||host/path?query is exact e.g. ||a.b/c?d= ? assume none [handle small number within RegExp's]
-
-// The exact rule sets are defined by the *_JSON hashes
-
-// ||host is wildcard e.g. ||a.* ? then RegExp.test(host)
-// ||host/path is wildcard e.g. ||a.*/c? ? then RegExp.test(url_path_noquery) [strip ?'s]
-// ||host/path?query is wildcard e.g. ||a.*/c?d= ? then RegExp.test(url)
-// url parts e.g. a.b^c&d|
-
-// Compile efficient NFA RegExp's
-
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_host_regex_Array.map(easylist2re).join("|") + ")", "i");
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_hostpath_regex_Array.map(easylist2re).join("|") + ")", "i");
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + good_da_regex_Array.map(easylist2re).join("|") + ")", "i");
-
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_host_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_host_regex_Array.map(easylist2re).join("|") + ")", "i");
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_hostpath_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_hostpath_regex_Array.map(easylist2re).join("|") + ")", "i");
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_da_RegExp = new RegExp(domain_anchor_replace + "(?:" + bad_da_regex_Array.map(easylist2re).join("|") + ")", "i");
-
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_url_parts_RegExp = new RegExp("(?:" + good_url_parts_Array.map(easylist2re).join("|") + ")", "i");
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_url_parts_RegExp = new RegExp("(?:" + bad_url_parts_Array.map(easylist2re).join("|") + ")", "i");
-
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var good_url_regex_RegExp = new RegExp("(?:" + good_url_regex_Array.map(easylist2re).join("|") + ")", "i");
-n_wildcard = 1;  // reset n_wildcard for concatenated patterns
-var bad_url_regex_RegExp = new RegExp("(?:" + bad_url_regex_Array.map(easylist2re).join("|") + ")", "i");
-
-// Post-processing: Dereference large strings (perhaps unnecessarily) to allow garbage collection
-good_da_host_regex_Array = null;
-good_da_hostpath_regex_Array = null;
-good_da_regex_Array = null;
-bad_da_host_regex_Array = null;
-bad_da_hostpath_regex_Array = null;
-bad_da_regex_Array = null;
-good_url_parts_Array = null;
-bad_url_parts_Array = null;
-good_url_regex_Array = null;
-bad_url_regex_Array = null;
-
 //////////////////////////////////////////////////
 // Define the is_ipv4_address function and vars //
 //////////////////////////////////////////////////
@@ -373,6 +239,12 @@ function is_ipv4_address(host)
         }
     }
     return is_valid_ipv4;
+}
+
+// object hashes
+// Note: original stackoverflow-based hasOwnProperty does not woth within iOS kernel 
+var hasOwnProperty = function(obj, prop) {
+    return obj.hasOwnProperty(prop);
 }
 
 /////////////////////
@@ -473,7 +345,7 @@ function FindProxyForURL(url, host)
             tmpNet = GoodNetworks_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
                 alert_flag && alert("GoodNetworks_Array PASS!");
-                return MyFindProxyForURL(url.toString(), host);
+                return MyFindProxyForURL(url, host);
             }
         }
     
@@ -513,7 +385,7 @@ function FindProxyForURL(url, host)
         if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host)))
             && !hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
                 alert_flag && alert("HTTPS PASS!");
-            return MyFindProxyForURL(url.toString(), host);
+            return MyFindProxyForURL(url, host);
         }
 
         //////////////////////////////////////////////////////////
@@ -549,7 +421,7 @@ function FindProxyForURL(url, host)
                     (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
                     (good_url_parts_flag && good_url_parts_RegExp.test(url_pathonly)) ||
                     (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
-            return MyFindProxyForURL(url.toString(), host);
+            return MyFindProxyForURL(url, host);
         }
     
         //////////////////////////////////////////////////////////
@@ -589,7 +461,7 @@ function FindProxyForURL(url, host)
     
     // default pass
     alert_flag && alert("Default PASS!");
-    return MyFindProxyForURL(url.toString(), host);
+    return MyFindProxyForURL(url, host);
 }
 
 // User-supplied FindProxyForURL()
@@ -656,6 +528,25 @@ good_da_host_exact = ['apple.com',
                       'itunes.apple.com.edgekey.net',
                       'icloud.com',
                       'setup.icloud.com',
+                      'p32-escrowproxy.icloud.com',
+                      'p32-escrowproxy.fe.apple-dns.net',
+                      'keyvalueservice.icloud.com',
+                      'keyvalueservice.fe.apple-dns.net',
+                      'p32-bookmarks.icloud.com',
+                      'p32-bookmarks.fe.apple-dns.net',
+                      'p32-ckdatabase.icloud.com',
+                      'p32-ckdatabase.fe.apple-dns.net',
+                      'configuration.apple.com',
+                      'configuration.apple.com.edgekey.net',
+                      'mesu.apple.com',
+                      'mesu-cdn.apple.com.akadns.net',
+                      'mesu.g.aaplimg.com',
+                      'gspe1-ssl.ls.apple.com',
+                      'gspe1-ssl.ls.apple.com.edgekey.net',
+                      'api-glb-bos.smoot.apple.com',
+                      'query.ess.apple.com',
+                      'query-geo.ess-apple.com.akadns.net',
+                      'query.ess-apple.com.akadns.net',
                       'setup.fe.apple-dns.net',
                       'gsa.apple.com',
                       'gsa.apple.com.akadns.net',
@@ -901,7 +792,7 @@ shop
 love
 content
 ^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$
-^([A-Za-z]{12}|[A-Za-z]{8}|[A-Za-z]{50})\.com$
+#^([A-Za-z]{12}|[A-Za-z]{8}|[A-Za-z]{50})\.com$
 smile
 happy
 traffic
@@ -913,7 +804,7 @@ down
 creativ
 host
 affil
-\\.(biz|ru|tv|stream|cricket|online|racing|party|trade|webcam|science|win|accountant|loan|faith|cricket|date)
+#\\.(biz|ru|tv|stream|cricket|online|racing|party|trade|webcam|science|win|accountant|loan|faith|cricket|date)
 ^mob
 join
 data
@@ -2543,6 +2434,7 @@ sex
 shareasale\\.com
 financialcontent\\.com'''
 
+badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^#',x)))
 badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_filters.split('\n'))))
 
 # use or not use regular expression rules of any kind
@@ -2555,6 +2447,86 @@ def regex_ignore_test(line,opts=''):
 def re_test(regex,string):
     if isinstance(regex,str): regex = re.compile(regex)
     return bool(regex.search(string))
+
+# convert EasyList wildcard '*', separator '^', and anchor '|' to regexp; ignore '?' globbing
+# http://blogs.perl.org/users/mauke/2017/05/converting-glob-patterns-to-efficient-regexes-in-perl-and-javascript.html
+# For efficiency this these are converted in Python; observed to be important in iSO kernel
+
+# var domain_anchor_RegExp = RegExp("^\\\\|\\\\|");
+# // performance: use a simplified, less inclusive of subdomains, regex for domain anchors
+# // also assume that RexgExp("^https?//") stripped from url string beforehand
+# //var domain_anchor_replace = "^(?:[\\\\w\\-]+\\\\.)*?";
+# var domain_anchor_replace = "^";
+# var n_wildcard = 1;
+# function easylist2re(pat) {
+#     function tr(pat) {
+#         return pat.replace(/[-\\/.?:!+^|$()[\\]{}]/g, function (m0, mp, ms) {  // url, regex, EasyList special chars
+#             // res = m0 === "?" ? "[\\s\\S]" : "\\\\" + m0;
+#             // https://adblockplus.org/filters#regexps, separator "^" == [^\\w.%-]
+#             var res = "\\\\" + m0;
+#             switch (m0) {
+#             case "^":
+#                 res = "[^\\\\w.%-]";
+#                 break;
+#             case "|":
+#                 res = mp + m0.length === ms.length ? "$" : "^";
+#                 break;
+#             default:
+#                 res = "\\\\" + m0;  // escape special characters
+#             }
+#             return res;
+#         });
+#     }
+#
+#     // EasyList domain anchor "||"
+#     var bos = "";
+#     if (domain_anchor_RegExp.test(pat)) {
+#         pat = pat.replace(domain_anchor_RegExp, "");  // strip "^||"
+#         bos = domain_anchor_replace;
+#     }
+#
+#     // EasyList wildcards '*', separators '^', and start/end anchors '|'
+#     // define n_wildcard outside the function for concatenation of these patterns
+#     // var n_wildcard = 1;
+#     pat = bos + pat.replace(/\\W[^*]*/g, function (m0, mp, ms) {
+#         if (m0.charAt(0) !== "*") {
+#             return tr(m0);
+#         }
+#         // var eos = mp + m0.length === ms.length ? "$" : "";
+#         var eos = "";
+#         return "(?=([\\\\s\\\\S]*?" + tr(m0.substr(1)) + eos + "))\\\\" + n_wildcard++;
+#     });
+#     return pat;
+# }
+
+n_wildcard = 1
+def easylist_to_jsre(pat):
+    def re_easylist(match):
+        mg = match.group()[0]
+        # https://adblockplus.org/filters#regexps, separator "^" == [^\\w.%-]
+        if mg == "^":
+            res = "[^\\w.%-]"
+        elif mg == "|":
+            res = "^" if match.span()[0] == 0 else "$"
+        else:
+            res = '\\' + mg
+        return res
+    def tr(pat):
+        return re.sub(r'[-\/.?:!+^|$()[\]{}]', re_easylist, pat)
+    def re_wildcard(match):
+        global n_wildcard
+        mg = match.group()
+        if mg[0] != "*": return tr(mg)
+        res = '(?=([\\s\\S]*?' + tr(mg[1:]) + '))\\' + '{:d}'.format(n_wildcard)
+        n_wildcard += 1
+        return res
+    domain_anchor_replace = "^"
+    bos = ''
+    if re_test(domain_anch_re,pat):
+        pat = domain_anch_re.sub('\\1',pat)
+        bos = domain_anchor_replace
+    pat = bos + re.sub(r'(\W[^*]*)', re_wildcard, pat)
+    return pat
 
 def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
     ignore_rules_flag = False
@@ -2719,8 +2691,29 @@ def js_init_object(object_name):
 
 // {:d} rules:
 var {}_JSON = {}{}{};
-var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this array after conversion to hash or RegExp
+var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
 '''.format(len(obj),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
+
+def js_init_regexp(array_name,domain_anchor=False):
+    global n_wildcard
+    n_wildcard = 1
+    domain_anchor_replace = "^" if domain_anchor else ""
+    match_nothing_regexp = "/^$/"
+
+    arr = globals()[array_name]
+
+    if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > truncate_alternatives_max:
+        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),truncate_alternatives_max))
+        arr = arr[:truncate_alternatives_max]
+    arr_regexp = "/" + domain_anchor_replace + "(?:" + "|".join(easylist_to_jsre(x) for x in arr) + ")/i"
+    if len(arr) == 0: arr_regexp = match_nothing_regexp
+
+    return '''\
+
+// {:d} rules as an efficient NFA RegExp:
+var {}_RegExp = {};
+var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
+'''.format(len(arr),re.sub(r'_regex$','',array_name),arr_regexp,array_name,len(arr))
 
 # Use to define '\n'-separated regex alternatives
 def js_init_array(array_name):
@@ -2740,20 +2733,20 @@ var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this string af
 proxy_pac = proxy_pac_preamble \
             + "\n".join(["// " + l for l in easylist_strategy.split("\n")]) \
             + js_init_object('good_da_host_exact') \
-            + js_init_array('good_da_host_regex') \
+            + js_init_regexp('good_da_host_regex',True) \
             + js_init_object('good_da_hostpath_exact') \
-            + js_init_array('good_da_hostpath_regex') \
-            + js_init_array('good_da_regex') \
+            + js_init_regexp('good_da_hostpath_regex',True) \
+            + js_init_regexp('good_da_regex',True) \
             + js_init_object('good_da_host_exceptions_exact') \
             + js_init_object('bad_da_host_exact') \
-            + js_init_array('bad_da_host_regex') \
+            + js_init_regexp('bad_da_host_regex',True) \
             + js_init_object('bad_da_hostpath_exact') \
-            + js_init_array('bad_da_hostpath_regex') \
-            + js_init_array('bad_da_regex') \
-            + js_init_array('good_url_parts') \
-            + js_init_array('bad_url_parts') \
-            + js_init_array('good_url_regex') \
-            + js_init_array('bad_url_regex') \
+            + js_init_regexp('bad_da_hostpath_regex',True) \
+            + js_init_regexp('bad_da_regex',True) \
+            + js_init_regexp('good_url_parts') \
+            + js_init_regexp('bad_url_parts') \
+            + js_init_regexp('good_url_regex') \
+            + js_init_regexp('bad_url_regex') \
             + proxy_pac_postamble
 
 for l in ['good_da_host_exact',
