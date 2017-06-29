@@ -19,16 +19,7 @@ __author__ = 'stsmith'
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import argparse as ap, datetime, functools as fnt, os, re, shutil, sys, time, warnings
-
-# version dependent libraries
-# https://docs.python.org/2/library/urllib.html
-# https://docs.python.org/3.0/library/urllib.parse.html
-if (sys.version_info > (3, 0)):
-    import urllib.request
-else:
-    from urllib2 import urlopen
-    import urlparse
+import argparse as ap, datetime, functools as fnt, os, re, shutil, time, urllib.request, warnings
 
 # blackhole specification in arguments
 # best choise is the LAN IP address of the http://hostname/proxy.pac web server, e.g. 192.168.0.2:80
@@ -39,6 +30,7 @@ parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='
 parser.add_argument('-P', '--PAC_original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
 parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int, default=9999)
 parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int, default=4999)
+parser.add_argument('-w', '--wildcard_limit', help="Limit the number of wildcards", type=int, default=99)
 parser.add_argument('-@@', '--exceptions_ignore_flag', help="Ignore exception rules", action='store_true')
 args = parser.parse_args()
 blackhole_ip_port = args.blackhole
@@ -48,6 +40,7 @@ orig_pac_file = os.path.join(easylist_dir,args.PAC_original)
 truncate_hash_max = args.truncate_hash
 truncate_alternatives_max = args.truncate_regex
 exceptions_ignore_flag = args.exceptions_ignore_flag
+wildcard_named_group_limit = args.wildcard_limit
 
 pac_proxy = 'PROXY {}'.format(proxy_host_port) if proxy_host_port else 'DIRECT'
 
@@ -270,18 +263,9 @@ function FindProxyForURL(url, host)
     alert_flag && alert("url is: " + url);
     alert_flag && alert("host is: " + host);
 
-    //////////////////////////////////////////////////////////////
-    // SCHEME BLOCKS: schemes matched here here will be blocked //
-    //////////////////////////////////////////////////////////////
     // Extract scheme and url without scheme
     var scheme = url.match(schemepart_RegExp)
     scheme = scheme.length > 0? scheme[1] : "";
-    if ( scheme.length == 0 || bad_schemes_RegExp.test(scheme) ) {
-        // Redefine url and host to avoid leaking information to the blackhole
-        url = "http://127.0.0.1:80";
-        host = "127.0.0.1";
-        return blackhole;
-    }
 
     // Remove the scheme and extract the path for regex efficiency
     var url_noscheme = url.replace(schemepart_RegExp,"");
@@ -550,6 +534,10 @@ good_da_host_exact = ['apple.com',
                       'setup.fe.apple-dns.net',
                       'gsa.apple.com',
                       'gsa.apple.com.akadns.net',
+                      'icloud-content.com',
+                      'usbos-edge.icloud-content.com',
+                      'usbos.ce.apple-dns.net',
+                      ''
                       'iadsdk.apple.com',
                       'iadsdk.apple.com.edgekey.net',
                       'lcdn-locator.apple.com',
@@ -669,11 +657,11 @@ wildcard_re = re.compile(r'\*+?')
 wildcard_regex = r'.*?'
 regexp_symbol_re = re.compile(r'([?*.+@])')
 httpempty_re = re.compile(r'^\|?https{0,1}://$')
-pathend_re = re.compile(r'(?i)(?:(?:/|\|)$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|(?:s|p)?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))')
+pathend_re = re.compile(r'(?i)(?:(?:/|\|)$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|(?:s|p)?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
 
 domain_anch_re = re.compile(r'^\|\|(.+?)$')
-domain_re = re.compile(r'(?:[\w\-]+\.)+[a-zA-Z0-9\-]{2,24}')
-urlhost_re = re.compile(r'^(?:https?://){0,1}(?:[wW]{3}\d{0,3}[.]){0,1}' + r'({})'.format(domain_re.pattern))
+domain_re = re.compile(r'(?:[\w\-]+\.)+[a-zA-Z0-9\-]{2,24}',re.IGNORECASE)
+urlhost_re = re.compile(r'^(?:https?://){0,1}(?:[wW]{3}\d{0,3}[.]){0,1}' + r'({})'.format(domain_re.pattern),re.IGNORECASE)
 # omit scheme from start of rule -- this will also be done in JS for efficiency
 scheme_anchor_re = re.compile(r'^(\|?(?:[\w*+-]{1,15})?://)');  # e.g. '|http://' at start
 
@@ -2435,7 +2423,7 @@ shareasale\\.com
 financialcontent\\.com'''
 
 badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^#',x)))
-badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_filters.split('\n'))))
+badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_filters.split('\n'))),re.IGNORECASE)
 
 # use or not use regular expression rules of any kind
 def regex_ignore_test(line,opts=''):
@@ -2528,6 +2516,12 @@ def easylist_to_jsre(pat):
     pat = bos + re.sub(r'(\W[^*]*)', re_wildcard, pat)
     return pat
 
+# Wildcard regex's use named groups. Limit their number to to an assumed maximum
+# e.g. Python's re limit is 100
+def wildcard_test(rule):
+    # assume no more than a couple wildcards in EasyList rules, backoff n_wildcard by 2
+    return not re_test(wildcard_re,rule) or n_wildcard <= max(1,wildcard_named_group_limit-2)
+
 def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
     ignore_rules_flag = False
     for line in fd:
@@ -2535,7 +2529,7 @@ def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
         line_orig = line
         if False:
             debug_this_rule_string = '||arstechnica.com^*/|$object'
-            if line.find(debug_this_rule_string) != -1:
+            if line_orig.find(debug_this_rule_string) != -1:
                 pass
         exception_flag = False  # block default; pass if True
         option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
@@ -2700,12 +2694,27 @@ def js_init_regexp(array_name,domain_anchor=False):
     domain_anchor_replace = "^" if domain_anchor else ""
     match_nothing_regexp = "/^$/"
 
-    arr = globals()[array_name]
+    # no wildcard sorting
+    # arr = [easylist_to_jsre(x) for x in globals()[array_name] if wildcard_test(x)]
+
+    arr_nostar = [x for x in globals()[array_name] if not re_test(wildcard_re,x)]
+    arr_star = [x for x in globals()[array_name] if re_test(wildcard_re,x)]
+    def wildcard_preferences(rule):
+        track_test = not re_test(re.compile(r'track',re.IGNORECASE),rule)       # MSB
+        beacon_test = not re_test(re.compile(r'beacon]',re.IGNORECASE),rule)  # LSB
+        stats_test = not re_test(re.compile(r'stat[is]]',re.IGNORECASE),rule)  # LSB
+        analysis_test = not re_test(re.compile(r'anal[iy]]',re.IGNORECASE),rule)  # LSB
+        return 8*track_test + 4*beacon_test + 2*stats_test + analysis_test
+    arr_star.sort(key=wildcard_preferences)
+    arr_star = arr_star[:wildcard_named_group_limit]
+    arr = arr_nostar + arr_star
 
     if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > truncate_alternatives_max:
         warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),truncate_alternatives_max))
         arr = arr[:truncate_alternatives_max]
-    arr_regexp = "/" + domain_anchor_replace + "(?:" + "|".join(easylist_to_jsre(x) for x in arr) + ")/i"
+
+    arr = [easylist_to_jsre(x) for x in arr]
+    arr_regexp = "/" + domain_anchor_replace + "(?:" + "|".join(arr) + ")/i"
     if len(arr) == 0: arr_regexp = match_nothing_regexp
 
     return '''\
@@ -2714,21 +2723,6 @@ def js_init_regexp(array_name,domain_anchor=False):
 var {}_RegExp = {};
 var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
 '''.format(len(arr),re.sub(r'_regex$','',array_name),arr_regexp,array_name,len(arr))
-
-# Use to define '\n'-separated regex alternatives
-def js_init_array(array_name):
-    # Javascript uses '`' for here documents
-    arr = globals()[array_name]
-
-    if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > truncate_alternatives_max:
-        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),truncate_alternatives_max))
-        arr = arr[:truncate_alternatives_max]
-    return '''\
-
-// {:d} rules:
-var {}_Array = {}{}{};
-var {}_flag = {} > 0 ? true : false;  // save #rules, then delete this string after conversion to hash or RegExp
-'''.format(len(arr),array_name,'[ ',",\n".join('"{}"'.format(x) for x in arr),' ]',array_name,len(arr))
 
 proxy_pac = proxy_pac_preamble \
             + "\n".join(["// " + l for l in easylist_strategy.split("\n")]) \
