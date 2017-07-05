@@ -20,12 +20,11 @@ __author__ = 'stsmith'
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse as ap, copy, datetime, functools as fnt, os, re, shutil, sys, time, urllib.request, warnings
-from matplotlib import pyplot as plt
 
 try:
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
-    import multiprocessing as mp, numpy as np, scipy.sparse as sps
+    import matplotlib.pyplot as plt, multiprocessing as mp, numpy as np, scipy.sparse as sps
     machine_learning_flag = True
 except ImportError as e:
     machine_learning_flag = False
@@ -60,8 +59,8 @@ class EasyListPAC:
         parser.add_argument('-g', '--debug', help="Debug: Just print rules", action='store_true')
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC_original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
-        parser.add_argument('-rb', '--bad_rule_max', help="Maximum number of rules", type=int, default=9999)
-        parser.add_argument('-rg', '--good_rule_max', help="Maximum number of rules", type=int, default=1999)
+        parser.add_argument('-rb', '--bad_rule_max', help="Maximum number of rules", type=int, default=14999)
+        parser.add_argument('-rg', '--good_rule_max', help="Maximum number of rules", type=int, default=2999)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
                             default=4999)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
@@ -77,13 +76,14 @@ class EasyListPAC:
         self.debug = args.debug
         self.proxy_host_port = args.proxy
         self.orig_pac_file = os.path.join(self.easylist_dir, args.PAC_original)
-        self.good_rule_max = args.good_rule_max
-        self.bad_rule_max = args.bad_rule_max
-        self.truncate_hash_max = args.truncate_hash
-        self.truncate_alternatives_max = args.truncate_regex
+        # n.b. negative limits are set to no limits using [:None] slicing trick
+        self.good_rule_max = args.good_rule_max if args.good_rule_max >= 0 else None
+        self.bad_rule_max = args.bad_rule_max if args.bad_rule_max >= 0 else None
+        self.truncate_hash_max = args.truncate_hash if args.truncate_hash >= 0 else None
+        self.truncate_alternatives_max = args.truncate_regex if args.truncate_regex >= 0 else None
         self.target_in_training = args.target_in_training
         self.exceptions_ignore_flag = args.exceptions_ignore_flag
-        self.wildcard_named_group_limit = args.wildcard_limit
+        self.wildcard_named_group_limit = args.wildcard_limit if args.wildcard_limit >= 0 else None
         self.extra_easylist_urls = args.Extra_EasyList_URLs
         return self.args
 
@@ -109,15 +109,17 @@ class EasyListPAC:
         """Parse all rules into good and bad lists. Use flags to specify included/excluded rules."""
         self.good_rules = []
         self.bad_rules = []
+        self.good_opts = []
+        self.bad_opts = []
         self.good_rules_include_flag = []
         self.bad_rules_include_flag = []
         for file in self.file_list:
             bname = os.path.basename(file)
             with open(file, 'r') as fd:
-                self.easylist_append_rules(fd,True and bname == 'easylist.txt')
+                self.easylist_append_rules(fd)
 
-    def easylist_append_rules(self, fd, ignore_huge_url_regex_rule_list=False):
-        """Append EasyList rules from file to goog and bad lists."""
+    def easylist_append_rules(self, fd):
+        """Append EasyList rules from file to good and bad lists."""
         ignore_rules_flag = False
         for line in fd:
             line = line.rstrip()
@@ -156,31 +158,34 @@ class EasyListPAC:
                 continue
             if ignore_rules_flag:
                 ignored_rules_count += 1
-                self.append_rule(exception_flag,line,False)
+                self.append_rule(exception_flag, line, opts, False)
                 continue
             # block default or pass exception
             if exception_flag:
                 option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
                 if self.exceptions_ignore_flag:
-                    self.append_rule(exception_flag, line, False)
+                    self.append_rule(exception_flag, line, opts, False)
                     continue
             # specific options: ignore
             if re_test(option_exception_re, opts):
-                self.append_rule(exception_flag, line, False)
+                self.append_rule(exception_flag, line, opts, False)
                 continue
             # blank url case: ignore
             if re_test(httpempty_re, line): continue
             # blank line case: ignore
-            if not line: continue
+            if not bool(line): continue
             # add all remaining rules
-            self.append_rule(exception_flag, line, True)
+            self.append_rule(exception_flag, line, opts, True)
 
-    def append_rule(self,exception_flag,rule,include_rule_flag):
+    def append_rule(self,exception_flag,rule, opts, include_rule_flag):
+        if not bool(rule): return
         if exception_flag:
             self.good_rules.append(rule)
+            self.good_opts.append(option_tokenizer(opts))
             self.good_rules_include_flag.append(include_rule_flag)
         else:
             self.bad_rules.append(rule)
+            self.bad_opts.append(option_tokenizer(opts))
             self.bad_rules_include_flag.append(include_rule_flag)
 
     def prioritize_rules(self):
@@ -197,27 +202,31 @@ class EasyListPAC:
             print("Performing logistic regression on rule sets. This will take a few minutes…",end='',flush=True)
             self.logreg_priorities()
             print(" done.", flush=True)
-            self.good_rule_max = min(self.good_rule_max,np.count_nonzero(self.good_signal > 0))
-            self.bad_rule_max = min(self.bad_rule_max, np.count_nonzero(self.bad_signal > 0))
+            if not self.debug:
+                self.good_rule_max = min(self.good_rule_max,np.count_nonzero(self.good_signal > 0))
+                self.bad_rule_max = min(self.bad_rule_max, np.count_nonzero(self.bad_signal > 0))
 
         # prioritize and limit the rules
         good_pridx = np.array([e[0] for e in sorted(enumerate(self.good_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:self.good_rule_max]
         self.good_columns = self.good_columns[good_pridx]
         self.good_signal = self.good_signal[good_pridx]
-        self.good_rules = [self.good_rules[k] for k in good_pridx]
+        self.good_rules = [self.good_rules[k] for k in self.good_columns]
+        self.good_columns = np.arange(0,len(self.good_rules),dtype=self.good_columns.dtype) # rules are now ordered
         bad_pridx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:self.bad_rule_max]
         self.bad_columns = self.bad_columns[bad_pridx]
         self.bad_signal = self.bad_signal[bad_pridx]
-        self.bad_rules = [self.bad_rules[k] for k in bad_pridx]
+        self.bad_rules = [self.bad_rules[k] for k in self.bad_columns]
+        self.bad_columns = np.arange(0,len(self.bad_rules),dtype=self.bad_columns.dtype) # rules are now ordered
+        return
 
     def logreg_priorities(self):
         """Rule prioritization using logistic regression on bootstrap preferences."""
         self.good_fv_json = {}
-        for col, rule in enumerate(self.good_rules):
-            feature_vector_append_column(rule, col, self.good_fv_json)
+        for col, (rule,opts) in enumerate(zip(self.good_rules,self.good_opts)):
+            feature_vector_append_column(rule, opts, col, self.good_fv_json)
         self.bad_fv_json = {}
-        for col, rule in enumerate(self.bad_rules):
-            feature_vector_append_column(rule, col, self.bad_fv_json)
+        for col, (rule,opts) in enumerate(zip(self.bad_rules,self.bad_opts)):
+            feature_vector_append_column(rule, opts, col, self.bad_fv_json)
 
         self.good_fv_mat, self.good_row_hash = fv_to_mat(self.good_fv_json, self.good_rules)
         self.bad_fv_mat, self.bad_row_hash = fv_to_mat(self.bad_fv_json, self.bad_rules)
@@ -226,52 +235,124 @@ class EasyListPAC:
         self.good_y_all = np.array([not bool(badregex_regex_filters_re.search(x)) for x in self.good_rules], dtype=np.int)
 
         self.bad_X_all = StandardScaler(with_mean=False).fit_transform(self.bad_fv_mat.astype(np.float))
-        self.bad_y_all = np.array([bool(badregex_regex_filters_re.search(x)) for x in self.bad_rules], dtype=np.int)
+        self.bad_y_all = np.array([
+            bool(badregex_regex_filters_re.search(x))
+            or (bool(opts) and bool(thrdp_im_pup_os_option_re.search(opts)))
+            for (x,opts) in zip(self.bad_rules,self.bad_opts)], dtype=np.int)
+
+        self.logit_fit_method_sample_weights()
 
         # inverse regularization signal; smaller values give more sparseness, less model rigidity
         self.C = 5.e-1
 
-        self.logreg_fast_and_lazy()
-        if not self.target_in_training: self.logreg_correct_and_multiprocessing()
+        self.logreg_test_in_training()
+        if not self.target_in_training: self.logreg_sliding_window()
 
-    def logreg_fast_and_lazy(self):
-        """fast, lazy method: test vectors in the training data"""
+    def logit_fit_method_sample_weights(self):
+        # weights for LogisticRegression.fit()
+        self.good_w_all = np.ones(len(self.good_y_all))
+        self.bad_w_all = np.ones(len(self.bad_y_all))
 
-        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01)
-        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01)
+        # add more weight for each of these regex matches
+        high_weight_regex = [re.compile(x,re.IGNORECASE) for x in """\
+trac?k
+beacon
+stat[is]?
+anal[iy]
+goog
+yahoo
+adob
+pagead\\d?
+syndicat
+(?:\\bad|ad\\b)
+\\boas\\b
+ads
+cdn
+cloud
+banner
+financ
+share
+traffic
+creativ
+host
+affil
+^mob
+data
+your?
+watch
+survey
+stealth
+invisible
+brand
+site
+merch
+kli(k|p)
+clic?k
+popup
+log
+assets
+counter
+metric
+event
+tool
+quant
+chart
+opti?m
+partner
+sponsor
+affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
+        for i, rule in enumerate(self.bad_rules):
+            self.bad_w_all[i] += 1/max(1,len(rule))  # slight disadvantage for longer rules
+            for regex in high_weight_regex:
+                self.bad_w_all[i] += len(regex.findall(rule))
+            # these options have more weight
+            self.bad_w_all[i] += bool(thrdp_im_pup_os_option_re.search(self.bad_opts[i]))
+        return
+
+    def logreg_test_in_training(self):
+        """fast, initial method: test vectors in the training data"""
+
+        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01, n_jobs=-1)
+        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01, n_jobs=-1)
 
         good_x_test = self.good_X_all[self.good_columns]
         good_X = self.good_X_all
         good_y = self.good_y_all
+        good_w = self.good_w_all
 
         bad_x_test = self.bad_X_all[self.bad_columns]
         bad_X = self.bad_X_all
         bad_y = self.bad_y_all
+        bad_w = self.bad_w_all
 
-        self.good_fv_logreg.fit(good_X, good_y)
-        self.bad_fv_logreg.fit(bad_X, bad_y)
+        self.good_fv_logreg.fit(good_X, good_y, sample_weight=good_w)
+        self.bad_fv_logreg.fit(bad_X, bad_y, sample_weight=bad_w)
 
         self.good_signal = self.good_fv_logreg.decision_function(good_x_test)
         self.bad_signal = self.bad_fv_logreg.decision_function(bad_x_test)
+        return
 
-    def logreg_correct_and_multiprocessing(self):
-        """slower, correct method: bootstrap the signal strengths by removing test vectors from training"""
+    def logreg_sliding_window(self):
+        """bootstrap the signal strengths by removing test vectors from training"""
 
         # pre-prioritize using test-in-target values and limit the rules
-        good_preidx = np.array([e[0] for e in sorted(enumerate(self.good_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.good_rule_max))]
-        self.good_columns = self.good_columns[good_preidx]
-        bad_preidx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.bad_rule_max))]
-        self.bad_columns = self.bad_columns[bad_preidx]
+        if not self.debug:
+            good_preidx = np.array([e[0] for e in sorted(enumerate(self.good_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.good_rule_max))]
+            self.good_columns = self.good_columns[good_preidx]
+            bad_preidx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.bad_rule_max))]
+            self.bad_columns = self.bad_columns[bad_preidx]
 
         # init w/ target-in-training results
         good_fv_logreg = copy.deepcopy(self.good_fv_logreg)
         good_fv_logreg.penalty = 'l2'
         good_fv_logreg.solver = 'sag'
         good_fv_logreg.warm_start = True
+        good_fv_logreg.n_jobs = 1  # achieve parallelism via block processing
         bad_fv_logreg = copy.deepcopy(self.bad_fv_logreg)
         bad_fv_logreg.penalty = 'l2'
         bad_fv_logreg.solver = 'sag'
         bad_fv_logreg.warm_start = True
+        bad_fv_logreg.n_jobs = 1  # achieve parallelism via block processing
 
         # debug mp: turn off multiprocessing
         if False:
@@ -286,7 +367,7 @@ class EasyListPAC:
 
         # multithreaded loop for speed
         # distribute training and tests across multiprocessors
-        def training_op(queue, X_all, y_all, fv_logreg, columns, column_block):
+        def training_op(queue, X_all, y_all, w_all, fv_logreg, columns, column_block):
             """Training and test operation put into a Queue.
             columns[column_block] and signal[column_block] are the rule columns and corresponding signal strengths
             """
@@ -299,8 +380,9 @@ class EasyListPAC:
                 x_test = X_all[np.logical_not(mask)]
                 X = X_all[mask]
                 y = y_all[mask]
+                w = w_all[mask]
 
-                fv_logreg.fit(X, y)
+                fv_logreg.fit(X, y, sample_weight=w)
                 res[k] = fv_logreg.decision_function(x_test)[0]
             queue.put((column_block,res))  # signal[column_block] = res
             return
@@ -316,7 +398,7 @@ class EasyListPAC:
         while len(column_block) > 0:
             column_block = column_block[np.where(column_block < len(self.good_columns))]
             fv_logreg = copy.deepcopy(good_fv_logreg)
-            p = mp.Process(target=training_op, args=(q, self.good_X_all, self.good_y_all, fv_logreg, self.good_columns, column_block))
+            p = mp.Process(target=training_op, args=(q, self.good_X_all, self.good_y_all, self.good_w_all, fv_logreg, self.good_columns, column_block))
             p.start()
             jobs.append(p)
             column_block += len(column_block)
@@ -336,7 +418,7 @@ class EasyListPAC:
         while len(column_block) > 0:
             column_block = column_block[np.where(column_block < len(self.bad_columns))]
             fv_logreg = copy.deepcopy(bad_fv_logreg)
-            p = mp.Process(target=training_op, args=(q, self.bad_X_all, self.bad_y_all, fv_logreg, self.bad_columns, column_block))
+            p = mp.Process(target=training_op, args=(q, self.bad_X_all, self.bad_y_all, self.bad_w_all, fv_logreg, self.bad_columns, column_block))
             p.start()
             jobs.append(p)
             column_block += len(column_block)
@@ -349,18 +431,16 @@ class EasyListPAC:
         return
 
     def parse_easylist_rules(self):
-        for rule in self.good_rules: self.easylist_to_javascript_vars(rule,exception_flag=True)
-        for rule in self.bad_rules: self.easylist_to_javascript_vars(rule,exception_flag=False)
+        for rule in self.good_rules: self.easylist_to_javascript_vars(rule)
+        for rule in self.bad_rules: self.easylist_to_javascript_vars(rule)
         ordered_unique_all_js_var_lists()
         return
 
-    def easylist_to_javascript_vars(self,rule,exception_flag=False,ignore_huge_url_regex_rule_list=False):
+    def easylist_to_javascript_vars(self,rule,ignore_huge_url_regex_rule_list=False):
         rule = rule.rstrip()
         rule_orig = rule
         exception_flag = exception_filter(rule)  # block default; pass if True
         rule = exception_re.sub('\\1', rule)
-        option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
-        exception_flag = False  # block default; pass if True
         option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
         opts = ''  # default: no options in the rule
         if re_test(option_re, rule):
@@ -960,7 +1040,7 @@ bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
     # Use to define js object hashes (much faster than string conversion)
     def js_init_object(self,object_name):
         obj = globals()[object_name]
-        if len(obj) > self.truncate_hash_max:
+        if bool(self.truncate_hash_max) and len(obj) > self.truncate_hash_max:
             warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(object_name,len(obj),self.truncate_hash_max))
             obj = obj[:self.truncate_hash_max]
         return '''\
@@ -991,7 +1071,7 @@ var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
         arr_star = arr_star[:self.wildcard_named_group_limit]
         arr = arr_nostar + arr_star
 
-        if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > self.truncate_alternatives_max:
+        if re_test(r'(?:_parts|_regex)$',array_name) and bool(self.truncate_alternatives_max) and len(arr) > self.truncate_alternatives_max:
             warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),self.truncate_alternatives_max))
             arr = arr[:self.truncate_alternatives_max]
 
@@ -1051,13 +1131,14 @@ else:
 
 comment_re = re.compile(r'^!\s*')   # ! commment
 configuration_re = re.compile(r'^\[[^]]*?\]')  # [Adblock Plus 2.0]
-easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
-option_re = re.compile(r'^(.*?)(\$' + easylist_opts + r'.*?)$')
+easylist_opts = r'~?\b(?:third\-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
+option_re = re.compile(r'^(.*?)\$(' + easylist_opts + r'.*?)$')
 # regex's used to exclude options for specific cases
 domain_option = r'(?:domain=)'  # discards rules specific to links from specific domains
 alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
-notdm3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
-not3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+notdm3dimppupos_option_exception_re = re.compile(r'~?\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+not3dimppupos_option_exception_re = re.compile(r'~?\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+thrdp_im_pup_os_option_re = re.compile(r'\b(?:third\-party|image|popup|object\-subrequest)\b')
 domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
 scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
 selector_re = re.compile(r'^(.*?)#\@?#*?.*?$') # #@##div [should be #+?, but old style still used]
@@ -1071,7 +1152,7 @@ exception_re = re.compile(r'^@@(.*?)$')
 wildcard_re = re.compile(r'\*+?')
 wildcard_regex = r'.*?'
 regexp_symbol_re = re.compile(r'([?*.+@])')
-httpempty_re = re.compile(r'^\|?https{0,1}://$')
+httpempty_re = re.compile(r'^\|?https?://$')
 pathend_re = re.compile(r'(?i)(?:(?:/|\|)$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|(?:s|p)?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
 
 domain_anch_re = re.compile(r'^\|\|(.+?)$')
@@ -1135,6 +1216,10 @@ def rule_tokenizer(rule):
     toks = ' '.join([punct_delete(host_part,punct_re=hostpunct_deletepreserve_reprog), punct_delete(path_part)]).strip()
     toks = re_sub(whitespace_reprog,whitespace_replace,toks)
     return toks
+easylist_name_opts_re = re.compile(r'^~?\b(third\-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)(?:=.+?)?$')
+def option_tokenizer(opts):
+    toks = ' '.join([easylist_name_opts_re.sub('\\1',o) for o in opts.split(',')])
+    return toks
 
 # use or not use regular expression rules of any kind
 def regex_ignore_test(line,opts=''):
@@ -1154,20 +1239,25 @@ def re_test(regex,string):
 # create adjacency lists for memory efficient sparse COO array construction
 
 default_row = {"column": [], "count": []}
-def feature_vector_append_column(rule,col,feature_vector={}):
+def feature_vector_append_column(rule,opts,col,feature_vector={}):
     toks = re.split(r'\s+',rule_tokenizer(rule))
     for k in range(len(toks)):
         # 1- and 2-grams
         grams = [toks[k], toks[k] + ' ' + toks[k + 1]] if k < len(toks) - 1 else [toks[k]]
-        for ky in grams:
-            feature_vector[ky] = feature_vector.get(ky, copy.deepcopy(default_row))
-            if not feature_vector[ky]["column"] or feature_vector[ky]["column"][-1] is not col:
-                feature_vector[ky]["column"].append(col)
-                feature_vector[ky]["count"].append(0)
-            feature_vector[ky]["count"][-1] += 1
-        else:
-            continue
-        break  # break out of nested for-loop if necessary
+        feature_vector_append_grams(grams, col, feature_vector)
+    toks = re.split(r'\s+',rule_tokenizer(opts))
+    for k in range(len(toks)):
+        # 1-grams
+        grams = ['option: ' + toks[k]]
+        feature_vector_append_grams(grams, col, feature_vector)
+
+def feature_vector_append_grams(grams, col, feature_vector={}):
+    for ky in grams:
+        feature_vector[ky] = feature_vector.get(ky, copy.deepcopy(default_row))
+        if not feature_vector[ky]["column"] or feature_vector[ky]["column"][-1] is not col:
+            feature_vector[ky]["column"].append(col)
+            feature_vector[ky]["count"].append(0)
+        feature_vector[ky]["count"][-1] += 1
 
 # store feature vectors as sparse arrays
 def fv_to_mat(feature_vector=copy.deepcopy(default_row),rules=[]):
@@ -1513,6 +1603,9 @@ if False:
     badregex_regex_filters = ''  # Accept everything
 else:
     badregex_regex_filters = '''\
+pagead
+syndicat
+(?:\\bad|ad\\b)
 cdn
 cloud
 banner
@@ -1554,8 +1647,8 @@ follow
 shop
 love
 content
-^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$
-#^([A-Za-z]{12}|[A-Za-z]{8}|[A-Za-z]{50})\.com$
+^(\\d{1,3})\\.(\d{1,3})\\.(\\d{1,3})\.(\\d{1,3})$
+#^([A-Za-z]{12}|[A-Za-z]{8}|[A-Za-z]{50})\\.com$
 smile
 happy
 traffic
@@ -1567,7 +1660,7 @@ down
 creativ
 host
 affil
-#\\.(biz|ru|tv|stream|cricket|online|racing|party|trade|webcam|science|win|accountant|loan|faith|cricket|date)
+\\.(biz|ru|tv|stream|cricket|online|racing|party|trade|webcam|science|win|accountant|loan|faith|cricket|date)
 ^mob
 join
 data
@@ -3197,7 +3290,7 @@ sex
 shareasale\\.com
 financialcontent\\.com'''
 
-badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^#',x)))
+badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^\s*?#',x)))
 badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_filters.split('\n'))),re.IGNORECASE)
 
 if __name__ == "__main__":
