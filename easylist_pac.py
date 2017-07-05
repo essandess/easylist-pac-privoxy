@@ -19,55 +19,503 @@ __author__ = 'stsmith'
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import argparse as ap, datetime, functools as fnt, os, re, shutil, time, urllib.request, warnings
+import argparse as ap, copy, datetime, functools as fnt, os, re, shutil, sys, time, urllib.request, warnings
+from matplotlib import pyplot as plt
 
-# blackhole specification in arguments
-# best choise is the LAN IP address of the http://hostname/proxy.pac web server, e.g. 192.168.0.2:80
-parser = ap.ArgumentParser()
-parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, default='127.0.0.1:80')
-parser.add_argument('-d', '--download_dir', help="Download directory", type=str, default='~/Downloads')
-parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
-parser.add_argument('-P', '--PAC_original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
-parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int, default=9999)
-parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int, default=4999)
-parser.add_argument('-w', '--wildcard_limit', help="Limit the number of wildcards", type=int, default=99)
-parser.add_argument('-@@', '--exceptions_ignore_flag', help="Ignore exception rules", action='store_true')
-args = parser.parse_args()
-blackhole_ip_port = args.blackhole
-easylist_dir = os.path.expanduser(args.download_dir)
-proxy_host_port = args.proxy
-orig_pac_file = os.path.join(easylist_dir,args.PAC_original)
-truncate_hash_max = args.truncate_hash
-truncate_alternatives_max = args.truncate_regex
-exceptions_ignore_flag = args.exceptions_ignore_flag
-wildcard_named_group_limit = args.wildcard_limit
+try:
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.preprocessing import StandardScaler
+    import multiprocessing as mp, numpy as np, scipy.sparse as sps
+    machine_learning_flag = True
+except ImportError as e:
+    machine_learning_flag = False
+    print(e)
+    warnings.warn("Install scikit-learn for more accurate EasyList rule selection.")
 
-pac_proxy = 'PROXY {}'.format(proxy_host_port) if proxy_host_port else 'DIRECT'
+class EasyListPAC:
+    '''Create a Proxy Auto Configuration file from EasyList rule sets.'''
 
-# only download if newer
-easylist_url = 'https://easylist.to/easylist/easylist.txt'
-easyprivacy_url = 'https://easylist.to/easylist/easyprivacy.txt'
+    def __init__(self):
+        self.parseArgs()
+        self.easylists_download_latest()
+        self.parse_and_filter_rule_files()
+        self.prioritize_rules()
+        if self.debug:
+            print('\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.bad_rules,self.bad_signal))))
+            if False:
+                plt.plot(np.arange(len(self.good_signal)), self.good_signal, '.')
+                plt.show()
+                plt.plot(np.arange(len(self.bad_signal)), self.bad_signal, '.')
+                plt.show()
+            return
+        self.parse_easylist_rules()
+        self.create_pac_file()
 
-# Conversion to UTC
-# resp = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': user_agent}))
-last_modified_resp = lambda req: resp.headers.get_all("Last-Modified")[0]
-last_modified_to_utc = lambda lm: time.mktime(datetime.datetime.strptime(lm,"%a, %d %b %Y %X GMT").timetuple())
-file_to_utc = lambda f: time.mktime(datetime.datetime.utcfromtimestamp(os.path.getmtime(f)).timetuple())
+    def parseArgs(self):
+        # blackhole specification in arguments
+        # best choise is the LAN IP address of the http://hostname/proxy.pac web server, e.g. 192.168.0.2:80
+        parser = ap.ArgumentParser()
+        parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, default='127.0.0.1:80')
+        parser.add_argument('-d', '--download_dir', help="Download directory", type=str, default='~/Downloads')
+        parser.add_argument('-g', '--debug', help="Debug: Just print rules", action='store_true')
+        parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
+        parser.add_argument('-P', '--PAC_original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
+        parser.add_argument('-rb', '--bad_rule_max', help="Maximum number of rules", type=int, default=9999)
+        parser.add_argument('-rg', '--good_rule_max', help="Maximum number of rules", type=int, default=1999)
+        parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
+                            default=4999)
+        parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
+                            default=1999)
+        parser.add_argument('-tt', '--target_in_training', help="Faster target-int-training data ML approach", action='store_true')
+        parser.add_argument('-w', '--wildcard_limit', help="Limit the number of wildcards", type=int, default=999)
+        parser.add_argument('-x', '--Extra_EasyList_URLs', help="Limit the number of wildcards", type=str, nargs='+', default=[])
+        parser.add_argument('-@@', '--exceptions_ignore_flag', help="Ignore exception rules", action='store_true')
+        args = parser.parse_args()
+        self.args = parser.parse_args()
+        self.blackhole_ip_port = args.blackhole
+        self.easylist_dir = os.path.expanduser(args.download_dir)
+        self.debug = args.debug
+        self.proxy_host_port = args.proxy
+        self.orig_pac_file = os.path.join(self.easylist_dir, args.PAC_original)
+        self.good_rule_max = args.good_rule_max
+        self.bad_rule_max = args.bad_rule_max
+        self.truncate_hash_max = args.truncate_hash
+        self.truncate_alternatives_max = args.truncate_regex
+        self.target_in_training = args.target_in_training
+        self.exceptions_ignore_flag = args.exceptions_ignore_flag
+        self.wildcard_named_group_limit = args.wildcard_limit
+        self.extra_easylist_urls = args.Extra_EasyList_URLs
+        return self.args
 
-user_agent = 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'
-# Download and/or update the easlist.txt and easyprivacy.txt files
-for url in [easylist_url, easyprivacy_url]:
-    fname = os.path.basename(url)
-    fname_full = os.path.join(easylist_dir,fname)
-    file_utc = file_to_utc(fname_full) if os.path.isfile(os.path.join(easylist_dir,fname)) else 0.
-    resp = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': user_agent}))
-    url_utc = last_modified_to_utc(last_modified_resp(resp))
-    if url_utc > file_utc:  # download the newer file
-        with open(fname_full, 'wb') as out_file:
-            shutil.copyfileobj(resp, out_file)
+    def easylists_download_latest(self):
+        easyprivacy_url = 'https://easylist.to/easylist/easyprivacy.txt'
+        easylist_url = 'https://easylist.to/easylist/easylist.txt'
+        self.download_list = [easyprivacy_url, easylist_url] + self.extra_easylist_urls
+        if False: # TODO
+            self.download_list = [easyprivacy_url] + self.extra_easylist_urls
+        self.file_list = []
+        for url in self.download_list:
+            fname = os.path.basename(url)
+            fname_full = os.path.join(self.easylist_dir, fname)
+            file_utc = file_to_utc(fname_full) if os.path.isfile(os.path.join(self.easylist_dir, fname)) else 0.
+            resp = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': user_agent}))
+            url_utc = last_modified_to_utc(last_modified_resp(resp))
+            if url_utc > file_utc:  # download the newer file
+                with open(fname_full, 'wb') as out_file:
+                    shutil.copyfileobj(resp, out_file)
+            self.file_list.append(fname_full)
 
-# define a default, user-supplied FindProxyForURL function
-default_FindProxyForURL_function = '''\
+    def parse_and_filter_rule_files(self):
+        """Parse all rules into good and bad lists. Use flags to specify included/excluded rules."""
+        self.good_rules = []
+        self.bad_rules = []
+        self.good_rules_include_flag = []
+        self.bad_rules_include_flag = []
+        for file in self.file_list:
+            bname = os.path.basename(file)
+            with open(file, 'r') as fd:
+                self.easylist_append_rules(fd,True and bname == 'easylist.txt')
+
+    def easylist_append_rules(self, fd, ignore_huge_url_regex_rule_list=False):
+        """Append EasyList rules from file to goog and bad lists."""
+        ignore_rules_flag = False
+        for line in fd:
+            line = line.rstrip()
+            line_orig = line
+            # configuration lines and selector rules should already be filtered out
+            if re_test(configuration_re, line) or re_test(selector_re, line): continue
+            if False:
+                debug_this_rule_string = '||arstechnica.com^*/|$object'
+                if line_orig.find(debug_this_rule_string) != -1:
+                    pass
+            exception_flag = exception_filter(line)  # block default; pass if True
+            line = exception_re.sub('\\1', line)
+            option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
+            # delete all easylist options **prior** to regex and selector cases
+            # ignore domain limits for now
+            opts = ''  # default: no options in the rule
+            if re_test(option_re, line):
+                opts = option_re.sub('\\2', line)
+                # domain-specific and other option exceptions: ignore
+                # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
+                line = option_re.sub('\\1', line)  # delete all the options and continue
+            # ignore these cases
+            # comment case: ignore
+            if re_test(comment_re, line):
+                if re_test(commentname_sections_ignore_re, line):
+                    ignored_rules_comment_start = comment_re.sub('', line)
+                    if not ignore_rules_flag:
+                        ignored_rules_count = 0
+                        ignore_rules_flag = True
+                        print('Ignore rules following comment ', end='', flush=True)
+                    print('"{}"… '.format(ignored_rules_comment_start), end='', flush=True)
+                else:
+                    if ignore_rules_flag: print('\n {:d} rules ignored.'.format(ignored_rules_count), flush=True)
+                    ignored_rules_count = 0
+                    ignore_rules_flag = False
+                continue
+            if ignore_rules_flag:
+                ignored_rules_count += 1
+                self.append_rule(exception_flag,line,False)
+                continue
+            # block default or pass exception
+            if exception_flag:
+                option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
+                if self.exceptions_ignore_flag:
+                    self.append_rule(exception_flag, line, False)
+                    continue
+            # specific options: ignore
+            if re_test(option_exception_re, opts):
+                self.append_rule(exception_flag, line, False)
+                continue
+            # blank url case: ignore
+            if re_test(httpempty_re, line): continue
+            # blank line case: ignore
+            if not line: continue
+            # add all remaining rules
+            self.append_rule(exception_flag, line, True)
+
+    def append_rule(self,exception_flag,rule,include_rule_flag):
+        if exception_flag:
+            self.good_rules.append(rule)
+            self.good_rules_include_flag.append(include_rule_flag)
+        else:
+            self.bad_rules.append(rule)
+            self.bad_rules_include_flag.append(include_rule_flag)
+
+    def prioritize_rules(self):
+        # use bootstrap regex preferences
+        # https://github.com/seatgeek/fuzzywuzzy would be great here if there were such a thing for regex
+        self.good_signal = np.array([not bool(badregex_regex_filters_re.search(x)) for x,f in zip(self.good_rules,self.good_rules_include_flag) if f], dtype=np.int)
+        self.bad_signal = np.array([not bool(badregex_regex_filters_re.search(x)) for x,f in zip(self.bad_rules,self.bad_rules_include_flag) if f], dtype=np.int)
+
+        self.good_columns = np.array([i for i,f in enumerate(self.good_rules_include_flag) if f],dtype=int)
+        self.bad_columns = np.array([i for i,f in enumerate(self.bad_rules_include_flag) if f],dtype=int)
+
+        # Logistic Regression for more accurate rule priorities
+        if machine_learning_flag:
+            print("Performing logistic regression on rule sets. This will take a few minutes…",end='',flush=True)
+            self.logreg_priorities()
+            print(" done.", flush=True)
+            self.good_rule_max = min(self.good_rule_max,np.count_nonzero(self.good_signal > 0))
+            self.bad_rule_max = min(self.bad_rule_max, np.count_nonzero(self.bad_signal > 0))
+
+        # prioritize and limit the rules
+        good_pridx = np.array([e[0] for e in sorted(enumerate(self.good_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:self.good_rule_max]
+        self.good_columns = self.good_columns[good_pridx]
+        self.good_signal = self.good_signal[good_pridx]
+        self.good_rules = [self.good_rules[k] for k in good_pridx]
+        bad_pridx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:self.bad_rule_max]
+        self.bad_columns = self.bad_columns[bad_pridx]
+        self.bad_signal = self.bad_signal[bad_pridx]
+        self.bad_rules = [self.bad_rules[k] for k in bad_pridx]
+
+    def logreg_priorities(self):
+        """Rule prioritization using logistic regression on bootstrap preferences."""
+        self.good_fv_json = {}
+        for col, rule in enumerate(self.good_rules):
+            feature_vector_append_column(rule, col, self.good_fv_json)
+        self.bad_fv_json = {}
+        for col, rule in enumerate(self.bad_rules):
+            feature_vector_append_column(rule, col, self.bad_fv_json)
+
+        self.good_fv_mat, self.good_row_hash = fv_to_mat(self.good_fv_json, self.good_rules)
+        self.bad_fv_mat, self.bad_row_hash = fv_to_mat(self.bad_fv_json, self.bad_rules)
+
+        self.good_X_all = StandardScaler(with_mean=False).fit_transform(self.good_fv_mat.astype(np.float))
+        self.good_y_all = np.array([not bool(badregex_regex_filters_re.search(x)) for x in self.good_rules], dtype=np.int)
+
+        self.bad_X_all = StandardScaler(with_mean=False).fit_transform(self.bad_fv_mat.astype(np.float))
+        self.bad_y_all = np.array([bool(badregex_regex_filters_re.search(x)) for x in self.bad_rules], dtype=np.int)
+
+        # inverse regularization signal; smaller values give more sparseness, less model rigidity
+        self.C = 5.e-1
+
+        self.logreg_fast_and_lazy()
+        if not self.target_in_training: self.logreg_correct_and_multiprocessing()
+
+    def logreg_fast_and_lazy(self):
+        """fast, lazy method: test vectors in the training data"""
+
+        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01)
+        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01)
+
+        good_x_test = self.good_X_all[self.good_columns]
+        good_X = self.good_X_all
+        good_y = self.good_y_all
+
+        bad_x_test = self.bad_X_all[self.bad_columns]
+        bad_X = self.bad_X_all
+        bad_y = self.bad_y_all
+
+        self.good_fv_logreg.fit(good_X, good_y)
+        self.bad_fv_logreg.fit(bad_X, bad_y)
+
+        self.good_signal = self.good_fv_logreg.decision_function(good_x_test)
+        self.bad_signal = self.bad_fv_logreg.decision_function(bad_x_test)
+
+    def logreg_correct_and_multiprocessing(self):
+        """slower, correct method: bootstrap the signal strengths by removing test vectors from training"""
+
+        # pre-prioritize using test-in-target values and limit the rules
+        good_preidx = np.array([e[0] for e in sorted(enumerate(self.good_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.good_rule_max))]
+        self.good_columns = self.good_columns[good_preidx]
+        bad_preidx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.bad_rule_max))]
+        self.bad_columns = self.bad_columns[bad_preidx]
+
+        # init w/ target-in-training results
+        good_fv_logreg = copy.deepcopy(self.good_fv_logreg)
+        good_fv_logreg.penalty = 'l2'
+        good_fv_logreg.solver = 'sag'
+        good_fv_logreg.warm_start = True
+        bad_fv_logreg = copy.deepcopy(self.bad_fv_logreg)
+        bad_fv_logreg.penalty = 'l2'
+        bad_fv_logreg.solver = 'sag'
+        bad_fv_logreg.warm_start = True
+
+        # debug mp: turn off multiprocessing
+        if False:
+            class NotAMultiProcess(mp.Process):
+                def start(self): self.run()
+                def join(self): pass
+            class NotAQueue(mp.Queue):
+                def put(self): pass
+                def get(self): pass
+            mp.Process = NotAMultiProcess
+            mp.Queue = NotAQueue
+
+        # multithreaded loop for speed
+        # distribute training and tests across multiprocessors
+        def training_op(queue, X_all, y_all, fv_logreg, columns, column_block):
+            """Training and test operation put into a Queue.
+            columns[column_block] and signal[column_block] are the rule columns and corresponding signal strengths
+            """
+            res = np.zeros(len(column_block))
+            for k in range(len(column_block)):
+                mask = np.zeros(len(y_all), dtype=bool)
+                mask[columns[column_block[k]]] = True
+                mask = np.logical_not(mask)
+
+                x_test = X_all[np.logical_not(mask)]
+                X = X_all[mask]
+                y = y_all[mask]
+
+                fv_logreg.fit(X, y)
+                res[k] = fv_logreg.decision_function(x_test)[0]
+            queue.put((column_block,res))  # signal[column_block] = res
+            return
+
+        num_threads = mp.cpu_count()
+
+        # good
+        q = mp.Queue()
+        jobs = []
+        self.good_signal = np.zeros(len(self.good_columns))
+        block_length = len(self.good_columns) // num_threads
+        column_block = np.arange(0, block_length)
+        while len(column_block) > 0:
+            column_block = column_block[np.where(column_block < len(self.good_columns))]
+            fv_logreg = copy.deepcopy(good_fv_logreg)
+            p = mp.Process(target=training_op, args=(q, self.good_X_all, self.good_y_all, fv_logreg, self.good_columns, column_block))
+            p.start()
+            jobs.append(p)
+            column_block += len(column_block)
+        # process the results in the queue
+        for i in range(len(jobs)):
+            column_block, res = q.get()
+            self.good_signal[column_block] = res
+        # join all jobs and wait for them to complete
+        for p in jobs: p.join()
+
+        # bad
+        q = mp.Queue()
+        jobs = []
+        self.bad_signal = np.zeros(len(self.bad_columns))
+        block_length = len(self.bad_columns) // num_threads
+        column_block = np.arange(0, block_length)
+        while len(column_block) > 0:
+            column_block = column_block[np.where(column_block < len(self.bad_columns))]
+            fv_logreg = copy.deepcopy(bad_fv_logreg)
+            p = mp.Process(target=training_op, args=(q, self.bad_X_all, self.bad_y_all, fv_logreg, self.bad_columns, column_block))
+            p.start()
+            jobs.append(p)
+            column_block += len(column_block)
+        # process the results in the queue
+        for i in range(len(jobs)):
+            column_block, res = q.get()
+            self.bad_signal[column_block] = res
+        # join all jobs and wait for them to complete
+        for p in jobs: p.join()
+        return
+
+    def parse_easylist_rules(self):
+        for rule in self.good_rules: self.easylist_to_javascript_vars(rule,exception_flag=True)
+        for rule in self.bad_rules: self.easylist_to_javascript_vars(rule,exception_flag=False)
+        ordered_unique_all_js_var_lists()
+        return
+
+    def easylist_to_javascript_vars(self,rule,exception_flag=False,ignore_huge_url_regex_rule_list=False):
+        rule = rule.rstrip()
+        rule_orig = rule
+        exception_flag = exception_filter(rule)  # block default; pass if True
+        rule = exception_re.sub('\\1', rule)
+        option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
+        exception_flag = False  # block default; pass if True
+        option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
+        opts = ''  # default: no options in the rule
+        if re_test(option_re, rule):
+            opts = option_re.sub('\\2', rule)
+            # domain-specific and other option exceptions: ignore
+            # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
+            rule = option_re.sub('\\1', rule)  # delete all the options and continue
+        # ignore these cases
+        # comment case: ignore
+        if re_test(comment_re, rule): return
+        # block default or pass exception
+        if exception_flag:
+            option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
+            if self.exceptions_ignore_flag: return
+        # specific options: ignore
+        if re_test(option_exception_re, opts): return
+        # blank url case: ignore
+        if re_test(httpempty_re, rule): return
+        # blank line case: ignore
+        if not rule: return
+        # treat each of the these cases separately, here and in Javascript
+        # regex case
+        if re_test(regex_re, rule):
+            if regex_ignore_test(rule): return
+            rule = regex_re.sub('\\1', rule)
+            if exception_flag:
+                good_url_regex.append(rule)
+            else:
+                if not re_test(badregex_regex_filters_re,
+                               rule): return  # limit bad regex's to those in the filter
+                bad_url_regex.append(rule)
+            return
+        # now that regex's are handled, delete unnecessary wildcards, e.g. /.../*
+        rule = wildcard_begend_re.sub('\\1', rule)
+        # domain anchors, || or '|http://a.b' -> domain anchor 'a.b' for regex efficiency in JS
+        if re_test(domain_anch_re, rule) or re_test(scheme_anchor_re, rule):
+            # strip off initial || or |scheme://
+            if re_test(domain_anch_re, rule):
+                rule = domain_anch_re.sub('\\1', rule)
+            elif re_test(scheme_anchor_re, rule):
+                rule = scheme_anchor_re.sub("", rule)
+            # host subcase
+            if re_test(da_hostonly_re, rule):
+                rule = da_hostonly_re.sub('\\1', rule)
+                if not re_test(wild_anch_sep_exc_re, rule):  # exact subsubcase
+                    if not re_test(badregex_regex_filters_re, rule):
+                        if False: print(rule)
+                        return  # limit bad regex's to those in the filter
+                    if exception_flag:
+                        good_da_host_exact.append(rule)
+                    else:
+                        bad_da_host_exact.append(rule)
+                    return
+                else:  # regex subsubcase
+                    if regex_ignore_test(rule): return
+                    if exception_flag:
+                        good_da_host_regex.append(rule)
+                    else:
+                        if not re_test(badregex_regex_filters_re,
+                                       rule): return  # limit bad regex's to those in the filter
+                        bad_da_host_regex.append(rule)
+                    return
+            # hostpath subcase
+            if re_test(da_hostpath_re, rule):
+                rule = da_hostpath_re.sub('\\1', rule)
+                if not re_test(wild_sep_exc_noanch_re, rule) and re_test(pathend_re, rule):  # exact subsubcase
+                    rule = re.sub(r'(?:/|\|)$', '', rule)  # strip EOL slashes (repeat in JS) and anchors
+                    if not re_test(badregex_regex_filters_re, rule):
+                        if False: print(rule)
+                        return  # limit bad regex's to those in the filter
+                    if exception_flag:
+                        good_da_hostpath_exact.append(rule)
+                    else:
+                        bad_da_hostpath_exact.append(rule)
+                    return
+                else:  # regex subsubcase
+                    if regex_ignore_test(rule): return
+                    # ignore option rules for some regex rules
+                    if True and re_test(alloption_exception_re, opts): return
+                    if exception_flag:
+                        good_da_hostpath_regex.append(rule)
+                    else:
+                        if not re_test(badregex_regex_filters_re,
+                                       rule): return  # limit bad regex's to those in the filter
+                        bad_da_hostpath_regex.append(rule)
+                    return
+            # hostpathquery default case
+            if True:
+                # if re_test(re.compile(r'^go\.'),rule):
+                #     pass
+                if regex_ignore_test(rule): return
+                if exception_flag:
+                    good_da_regex.append(rule)
+                else:
+                    bad_da_regex.append(rule)
+                return
+        # all other non-regex patterns
+        if True:
+            if regex_ignore_test(rule): return
+            if not ignore_huge_url_regex_rule_list:
+                if True and re_test(alloption_exception_re, opts): return
+                if exception_flag:
+                    good_url_parts.append(rule)
+                else:
+                    if not re_test(badregex_regex_filters_re,
+                                   rule): return  # limit bad regex's to those in the filter
+                    bad_url_parts.append(rule)
+                return  # superfluous return
+
+    def create_pac_file(self):
+        self.proxy_pac_init()
+        self.proxy_pac = self.proxy_pac_preamble \
+                    + "\n".join(["// " + l for l in self.easylist_strategy.split("\n")]) \
+                    + self.js_init_object('good_da_host_exact') \
+                    + self.js_init_regexp('good_da_host_regex', True) \
+                    + self.js_init_object('good_da_hostpath_exact') \
+                    + self.js_init_regexp('good_da_hostpath_regex', True) \
+                    + self.js_init_regexp('good_da_regex', True) \
+                    + self.js_init_object('good_da_host_exceptions_exact') \
+                    + self.js_init_object('bad_da_host_exact') \
+                    + self.js_init_regexp('bad_da_host_regex', True) \
+                    + self.js_init_object('bad_da_hostpath_exact') \
+                    + self.js_init_regexp('bad_da_hostpath_regex', True) \
+                    + self.js_init_regexp('bad_da_regex', True) \
+                    + self.js_init_regexp('good_url_parts') \
+                    + self.js_init_regexp('bad_url_parts') \
+                    + self.js_init_regexp('good_url_regex') \
+                    + self.js_init_regexp('bad_url_regex') \
+                    + self.proxy_pac_postamble
+
+        for l in ['good_da_host_exact',
+                  'good_da_host_regex',
+                  'good_da_hostpath_exact',
+                  'good_da_hostpath_regex',
+                  'good_da_regex',
+                  'good_da_host_exceptions_exact',
+                  'bad_da_host_exact',
+                  'bad_da_host_regex',
+                  'bad_da_hostpath_exact',
+                  'bad_da_hostpath_regex',
+                  'bad_da_regex',
+                  'good_url_parts',
+                  'bad_url_parts',
+                  'good_url_regex',
+                  'bad_url_regex']:
+            print("{}: {:d} rules".format(l, len(globals()[l])), flush=True)
+
+        with open(os.path.join(self.easylist_dir, 'proxy.pac'), 'w') as fd:
+            fd.write(self.proxy_pac)
+
+    def proxy_pac_init(self):
+        self.pac_proxy = 'PROXY {}'.format(self.proxy_host_port) if self.proxy_host_port else 'DIRECT'
+
+        # define a default, user-supplied FindProxyForURL function
+        self.default_FindProxyForURL_function = '''\
 function FindProxyForURL(url, host)
 {{
 if (
@@ -84,22 +532,28 @@ if (
 else
         return "{}";
 }}
-'''.format(pac_proxy)
+'''.format(self.pac_proxy)
 
-if os.path.isfile(orig_pac_file):
-    with open(orig_pac_file, 'r') as fd:
-        original_FindProxyForURL_function = fd.read()
-else:
-    original_FindProxyForURL_function = default_FindProxyForURL_function
-# change the function name to MyFindProxyForURL
-original_FindProxyForURL_function = re.sub(r'function[\s]+FindProxyForURL','function MyFindProxyForURL',original_FindProxyForURL_function)
+        if os.path.isfile(self.orig_pac_file):
+            with open(self.orig_pac_file, 'r') as fd:
+                self.original_FindProxyForURL_function = fd.read()
+        else:
+            self.original_FindProxyForURL_function = self.default_FindProxyForURL_function
 
-#  proxy.pac preamble
+        # change the function name to MyFindProxyForURL
+        self.original_FindProxyForURL_function = re.sub(r'function[\s]+FindProxyForURL', 'function MyFindProxyForURL',
+                                               self.original_FindProxyForURL_function)
 
-proxy_pac_preamble = '''\
+        #  proxy.pac preamble
+        self.calling_command = ' '.join([os.path.basename(sys.argv[0])] + sys.argv[1:])
+        self.proxy_pac_preamble = '''\
 // PAC (Proxy Auto Configuration) Filter from EasyList rules
 // 
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
+// https://github.com/essandess/easylist-pac-privoxy/
+//
+// PAC file created on {}
+// Created with command: {}
 //
 // http://www.gnu.org/licenses/lgpl.txt
 //
@@ -144,9 +598,9 @@ var blackhole = "PROXY " + blackhole_ip_port;
 
 // Too many rules (>~ 10k) bog down the browser; make reasonable exclusions here:
 
-'''.format(blackhole_ip_port)
+'''.format(time.strftime("%a, %d %b %Y %X GMT", time.gmtime()),self.calling_command,self.blackhole_ip_port)
 
-proxy_pac_postamble = '''
+        self.proxy_pac_postamble = '''
 // Add any good networks here. Format is network folowed by a comma and
 // optional white space, and then the netmask.
 // LAN, loopback, Apple (direct and Akamai e.g. e4805.a.akamaiedge.net), Microsoft (updates and services)
@@ -222,7 +676,7 @@ function is_ipv4_address(host)
 {
     var ipv4_pentary = host.match(ipv4_RegExp);
     var is_valid_ipv4 = false;
-    
+
     if (ipv4_pentary) {
         is_valid_ipv4 = true;
         for( i = 1; i <= 4; i++) {
@@ -259,7 +713,7 @@ function FindProxyForURL(url, host)
 {
     var host_is_ipv4 = is_ipv4_address(host);
     var host_ipv4_address;
-    
+
     alert_flag && alert("url is: " + url);
     alert_flag && alert("host is: " + host);
 
@@ -275,13 +729,13 @@ function FindProxyForURL(url, host)
     var url_noserver = !host_is_ipv4 ? url_noscheme.replace(domainpart_RegExp,"$1") : url_noscheme;
     var url_noservernoquery = !host_is_ipv4 ? url_noquery.replace(domainpart_RegExp,"$1") : url_noscheme;
     var host_noserver =  !host_is_ipv4 ? host.replace(domainpart_RegExp,"$1") : host;
-    
+
     // Remove slashes from the EOL
     url_pathonly = url_pathonly != "/" ? url_pathonly.replace(slashend_RegExp,"") : url_pathonly;
     url_noquery = url_noquery.replace(slashend_RegExp,"");
     url_noserver = url_noserver.replace(slashend_RegExp,"");
     url_noservernoquery = url_noservernoquery.replace(slashend_RegExp,"");
-    
+
     // Debugging results
     if (debug_flag && alert_flag) {
         alert("url_noscheme is: " + url_noscheme);
@@ -305,7 +759,7 @@ function FindProxyForURL(url, host)
     // Check to make sure we can get an IPv4 address from the given host //
     // name.  If we cannot do that then skip the Networks tests.         //
     ///////////////////////////////////////////////////////////////////////
-    
+
     host_ipv4_address = host_is_ipv4 ? host : (isResolvable(host) ? dnsResolve(host) : false);
 
     if (host_ipv4_address) {
@@ -314,7 +768,7 @@ function FindProxyForURL(url, host)
         // If the IP translates to one of the GoodNetworks_Array (with exceptions) //
         // we pass it because it is considered safe.                               //
         /////////////////////////////////////////////////////////////////////////////
-    
+
         for (i in GoodNetworks_Exceptions_Array) {
             tmpNet = GoodNetworks_Exceptions_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
@@ -332,12 +786,12 @@ function FindProxyForURL(url, host)
                 return MyFindProxyForURL(url, host);
             }
         }
-    
+
         ///////////////////////////////////////////////////////////////////////
         // If the IP translates to one of the BadNetworks_Array we fail it   //
         // because it is not considered safe.                                //
         ///////////////////////////////////////////////////////////////////////
-    
+
         for (i in BadNetworks_Array) {
             tmpNet = BadNetworks_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
@@ -361,7 +815,7 @@ function FindProxyForURL(url, host)
 
     // Assume browser has disabled path access if scheme is https and path is '/'
     if ( scheme == "https" && url_pathonly == "/" ) {
-    
+
         ///////////////////////////////////////////////////////////////////////
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
@@ -375,7 +829,7 @@ function FindProxyForURL(url, host)
         //////////////////////////////////////////////////////////
         // BLOCK LIST:	stuff matched here here will be blocked //
         //////////////////////////////////////////////////////////
-    
+
         if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ) {
             alert_flag && alert("HTTPS blackhole!");
             // Redefine url and host to avoid leaking information to the blackhole
@@ -388,9 +842,9 @@ function FindProxyForURL(url, host)
     ////////////////////////////////////////
     // HTTPS and HTTP: full path analysis //
     ////////////////////////////////////////
-    
+
     if (scheme == "https" || scheme == "http") {
-    
+
         ///////////////////////////////////////////////////////////////////////
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
@@ -407,7 +861,7 @@ function FindProxyForURL(url, host)
                     (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
             return MyFindProxyForURL(url, host);
         }
-    
+
         //////////////////////////////////////////////////////////
         // BLOCK LIST:	stuff matched here here will be blocked //
         //////////////////////////////////////////////////////////
@@ -426,7 +880,7 @@ function FindProxyForURL(url, host)
             alert("bad_url_parts_RegExp.test(url_pathonly): " + (bad_url_parts_flag && bad_url_parts_RegExp.test(url_pathonly)));
             alert("bad_url_regex_RegExp.test(url): " + (bad_url_regex_flag && bad_url_regex_RegExp.test(url)));
         }
-    
+
         if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ||  // fastest test first
             (bad_da_hostpath_exact_flag && (hasOwnProperty(bad_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(bad_da_hostpath_JSON,url_noquery)) ) ||
             // test logic: only do the slower test if the host has a (non)suspect fqdn
@@ -442,16 +896,16 @@ function FindProxyForURL(url, host)
             return blackhole;
         }
     }
-    
+
     // default pass
     alert_flag && alert("Default PASS!");
     return MyFindProxyForURL(url, host);
 }
 
 // User-supplied FindProxyForURL()
-''' + original_FindProxyForURL_function
+''' + self.original_FindProxyForURL_function
 
-easylist_strategy = """\
+        self.easylist_strategy = """\
 EasyList rules:
 https://adblockplus.org/filters
 https://adblockplus.org/filter-cheatsheet
@@ -501,81 +955,436 @@ Variable name conventions (example that defines the rule):
 bad_da_host_exact == bad domain anchor with host/path type, exact matching with Object hash
 bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 """
+        return
+
+    # Use to define js object hashes (much faster than string conversion)
+    def js_init_object(self,object_name):
+        obj = globals()[object_name]
+        if len(obj) > self.truncate_hash_max:
+            warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(object_name,len(obj),self.truncate_hash_max))
+            obj = obj[:self.truncate_hash_max]
+        return '''\
+
+// {:d} rules:
+var {}_JSON = {}{}{};
+var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
+'''.format(len(obj),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
+
+    def js_init_regexp(self,array_name,domain_anchor=False):
+        global n_wildcard
+        n_wildcard = 1
+        domain_anchor_replace = "^" if domain_anchor else ""
+        match_nothing_regexp = "/^$/"
+
+        # no wildcard sorting
+        # arr = [easylist_to_jsre(x) for x in globals()[array_name] if wildcard_test(x)]
+
+        arr_nostar = [x for x in globals()[array_name] if not re_test(wildcard_re,x)]
+        arr_star = [x for x in globals()[array_name] if re_test(wildcard_re,x)]
+        def wildcard_preferences(rule):
+            track_test = not re_test(re.compile(r'track',re.IGNORECASE),rule)       # MSB
+            beacon_test = not re_test(re.compile(r'beacon]',re.IGNORECASE),rule)  # LSB
+            stats_test = not re_test(re.compile(r'stat[is]]',re.IGNORECASE),rule)  # LSB
+            analysis_test = not re_test(re.compile(r'anal[iy]]',re.IGNORECASE),rule)  # LSB
+            return 8*track_test + 4*beacon_test + 2*stats_test + analysis_test
+        arr_star.sort(key=wildcard_preferences)
+        arr_star = arr_star[:self.wildcard_named_group_limit]
+        arr = arr_nostar + arr_star
+
+        if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > self.truncate_alternatives_max:
+            warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),self.truncate_alternatives_max))
+            arr = arr[:self.truncate_alternatives_max]
+
+        arr = [easylist_to_jsre(x) for x in arr]
+        arr_regexp = "/" + domain_anchor_replace + "(?:" + "|".join(arr) + ")/i"
+        if len(arr) == 0: arr_regexp = match_nothing_regexp
+
+        return '''\
+    
+// {:d} rules as an efficient NFA RegExp:
+var {}_RegExp = {};
+var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
+'''.format(len(arr),re.sub(r'_regex$','',array_name),arr_regexp,array_name,len(arr))
+    # end of EasyListPAC definition
+
+# global variables and functions
+
+last_modified_resp = lambda req: req.headers.get_all("Last-Modified")[0]
+last_modified_to_utc = lambda lm: time.mktime(datetime.datetime.strptime(lm,"%a, %d %b %Y %X GMT").timetuple())
+file_to_utc = lambda f: time.mktime(datetime.datetime.utcfromtimestamp(os.path.getmtime(f)).timetuple())
+
+user_agent = 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'
+
+# Monkey patch `re.sub` (***groan***)
+# See https://gist.github.com/gromgull/3922244
+if (sys.version_info < (3, 5)):
+    def re_sub(pattern, replacement, string):
+        def _r(m):
+            # Now this is ugly.
+            # Python has a "feature" where unmatched groups return None
+            # then re.sub chokes on this.
+            # see http://bugs.python.org/issue1519638
+
+            # this works around and hooks into the internal of the re module...
+
+            # the match object is replaced with a wrapper that
+            # returns "" instead of None for unmatched groups
+
+            class _m():
+                def __init__(self, m):
+                    self.m = m
+                    self.string = m.string
+
+                def group(self, n):
+                    return m.group(n) or ""
+
+            return re._expand(pattern, _m(m), replacement)
+
+        return re.sub(pattern, _r, string)
+else:
+    re_sub = re.sub
+
+# print(re_sub('(ab)|(a)', r'(1:\1 2:\2)', 'abc'))
+# prints '(1:ab 2:)c'
+
+# EasyList regular expressions
+
+comment_re = re.compile(r'^!\s*')   # ! commment
+configuration_re = re.compile(r'^\[[^]]*?\]')  # [Adblock Plus 2.0]
+easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
+option_re = re.compile(r'^(.*?)(\$' + easylist_opts + r'.*?)$')
+# regex's used to exclude options for specific cases
+domain_option = r'(?:domain=)'  # discards rules specific to links from specific domains
+alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
+notdm3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+not3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
+scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
+selector_re = re.compile(r'^(.*?)#\@?#*?.*?$') # #@##div [should be #+?, but old style still used]
+regex_re = re.compile(r'^\@{0,2}\/(.*?)\/$')
+wildcard_begend_re = re.compile(r'^(?:\**?([^*]*?)\*+?|\*+?([^*]*?)\**?)$')
+wild_anch_sep_exc_re = re.compile(r'[*|^@]')
+wild_sep_exc_noanch_re = re.compile(r'(?:[*^@]|\|[\s\S])')
+anch_sep_exc_re = re.compile(r'[|^@]')
+anch_exc_re = re.compile(r'[|@]')
+exception_re = re.compile(r'^@@(.*?)$')
+wildcard_re = re.compile(r'\*+?')
+wildcard_regex = r'.*?'
+regexp_symbol_re = re.compile(r'([?*.+@])')
+httpempty_re = re.compile(r'^\|?https{0,1}://$')
+pathend_re = re.compile(r'(?i)(?:(?:/|\|)$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|(?:s|p)?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
+
+domain_anch_re = re.compile(r'^\|\|(.+?)$')
+domain_re = re.compile(r'(?:[\w-]+\.)+[a-zA-Z0-9-]{2,24}',re.IGNORECASE)
+# omit scheme from start of rule -- this will also be done in JS for efficiency
+scheme_anchor_re = re.compile(r'^(\|?(?:[\w*+-]{1,15})?://)');  # e.g. '|http://' at start
+
+# (Almost) fully-qualified domain name extraction (with EasyList wildcards)
+# Example case: banner.3ddownloads.com^
+da_hostonly_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?)(?:$|[/^?])$');
+da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]+?)\??$');
+
+domain_re = re.compile(r'(?<!\.)(?:[\w-]+\.)[a-zA-Z0-9-]{2,24}(?!\.)',re.IGNORECASE)
+ipv4_re = re.compile(r'(?:\d{1,3}\.){3}\d{1,3}')
+
+host_path_parts_re = re.compile(r'^(?:https?://)?((?:\d{1,3}\.){3}\d{1,3}|(?:[\w-]+\.)+[a-zA-Z0-9-]{2,24}\.?)?([\S]+)?',re.IGNORECASE)
+domain_part_re = re.compile(r'^(?:[\w-]+\.)*((?:[\w-]+\.)[a-zA-Z0-9-]{2,24}\.?)',re.IGNORECASE)
+
+punct_str = r'][{}()<>.,;:?/~!#$%^&*_=+`\'"|\s-'
+punct_class = r'[{}]'.format(punct_str)
+nopunct_class = r'[^{}]'.format(punct_str)
+specialword_re = r'<\w+>'
+hostpunct_str = punct_str[:-1]  # everything but '-'
+hostpunct_class = r'[{}]'.format(hostpunct_str)
+
+# regex logic: (keep1|keep2)|([::discard class::]+?)
+# (<\w+>|\b(?:\w+[.])+[a-zA-Z0-9-]{2,24}\b)|([][()<>.;-]+?)
+punct_deletepreserve_re = r'({}|\b{}\b)|({}+?)'.format(specialword_re,ipv4_re.pattern,punct_class)
+punct_deletepreserve_reprog = re.compile(punct_deletepreserve_re)
+punct_deletepreserve_replace = '\\1 '
+hostpunct_deletepreserve_re = r'({}|\b{}\b)|({}+?)'.format(specialword_re,ipv4_re.pattern,hostpunct_class)
+hostpunct_deletepreserve_reprog = re.compile(hostpunct_deletepreserve_re)
+whitespace_reprog = re.compile(r'\s+')
+whitespace_replace = ' '
+
+def line_filter(line):
+    """Filter out empty, configuration, and selector rule lines; keep comments and filter later."""
+    return not ( not bool(line) or bool(configuration_re.search(line)) or bool(selector_re.search(line)) )
+def exception_filter(line):
+    return bool(exception_re.search(line))
+def line_hostpathoptions_rule(line):
+    opts = option_re.sub('\\2', line)
+    line = exception_re.sub('\\1',line)
+    line = option_re.sub('\\1',line)
+    return line, opts
+def line_hostpath_rule(line):
+   line = exception_re.sub('\\1',line)
+   line = domain_anch_re.sub('\\1',line)
+   line = option_re.sub('\\1',line)
+   return line
+def punct_delete(line,punct_re=punct_deletepreserve_reprog):
+    res = line
+    res = re_sub(punct_re,punct_deletepreserve_replace,res)
+    res = re_sub(whitespace_reprog,whitespace_replace,res)
+    return res
+def rule_tokenizer(rule):
+    rule = line_hostpath_rule(rule)
+    host_part = re_sub(host_path_parts_re,'\\1',rule)
+    path_part = re_sub(host_path_parts_re,'\\2',rule)
+    domain_part = re_sub(domain_part_re,'\\1',host_part) if not bool(ipv4_re.search(host_part)) else '	'
+    toks = ' '.join([punct_delete(host_part,punct_re=hostpunct_deletepreserve_reprog), punct_delete(path_part)]).strip()
+    toks = re_sub(whitespace_reprog,whitespace_replace,toks)
+    return toks
+
+# use or not use regular expression rules of any kind
+def regex_ignore_test(line,opts=''):
+    res = False  # don't ignore any rule
+    # ignore wildcards and anchors
+    # res = re_test(r'[*^]',line)
+    return res
+
+def re_test(regex,string):
+    if isinstance(regex,str): regex = re.compile(regex)
+    return bool(regex.search(string))
+
+# Logistic Regression functions
+
+# feature vector hashes
+# JSON structure: {"token": { "column": list of int, "count": list of int, "row_index": int }
+# create adjacency lists for memory efficient sparse COO array construction
+
+default_row = {"column": [], "count": []}
+def feature_vector_append_column(rule,col,feature_vector={}):
+    toks = re.split(r'\s+',rule_tokenizer(rule))
+    for k in range(len(toks)):
+        # 1- and 2-grams
+        grams = [toks[k], toks[k] + ' ' + toks[k + 1]] if k < len(toks) - 1 else [toks[k]]
+        for ky in grams:
+            feature_vector[ky] = feature_vector.get(ky, copy.deepcopy(default_row))
+            if not feature_vector[ky]["column"] or feature_vector[ky]["column"][-1] is not col:
+                feature_vector[ky]["column"].append(col)
+                feature_vector[ky]["count"].append(0)
+            feature_vector[ky]["count"][-1] += 1
+        else:
+            continue
+        break  # break out of nested for-loop if necessary
+
+# store feature vectors as sparse arrays
+def fv_to_mat(feature_vector=copy.deepcopy(default_row),rules=[]):
+    """Compute sparse, transposed, CSR matrix and row hash from a feature vector."""
+    row_hash = {}
+    rows = []
+    cols = []
+    vals = []
+    for i, tok in enumerate(feature_vector):
+        feature_vector[tok]["row_index"] = i
+        row_hash[i] = tok
+        j_new = feature_vector[tok]["column"]
+        i_new = [i]*len(j_new)
+        v_new = feature_vector[tok]["count"]
+        rows += i_new
+        cols += j_new
+        vals += v_new
+    fv_mat = sps.coo_matrix((vals,(cols,rows)),shape=(len(rules),len(feature_vector)),dtype=np.long).tocsr()
+    return fv_mat, row_hash
+
+# convert EasyList wildcard '*', separator '^', and anchor '|' to regexp; ignore '?' globbing
+# http://blogs.perl.org/users/mauke/2017/05/converting-glob-patterns-to-efficient-regexes-in-perl-and-javascript.html
+# For efficiency this these are converted in Python; observed to be important in iSO kernel
+
+# var domain_anchor_RegExp = RegExp("^\\\\|\\\\|");
+# // performance: use a simplified, less inclusive of subdomains, regex for domain anchors
+# // also assume that RexgExp("^https?//") stripped from url string beforehand
+# //var domain_anchor_replace = "^(?:[\\\\w\\-]+\\\\.)*?";
+# var domain_anchor_replace = "^";
+# var n_wildcard = 1;
+# function easylist2re(pat) {
+#     function tr(pat) {
+#         return pat.replace(/[-\\/.?:!+^|$()[\\]{}]/g, function (m0, mp, ms) {  // url, regex, EasyList special chars
+#             // res = m0 === "?" ? "[\\s\\S]" : "\\\\" + m0;
+#             // https://adblockplus.org/filters#regexps, separator "^" == [^\\w.%-]
+#             var res = "\\\\" + m0;
+#             switch (m0) {
+#             case "^":
+#                 res = "[^\\\\w.%-]";
+#                 break;
+#             case "|":
+#                 res = mp + m0.length === ms.length ? "$" : "^";
+#                 break;
+#             default:
+#                 res = "\\\\" + m0;  // escape special characters
+#             }
+#             return res;
+#         });
+#     }
+#
+#     // EasyList domain anchor "||"
+#     var bos = "";
+#     if (domain_anchor_RegExp.test(pat)) {
+#         pat = pat.replace(domain_anchor_RegExp, "");  // strip "^||"
+#         bos = domain_anchor_replace;
+#     }
+#
+#     // EasyList wildcards '*', separators '^', and start/end anchors '|'
+#     // define n_wildcard outside the function for concatenation of these patterns
+#     // var n_wildcard = 1;
+#     pat = bos + pat.replace(/\\W[^*]*/g, function (m0, mp, ms) {
+#         if (m0.charAt(0) !== "*") {
+#             return tr(m0);
+#         }
+#         // var eos = mp + m0.length === ms.length ? "$" : "";
+#         var eos = "";
+#         return "(?=([\\\\s\\\\S]*?" + tr(m0.substr(1)) + eos + "))\\\\" + n_wildcard++;
+#     });
+#     return pat;
+# }
+
+n_wildcard = 1
+def easylist_to_jsre(pat):
+    def re_easylist(match):
+        mg = match.group()[0]
+        # https://adblockplus.org/filters#regexps, separator "^" == [^\\w.%-]
+        if mg == "^":
+            res = "[^\\w.%-]"
+        elif mg == "|":
+            res = "^" if match.span()[0] == 0 else "$"
+        else:
+            res = '\\' + mg
+        return res
+    def tr(pat):
+        return re.sub(r'[-\/.?:!+^|$()[\]{}]', re_easylist, pat)
+    def re_wildcard(match):
+        global n_wildcard
+        mg = match.group()
+        if mg[0] != "*": return tr(mg)
+        res = '(?=([\\s\\S]*?' + tr(mg[1:]) + '))\\' + '{:d}'.format(n_wildcard)
+        n_wildcard += 1
+        return res
+    domain_anchor_replace = "^"
+    bos = ''
+    if re_test(domain_anch_re,pat):
+        pat = domain_anch_re.sub('\\1',pat)
+        bos = domain_anchor_replace
+    pat = bos + re.sub(r'(\W[^*]*)', re_wildcard, pat)
+    return pat
+
+# Wildcard regex's use named groups. Limit their number to to an assumed maximum
+# e.g. Python's re limit is 100
+def wildcard_test(rule,wildcard_named_group_limit):
+    # assume no more than a couple wildcards in EasyList rules, backoff n_wildcard by 2
+    return not re_test(wildcard_re,rule) or n_wildcard <= max(1,wildcard_named_group_limit-2)
+
+def ordered_unique_all_js_var_lists():
+    global good_da_host_exact
+    global good_da_host_regex
+    global good_da_hostpath_exact
+    global good_da_hostpath_regex
+    global good_da_regex
+    global good_da_host_exceptions_exact
+
+    global bad_da_host_exact
+    global bad_da_host_regex
+    global bad_da_hostpath_exact
+    global bad_da_hostpath_regex
+    global bad_da_regex
+
+    global good_url_parts
+    global bad_url_parts
+    global good_url_regex
+    global bad_url_regex
+
+    good_da_host_exact = ordered_unique_nonempty(good_da_host_exact)
+    good_da_host_regex = ordered_unique_nonempty(good_da_host_regex)
+    good_da_hostpath_exact = ordered_unique_nonempty(good_da_hostpath_exact)
+    good_da_hostpath_regex = ordered_unique_nonempty(good_da_hostpath_regex)
+    good_da_regex = ordered_unique_nonempty(good_da_regex)
+    good_da_host_exceptions_exact = ordered_unique_nonempty(good_da_host_exceptions_exact)
+
+    bad_da_host_exact = ordered_unique_nonempty(bad_da_host_exact)
+    bad_da_host_regex = ordered_unique_nonempty(bad_da_host_regex)
+    bad_da_hostpath_exact = ordered_unique_nonempty(bad_da_hostpath_exact)
+    bad_da_hostpath_regex = ordered_unique_nonempty(bad_da_hostpath_regex)
+    bad_da_regex = ordered_unique_nonempty(bad_da_regex)
+
+    good_url_parts = ordered_unique_nonempty(good_url_parts)
+    bad_url_parts = ordered_unique_nonempty(bad_url_parts)
+    good_url_regex = ordered_unique_nonempty(good_url_regex)
+    bad_url_regex = ordered_unique_nonempty(bad_url_regex)
+
+# ordered uniqueness, https://stackoverflow.com/questions/12897374/get-unique-values-from-a-list-in-python
+ordered_unique_nonempty = lambda listable: fnt.reduce(lambda l, x: l.append(x) or l if x not in l and bool(x) else l, listable, [])
 
 # list variables based on EasyList strategies above
 # initial values prepended before EasyList rules
 # pass updates and services from these domains
 # handle organization-specific ad and tracking servers in later commit
 good_da_host_exact = ['apple.com',
-                      'init.itunes.apple.com',  # use nslookup to determine canonical names
-                      'init-cdn.itunes-apple.com.akadns.net',
-                      'itunes.apple.com.edgekey.net',
                       'icloud.com',
-                      'setup.icloud.com',
-                      'p32-escrowproxy.icloud.com',
-                      'p32-escrowproxy.fe.apple-dns.net',
-                      'keyvalueservice.icloud.com',
-                      'keyvalueservice.fe.apple-dns.net',
-                      'p32-bookmarks.icloud.com',
-                      'p32-bookmarks.fe.apple-dns.net',
-                      'p32-ckdatabase.icloud.com',
-                      'p32-ckdatabase.fe.apple-dns.net',
-                      'configuration.apple.com',
-                      'configuration.apple.com.edgekey.net',
-                      'mesu.apple.com',
-                      'mesu-cdn.apple.com.akadns.net',
-                      'mesu.g.aaplimg.com',
-                      'gspe1-ssl.ls.apple.com',
-                      'gspe1-ssl.ls.apple.com.edgekey.net',
-                      'api-glb-bos.smoot.apple.com',
-                      'query.ess.apple.com',
-                      'query-geo.ess-apple.com.akadns.net',
-                      'query.ess-apple.com.akadns.net',
-                      'setup.fe.apple-dns.net',
-                      'gsa.apple.com',
-                      'gsa.apple.com.akadns.net',
-                      'icloud-content.com',
-                      'usbos-edge.icloud-content.com',
-                      'usbos.ce.apple-dns.net',
-                      ''
-                      'iadsdk.apple.com',
-                      'iadsdk.apple.com.edgekey.net',
-                      'lcdn-locator.apple.com',
-                      'lcdn-locator.apple.com.akadns.net',
-                      'lcdn-locator-usuqo.apple.com.akadns.net',
-                      'cl1.apple.com',
-                      'cl2.apple.com',
-                      'cl3.apple.com',
-                      'cl4.apple.com',
-                      'cl5.apple.com',
-                      'cl1-cdn.origin-apple.com.akadns.net',
-                      'cl2-cdn.origin-apple.com.akadns.net',
-                      'cl3-cdn.origin-apple.com.akadns.net',
-                      'cl4-cdn.origin-apple.com.akadns.net',
-                      'cl5-cdn.origin-apple.com.akadns.net',
-                      'cl1.apple.com.edgekey.net',
-                      'cl2.apple.com.edgekey.net',
-                      'cl3.apple.com.edgekey.net',
-                      'cl4.apple.com.edgekey.net',
-                      'cl5.apple.com.edgekey.net',
-                      'xp.apple.com',
-                      'xp.itunes-apple.com.akadns.net',
-                      'mt-ingestion-service-pv.itunes.apple.com',
-                      'p32-sharedstreams.icloud.com',
-                      'p32-sharedstreams.fe.apple-dns.net',
-                      'p32-fmip.icloud.com',
-                      'p32-fmip.fe.apple-dns.net',
-                      'gsp-ssl.ls.apple.com',
-                      'gsp-ssl.ls-apple.com.akadns.net',
-                      'gsp-ssl.ls2-apple.com.akadns.net',
-                      'gspe35-ssl.ls.apple.com',
-                      'gspe35-ssl.ls-apple.com.akadns.net',
-                      'gspe35-ssl.ls.apple.com.edgekey.net',
-                      'gsp64-ssl.ls.apple.com',
-                      'gsp64-ssl.ls-apple.com.akadns.net',
-                      'mt-ingestion-service-st11.itunes.apple.com',
-                      'mt-ingestion-service-st11.itunes-apple.com.akadns.net',
                       'apple-dns.net',
+                      # 'init.itunes.apple.com',  # use nslookup to determine canonical names
+                      # 'init-cdn.itunes-apple.com.akadns.net',
+                      # 'itunes.apple.com.edgekey.net',
+                      # 'setup.icloud.com',
+                      # 'p32-escrowproxy.icloud.com',
+                      # 'p32-escrowproxy.fe.apple-dns.net',
+                      # 'keyvalueservice.icloud.com',
+                      # 'keyvalueservice.fe.apple-dns.net',
+                      # 'p32-bookmarks.icloud.com',
+                      # 'p32-bookmarks.fe.apple-dns.net',
+                      # 'p32-ckdatabase.icloud.com',
+                      # 'p32-ckdatabase.fe.apple-dns.net',
+                      # 'configuration.apple.com',
+                      # 'configuration.apple.com.edgekey.net',
+                      # 'mesu.apple.com',
+                      # 'mesu-cdn.apple.com.akadns.net',
+                      # 'mesu.g.aaplimg.com',
+                      # 'gspe1-ssl.ls.apple.com',
+                      # 'gspe1-ssl.ls.apple.com.edgekey.net',
+                      # 'api-glb-bos.smoot.apple.com',
+                      # 'query.ess.apple.com',
+                      # 'query-geo.ess-apple.com.akadns.net',
+                      # 'query.ess-apple.com.akadns.net',
+                      # 'setup.fe.apple-dns.net',
+                      # 'gsa.apple.com',
+                      # 'gsa.apple.com.akadns.net',
+                      # 'icloud-content.com',
+                      # 'usbos-edge.icloud-content.com',
+                      # 'usbos.ce.apple-dns.net',
+                      # 'lcdn-locator.apple.com',
+                      # 'lcdn-locator.apple.com.akadns.net',
+                      # 'lcdn-locator-usuqo.apple.com.akadns.net',
+                      # 'cl1.apple.com',
+                      # 'cl2.apple.com',
+                      # 'cl3.apple.com',
+                      # 'cl4.apple.com',
+                      # 'cl5.apple.com',
+                      # 'cl1-cdn.origin-apple.com.akadns.net',
+                      # 'cl2-cdn.origin-apple.com.akadns.net',
+                      # 'cl3-cdn.origin-apple.com.akadns.net',
+                      # 'cl4-cdn.origin-apple.com.akadns.net',
+                      # 'cl5-cdn.origin-apple.com.akadns.net',
+                      # 'cl1.apple.com.edgekey.net',
+                      # 'cl2.apple.com.edgekey.net',
+                      # 'cl3.apple.com.edgekey.net',
+                      # 'cl4.apple.com.edgekey.net',
+                      # 'cl5.apple.com.edgekey.net',
+                      # 'xp.apple.com',
+                      # 'xp.itunes-apple.com.akadns.net',
+                      # 'mt-ingestion-service-pv.itunes.apple.com',
+                      # 'p32-sharedstreams.icloud.com',
+                      # 'p32-sharedstreams.fe.apple-dns.net',
+                      # 'p32-fmip.icloud.com',
+                      # 'p32-fmip.fe.apple-dns.net',
+                      # 'gsp-ssl.ls.apple.com',
+                      # 'gsp-ssl.ls-apple.com.akadns.net',
+                      # 'gsp-ssl.ls2-apple.com.akadns.net',
+                      # 'gspe35-ssl.ls.apple.com',
+                      # 'gspe35-ssl.ls-apple.com.akadns.net',
+                      # 'gspe35-ssl.ls.apple.com.edgekey.net',
+                      # 'gsp64-ssl.ls.apple.com',
+                      # 'gsp64-ssl.ls-apple.com.akadns.net',
+                      # 'mt-ingestion-service-st11.itunes.apple.com',
+                      # 'mt-ingestion-service-st11.itunes-apple.com.akadns.net',
                       'microsoft.com', 'mozilla.com', 'mozilla.org']
 good_da_host_regex = []
 good_da_hostpath_exact = []
@@ -593,6 +1402,8 @@ bad_url_regex = []
 
 # provide explicit expceptions to good hosts or domains, e.g. iad.apple.com
 good_da_host_exceptions_exact = [ 'iad.apple.com',
+                                  'iadsdk.apple.com',
+                                  'iadsdk.apple.com.edgekey.net',
                                   'bingads.microsoft.com',
                                   'azure.bingads.trafficmanager.net',
                                   'choice.microsoft.com',
@@ -632,43 +1443,7 @@ good_da_host_exceptions_exact = [ 'iad.apple.com',
                                   'www.bingads.microsoft.com',
                                   'survey.watson.microsoft.com' ]
 
-# EasyList regular expressions
-
-comment_re = re.compile(r'^!\s*')   # ! commment
-configuration_re = re.compile(r'^\[[^]]*?\]')  # [Adblock Plus 2.0]
-easylist_opts = r'~{0,1}\b(?:third-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
-option_re = re.compile(r'^(.*?)(\$' + easylist_opts + r'.*?)$')
-# regex's used to exclude options for specific cases
-domain_option = r'(?:domain=)'  # discards rules specific to links from specific domains
-alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
-notdm3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
-not3dimppupos_option_exception_re = re.compile(r'~{0,1}\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
-domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
-scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
-selector_re = re.compile(r'^(.*?)#\@{0,1}#*?.*?$') # #@##div [should be #+?, but old style still used]
-regex_re = re.compile(r'^\@{0,2}\/(.*?)\/$')
-wildcard_begend_re = re.compile(r'^(?:\**?([^*]*?)\*+?|\*+?([^*]*?)\**?)$')
-wild_anch_sep_exc_re = re.compile(r'[*|^@]')
-wild_sep_exc_noanch_re = re.compile(r'(?:[*^@]|\|[\s\S])')
-anch_sep_exc_re = re.compile(r'[|^@]')
-anch_exc_re = re.compile(r'[|@]')
-exception_re = re.compile(r'^@@(.*?)$')
-wildcard_re = re.compile(r'\*+?')
-wildcard_regex = r'.*?'
-regexp_symbol_re = re.compile(r'([?*.+@])')
-httpempty_re = re.compile(r'^\|?https{0,1}://$')
-pathend_re = re.compile(r'(?i)(?:(?:/|\|)$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|(?:s|p)?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
-
-domain_anch_re = re.compile(r'^\|\|(.+?)$')
-domain_re = re.compile(r'(?:[\w\-]+\.)+[a-zA-Z0-9\-]{2,24}',re.IGNORECASE)
-urlhost_re = re.compile(r'^(?:https?://){0,1}(?:[wW]{3}\d{0,3}[.]){0,1}' + r'({})'.format(domain_re.pattern),re.IGNORECASE)
-# omit scheme from start of rule -- this will also be done in JS for efficiency
-scheme_anchor_re = re.compile(r'^(\|?(?:[\w*+-]{1,15})?://)');  # e.g. '|http://' at start
-
-# (Almost) fully-qualified domain name extraction (with EasyList wildcards)
-# Example case: banner.3ddownloads.com^
-da_hostonly_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?)(?:$|[/^?])$');
-da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]+?)\??$');
+# Long regex filter """here""" documents
 
 # ignore any rules following comments with these strings, until the next non-ignorable comment
 commentname_sections_ignore_re = r'(?:{})'.format('|'.join(re.sub(r'([.])','\\.',x) for x in '''\
@@ -2425,340 +3200,7 @@ financialcontent\\.com'''
 badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^#',x)))
 badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_filters.split('\n'))),re.IGNORECASE)
 
-# use or not use regular expression rules of any kind
-def regex_ignore_test(line,opts=''):
-    res = False  # don't ignore any rule
-    # ignore wildcards and anchors
-    # res = re_test(r'[*^]',line)
-    return res
+if __name__ == "__main__":
+    res = EasyListPAC()
 
-def re_test(regex,string):
-    if isinstance(regex,str): regex = re.compile(regex)
-    return bool(regex.search(string))
-
-# convert EasyList wildcard '*', separator '^', and anchor '|' to regexp; ignore '?' globbing
-# http://blogs.perl.org/users/mauke/2017/05/converting-glob-patterns-to-efficient-regexes-in-perl-and-javascript.html
-# For efficiency this these are converted in Python; observed to be important in iSO kernel
-
-# var domain_anchor_RegExp = RegExp("^\\\\|\\\\|");
-# // performance: use a simplified, less inclusive of subdomains, regex for domain anchors
-# // also assume that RexgExp("^https?//") stripped from url string beforehand
-# //var domain_anchor_replace = "^(?:[\\\\w\\-]+\\\\.)*?";
-# var domain_anchor_replace = "^";
-# var n_wildcard = 1;
-# function easylist2re(pat) {
-#     function tr(pat) {
-#         return pat.replace(/[-\\/.?:!+^|$()[\\]{}]/g, function (m0, mp, ms) {  // url, regex, EasyList special chars
-#             // res = m0 === "?" ? "[\\s\\S]" : "\\\\" + m0;
-#             // https://adblockplus.org/filters#regexps, separator "^" == [^\\w.%-]
-#             var res = "\\\\" + m0;
-#             switch (m0) {
-#             case "^":
-#                 res = "[^\\\\w.%-]";
-#                 break;
-#             case "|":
-#                 res = mp + m0.length === ms.length ? "$" : "^";
-#                 break;
-#             default:
-#                 res = "\\\\" + m0;  // escape special characters
-#             }
-#             return res;
-#         });
-#     }
-#
-#     // EasyList domain anchor "||"
-#     var bos = "";
-#     if (domain_anchor_RegExp.test(pat)) {
-#         pat = pat.replace(domain_anchor_RegExp, "");  // strip "^||"
-#         bos = domain_anchor_replace;
-#     }
-#
-#     // EasyList wildcards '*', separators '^', and start/end anchors '|'
-#     // define n_wildcard outside the function for concatenation of these patterns
-#     // var n_wildcard = 1;
-#     pat = bos + pat.replace(/\\W[^*]*/g, function (m0, mp, ms) {
-#         if (m0.charAt(0) !== "*") {
-#             return tr(m0);
-#         }
-#         // var eos = mp + m0.length === ms.length ? "$" : "";
-#         var eos = "";
-#         return "(?=([\\\\s\\\\S]*?" + tr(m0.substr(1)) + eos + "))\\\\" + n_wildcard++;
-#     });
-#     return pat;
-# }
-
-n_wildcard = 1
-def easylist_to_jsre(pat):
-    def re_easylist(match):
-        mg = match.group()[0]
-        # https://adblockplus.org/filters#regexps, separator "^" == [^\\w.%-]
-        if mg == "^":
-            res = "[^\\w.%-]"
-        elif mg == "|":
-            res = "^" if match.span()[0] == 0 else "$"
-        else:
-            res = '\\' + mg
-        return res
-    def tr(pat):
-        return re.sub(r'[-\/.?:!+^|$()[\]{}]', re_easylist, pat)
-    def re_wildcard(match):
-        global n_wildcard
-        mg = match.group()
-        if mg[0] != "*": return tr(mg)
-        res = '(?=([\\s\\S]*?' + tr(mg[1:]) + '))\\' + '{:d}'.format(n_wildcard)
-        n_wildcard += 1
-        return res
-    domain_anchor_replace = "^"
-    bos = ''
-    if re_test(domain_anch_re,pat):
-        pat = domain_anch_re.sub('\\1',pat)
-        bos = domain_anchor_replace
-    pat = bos + re.sub(r'(\W[^*]*)', re_wildcard, pat)
-    return pat
-
-# Wildcard regex's use named groups. Limit their number to to an assumed maximum
-# e.g. Python's re limit is 100
-def wildcard_test(rule):
-    # assume no more than a couple wildcards in EasyList rules, backoff n_wildcard by 2
-    return not re_test(wildcard_re,rule) or n_wildcard <= max(1,wildcard_named_group_limit-2)
-
-def easylist_append_rules(fd,ignore_huge_url_regex_rule_list=False):
-    ignore_rules_flag = False
-    for line in fd:
-        line = line.rstrip()
-        line_orig = line
-        if False:
-            debug_this_rule_string = '||arstechnica.com^*/|$object'
-            if line_orig.find(debug_this_rule_string) != -1:
-                pass
-        exception_flag = False  # block default; pass if True
-        option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
-        opts = ''  # default: no options in the rule
-        # ignore these cases
-        # comment case: ignore
-        if re_test(comment_re,line):
-            if re_test(commentname_sections_ignore_re, line):
-                ignored_rules_comment_start = comment_re.sub('',line)
-                if not ignore_rules_flag:
-                    ignored_rules_count = 0
-                    ignore_rules_flag = True
-                    print('Ignore rules following comment ',end='',flush=True)
-                print('"{}"… '.format(ignored_rules_comment_start),end='',flush=True)
-            else:
-                if ignore_rules_flag: print('\n {:d} rules ignored.'.format(ignored_rules_count),flush=True)
-                ignored_rules_count = 0
-                ignore_rules_flag = False
-            continue
-        if ignore_rules_flag:
-            ignored_rules_count += 1
-            continue
-        # configuration case: ignore
-        if re_test(configuration_re,line): continue
-        # delete all easylist options **prior** to regex and selector cases
-        # ignore domain limits for now
-        if re_test(option_re,line):
-            opts = option_re.sub('\\2', line)
-            # domain-specific and other option exceptions: ignore
-            # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
-            line = option_re.sub('\\1', line)  # delete all the options and continue
-        # block default or pass exception
-        if re_test(exception_re,line):
-            line = exception_re.sub('\\1', line)
-            exception_flag = True
-            option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
-            if exceptions_ignore_flag: continue
-        # selector case: ignore
-        if re_test(selector_re,line): continue
-        # specific options: ignore
-        if re_test(option_exception_re, opts): continue
-        # blank url case: ignore
-        if re_test(httpempty_re,line): continue
-        # blank line case: ignore
-        if not line: continue
-        # treat each of the these cases separately, here and in Javascript
-        # regex case
-        if re_test(regex_re,line):
-            if regex_ignore_test(line): continue
-            line = regex_re.sub('\\1', line)
-            if exception_flag: good_url_regex.append(line)
-            else:
-                if not re_test(badregex_regex_filters_re, line): continue  # limit bad regex's to those in the filter 
-                bad_url_regex.append(line)
-            continue
-        # now that regex's are handled, delete unnecessary wildcards, e.g. /.../*
-        line = wildcard_begend_re.sub('\\1', line)
-        # domain anchors, || or '|http://a.b' -> domain anchor 'a.b' for regex efficiency in JS
-        if re_test(domain_anch_re,line) or re_test(scheme_anchor_re,line):
-            # strip off initial || or |scheme://
-            if re_test(domain_anch_re,line): line = domain_anch_re.sub('\\1', line)
-            elif re_test(scheme_anchor_re,line): line = scheme_anchor_re.sub("", line)
-            # host subcase
-            if re_test(da_hostonly_re,line):
-                line = da_hostonly_re.sub('\\1', line)
-                if not re_test(wild_anch_sep_exc_re,line):  # exact subsubcase
-                    if not re_test(badregex_regex_filters_re, line):
-                        if False: print(line)
-                        continue  # limit bad regex's to those in the filter
-                    if exception_flag: good_da_host_exact.append(line)
-                    else: bad_da_host_exact.append(line)
-                    continue
-                else:  # regex subsubcase
-                    if regex_ignore_test(line): continue
-                    if exception_flag: good_da_host_regex.append(line)
-                    else:
-                        if not re_test(badregex_regex_filters_re, line): continue  # limit bad regex's to those in the filter 
-                        bad_da_host_regex.append(line)
-                    continue
-            # hostpath subcase
-            if re_test(da_hostpath_re,line):
-                line = da_hostpath_re.sub('\\1', line)
-                if not re_test(wild_sep_exc_noanch_re,line) and re_test(pathend_re,line):  # exact subsubcase
-                    line = re.sub(r'(?:/|\|)$', '', line)  # strip EOL slashes (repeat in JS) and anchors
-                    if not re_test(badregex_regex_filters_re, line):
-                        if False: print(line)
-                        continue  # limit bad regex's to those in the filter
-                    if exception_flag: good_da_hostpath_exact.append(line)
-                    else: bad_da_hostpath_exact.append(line)
-                    continue
-                else:  # regex subsubcase
-                    if regex_ignore_test(line): continue
-                    # ignore option rules for some regex rules
-                    if True and re_test(alloption_exception_re,opts): continue
-                    if exception_flag: good_da_hostpath_regex.append(line)
-                    else:
-                        if not re_test(badregex_regex_filters_re, line): continue  # limit bad regex's to those in the filter 
-                        bad_da_hostpath_regex.append(line)
-                    continue
-            # hostpathquery default case
-            if True:
-                # if re_test(re.compile(r'^go\.'),line):
-                #     pass
-                if regex_ignore_test(line): continue
-                if exception_flag: good_da_regex.append(line)
-                else: bad_da_regex.append(line)
-                continue
-        # all other non-regex patterns
-        if True:
-            if regex_ignore_test(line): continue
-            if not ignore_huge_url_regex_rule_list:
-                if True and re_test(alloption_exception_re, opts): continue
-                if exception_flag: good_url_parts.append(line)
-                else:
-                    if not re_test(badregex_regex_filters_re, line): continue  # limit bad regex's to those in the filter 
-                    bad_url_parts.append(line)
-                continue  # superfluous continue
-
-for fname in ['~/Desktop/easyprivacy.txt', '~/Desktop/easylist.txt']:
-    fd = open(os.path.expanduser(fname), 'r')
-    # ignore the very large number of url part rules in easylist.txt
-    easylist_append_rules(fd,True and fname == '~/Desktop/easylist.txt')
-    fd.close()
-
-# ordered uniqueness, https://stackoverflow.com/questions/12897374/get-unique-values-from-a-list-in-python
-ordered_unique_nonempty = lambda listable: fnt.reduce(lambda l, x: l.append(x) or l if x not in l and bool(x) else l, listable, [])
-
-good_da_host_exact = ordered_unique_nonempty(good_da_host_exact)
-good_da_host_regex = ordered_unique_nonempty(good_da_host_regex)
-good_da_hostpath_exact = ordered_unique_nonempty(good_da_hostpath_exact)
-good_da_hostpath_regex = ordered_unique_nonempty(good_da_hostpath_regex)
-good_da_regex = ordered_unique_nonempty(good_da_regex)
-good_da_host_exceptions_exact = ordered_unique_nonempty(good_da_host_exceptions_exact)
-
-bad_da_host_exact = ordered_unique_nonempty(bad_da_host_exact)
-bad_da_host_regex = ordered_unique_nonempty(bad_da_host_regex)
-bad_da_hostpath_exact = ordered_unique_nonempty(bad_da_hostpath_exact)
-bad_da_hostpath_regex = ordered_unique_nonempty(bad_da_hostpath_regex)
-bad_da_regex = ordered_unique_nonempty(bad_da_regex)
-
-good_url_parts = ordered_unique_nonempty(good_url_parts)
-bad_url_parts = ordered_unique_nonempty(bad_url_parts)
-good_url_regex = ordered_unique_nonempty(good_url_regex)
-bad_url_regex = ordered_unique_nonempty(bad_url_regex)
-
-# Use to define js object hashes (much faster than string conversion)
-def js_init_object(object_name):
-    obj = globals()[object_name]
-    if len(obj) > truncate_hash_max:
-        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(object_name,len(obj),truncate_hash_max))
-        obj = obj[:truncate_hash_max]
-    return '''\
-
-// {:d} rules:
-var {}_JSON = {}{}{};
-var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
-'''.format(len(obj),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
-
-def js_init_regexp(array_name,domain_anchor=False):
-    global n_wildcard
-    n_wildcard = 1
-    domain_anchor_replace = "^" if domain_anchor else ""
-    match_nothing_regexp = "/^$/"
-
-    # no wildcard sorting
-    # arr = [easylist_to_jsre(x) for x in globals()[array_name] if wildcard_test(x)]
-
-    arr_nostar = [x for x in globals()[array_name] if not re_test(wildcard_re,x)]
-    arr_star = [x for x in globals()[array_name] if re_test(wildcard_re,x)]
-    def wildcard_preferences(rule):
-        track_test = not re_test(re.compile(r'track',re.IGNORECASE),rule)       # MSB
-        beacon_test = not re_test(re.compile(r'beacon]',re.IGNORECASE),rule)  # LSB
-        stats_test = not re_test(re.compile(r'stat[is]]',re.IGNORECASE),rule)  # LSB
-        analysis_test = not re_test(re.compile(r'anal[iy]]',re.IGNORECASE),rule)  # LSB
-        return 8*track_test + 4*beacon_test + 2*stats_test + analysis_test
-    arr_star.sort(key=wildcard_preferences)
-    arr_star = arr_star[:wildcard_named_group_limit]
-    arr = arr_nostar + arr_star
-
-    if re_test(r'(?:_parts|_regex)$',array_name) and len(arr) > truncate_alternatives_max:
-        warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),truncate_alternatives_max))
-        arr = arr[:truncate_alternatives_max]
-
-    arr = [easylist_to_jsre(x) for x in arr]
-    arr_regexp = "/" + domain_anchor_replace + "(?:" + "|".join(arr) + ")/i"
-    if len(arr) == 0: arr_regexp = match_nothing_regexp
-
-    return '''\
-
-// {:d} rules as an efficient NFA RegExp:
-var {}_RegExp = {};
-var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
-'''.format(len(arr),re.sub(r'_regex$','',array_name),arr_regexp,array_name,len(arr))
-
-proxy_pac = proxy_pac_preamble \
-            + "\n".join(["// " + l for l in easylist_strategy.split("\n")]) \
-            + js_init_object('good_da_host_exact') \
-            + js_init_regexp('good_da_host_regex',True) \
-            + js_init_object('good_da_hostpath_exact') \
-            + js_init_regexp('good_da_hostpath_regex',True) \
-            + js_init_regexp('good_da_regex',True) \
-            + js_init_object('good_da_host_exceptions_exact') \
-            + js_init_object('bad_da_host_exact') \
-            + js_init_regexp('bad_da_host_regex',True) \
-            + js_init_object('bad_da_hostpath_exact') \
-            + js_init_regexp('bad_da_hostpath_regex',True) \
-            + js_init_regexp('bad_da_regex',True) \
-            + js_init_regexp('good_url_parts') \
-            + js_init_regexp('bad_url_parts') \
-            + js_init_regexp('good_url_regex') \
-            + js_init_regexp('bad_url_regex') \
-            + proxy_pac_postamble
-
-for l in ['good_da_host_exact',
-          'good_da_host_regex',
-          'good_da_hostpath_exact',
-          'good_da_hostpath_regex',
-          'good_da_regex',
-          'good_da_host_exceptions_exact',
-          'bad_da_host_exact',
-          'bad_da_host_regex',
-          'bad_da_hostpath_exact',
-          'bad_da_hostpath_regex',
-          'bad_da_regex',
-          'good_url_parts',
-          'bad_url_parts',
-          'good_url_regex',
-          'bad_url_regex']:
-    print("{}: {:d} rules".format(l,len(locals()[l])),flush=True)
-
-with open(os.path.join(easylist_dir,'proxy.pac'),'w') as fd:
-    fd.write(proxy_pac)
+sys.exit()
