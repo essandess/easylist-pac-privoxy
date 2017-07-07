@@ -2,7 +2,7 @@
 #coding: utf-8
 __author__ = 'stsmith'
 
-# easylist_pac: Convert Easylist Tracker and Adblocking rules to an efficient Proxy Auto Configuration file
+# easylist_pac: Convert EasyList Tracker and Adblocking rules to an efficient Proxy Auto Configuration file
 
 # Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 
@@ -22,9 +22,9 @@ __author__ = 'stsmith'
 import argparse as ap, copy, datetime, functools as fnt, os, re, shutil, sys, time, urllib.request, warnings
 
 try:
+    import matplotlib.pyplot as plt, multiprocessing as mp, numpy as np, scipy.sparse as sps
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
-    import matplotlib.pyplot as plt, multiprocessing as mp, numpy as np, scipy.sparse as sps
     machine_learning_flag = True
 except ImportError as e:
     machine_learning_flag = False
@@ -40,10 +40,11 @@ class EasyListPAC:
         self.parse_and_filter_rule_files()
         self.prioritize_rules()
         if self.debug:
-            print('\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.bad_rules,self.bad_signal))))
-            if False:
-                plt.plot(np.arange(len(self.good_signal)), self.good_signal, '.')
-                plt.show()
+            print("Good rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.good_rules,self.good_signal))))
+            print("\nBad rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.bad_rules,self.bad_signal))))
+            if True:
+                #plt.plot(np.arange(len(self.good_signal)), self.good_signal, '.')
+                #plt.show()
                 plt.plot(np.arange(len(self.bad_signal)), self.bad_signal, '.')
                 plt.show()
             return
@@ -55,20 +56,22 @@ class EasyListPAC:
         # best choise is the LAN IP address of the http://hostname/proxy.pac web server, e.g. 192.168.0.2:80
         parser = ap.ArgumentParser()
         parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, default='127.0.0.1:80')
-        parser.add_argument('-d', '--download_dir', help="Download directory", type=str, default='~/Downloads')
+        parser.add_argument('-d', '--download-dir', help="Download directory", type=str, default='~/Downloads')
         parser.add_argument('-g', '--debug', help="Debug: Just print rules", action='store_true')
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
-        parser.add_argument('-P', '--PAC_original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
-        parser.add_argument('-rb', '--bad_rule_max', help="Maximum number of rules", type=int, default=14999)
-        parser.add_argument('-rg', '--good_rule_max', help="Maximum number of rules", type=int, default=2999)
+        parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
+        parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
+                            default=19999)
+        parser.add_argument('-rg', '--good-rule-max', help="Maximum number of good rules (-1 for unlimited)",
+                            type=int, default=2999)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
                             default=4999)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
-                            default=1999)
-        parser.add_argument('-tt', '--target_in_training', help="Faster target-int-training data ML approach", action='store_true')
-        parser.add_argument('-w', '--wildcard_limit', help="Limit the number of wildcards", type=int, default=999)
+                            default=4999)
+        parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
         parser.add_argument('-x', '--Extra_EasyList_URLs', help="Limit the number of wildcards", type=str, nargs='+', default=[])
-        parser.add_argument('-@@', '--exceptions_ignore_flag', help="Ignore exception rules", action='store_true')
+        parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
+        parser.add_argument('-@@', '--exceptions_include_flag', help="Include exception rules", action='store_true')
         args = parser.parse_args()
         self.args = parser.parse_args()
         self.blackhole_ip_port = args.blackhole
@@ -81,8 +84,8 @@ class EasyListPAC:
         self.bad_rule_max = args.bad_rule_max if args.bad_rule_max >= 0 else None
         self.truncate_hash_max = args.truncate_hash if args.truncate_hash >= 0 else None
         self.truncate_alternatives_max = args.truncate_regex if args.truncate_regex >= 0 else None
-        self.target_in_training = args.target_in_training
-        self.exceptions_ignore_flag = args.exceptions_ignore_flag
+        self.sliding_window = args.sliding_window
+        self.exceptions_include_flag = args.exceptions_include_flag
         self.wildcard_named_group_limit = args.wildcard_limit if args.wildcard_limit >= 0 else None
         self.extra_easylist_urls = args.Extra_EasyList_URLs
         return self.args
@@ -126,13 +129,13 @@ class EasyListPAC:
             line_orig = line
             # configuration lines and selector rules should already be filtered out
             if re_test(configuration_re, line) or re_test(selector_re, line): continue
-            if False:
-                debug_this_rule_string = '||arstechnica.com^*/|$object'
+            if True:
+                debug_this_rule_string = '||theatlantic.com^'
                 if line_orig.find(debug_this_rule_string) != -1:
                     pass
             exception_flag = exception_filter(line)  # block default; pass if True
             line = exception_re.sub('\\1', line)
-            option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
+            option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
             # delete all easylist options **prior** to regex and selector cases
             # ignore domain limits for now
             opts = ''  # default: no options in the rule
@@ -160,25 +163,25 @@ class EasyListPAC:
                 ignored_rules_count += 1
                 self.append_rule(exception_flag, line, opts, False)
                 continue
+            # blank url case: ignore
+            if re_test(httpempty_re, line): continue
+            # blank line case: ignore
+            if not bool(line): continue
             # block default or pass exception
             if exception_flag:
-                option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
-                if self.exceptions_ignore_flag:
+                option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options within exceptions
+                if not self.exceptions_include_flag:
                     self.append_rule(exception_flag, line, opts, False)
                     continue
             # specific options: ignore
             if re_test(option_exception_re, opts):
                 self.append_rule(exception_flag, line, opts, False)
                 continue
-            # blank url case: ignore
-            if re_test(httpempty_re, line): continue
-            # blank line case: ignore
-            if not bool(line): continue
             # add all remaining rules
             self.append_rule(exception_flag, line, opts, True)
 
     def append_rule(self,exception_flag,rule, opts, include_rule_flag):
-        if not bool(rule): return
+        if not bool(rule): return  # last chance to reject blank lines -- shouldn't happen
         if exception_flag:
             self.good_rules.append(rule)
             self.good_opts.append(option_tokenizer(opts))
@@ -188,23 +191,37 @@ class EasyListPAC:
             self.bad_opts.append(option_tokenizer(opts))
             self.bad_rules_include_flag.append(include_rule_flag)
 
+    def good_class_test(self,rule,opts=''):
+        return not bool(badregex_regex_filters_re.search(rule))
+
+    def bad_class_test(self,rule,opts=''):
+        """Bad rule of interest if a match for the bad regex's or specific rule options,
+e.g. non-domain specific popups or images."""
+        return bool(badregex_regex_filters_re.search(rule)) \
+                or (bool(opts) and bool(thrdp_im_pup_os_option_re.search(opts))
+                    and not bool(not3dimppupos_option_exception_re.search(opts)))
+
     def prioritize_rules(self):
         # use bootstrap regex preferences
         # https://github.com/seatgeek/fuzzywuzzy would be great here if there were such a thing for regex
-        self.good_signal = np.array([not bool(badregex_regex_filters_re.search(x)) for x,f in zip(self.good_rules,self.good_rules_include_flag) if f], dtype=np.int)
-        self.bad_signal = np.array([not bool(badregex_regex_filters_re.search(x)) for x,f in zip(self.bad_rules,self.bad_rules_include_flag) if f], dtype=np.int)
+        self.good_signal = np.array([self.good_class_test(x,opts) for (x,opts,f) in zip(self.good_rules,self.good_opts,self.good_rules_include_flag) if f], dtype=np.int)
+        self.bad_signal = np.array([self.bad_class_test(x,opts) for (x,opts,f) in zip(self.bad_rules,self.bad_opts,self.bad_rules_include_flag) if f], dtype=np.int)
 
-        self.good_columns = np.array([i for i,f in enumerate(self.good_rules_include_flag) if f],dtype=int)
-        self.bad_columns = np.array([i for i,f in enumerate(self.bad_rules_include_flag) if f],dtype=int)
+        self.good_columns = np.array([i for (i,f) in enumerate(self.good_rules_include_flag) if f],dtype=int)
+        self.bad_columns = np.array([i for (i,f) in enumerate(self.bad_rules_include_flag) if f],dtype=int)
 
         # Logistic Regression for more accurate rule priorities
         if machine_learning_flag:
             print("Performing logistic regression on rule sets. This will take a few minutes…",end='',flush=True)
             self.logreg_priorities()
             print(" done.", flush=True)
+
+            # truncate to positive signal strengths
             if not self.debug:
-                self.good_rule_max = min(self.good_rule_max,np.count_nonzero(self.good_signal > 0))
-                self.bad_rule_max = min(self.bad_rule_max, np.count_nonzero(self.bad_signal > 0))
+                self.good_rule_max = min(self.good_rule_max,np.count_nonzero(self.good_signal > 0)) \
+                    if isinstance(self.good_rule_max,(int,np.int)) else np.count_nonzero(self.good_signal > 0)
+                self.bad_rule_max = min(self.bad_rule_max, np.count_nonzero(self.bad_signal > 0)) \
+                    if isinstance(self.bad_rule_max,(int,np.int)) else np.count_nonzero(self.bad_signal > 0)
 
         # prioritize and limit the rules
         good_pridx = np.array([e[0] for e in sorted(enumerate(self.good_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:self.good_rule_max]
@@ -232,21 +249,20 @@ class EasyListPAC:
         self.bad_fv_mat, self.bad_row_hash = fv_to_mat(self.bad_fv_json, self.bad_rules)
 
         self.good_X_all = StandardScaler(with_mean=False).fit_transform(self.good_fv_mat.astype(np.float))
-        self.good_y_all = np.array([not bool(badregex_regex_filters_re.search(x)) for x in self.good_rules], dtype=np.int)
+        self.good_y_all = np.array([self.good_class_test(x,opts) for (x,opts) in zip(self.good_rules, self.good_opts)], dtype=np.int)
 
         self.bad_X_all = StandardScaler(with_mean=False).fit_transform(self.bad_fv_mat.astype(np.float))
-        self.bad_y_all = np.array([
-            bool(badregex_regex_filters_re.search(x))
-            or (bool(opts) and bool(thrdp_im_pup_os_option_re.search(opts)))
-            for (x,opts) in zip(self.bad_rules,self.bad_opts)], dtype=np.int)
+        self.bad_y_all = np.array([self.bad_class_test(x,opts) for (x,opts) in zip(self.bad_rules, self.bad_opts)], dtype=np.int)
 
         self.logit_fit_method_sample_weights()
 
         # inverse regularization signal; smaller values give more sparseness, less model rigidity
-        self.C = 5.e-1
+        self.C = 1.e1
 
         self.logreg_test_in_training()
-        if not self.target_in_training: self.logreg_sliding_window()
+        if self.sliding_window: self.logreg_sliding_window()
+
+        return
 
     def logit_fit_method_sample_weights(self):
         # weights for LogisticRegression.fit()
@@ -254,53 +270,6 @@ class EasyListPAC:
         self.bad_w_all = np.ones(len(self.bad_y_all))
 
         # add more weight for each of these regex matches
-        high_weight_regex = [re.compile(x,re.IGNORECASE) for x in """\
-trac?k
-beacon
-stat[is]?
-anal[iy]
-goog
-yahoo
-adob
-pagead\\d?
-syndicat
-(?:\\bad|ad\\b)
-\\boas\\b
-ads
-cdn
-cloud
-banner
-financ
-share
-traffic
-creativ
-host
-affil
-^mob
-data
-your?
-watch
-survey
-stealth
-invisible
-brand
-site
-merch
-kli(k|p)
-clic?k
-popup
-log
-assets
-counter
-metric
-event
-tool
-quant
-chart
-opti?m
-partner
-sponsor
-affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
         for i, rule in enumerate(self.bad_rules):
             self.bad_w_all[i] += 1/max(1,len(rule))  # slight disadvantage for longer rules
             for regex in high_weight_regex:
@@ -312,8 +281,8 @@ affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
     def logreg_test_in_training(self):
         """fast, initial method: test vectors in the training data"""
 
-        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01, n_jobs=-1)
-        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l1', solver='liblinear', tol=0.01, n_jobs=-1)
+        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l2', solver='liblinear', tol=0.01, n_jobs=mp.cpu_count())  # or n_jobs=-1
+        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l2', solver='liblinear', tol=0.01, n_jobs=mp.cpu_count())  # or n_jobs=-1
 
         good_x_test = self.good_X_all[self.good_columns]
         good_X = self.good_X_all
@@ -325,11 +294,12 @@ affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
         bad_y = self.bad_y_all
         bad_w = self.bad_w_all
 
-        self.good_fv_logreg.fit(good_X, good_y, sample_weight=good_w)
-        self.bad_fv_logreg.fit(bad_X, bad_y, sample_weight=bad_w)
-
-        self.good_signal = self.good_fv_logreg.decision_function(good_x_test)
-        self.bad_signal = self.bad_fv_logreg.decision_function(bad_x_test)
+        if good_x_test.shape[0] > 0:
+            self.good_fv_logreg.fit(good_X, good_y, sample_weight=good_w)
+            self.good_signal = self.good_fv_logreg.decision_function(good_x_test)
+        if bad_x_test.shape[0] > 0:
+            self.bad_fv_logreg.fit(bad_X, bad_y, sample_weight=bad_w)
+            self.bad_signal = self.bad_fv_logreg.decision_function(bad_x_test)
         return
 
     def logreg_sliding_window(self):
@@ -342,92 +312,119 @@ affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
             bad_preidx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:int(np.ceil(1.4*self.bad_rule_max))]
             self.bad_columns = self.bad_columns[bad_preidx]
 
-        # init w/ target-in-training results
-        good_fv_logreg = copy.deepcopy(self.good_fv_logreg)
-        good_fv_logreg.penalty = 'l2'
-        good_fv_logreg.solver = 'sag'
-        good_fv_logreg.warm_start = True
-        good_fv_logreg.n_jobs = 1  # achieve parallelism via block processing
-        bad_fv_logreg = copy.deepcopy(self.bad_fv_logreg)
-        bad_fv_logreg.penalty = 'l2'
-        bad_fv_logreg.solver = 'sag'
-        bad_fv_logreg.warm_start = True
-        bad_fv_logreg.n_jobs = 1  # achieve parallelism via block processing
-
-        # debug mp: turn off multiprocessing
-        if False:
-            class NotAMultiProcess(mp.Process):
-                def start(self): self.run()
-                def join(self): pass
-            class NotAQueue(mp.Queue):
-                def put(self): pass
-                def get(self): pass
-            mp.Process = NotAMultiProcess
-            mp.Queue = NotAQueue
-
         # multithreaded loop for speed
-        # distribute training and tests across multiprocessors
-        def training_op(queue, X_all, y_all, w_all, fv_logreg, columns, column_block):
-            """Training and test operation put into a Queue.
-            columns[column_block] and signal[column_block] are the rule columns and corresponding signal strengths
-            """
-            res = np.zeros(len(column_block))
-            for k in range(len(column_block)):
-                mask = np.zeros(len(y_all), dtype=bool)
-                mask[columns[column_block[k]]] = True
-                mask = np.logical_not(mask)
+        use_blocked_not_sklearn_mp = True  # it's a lot faster to block it yourself
+        if use_blocked_not_sklearn_mp:
+            # init w/ target-in-training results
+            good_fv_logreg = copy.deepcopy(self.good_fv_logreg)
+            good_fv_logreg.penalty = 'l2'
+            good_fv_logreg.solver = 'sag'
+            good_fv_logreg.warm_start = True
+            bad_fv_logreg = copy.deepcopy(self.bad_fv_logreg)
+            bad_fv_logreg.penalty = 'l2'
+            bad_fv_logreg.solver = 'sag'
+            bad_fv_logreg.warm_start = True
+            bad_fv_logreg.n_jobs = 1  # achieve parallelism via block processing
+            if False:  # debug mp: turn off multiprocessing with a monkeypatch
+                class NotAMultiProcess(mp.Process):
+                    def start(self): self.run()
+                    def join(self): pass
+                class NotAQueue(object):
+                    def put(self): pass
+                    def get(self): pass
+                mp.Process = NotAMultiProcess
+                mp.Queue = NotAQueue
 
-                x_test = X_all[np.logical_not(mask)]
-                X = X_all[mask]
-                y = y_all[mask]
-                w = w_all[mask]
+            # this is probably efficient with Linux's copy-on-write fork(); unsure about BSD/macOS
+            # must refactor to use shared Array() [along with warm_start coeff's] to ensure
+            # see https://stackoverflow.com/questions/5549190/is-shared-readonly-data-copied-to-different-processes-for-python-multiprocessing/
 
-                fv_logreg.fit(X, y, sample_weight=w)
-                res[k] = fv_logreg.decision_function(x_test)[0]
-            queue.put((column_block,res))  # signal[column_block] = res
-            return
+            # distribute training and tests across multiprocessors
+            def training_op(queue, X_all, y_all, w_all, fv_logreg, columns, column_block):
+                """Training and test operation put into a mp.Queue.
+                columns[column_block] and signal[column_block] are the rule columns and corresponding signal strengths
+                """
+                res = np.zeros(len(column_block))
+                for k in range(len(column_block)):
+                    mask = np.zeros(len(y_all), dtype=bool)
+                    mask[columns[column_block[k]]] = True
+                    mask = np.logical_not(mask)
 
-        num_threads = mp.cpu_count()
+                    x_test = X_all[np.logical_not(mask)]
+                    X = X_all[mask]
+                    y = y_all[mask]
+                    w = w_all[mask]
 
-        # good
-        q = mp.Queue()
-        jobs = []
-        self.good_signal = np.zeros(len(self.good_columns))
-        block_length = len(self.good_columns) // num_threads
-        column_block = np.arange(0, block_length)
-        while len(column_block) > 0:
-            column_block = column_block[np.where(column_block < len(self.good_columns))]
-            fv_logreg = copy.deepcopy(good_fv_logreg)
-            p = mp.Process(target=training_op, args=(q, self.good_X_all, self.good_y_all, self.good_w_all, fv_logreg, self.good_columns, column_block))
-            p.start()
-            jobs.append(p)
-            column_block += len(column_block)
-        # process the results in the queue
-        for i in range(len(jobs)):
-            column_block, res = q.get()
-            self.good_signal[column_block] = res
-        # join all jobs and wait for them to complete
-        for p in jobs: p.join()
+                    fv_logreg.fit(X, y, sample_weight=w)
+                    res[k] = fv_logreg.decision_function(x_test)[0]
+                queue.put((column_block,res))  # signal[column_block] = res
+                return
 
-        # bad
-        q = mp.Queue()
-        jobs = []
-        self.bad_signal = np.zeros(len(self.bad_columns))
-        block_length = len(self.bad_columns) // num_threads
-        column_block = np.arange(0, block_length)
-        while len(column_block) > 0:
-            column_block = column_block[np.where(column_block < len(self.bad_columns))]
-            fv_logreg = copy.deepcopy(bad_fv_logreg)
-            p = mp.Process(target=training_op, args=(q, self.bad_X_all, self.bad_y_all, self.bad_w_all, fv_logreg, self.bad_columns, column_block))
-            p.start()
-            jobs.append(p)
-            column_block += len(column_block)
-        # process the results in the queue
-        for i in range(len(jobs)):
-            column_block, res = q.get()
-            self.bad_signal[column_block] = res
-        # join all jobs and wait for them to complete
-        for p in jobs: p.join()
+            num_threads = mp.cpu_count()
+
+            # good
+            q = mp.Queue()
+            jobs = []
+            self.good_signal = np.zeros(len(self.good_columns))
+            block_length = len(self.good_columns) // num_threads
+            column_block = np.arange(0, block_length)
+            while len(column_block) > 0:
+                column_block = column_block[np.where(column_block < len(self.good_columns))]
+                fv_logreg = copy.deepcopy(good_fv_logreg)  # each process gets its own .coeff_'s
+                column_block_copy = np.copy(column_block)  # each process gets its own block of columns
+                p = mp.Process(target=training_op, args=(q, self.good_X_all, self.good_y_all, self.good_w_all, fv_logreg, self.good_columns, column_block_copy))
+                p.start()
+                jobs.append(p)
+                column_block += len(column_block)
+            # process the results in the queue
+            for i in range(len(jobs)):
+                column_block, res = q.get()
+                self.good_signal[column_block] = res
+            # join all jobs and wait for them to complete
+            for p in jobs: p.join()
+
+            # bad
+            q = mp.Queue()
+            jobs = []
+            self.bad_signal = np.zeros(len(self.bad_columns))
+            block_length = len(self.bad_columns) // num_threads
+            column_block = np.arange(0, block_length)
+            while len(column_block) > 0:
+                column_block = column_block[np.where(column_block < len(self.bad_columns))]
+                fv_logreg = copy.deepcopy(bad_fv_logreg)   # each process gets its own .coeff_'s
+                column_block_copy = np.copy(column_block)  # each process gets its own block of columns
+                p = mp.Process(target=training_op, args=(q, self.bad_X_all, self.bad_y_all, self.bad_w_all, fv_logreg, self.bad_columns, column_block_copy))
+                p.start()
+                jobs.append(p)
+                column_block += len(column_block)
+            # process the results in the queue
+            for i in range(len(jobs)):
+                column_block, res = q.get()
+                self.bad_signal[column_block] = res
+            # join all jobs and wait for them to complete
+            for p in jobs: p.join()
+        else:  # if use_blocked_not_sklearn_mp:
+            def training_op(X_all, y_all, w_all, fv_logreg, columns, signal):
+                """Training and test operations reusing results with multiprocessing."""
+                res = np.zeros(len(signal))
+                for k in range(len(res)):
+                    mask = np.zeros(len(y_all), dtype=bool)
+                    mask[columns[k]] = True
+                    mask = np.logical_not(mask)
+
+                    x_test = X_all[np.logical_not(mask)]
+                    X = X_all[mask]
+                    y = y_all[mask]
+                    w = w_all[mask]
+
+                    fv_logreg.fit(X, y, sample_weight=w)
+                    res[k] = fv_logreg.decision_function(x_test)[0]
+                signal[:] = res
+                return
+            # good
+            training_op(self.good_X_all, self.good_y_all, self.good_w_all, self.good_fv_logreg, self.good_columns, self.good_signal)
+            # bad
+            training_op(self.bad_X_all, self.bad_y_all, self.bad_w_all, self.bad_fv_logreg, self.bad_columns, self.bad_signal)
         return
 
     def parse_easylist_rules(self):
@@ -441,7 +438,7 @@ affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
         rule_orig = rule
         exception_flag = exception_filter(rule)  # block default; pass if True
         rule = exception_re.sub('\\1', rule)
-        option_exception_re = not3dimppupos_option_exception_re  # ignore these options by default
+        option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
         opts = ''  # default: no options in the rule
         if re_test(option_re, rule):
             opts = option_re.sub('\\2', rule)
@@ -453,8 +450,8 @@ affiliate""".split('\n') if not bool(re.search(r'^\s*?#',x))]
         if re_test(comment_re, rule): return
         # block default or pass exception
         if exception_flag:
-            option_exception_re = not3dimppupos_option_exception_re  # ignore these options within exceptions
-            if self.exceptions_ignore_flag: return
+            option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options within exceptions
+            if not self.exceptions_include_flag: return
         # specific options: ignore
         if re_test(option_exception_re, opts): return
         # blank url case: ignore
@@ -852,7 +849,7 @@ function FindProxyForURL(url, host)
         for (i in GoodNetworks_Exceptions_Array) {
             tmpNet = GoodNetworks_Exceptions_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
-                alert_flag && alert("GoodNetworks_Exceptions_Array Blackhole!");
+                alert_flag && alert("GoodNetworks_Exceptions_Array Blackhole: " + host_ipv4_address);
                 // Redefine url and host to avoid leaking information to the blackhole
                 url = "http://127.0.0.1:80";
                 host = "127.0.0.1";
@@ -862,7 +859,7 @@ function FindProxyForURL(url, host)
         for (i in GoodNetworks_Array) {
             tmpNet = GoodNetworks_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
-                alert_flag && alert("GoodNetworks_Array PASS!");
+                alert_flag && alert("GoodNetworks_Array PASS: " + host_ipv4_address);
                 return MyFindProxyForURL(url, host);
             }
         }
@@ -875,7 +872,7 @@ function FindProxyForURL(url, host)
         for (i in BadNetworks_Array) {
             tmpNet = BadNetworks_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
-                alert_flag && alert("BadNetworks_Array Blackhole!");
+                alert_flag && alert("BadNetworks_Array Blackhole: " + host_ipv4_address);
                 // Redefine url and host to avoid leaking information to the blackhole
                 url = "http://127.0.0.1:80";
                 host = "127.0.0.1";
@@ -902,7 +899,7 @@ function FindProxyForURL(url, host)
 
         if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host)))
             && !hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
-                alert_flag && alert("HTTPS PASS!");
+                alert_flag && alert("HTTPS PASS: " + host + ", " + host_noserver);
             return MyFindProxyForURL(url, host);
         }
 
@@ -911,7 +908,7 @@ function FindProxyForURL(url, host)
         //////////////////////////////////////////////////////////
 
         if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ) {
-            alert_flag && alert("HTTPS blackhole!");
+            alert_flag && alert("HTTPS blackhole: " + host + ", " + host_noserver);
             // Redefine url and host to avoid leaking information to the blackhole
             url = "http://127.0.0.1:80";
             host = "127.0.0.1";
@@ -937,7 +934,7 @@ function FindProxyForURL(url, host)
                     (good_da_host_regex_flag && (good_da_host_RegExp.test(host_noserver)||good_da_host_RegExp.test(host))) ||
                     (good_da_hostpath_regex_flag && (good_da_hostpath_RegExp.test(url_noservernoquery)||good_da_hostpath_RegExp.test(url_noquery))) ||
                     (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
-                    (good_url_parts_flag && good_url_parts_RegExp.test(url_pathonly)) ||
+                    (good_url_parts_flag && good_url_parts_RegExp.test(url)) ||
                     (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
             return MyFindProxyForURL(url, host);
         }
@@ -947,18 +944,18 @@ function FindProxyForURL(url, host)
         //////////////////////////////////////////////////////////
         // Debugging results
         if (debug_flag && alert_flag) {
-            alert("hasOwnProperty(bad_da_host_JSON,host_noserver): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_JSON,host_noserver)));
-            alert("hasOwnProperty(bad_da_host_JSON,host): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_JSON,host)));
-            alert("hasOwnProperty(bad_da_hostpath_JSON,url_noservernoquery): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_JSON,url_noservernoquery)));
-            alert("hasOwnProperty(bad_da_hostpath_JSON,url_noquery): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_JSON,url_noquery)));
-            alert("bad_da_host_RegExp.test(host_noserver): " + (bad_da_host_regex_flag && bad_da_host_RegExp.test(host_noserver)));
-            alert("bad_da_host_RegExp.test(host): " + (bad_da_host_regex_flag && bad_da_host_RegExp.test(host)));
-            alert("bad_da_hostpath_RegExp.test(url_noservernoquery): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_RegExp.test(url_noservernoquery)));
-            alert("bad_da_hostpath_RegExp.test(url_noquery): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_RegExp.test(url_noquery)));
-            alert("bad_da_RegExp.test(url_noserver): " + (bad_da_regex_flag && bad_da_RegExp.test(url_noserver)));
-            alert("bad_da_RegExp.test(url_noscheme): " + (bad_da_regex_flag && bad_da_RegExp.test(url_noscheme)));
-            alert("bad_url_parts_RegExp.test(url_pathonly): " + (bad_url_parts_flag && bad_url_parts_RegExp.test(url_pathonly)));
-            alert("bad_url_regex_RegExp.test(url): " + (bad_url_regex_flag && bad_url_regex_RegExp.test(url)));
+            alert("hasOwnProperty(bad_da_host_JSON," + host_noserver + "): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_JSON,host_noserver)));
+            alert("hasOwnProperty(bad_da_host_JSON," + host + "): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_JSON,host)));
+            alert("hasOwnProperty(bad_da_hostpath_JSON," + url_noservernoquery + "): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_JSON,url_noservernoquery)));
+            alert("hasOwnProperty(bad_da_hostpath_JSON," + url_noquery + "): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_JSON,url_noquery)));
+            alert("bad_da_host_RegExp.test(" + host_noserver + "): " + (bad_da_host_regex_flag && bad_da_host_RegExp.test(host_noserver)));
+            alert("bad_da_host_RegExp.test(" + host + "): " + (bad_da_host_regex_flag && bad_da_host_RegExp.test(host)));
+            alert("bad_da_hostpath_RegExp.test(" + url_noservernoquery + "): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_RegExp.test(url_noservernoquery)));
+            alert("bad_da_hostpath_RegExp.test(" + url_noquery + "): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_RegExp.test(url_noquery)));
+            alert("bad_da_RegExp.test(" + url_noserver + "): " + (bad_da_regex_flag && bad_da_RegExp.test(url_noserver)));
+            alert("bad_da_RegExp.test(" + url_noscheme + "): " + (bad_da_regex_flag && bad_da_RegExp.test(url_noscheme)));
+            alert("bad_url_parts_RegExp.test(" + url + "): " + (bad_url_parts_flag && bad_url_parts_RegExp.test(url)));
+            alert("bad_url_regex_RegExp.test(" + url + "): " + (bad_url_regex_flag && bad_url_regex_RegExp.test(url)));
         }
 
         if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ||  // fastest test first
@@ -967,9 +964,9 @@ function FindProxyForURL(url, host)
             (bad_da_host_regex_flag && (bad_da_host_RegExp.test(host_noserver)||bad_da_host_RegExp.test(host))) ||
             (bad_da_hostpath_regex_flag && (bad_da_hostpath_RegExp.test(url_noservernoquery)||bad_da_hostpath_RegExp.test(url_noquery))) ||
             (bad_da_regex_flag && (bad_da_RegExp.test(url_noserver)||bad_da_RegExp.test(url_noscheme))) ||
-            (bad_url_parts_flag && bad_url_parts_RegExp.test(url_pathonly)) ||
+            (bad_url_parts_flag && bad_url_parts_RegExp.test(url)) ||
             (bad_url_regex_flag && bad_url_regex_RegExp.test(url)) ) {
-            alert_flag && alert("Blackhole!");
+            alert_flag && alert("Blackhole: " + url + ", " + host);
             // Redefine url and host to avoid leaking information to the blackhole
             url = "http://127.0.0.1:80";
             host = "127.0.0.1";
@@ -978,7 +975,7 @@ function FindProxyForURL(url, host)
     }
 
     // default pass
-    alert_flag && alert("Default PASS!");
+    alert_flag && alert("Default PASS: " + url + ", " + host);
     return MyFindProxyForURL(url, host);
 }
 
@@ -1138,6 +1135,7 @@ domain_option = r'(?:domain=)'  # discards rules specific to links from specific
 alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
 notdm3dimppupos_option_exception_re = re.compile(r'~?\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 not3dimppupos_option_exception_re = re.compile(r'~?\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
+not3dimppuposgh_option_exception_re = re.compile(r'~?\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 thrdp_im_pup_os_option_re = re.compile(r'\b(?:third\-party|image|popup|object\-subrequest)\b')
 domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
 scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
@@ -1240,24 +1238,30 @@ def re_test(regex,string):
 
 default_row = {"column": [], "count": []}
 def feature_vector_append_column(rule,opts,col,feature_vector={}):
+    # rule grams
     toks = re.split(r'\s+',rule_tokenizer(rule))
     for k in range(len(toks)):
         # 1- and 2-grams
         grams = [toks[k], toks[k] + ' ' + toks[k + 1]] if k < len(toks) - 1 else [toks[k]]
-        feature_vector_append_grams(grams, col, feature_vector)
-    toks = re.split(r'\s+',rule_tokenizer(opts))
-    for k in range(len(toks)):
-        # 1-grams
-        grams = ['option: ' + toks[k]]
-        feature_vector_append_grams(grams, col, feature_vector)
+        feature_vector_append_grams(grams, col, feature_vector, weight=1/np.sqrt(len(toks)))
+    # option tokens (1-grams)
+    if bool(opts):
+        grams = ['option: ' + x for x in re.split(r'\s+',rule_tokenizer(opts))]
+        feature_vector_append_grams(grams, col, feature_vector, weight=0.5)
+    # regex tokens used to relate for short, unique rules
+    if True and len(toks) == 1:
+        grams = []
+        for regex in high_weight_regex:
+            if bool(regex.search(rule)): grams.append('regex: ' + regex.pattern)
+        feature_vector_append_grams(grams, col, feature_vector, weight=0.25)
 
-def feature_vector_append_grams(grams, col, feature_vector={}):
+def feature_vector_append_grams(grams, col, feature_vector={}, weight=1.):
     for ky in grams:
         feature_vector[ky] = feature_vector.get(ky, copy.deepcopy(default_row))
         if not feature_vector[ky]["column"] or feature_vector[ky]["column"][-1] is not col:
             feature_vector[ky]["column"].append(col)
             feature_vector[ky]["count"].append(0)
-        feature_vector[ky]["count"][-1] += 1
+        feature_vector[ky]["count"][-1] += weight
 
 # store feature vectors as sparse arrays
 def fv_to_mat(feature_vector=copy.deepcopy(default_row),rules=[]):
@@ -1275,7 +1279,7 @@ def fv_to_mat(feature_vector=copy.deepcopy(default_row),rules=[]):
         rows += i_new
         cols += j_new
         vals += v_new
-    fv_mat = sps.coo_matrix((vals,(cols,rows)),shape=(len(rules),len(feature_vector)),dtype=np.long).tocsr()
+    fv_mat = sps.coo_matrix((vals,(cols,rows)),shape=(len(rules),len(feature_vector)),dtype=np.float).tocsr()
     return fv_mat, row_hash
 
 # convert EasyList wildcard '*', separator '^', and anchor '|' to regexp; ignore '?' globbing
@@ -1598,11 +1602,71 @@ boote-forum.de
 comunio.de
 planetsnow.de'''.split('\n')))
 
+high_weight_regex_strings = """\
+trac?k
+beacon
+stat[is]?
+anal[iy]
+goog
+facebook
+yahoo
+amazon
+adob
+cooki
+twitter
+krxd
+pagead\\d?
+syndicat
+(?:\\bad|ad\\b)
+securepub
+static
+\\boas\\b
+ads
+cdn
+cloud
+banner
+financ
+share
+traffic
+creativ
+media
+host
+affil
+^mob
+data
+your?
+watch
+survey
+stealth
+invisible
+brand
+site
+merch
+kli(k|p)
+clic?k
+popup
+log
+assets
+count
+metric
+score
+event
+tool
+quant
+chart
+opti?m
+partner
+sponsor
+affiliate"""
+
+high_weight_regex = [re.compile(x,re.IGNORECASE) for x in high_weight_regex_strings.split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x))]
+
 # regex to limit regex filters (bootstrapping in part from securemecca.com PAC regex keywords)
 if False:
     badregex_regex_filters = ''  # Accept everything
 else:
-    badregex_regex_filters = '''\
+    badregex_regex_filters = high_weight_regex_strings + '\n' + '''\
+cooki
 pagead
 syndicat
 (?:\\bad|ad\\b)
@@ -1647,7 +1711,7 @@ follow
 shop
 love
 content
-^(\\d{1,3})\\.(\d{1,3})\\.(\\d{1,3})\.(\\d{1,3})$
+#^(\\d{1,3})\\.(\d{1,3})\\.(\\d{1,3})\.(\\d{1,3})$
 #^([A-Za-z]{12}|[A-Za-z]{8}|[A-Za-z]{50})\\.com$
 smile
 happy
@@ -1679,976 +1743,33 @@ kli(k|p)
 clic?k
 zip
 invest
-0catch\\.com
-24counter\\.com
-2o7\\.net
-302br\\.net
-33across\\.com
-360tag\\.com
-3gl\\.net
-51yes\\.com
-abmr\\.net
-acecounter\\.com
-ad-gbn\\.com
-ad6media\\.fr
-adadvisor\\.net
-adblade\\.com
-adbull\\.com
-adc-serv\\.net
-adclick\\.lv
-adclickmedia\\.com
-addynamo\\.net
-adengage\\.com
-adextent\\.com
-adfeedstrk\\.com
-adform\\.net
-adframesrc\\.com
-adfusion\\.com
-adgtracker\\.com
-adhese\\.com
-adinterax\\.com
-adition\\.com
-adjungle\\.com
-adk2\\.com
-adlooxtracking\\.com
-adman\\.gr
-admanage\\.com
-admarketplace\\.net
-admedia\\.com
-admulti\\.com
-adnxs\\.com
-adobetag\\.com
-adocean\\.pl
-adparlor\\.com
-adprotect\\.net
-adreadytractions\\.com
-adrent\\.net
-adroll\\.com
-adsafeprotected\\.com
-adsbookie\\.com
-adservinginternational\\.com
-adskape\\.ru
-adsonar\\.com
-adspeed\\.com
-adsrvr\\.org
-adsymptotic\\.com
-adtech\\.de
-adtech\\.fr
-adtechus\\.com
-adtrk\\.biz
-advance\\.net
-advertstream\\.com
-advertise\\.com
-advertising\\.com
-advertserve\\.com
-adzerk\\.net
-affinity\\.com
-afftrack\\.com
-afy11\\.net
-agcdn\\.com
-aggregateknowledge\\.com
-agkn\\.com
-aimediagroup\\.com
-alexametrics\\.com
-amazingcounters\\.com
-amazon-adsystem\\.com
-amgdgt\\.com
-ampxchange\\.com
-amung\\.us
-analytics-egain\\.com
-analytics\\.edgesuite\\.net
-analytics\\.edgekey\\.net
-analytics\\.go\\.com
-anametrix\\.net
-andomedia\\.com
-angelfishstats\\.com
-apicit\\.net
-apmebf\\.com
-arlime\\.com
-assoc-amazon\\.com
-atomex\\.net
-atwola\\.com
-audienceiq\\.com
-avazutracking\\.net
-acxiom-online\\.com
-axf8\\.net
-bbelements\\.com
-behavioralengine\\.com
-betrad\\.com
-bidsystem\\.com
-bidvertiser\\.com
-bigmir\\.net
-binlayer\\.com
-bizible\\.com
-bizographics\\.com
-bkrtx\\.com
-blockmetrics\\.com
-blogads\\.com
-blogtoplist\\.com
-blueadvertise\\.com
-bluekai\\.com
-blueconic\\.net
-bluecava\\.net
-blueseek\\.com
-bm23\\.com
-bmmetrix\\.com
-boomtrain\\.com
-brandaffinity\\.net
-brandreachsys\\.com
-brat-online\\.ro
-bravenet\\.com
-brcdn\\.com
-brightedge\\.com
-btrll\\.com
-btstatic\\.com
-burt\\.io
-buysellads\\.com
-c\\.compete\\.com
-c3metrics\\.com
-c3tag\\.com
-cam-content\\.com
-cam4\\.com
-carbonads\\.com
-cc
-ccbill\\.com
-cc-dt\\.com
-cedexis\\.com
-chango\\.com
-chartbeat\\.com
-chartbeat\\.net
-checkm8\\.com
-cjb\\.net
-clickable\\.net
-clickability\\.com
-clickbank\\.net
-clickbooth\\.com
-clickdensity\\.com
-clickequations\\.net
-clickintext\\.net
-clickon\\.co\\.il
-clickpathmedia\\.com
-clickprotects\\.com
-clicksagent\\.com
-clickshield\\.net
-clickshift\\.com
-clicksor\\.com
-clicksor\\.net
-clicktale\\.net
-clicktracks\\.com
-clickzs\\.com
-clickzzs\\.nl
-clustrmaps\\.com
-cmpnet\\.com
-cn
-cnzz\\.com
-collect\\.igodigital\\.com
-collective-media\\.net
-collserve\\.com
-comclick\\.com
-company-target\\.com
-comscore\\.com
-conduit-banners\\.com
-contextly\\.com
-contextweb\\.com
-convertexperiments\\.com
-convertglobal\\.com
-convertro\\.com
-coremetrics\\.com
-counter\\.hackers\\.lv
-counter\\.rambler\\.ru
-counter\\.yadro\\.ru
-cpa\\.clicksure\\.com
-cpxinteractive\\.com
-cqcounter\\.com
-craktraffic\\.com
-crazyegg\\.com
-creative-serving\\.com
-criteo\\.com
-criteo\\.net
-crm-metrix\\.com
-crowdscience\\.com
-crsspxl\\.com
-crwdcntrl\\.net
-ctasnet\\.com
-cxense\\.com
-cxt\\.ms
-dapper\\.net
-dbbsrv\\.com
-ddnsking\\.com
-dedicatedmedia\\.com
-deepmetrix\\.com
-demandbase\\.com
-demdex\\.net
-digitaldesire\\.com
-directadvert\\.ru
-directrdr\\.com
-directrev\\.com
-directtrack\\.com
-displaymarketplace\\.com
-dl-rms\\.com
-dmtracker\\.com
-dmtry\\.com
-domainsponsor\\.com
-domdex\\.com
-dotmetrics\\.net
-dotomi\\.com
-doublepimp\\.com
-doubleverify\\.com
-dsply\\.com
-dt\\.mydas\\.mobi
-dwin1\\.com
-easy\\.lv
-easyresearch\\.se
-econda-monitor\\.de
-ecustomeropinions\\.com
-effectivemeasure\\.net
-eloqua\\.com
-emailretargeting\\.com
-emediate\\.eu
-en25\\.com
-enecto\\.com
-eproof\\.com
-ero-advertising\\.com
-esm1\\.net
-esomniture\\.com
-estara\\.com
-estat\\.com
-etargetnet\\.com
-ethnio\\.com
-etracker\\.de
-euroclick\\.com
-everestjs\\.net
-everesttech\\.net
-evergage\\.com
-evolvemediametrics\\.com
-evyy\\.net
-exactag\\.com
-exacttarget\\.com
-exelator\\.com
-exmasters\\.com
-exoclick\\.com
-extole\\.com
-extreme-dm\\.com
-eyeota\\.net
-eyereturn\\.com
-eyewonder\\.com
-ezakus\\.net
-ezboard\\.com
-fastonlineusers\\.com
-feedjit\\.com
-feeldmc\\.com
-finalid\\.com
-flagcounter\\.com
-flashtalking\\.com
-fls\\.doubleclick\\.net
-flxpxl\\.com
-fmpub\\.net
-footprintlive\\.com
-formalyzer\\.com
-freelogs\\.com
-freesexparadise\\.com
-frosmo\\.com
-fwdservice\\.com
-gaug\\.es
-gemius\\.pl
-geobytes\\.com
-geoplugin\\.net
-geovisite\\.com
-getclicky\\.com
-gigcount\\.com
-glam\\.com
-globalmailer\\.com
-go-mpulse\\.net
-go2jump\\.org
-googleadservices\\.com
-gosquared\\.com
-gostats\\.com
-gostats\\.ru
-grapeshot\\.co\\.uk
-gravity\\.com
-gsimedia\\.net
-gumgum\\.com
-gwallet\\.com
-heapanalytics\\.com
-hiconversion\\.com
-histats\\.com
-hit\\.bg
-hitslink\\.com
-hitsprocessor\\.com
-hittail\\.com
-hopto\\.org
-hotlog\\.ru
-hs-analytics\\.net
-hubspot\\.com
-humanclick\\.com
-hxtrack\\.com
-hype-ads\\.com
-hypeads\\.org
-ib-ibi\\.com
-ic-live\\.com
-iclive\\.com
-idtargeting\\.com
-ilsemedia\\.nl
-imiclk\\.com
-imlive\\.com
-impact-ad\\.jp
-impresionesweb\\.com
-impressiondesk\\.com
-imrworldwide\\.com
-indextools\\.com
-industrybrains\\.com
-infolinks\\.com
-inpwrd\\.com
-insightexpressai\\.com
-inspectlet\\.com
-intelliad\\.de
-intellitxt\\.com
-interia\\.pl
-intermarkets\\.net
-interpolls\\.com
-intextad\\.net
-investingchannel\\.com
-invitemedia\\.com
-inviziads\\.com
-invoc\\.us
-invodo\\.com
-ip-api\\.com
-ip-label\\.net
-iperceptions\\.com
-ipinfodb\\.com
-ist-track\\.com
-istrack\\.com
-iwanttodeliver\\.com
-jirafe\\.com
-juicyads\\.com
-jump-time\\.net
-jumptap\\.com
-jumptime\\.com
-kameleoon\\.com
-keywordmax\\.com
-klikbonus\\.com
-komoona\\.com
-korrelate\\.net
-krxd\\.net
-l\\.addthiscdn\\.com
-l2m\\.net
-lduhtrp\\.net
-leadforensics\\.com
-leadformix\\.com
-legolas-media\\.com
-levexis\\.com
-liadm\\.com
-liftdna\\.com
-lijit\\.com
-linkbucks\\.com
-linkpulse\\.com
-linksmart\\.com
-list\\.ru
-listrakbi\\.com
-liveperson\\.net
-livepromotools\\.com
-loggly\\.com
-lognormal\\.net
-lookery\\.com
-lphbs\\.com
-luckyorange\\.com
-luxup\\.ru
-m-pathy\\.com
-magnify360\\.com
-maploco\\.com
-maps-4-u\\.com
-marinsm\\.com
-marketo\\.net
-mathtag\\.com
-matheranalytics\\.com
-mdotlabs\\.com
-measuremap\\.com
-media6degrees\\.com
-mediaforge\\.com
-mediaforgews\\.com
-mediatraffic\\.com
-meetrics\\.net
-mercent\\.com
-met\\.vgwort\\.de
-metalyzer\\.com
-meteorsolutions\\.com
-metric\\.gstatic\\.com
-metrigo\\.com
-misstrends\\.com
-miva\\.com
-mixpanel\\.com
-mixpo\\.com
-mkt51\\.net
-mlstat\\.com
-mmstat\\.com
-moatads\\.com
-mobify\\.com
-monetate\\.net
-mongoosemetrics\\.com
-mookie1\\.com
-motigo\\.com
-motorpresse-statistik\\.de
-mouseflow\\.com
-mp\\.mydas\\.mobi
-mplxtms\\.com
-msads\\.net
-mtree\\.com
-mvilivestats\\.com
-mvtracker\\.com
-mxcdn\\.net
-myaffiliateprogram\\.com
-myomnistar\\.com
-myroitracking\\.com
-mysearch\\.com
-mystat-in\\.net
-mystats\\.nl
-mythings\\.com
-neodatagroup\\.com
-netflame\\.cc
-netlog\\.com
-netmining\\.com
-netmng\\.com
-netseer\\.com
-netshelter\\.net
-newrelic\\.com
-newsanalytics\\.com\\.au
-newstogram\\.com
-nexac\\.com
-nextstat\\.com
-nir\\.theregister\\.co\\.uk
-nordicresearch\\.com
-notlong\\.com
-nrelate\\.com
-nuggad\\.net
-nxtck\\.com
-o-oe\\.com
-oewabox\\.at
-offermatica\\.com
-offermatica\\.intuit\\.com
-ojolink\\.fr
-ojrq\\.net
-olark\\.com
-omtrdc\\.net
-onestat\\.com
-online-metrix\\.net
-opbandit\\.com
-opentracker\\.net
-openx\\.com
-openx\\.net
-openx\\.org
-optimizely\\.com
-optimost\\.com
-orangeads\\.fr
-outster\\.com
-owneriq\\.net
-p-td\\.com
-pages05\\.net
-paperg\\.com
-pardot\\.com
-parkingcrew\\.net
-pay-click\\.ru
-peer39\\.net
-peerius\\.com
-percentmobile\\.com
-perfectaudience\\.com
-pingdom\\.net
-pixel\\.parsely\\.com
-plugrush\\.com
-plushlikegarnier\\.com
-po\\.st
-pochta\\.ru
-pocitadlo\\.cz
-pointroll\\.com
-popadscdn\\.net
-popunder\\.ru
-ppctracking\\.net
-prchecker\\.info
-predictad\\.com
-predictiveresponse\\.net
-primosearch\\.com
-prnx\\.net
-pro-market\\.net
-program3\\.com
-proxad\\.net
-proximic\\.com
-pstats\\.com
-publishflow\\.com
-pubmatic\\.com
-puhtml\\.com
-puls\\.lv
-pulse360\\.com
-pulsemgr\\.com
-pzkysq\\.pink
-q1media\\.com
-qbaka\\.net
-qnsr\\.com
-qualtrics\\.com
-quantserve\\.com
-qubitproducts\\.com
-quebec-bin\\.com
-quintelligence\\.com
-rcm\\.amazon\\.com
-r\\.msn\\.com
-raasnet\\.com
-reachjunction\\.com
-readnotify\\.com
-realclick\\.co\\.kr
-realist\\.gen\\.tr
-realtracker\\.com
-rediff\\.com
-redirecthere\\.com
-redirectme\\.net
-reinvigorate\\.net
-reporo\\.net
-res-x\\.com
-research\\.de\\.com
-research-int\\.se
-revenuewire\\.net
-revolvermaps\\.com
-revsci\\.net
-rfihub\\.com
-rfihub\\.net
-richmetrics\\.com
-richrelevance\\.com
-ringrevenue\\.com
-rkdms\\.com
-rlcdn\\.com
-roia\\.biz
-roispy\\.com
-roitesting\\.com
-roivista\\.com
-rovion\\.com
-rs6\\.net
-rsvpgenius\\.com
-ru
-ru4\\.com
-rubiconproject\\.com
-runadtag\\.com
-sail-horizon\\.com
-sancdn\\.net
-sayyac\\.com
-sayyac\\.net
-scanscout\\.com
-scorecardresearch\\.com
-scoutanalytics\\.net
-searchignite\\.com
-securetracking2\\.com
-segment\\.com
-segment\\.io
-sellpoint\\.net
-sendori\\.com
-serving-sys\\.com
-sexcounter\\.com
-sharpspring\\.com
-shinystat\\.com
-shinystat\\.it
-simplereach\\.com
-simpli\\.fi
-site50\\.net
-siteapps\\.com
-siteimprove\\.com
-sitemeter\\.com
-sitescout\\.com
-sitestat\\.com
-sitetagger\\.co\\.uk
-sitetracker\\.com
-skimlinks\\.com
-skimresources\\.com
-smartadserver\\.com
-smartclick\\.net
-snoobi\\.com
-softonicads\\.com
-sojern\\.com
-sonobi\\.com
-sophus3\\.com
-soundsecureredir\\.com
-specificclick\\.net
-specificmedia\\.com
-splittag\\.com
-spongecell\\.com
-spotxchange\\.com
-spring-tns\\.net
-springmetrics\\.com
-spylog\\.com
-spylog\\.ru
-ssl-stats\\.wordpress\\.com
-starmegane\\.info
-stat24\\.com
-statcounter\\.com
-stathat\\.com
-stats\\.fr
-stats\\.magnify\\.net
-stats\\.wordpress\\.com
-steelhousemedia\\.com
-stormiq\\.com
-sub2tech\\.com
-sumome\\.com
-supercounters\\.com
-superstats\\.com
-supert\\.ag
-sv2\\.biz
-sytes\\.net
-tagsrvcs\\.com
-tailsweep\\.com
-tailtarget\\.com
-targetfuel\\.com
-targetnet\\.com
-telemetryverification\\.net
-tellapart\\.com
-tentaculos\\.net
-thebrighttag\\.com
-theprivateredirect\\.net
-thesearchagency\\.net
-tidaltv\\.com
-tk
-tnctrx\\.com
-tns-cs\\.net
-toboads\\.com
-toolbar\\.com
-toplist\\.cz
-total-media\\.net
-tradedoubler\\.com
-tracemyip\\.org
-track\\.clicksure\\.com
-track\\.ning\\.com
-trackalyzer\\.com
-trackedlink\\.net
-tracking\\.searchmarketing\\.com
-tracking202\\.com
-trafic-booster\\.biz
-traffichaus\\.com
-trafficjunky\\.net
-travidia\\.com
-tribalfusion\\.com
-triplequadturbo\\.com
-trk4\\.com
-trkme\\.net
-trovus\\.co\\.uk
-truehits\\.in\\.th
-truehits\\.net
-trw12\\.com
-tubemogul\\.com
-turn\\.com
-tvsquared\\.com
-tynt\\.com
-tyxo\\.bg
-ugdturner\\.com
-uimserv\\.net
-umbel\\.com
-undertone\\.com
-unicast\\.com
-unrulymedia\\.com
-up\\.nytimes\\.com
-usabilla\\.com
-usabilitytools\\.com
-usercash\\.com
-userreport\\.com
-users\\.51\\.la
-valuead\\.com
-veinteractive\\.com
-ventivmedia\\.com
-verticalscope\\.com
-viglink\\.com
-vindicosuite\\.com
-vinsight\\.de
-visiblemeasures\\.com
-visistat\\.com
-visitor-track\\.com
-visualdna\\.com
-visualdna-stats\\.com
-visualwebsiteoptimizer\\.com
-vizu\\.com
-voicefive\\.com
-voluumtrk\\.com
-voodoo\\.com
-w55c\\.net
-way2traffic\\.com
-web-stat\\.com
-webcams\\.com
-webeffective\\.keynote\\.com
-webflowmetrics\\.com
-webleads-tracker\\.com
-weborama\\.fr
-webspectator\\.com
-webstats4u\\.com
-webtrekk\\.net
-webtrends\\.com
-webtrendslive\\.com
-webvoo\\.com
-wemfbox\\.ch
-whoson\\.com
-wikia-beacon\\.com
-wiredminds\\.de
-woopra\\.com
-wtp101\\.com
-x-traceur\\.com
-x0\\.nl
-xblasterads1\\.com
-xg4ken\\.com
-xhit\\.com
-xiti\\.com
-xorg\\.pl
-xplosion\\.de
-xtendmedia\\.com
-yesmessenger\\.com
-yieldmanager\\.com
-yieldmanager\\.net
-yieldoptimizer\\.com
-yousee\\.com
-ypmadserver\\.com
-yumenetworks\\.com
-z5x\\.net
-zanox\\.com
-zapto\\.org
-zdbb\\.net
-zebestof\\.com
-zedo\\.com
-zemanta\\.com
-zergnet\\.com
-zqtk\\.net
-rabnaar
-adlogger
-adbanner
-adbanner
-pagevisit
-counter
-adcheck
-ad_?choice
-addthis
-adforge
-banners
-adobe_update
-adobeflashplayer
-adproducts?
-adrevolver
-ad-
-ads
-amazon-affiliate
-logger
-analytics?
-track
-assets
-awempire
-babes
-baise
-bbvanetoffice
-behaviorads
-bigtit
-bing\\.com
-bit\\.ly
-blowjob
-bondage
-boobs
-burningcamel
-cardstatement
-chartbeat
-chicks
-chloroform
-click
-cloudfront\\.net
-cock
-cumshot
-dblclick
-impression
-doubleclick
-surveycode
-eluminate
-ero-advertising
-eroadvertising
-eroti
-event
-ficken
-flash-update
-flash_update
-flashplayer
-fuck
-gecock
-adsense
-googlead
-gravity-beacon
-hardcore
-hentai
-house_?ad
-hugedomains\\.com
-incest
-iperceptions
-java
-jquery
-jquery
-keezmovies
-keygen
-lazyload-ad
-lesbi
-litas
-livejasmin
-loghuman
-lolita
-logic
-godaddy
-media
-milf
-naked
-nasty
-tpagetag
-oasfile
-okcupid
-orgy
-beacon
-paypal
-pissing
-piwik
-popunder
-porn
-proxysignature
-pussy
-quant
-radio_?ad
-remote-?desktop
-stats?
-sesso
-sex
-links?
-slut
-small-?ad
-sms
-fantasy
-navad
-tacoda
-tecock
-tits
-transparent
-trial
-tripadvisor
-utm
-vecock
-videoarab
-voyeur
-warez
-webad
-webiqonline
-webtrek
-zvents
-3x
-aba
-adult
-aggregate
-knowledge
-ally\\.com
-allybank\\.com
-amateur
-americanexpress
-anony
-anti-vir
-antispy
-antivir
-anz\\.co
-aol\\.com
-around
-asian
-avast\\.com
-banese\\\.com
-bankofamerica
-bbva\\.es
-bitch
-blackapplehost
-block
-boob
-bradesco\\.com
-casalemedia
-casino
-cazino
-cdc\\.gov
-cdna\\.tremormedia\\.com
-celeb
-chase\\.com
-chaseonline
-cialis
-cimbclicks
-cisco
-citibank
-cloak
-cool
-danskebank
-tremormedia
-dhl
-digid
-discovercard
+arstech
+buzzfeed
+imdb
+twitter
+baidu
+yandex
+youtube
 ebay
-exponential
-facebook
-fdic
-firewall
-flash-player
-flashplayer
-freestats
-gay
-getpast
-girls
-glamour
-brightcove
-google\\.com
-googlepages\\.com
-googletagservices
-garcinia
-greencoffe
-hidden
-hide
+discovercard
+chase
 hsbc
-huge
-invisible
-irs\\.gov
-itau\\.com
-kampyle\\.com
-kaspersky
-kazaa
-kontera
-levitra
-linkedin
-lloydstsb
-lust
-macromedia
-mastercard
-mature
-maximumslim
-meter
-microsoft\\.com
-myspace
-nacha\\.org
-nude
-oasc[(?:0|1|e)]
-penis
-pills
-poker
-popadscdn
-privacy
-prok[(?:c|s)]
-prox
-meebo
-refunds?
-heise\\.de
-runescape
-[^aeo]rx[^c]
-s2d6\\.com
+usbank
 santander
+kaspersky
+symantec
+brightcove
+hidden
+invisible
+macromedia
+flash
 [^i]scan[^dy]
 secret
-secure\.ally\.com
 skype
-slimbody
-slimfast
-ssa\\.gov
-[^sy]suck
-symantec
-toolbar
-traveladvertising
-treasury\\.gov
-triggertag
 tsbbank
-tsb\\.co\\.nz
 tunnel
 ubs\\.com
 unblock
-unibanco\\.com
 unlock
 usaa\\.com
 usbank\\.com
@@ -2656,460 +1777,15 @@ ustreas\\.gov
 ustreasury
 verifiedbyvisa\\.com
 viagra
-vipreantivirus
-visa\\.com
-boldchat
 wachovia
 wellsfargo\\.com
 westernunion
-windowsupdate\\.com
-xxx
-yahoo
-zeroredirect
-zonealarm
-activex
-ad_?banner
-ad_?iframe
-ad_?label
-ad_?legend
-ad_?manager
-adengage
-adserver
-adsyndication
-advert
-ajrotator
-bannerads?
-cmdatatagutils
-competetracking
-dynatracemonitor
-filezilla
-flash-plugin
-flash-hq-plugin
-flash-video-plugin
-flashinstaller
-footer-?ad
-generate
-google_?analytics
-google_?page_?track
-houseads?
-install
-install_?activex
-mature
-mtvi_?reporting
-nude
-omnidiggthis
-openads
-optimost
-page-peel
-pageear
-performancingads?
-pixeltracking
-recordhit
-redirectexittrack
-revsci
-afs_?ads
-touchclarity
-tracking_?frame
-tradead
-urlsplittrack
-vtracker
-yahoo-?ad
-1pix\\.gif
-1x1_trans\\.gif
-listeners?
-flashcookie
-counters?
-ad_?banner
-ad_?counter
-ad_?frame
-ad_?iframe
-ad_?rotation
-ad_?tpl
-adap\\.tv
-adaptive
-adaptvadplayer
-ad_?code
-adcalloverride
-adchoices?
-addyn
-adfile
-adheader
-adhese
-adimage
-adimages
-adindex
-adinjector
-adjs
-adlinks\\.[(j|p)]
-adloader
-adlog
-admanager
-admantx
-admarker
-adobject
-adpage
-adpeeps
-adproxy
-adrelated
-adrevenue
-adrollpixel
-adrum
-freewheel
-adsales
-adsatt
-adsbanner
-adscript
-adscroll
-adsense
-adserv
-adsfac
-adsonar
-adsremote
-adsrotate
-adsrv
-adssrv
-adstream
-adswrapper\.
-adswrapper3
-adtags?
-adtech_
-adtext
-adtrack
-adunit
-adunits
-advertisement
-advertising
-advert
-adview
-affiliates?
-alexa\\.com
-amatomu\\.com
-amazonaws\\.com
-analyticsextension
-anal[^_oy]
-miss-knowing
-assets?
-atdmt\\.com
-autotag
-avmws
-aweber\\.com
-baidu\\.com
-bannerad
-banners-stat
-blekko\\.com
-blogoas
-bluekai
-bottom_?ad
-brandanalytics
-brazzers\\.com
-break\\.com
-brightedge
-britannica\\.com
-bugsnag
-buzznet\\.com
-carbonads
-cbc\\\.ca
-cbox\\.ws
-cbs1x1\\.gif
-cdn\\.nmcdn\\.us
-cdn5\\.js
-cdnplanet\\.com
-cdx\\.gif
-cedexis
-certona
-cfformprotect
-chartbeat
-yandex\\.com
-clear\\.gif
-clickheat
-clickjs
-click_?stats
-clickstream
-clicktale
-clicktale
-clicktracking
-cloudfront\\.net
-cn-fe-ads
-cn-fe-stats
-cnevids\\.com
-cnwk\\.1d
-com\\/adx
-com\\/i\\/i\\.gif
-com\\/t\\.gif
-com\\/v\\.gif
-joomlawatch
-common\\/ads
-comscore
-conversionruler
-cookie-id
-cookie\\.crumb
-coradiant\\.js
-coremetrics
-counter\\.js
-counter\\.php
-criteo
-cubead
-curveball
-dailymotion\\.com
-dclk
-dcs\\.gif
-deep_?recover
-demandbase
-demdex\\.js
-descpopup\\.js
-disqus\\.com
-doors\\/ads
-dotclear\.[(g|j)]
-dtmtag\.js
-dw-world\\.de
-dw\\.com
-eas_tag
-ecom\\/status
-surveycode
-digitalsurvey
-elqcfg
-elqimg
-elqnow
-emos2\\.js
-emstrack
-entry-stats
-epimg\\.net
-eros[^ei]
-eu\\/ywa\\.js
-eweek\\.com
-exelate
-extendedanalytics
-fb-tracking
-nyaa\\.eu
-flash_?player
-flash\\/ads
-flashads
-flashget
-foresee
-clear\\.png
-fpcount
-fsrscripts
-fttrack
-addons?
-geoip
-getads?
-getbanner
-getclicky
-giganews\\.com
-gigya\\.com
-go2cloud\\.org
-google\\.com\\/uds\\/stats
-google_?ads?
-google-analyticator
-google_?caf
-googletagmanager\\.com
-googleusercontent\\.com
-googlytics
-gotmojo\\.com
-gravity-beacon
-grvcdn\\.com
-gscounters
-heatmap
-hellobar\\.com
-netflame\\.cc
-hrblock\\.com
-hs_?track
-html\\.ng
-huffingtonpost\\.com
-iframe\\/ads?
-providesupport\\.com
-images\\/ad
-imawebcookie
-imdbads
-img\\/ad
-includes\\/ads?
-indeed\\.com
-installflashplay
-intensedebate\\.com
-internads
-iperceptions
-ixs1\\.net
-jnana\\.tsa
-jnana_[(1|9)]
-js\\/(?:ads|dart|nielsen|oas|track|ywa)
-adscripts?
-kantarmedia
-keen-tracker
-keywee
-kissmetrics
-krux\\.js
-link_?track
-list-manage\\.com
-livefyre\\.com
-livezilla
-loadads?
-log_view
-logging
-lygo\\.com
-mail\\.ru
-medium\\.com
-metrics?
-mgnetwork\\.com
-mobify
-modules\\/ad
-moneyball
-mpel\\mpel
-mpu-dm\\.html
-msn\\.com
-mwtag\\.js
-mylife\\.com
-nbcudigitaladops.com\/hosted\/housepix.gif
-neonbctracker\\.js
-net\\/_ads
-net\\/pop
-cetrk\\.com
-news\\/(?:ber|ras|via)
+windowsupdate
+plugin
 nielsen
-nircmd
-mtr\\.js
 oas-config
 oas\\/oas
-keynote\\.com
-oiopub-direct
-ooyala\\.com
-opentag
-openx_[^g]
-openx\\/
-opinionlab
-optimost
-org\\/pop
-ostkcdn\\.com
-page-ads
-pagepeel
-partenaires
-pbstrackingplugin
-perfectmarket\\.com
-php-stats
-myvisites
-ping\\.gif
-ping\\.html
-piwik
-pix\\.gif
-pixall\\.min\\.js
-pixel\\.gif
-pixel\\.png
-pixel-page\\.html
-pixeltrack\\.php
-twitter\\.com
-ooyala\\.com
-plus\\/ad
-pop6\\.com
-popunder
-postprocad
-pricegrabber\\.com
-prnx_?track
-ptv8\\.swf
-pub\\/trictrac
-pubads?
-publicidad
-pxa\\.min\\.js
-quant\\.js
-quantcast
-quisma\\.com
-ra_track
-rcom-ads
-rcom-wt-mlt
-readme\\.exe
-realmedia\\/ads
-refreshads
-reklama
-related-ads
-resxclsa
-resxclsx
-reuters\\.com
-rg-rlog\\.php
-rightad
-ru\\/pop\\.js
-rum\\/bacon\\.min\\.js
-s-code[(4|5)]\\.js
-s_code\\.js
-s_code_ma\\.js
-s\\/hbx\\.js
-sailthru\\.js
-salesforce\\.com
-scanscout
-scribol\\.com
-scripts\\/ad
-scripts\\/ga
-scripts\\/xiti
-sdctag\\.js
-search\\.usa\\.gov
-servead
-session-hit
-shell\\.exe
-shinystat\\.cgi
-shop\\.pe
-shopify_stats
-showad
-silverpop
-simplereach_counts
-siteads
-sitecatalyst
-sitecrm
-sitestat
-skoom\\.de
-skstats
-smartad
-smartname\\.com
-spc_trans\\.gif
-spc\\.php
-spcjs\\.php
-special-ads\\
-sports\\.fr
-__ssobj\\/core
-stat\\.php
-statcounter\\.js
-static\\/ad
-statistics\\.php
-supercookie
-survey_?monkey
-swf\\/ad
-swfbin\\/ad
-swiftypecdn\\.com
-tagcdn\\.com
-taxonomy-ads
-targeting
-throttle
-tealeaf\\.js
-tealeafsdk\\.js
-tealium\\.js
-thirdparty
-timeslog
-tinypass\\.com
-tncms\\/ads
-top_?ad
-topic_stats
-touchcommerce\\.com
-tout\\.com
-trackevent
-trackjs
-trafic
-trans_pixel
-transparent
-turner\\.com
-turnsocial\\.com
-tynt\\.js
-typepad\\.com
-ucoz\\.com
-unica_[(n|o|t)]
-update\\.exe
-updateflashplayer\\.exe
-upi\\.com
-uploads\\/ad
-us\\/[(c|s)]
-userfly\\.js
-utag\\.ga
-utag\\.js
-utag\\.loader
-veapianalytics\\.js
-vertical-stats
-vfxdsys
-vglnk\\.js
+pix
 video-plugin
 videodownloader
 visit
@@ -3126,112 +1802,6 @@ widgets
 winstart\\.exe
 winstart\\.zip
 wired\\.com
-woopra\\.js
-slimstat
-wpdigital\\.net
-wrb\\.js
-wsj\\.net
-wtbase\\.js
-wtcore\\.js
-wtid\\.js
-wtinit\\.js
-wunderground\\.com
-plugthis
-xiti\.js
-xgemius\\.js
-xn_track
-xtclick.
-xtcore\\.[(j|p)]
-xtrack\\.php
-yahoo-beacon\\.js
-yandex\\.ru
-ybn_pixel
-yimg\\.com
-youtube\\.com
-youtube-nocookie\\.com
-ystat\\.js
-ywxi\\.net
-zaehlpixel\\.php
-zag\\.gif
-zaguk\\.gif
-zdnet\\.com
-ziffdavisenterprise\\.com
-contextclicks
-zwshell\\.exe
-zwshellx\\.exe
-zvents\\.com
-crd_prm
-adserver
-cheapwatch
-clicktalecdn
-dating
-doctor
-finewatch
-girl
-hide
-netspiderads
-replicawatch
-rx[^fls]
-sex
-superwatch
-surf
-swisswatch
-ustreasury
-watchreplica
-ad-cdn
-ad\\.
-adcdn\\.
-adimg\\.
-adlog\\.
-adnetwork\\.
-ads\\.
-ads-pd\\.
-ads[0-9]\\.
-adsys\\.
-adv\\.
-advertiser\\.
-ally\\.com
-bstats\\.
-chase\\.com
-content\\.mkt
-crack[^l]
-crmmetrix
-alexa\\.com
-dw-eu\\.com
-ebay\\.com
-fdic\\.gov
-gdyn\\.
-geoip\\.
-geoiplookup\\.
-gostats\\.
-hard[(b|c|e|p|s)]
-hot[^em]
-id\\.google
-irs\\.gov
-nacha\\.org
-oas\\.
-openx\\.
-ox-d\\.
-pills
-piwik\\.
-pcworld\\.com
-refund-services\\.irs
-refunds\\.irs
-reklama\\.
-singlefeed\.com
-sdc\\.
-sedocnamemain\\.
-secure\\.signup
-ssdc\\.
-stats\\.bbc\\.co\\.uk
-synad\\.
-synad2\\.
-tit[^abhilmou]
-traffic\\.outbrain\\.com
-utm\\.
-validclick\\.
-visa\\.com
-wtsdc\\.
 ad-limits\\.js
 ad-manager
 ad_engine
@@ -3260,37 +1830,15 @@ __utm\\.js
 whv2_001\\.js
 xtcore\\.js
 \\.zip
-babe
-beacon
-gay
-mature
-nude
-wachovia
 sharethis\\.com
-blogsontop\\.com
-pantherssl\\.com
-csdata1\\.com
-cloudfront\\.net
-domdex\\\.com
-[^cs]hard
-[^s]hot
-log\\.go\\.com
 stats\\.wp\\.com
 [^i]crack
 virgins\\.com
 \\.xyz
-cracks
-yahoo\\.com
-girl
-girls
-hide
-pills
-voxmedia\\.com
-sex
 shareasale\\.com
 financialcontent\\.com'''
 
-badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^\s*?#',x)))
+badregex_regex_filters = '\n'.join(x for x in badregex_regex_filters.split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x)))
 badregex_regex_filters_re = re.compile(r'(?:{})'.format('|'.join(badregex_regex_filters.split('\n'))),re.IGNORECASE)
 
 if __name__ == "__main__":
