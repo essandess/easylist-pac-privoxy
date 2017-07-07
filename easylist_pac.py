@@ -320,6 +320,7 @@ e.g. non-domain specific popups or images."""
             good_fv_logreg.penalty = 'l2'
             good_fv_logreg.solver = 'sag'
             good_fv_logreg.warm_start = True
+            good_fv_logreg.n_jobs = 1  # achieve parallelism via block processing
             bad_fv_logreg = copy.deepcopy(self.bad_fv_logreg)
             bad_fv_logreg.penalty = 'l2'
             bad_fv_logreg.solver = 'sag'
@@ -329,11 +330,7 @@ e.g. non-domain specific popups or images."""
                 class NotAMultiProcess(mp.Process):
                     def start(self): self.run()
                     def join(self): pass
-                class NotAQueue(object):
-                    def put(self): pass
-                    def get(self): pass
                 mp.Process = NotAMultiProcess
-                mp.Queue = NotAQueue
 
             # this is probably efficient with Linux's copy-on-write fork(); unsure about BSD/macOS
             # must refactor to use shared Array() [along with warm_start coeff's] to ensure
