@@ -43,8 +43,8 @@ class EasyListPAC:
             print("Good rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.good_rules,self.good_signal))))
             print("\nBad rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.bad_rules,self.bad_signal))))
             if True:
-                #plt.plot(np.arange(len(self.good_signal)), self.good_signal, '.')
-                #plt.show()
+                # plt.plot(np.arange(len(self.good_signal)), self.good_signal, '.')
+                # plt.show()
                 plt.plot(np.arange(len(self.bad_signal)), self.bad_signal, '.')
                 plt.show()
             return
@@ -61,13 +61,13 @@ class EasyListPAC:
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
         parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
-                            default=19999)
+                            default=29999)
         parser.add_argument('-rg', '--good-rule-max', help="Maximum number of good rules (-1 for unlimited)",
-                            type=int, default=2999)
+                            type=int, default=1999)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
-                            default=4999)
+                            default=5999)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
-                            default=4999)
+                            default=5999)
         parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
         parser.add_argument('-x', '--Extra_EasyList_URLs', help="Limit the number of wildcards", type=str, nargs='+', default=[])
         parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
@@ -94,8 +94,6 @@ class EasyListPAC:
         easyprivacy_url = 'https://easylist.to/easylist/easyprivacy.txt'
         easylist_url = 'https://easylist.to/easylist/easylist.txt'
         self.download_list = [easyprivacy_url, easylist_url] + self.extra_easylist_urls
-        if False: # TODO
-            self.download_list = [easyprivacy_url] + self.extra_easylist_urls
         self.file_list = []
         for url in self.download_list:
             fname = os.path.basename(url)
@@ -128,10 +126,6 @@ class EasyListPAC:
             line_orig = line
             # configuration lines and selector rules should already be filtered out
             if re_test(configuration_re, line) or re_test(selector_re, line): continue
-            if True:
-                debug_this_rule_string = '||theatlantic.com^'
-                if line_orig.find(debug_this_rule_string) != -1:
-                    pass
             exception_flag = exception_filter(line)  # block default; pass if True
             line = exception_re.sub('\\1', line)
             option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
@@ -262,6 +256,16 @@ e.g. non-domain specific popups or images."""
         if self.sliding_window: self.logreg_sliding_window()
 
         return
+
+    def debug_feature_vector(self,rule_substring=r'google.com/pagead'):
+        for j, rule in enumerate(self.bad_rules):
+            if rule.find(rule_substring) >= 0: break
+        col = j
+        print(self.bad_rules[col])
+        _, rows = self.bad_fv_mat[col,:].nonzero()  # fv_mat is transposed
+        print(rows)
+        for row in rows:
+            print('Row {:d}: {}:: {:g}'.format(row, self.bad_row_hash[int(row)], self.bad_fv_mat[col, row]))
 
     def logit_fit_method_sample_weights(self):
         # weights for LogisticRegression.fit()
@@ -480,7 +484,6 @@ e.g. non-domain specific popups or images."""
                 rule = da_hostonly_re.sub('\\1', rule)
                 if not re_test(wild_anch_sep_exc_re, rule):  # exact subsubcase
                     if not re_test(badregex_regex_filters_re, rule):
-                        if False: print(rule)
                         return  # limit bad regex's to those in the filter
                     if exception_flag:
                         good_da_host_exact.append(rule)
@@ -500,9 +503,8 @@ e.g. non-domain specific popups or images."""
             if re_test(da_hostpath_re, rule):
                 rule = da_hostpath_re.sub('\\1', rule)
                 if not re_test(wild_sep_exc_noanch_re, rule) and re_test(pathend_re, rule):  # exact subsubcase
-                    rule = re.sub(r'[/|]$', '', rule)  # strip EOL slashes (repeat in JS) and anchors
+                    rule = re.sub(r'\|$', '', rule)  # strip EOL anchors
                     if not re_test(badregex_regex_filters_re, rule):
-                        if False: print(rule)
                         return  # limit bad regex's to those in the filter
                     if exception_flag:
                         good_da_hostpath_exact.append(rule)
@@ -512,7 +514,7 @@ e.g. non-domain specific popups or images."""
                 else:  # regex subsubcase
                     if regex_ignore_test(rule): return
                     # ignore option rules for some regex rules
-                    if True and re_test(alloption_exception_re, opts): return
+                    if re_test(alloption_exception_re, opts): return
                     if exception_flag:
                         good_da_hostpath_regex.append(rule)
                     else:
@@ -534,7 +536,7 @@ e.g. non-domain specific popups or images."""
         if True:
             if regex_ignore_test(rule): return
             if not ignore_huge_url_regex_rule_list:
-                if True and re_test(alloption_exception_re, opts): return
+                if re_test(alloption_exception_re, opts): return
                 if exception_flag:
                     good_url_parts.append(rule)
                 else:
@@ -737,7 +739,6 @@ var schemepart_RegExp = RegExp("^([\\\\w*+-]{2,15}):\\\\/{0,2}","i");
 var hostpart_RegExp = RegExp("^((?:[\\\\w-]+\\\\.)+[a-zA-Z0-9-]{2,24}\\\\.?)", "i");
 var querypart_RegExp = RegExp("^((?:[\\\\w-]+\\\\.)+[a-zA-Z0-9-]{2,24}\\\\.?[\\\\w~%.\\\\/^*-]+)(\\\\??[\\\\S]*?)$", "i");
 var domainpart_RegExp = RegExp("^(?:[\\\\w-]+\\\\.)*((?:[\\\\w-]+\\\\.)[a-zA-Z0-9-]{2,24}\\\\.?)", "i");
-var slashend_RegExp = RegExp("\\\\/$", "i");
 
 //////////////////////////////////////////////////
 // Define the is_ipv4_address function and vars //
@@ -802,12 +803,6 @@ function FindProxyForURL(url, host)
     var url_noserver = !host_is_ipv4 ? url_noscheme.replace(domainpart_RegExp,"$1") : url_noscheme;
     var url_noservernoquery = !host_is_ipv4 ? url_noquery.replace(domainpart_RegExp,"$1") : url_noscheme;
     var host_noserver =  !host_is_ipv4 ? host.replace(domainpart_RegExp,"$1") : host;
-
-    // Remove slashes from the EOL
-    url_pathonly = url_pathonly != "/" ? url_pathonly.replace(slashend_RegExp,"") : url_pathonly;
-    url_noquery = url_noquery.replace(slashend_RegExp,"");
-    url_noserver = url_noserver.replace(slashend_RegExp,"");
-    url_noservernoquery = url_noservernoquery.replace(slashend_RegExp,"");
 
     // Debugging results
     if (debug_flag && alert_flag) {
@@ -1146,7 +1141,8 @@ wild_sep_exc_noanch_re = re.compile(r'(?:[*^@]|\|[\s\S])')
 exception_re = re.compile(r'^@@(.*?)$')
 wildcard_re = re.compile(r'\*+?')
 httpempty_re = re.compile(r'^\|?https?://$')
-pathend_re = re.compile(r'(?i)(?:[/|]$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|[sp]?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
+# Note: assume path end rules the end in '/' are partial, not exact, e.g. host.com/path/
+pathend_re = re.compile(r'(?:\||\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|[sp]?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))$',re.IGNORECASE)
 
 domain_anch_re = re.compile(r'^\|\|(.+?)$')
 # omit scheme from start of rule -- this will also be done in JS for efficiency
@@ -1227,16 +1223,17 @@ def feature_vector_append_column(rule,opts,col,feature_vector={}):
         # 1- and 2-grams
         grams = [toks[k], toks[k] + ' ' + toks[k + 1]] if k < len(toks) - 1 else [toks[k]]
         feature_vector_append_grams(grams, col, feature_vector, weight=1/np.sqrt(len(toks)))
-    # option tokens (1-grams)
-    if bool(opts):
-        grams = ['option: ' + x for x in re.split(r'\s+',rule_tokenizer(opts))]
-        feature_vector_append_grams(grams, col, feature_vector, weight=min(0.5,1/np.sqrt(len(grams))))
-    # regex tokens used to relate for short, unique rules
-    if True and len(toks) <= 2:
+    if len(toks) <= 4:
+        """Add information from available options and high weight regex matches."""
+        if bool(opts):
+            # option tokens (1-grams)
+            grams = ['option: ' + x for x in re.split(r'\s+', option_tokenizer(opts))]
+            feature_vector_append_grams(grams, col, feature_vector, weight=min(0.5, 1/np.sqrt(len(grams))))
+        # regex tokens used to relate for short, unique rules
         grams = []
         for regex in high_weight_regex:
             if bool(regex.search(rule)): grams.append('regex: ' + regex.pattern)
-        feature_vector_append_grams(grams, col, feature_vector, weight=0.25)
+        if bool(grams): feature_vector_append_grams(grams, col, feature_vector, weight=1/np.sqrt(len(grams)))
 
 def feature_vector_append_grams(grams, col, feature_vector={}, weight=1.):
     for ky in grams:
@@ -1589,10 +1586,19 @@ facebook
 yahoo
 amazon
 adob
+msn
+# 2-grams
+goog\\S+?ad
+amazon\\S+?ad
+yahoo\\S+?ad
+facebook\\S+?ad
+adob\\S+?ad
+msn\\S+ad
+doubleclick
 cooki
 twitter
 krxd
-pagead\\d?
+pagead
 syndicat
 (?:\\bad|ad\\b)
 securepub
@@ -1619,7 +1625,7 @@ invisible
 brand
 site
 merch
-kli(k|p)
+kli[kp]
 clic?k
 popup
 log
