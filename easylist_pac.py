@@ -117,7 +117,6 @@ class EasyListPAC:
         self.good_rules_include_flag = []
         self.bad_rules_include_flag = []
         for file in self.file_list:
-            bname = os.path.basename(file)
             with open(file, 'r') as fd:
                 self.easylist_append_rules(fd)
 
@@ -501,7 +500,7 @@ e.g. non-domain specific popups or images."""
             if re_test(da_hostpath_re, rule):
                 rule = da_hostpath_re.sub('\\1', rule)
                 if not re_test(wild_sep_exc_noanch_re, rule) and re_test(pathend_re, rule):  # exact subsubcase
-                    rule = re.sub(r'(?:/|\|)$', '', rule)  # strip EOL slashes (repeat in JS) and anchors
+                    rule = re.sub(r'[/|]$', '', rule)  # strip EOL slashes (repeat in JS) and anchors
                     if not re_test(badregex_regex_filters_re, rule):
                         if False: print(rule)
                         return  # limit bad regex's to those in the filter
@@ -1062,7 +1061,14 @@ var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
             analysis_test = not re_test(re.compile(r'anal[iy]]',re.IGNORECASE),rule)  # LSB
             return 8*track_test + 4*beacon_test + 2*stats_test + analysis_test
         arr_star.sort(key=wildcard_preferences)
-        arr_star = arr_star[:self.wildcard_named_group_limit]
+        # Wildcard regex's use named groups. Limit their number to to an assumed maximum
+        # e.g. Python's re limit is 100
+        k_wildcard = 0
+        rule_kdx = self.wildcard_named_group_limit
+        for rule_kdx, rule in enumerate(arr_star):
+            k_wildcard += len(arr_star[rule_kdx].split('*'))-1
+            if k_wildcard > self.wildcard_named_group_limit: break
+        arr_star = arr_star[:rule_kdx]
         arr = arr_nostar + arr_star
 
         if re_test(r'(?:_parts|_regex)$',array_name) and bool(self.truncate_alternatives_max) and len(arr) > self.truncate_alternatives_max:
@@ -1123,48 +1129,37 @@ else:
 
 # EasyList regular expressions
 
-comment_re = re.compile(r'^!\s*')   # ! commment
-configuration_re = re.compile(r'^\[[^]]*?\]')  # [Adblock Plus 2.0]
+comment_re = re.compile(r'^\s*?!')   # ! commment
+configuration_re = re.compile(r'^\s*?\[[^]]*?\]')  # [Adblock Plus 2.0]
 easylist_opts = r'~?\b(?:third\-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)\b'
 option_re = re.compile(r'^(.*?)\$(' + easylist_opts + r'.*?)$')
 # regex's used to exclude options for specific cases
-domain_option = r'(?:domain=)'  # discards rules specific to links from specific domains
 alloption_exception_re = re.compile(easylist_opts)  # discard all options from rules
-notdm3dimppupos_option_exception_re = re.compile(r'~?\b(?:script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 not3dimppupos_option_exception_re = re.compile(r'~?\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 not3dimppuposgh_option_exception_re = re.compile(r'~?\b(?:domain|script|stylesheet|object(?!-subrequest)|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|genericblock|other|sitekey|match-case|collapse|donottrack|media|font)\b')
 thrdp_im_pup_os_option_re = re.compile(r'\b(?:third\-party|image|popup|object\-subrequest)\b')
-domain_option_exception_re = re.compile(domain_option)  # discard from-domain specific rules
-scriptdomain_option_exception_re = re.compile(r'(?:script|domain=)')  # discard from-domain specific rules
 selector_re = re.compile(r'^(.*?)#\@?#*?.*?$') # #@##div [should be #+?, but old style still used]
 regex_re = re.compile(r'^\@{0,2}\/(.*?)\/$')
 wildcard_begend_re = re.compile(r'^(?:\**?([^*]*?)\*+?|\*+?([^*]*?)\**?)$')
 wild_anch_sep_exc_re = re.compile(r'[*|^@]')
 wild_sep_exc_noanch_re = re.compile(r'(?:[*^@]|\|[\s\S])')
-anch_sep_exc_re = re.compile(r'[|^@]')
-anch_exc_re = re.compile(r'[|@]')
 exception_re = re.compile(r'^@@(.*?)$')
 wildcard_re = re.compile(r'\*+?')
-wildcard_regex = r'.*?'
-regexp_symbol_re = re.compile(r'([?*.+@])')
 httpempty_re = re.compile(r'^\|?https?://$')
-pathend_re = re.compile(r'(?i)(?:(?:/|\|)$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|(?:s|p)?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
+pathend_re = re.compile(r'(?i)(?:[/|]$|\.(?:jsp?|php|xml|jpe?g|png|p?gif|img|swf|flv|[sp]?html?|f?cgi|pl?|aspx|ashx|css|jsonp?|asp|search|cfm|ico|act|act(?:ion)?|spy|do|stm|cms|txt|imu|dll|io|smjs|xhr|ount|bin|py|dyn|gne|mvc|lv|nap|jam|nhn))',re.IGNORECASE)
 
 domain_anch_re = re.compile(r'^\|\|(.+?)$')
-domain_re = re.compile(r'(?:[\w-]+\.)+[a-zA-Z0-9-]{2,24}',re.IGNORECASE)
 # omit scheme from start of rule -- this will also be done in JS for efficiency
 scheme_anchor_re = re.compile(r'^(\|?(?:[\w*+-]{1,15})?://)');  # e.g. '|http://' at start
 
 # (Almost) fully-qualified domain name extraction (with EasyList wildcards)
 # Example case: banner.3ddownloads.com^
-da_hostonly_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?)(?:$|[/^?])$');
-da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]+?)\??$');
+da_hostonly_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?)(?:$|[/^?])$')
+da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]+?)\??$')
 
-domain_re = re.compile(r'(?<!\.)(?:[\w-]+\.)[a-zA-Z0-9-]{2,24}(?!\.)',re.IGNORECASE)
 ipv4_re = re.compile(r'(?:\d{1,3}\.){3}\d{1,3}')
 
 host_path_parts_re = re.compile(r'^(?:https?://)?((?:\d{1,3}\.){3}\d{1,3}|(?:[\w-]+\.)+[a-zA-Z0-9-]{2,24}\.?)?([\S]+)?',re.IGNORECASE)
-domain_part_re = re.compile(r'^(?:[\w-]+\.)*((?:[\w-]+\.)[a-zA-Z0-9-]{2,24}\.?)',re.IGNORECASE)
 
 punct_str = r'][{}()<>.,;:?/~!#$%^&*_=+`\'"|\s-'
 punct_class = r'[{}]'.format(punct_str)
@@ -1183,16 +1178,8 @@ hostpunct_deletepreserve_reprog = re.compile(hostpunct_deletepreserve_re)
 whitespace_reprog = re.compile(r'\s+')
 whitespace_replace = ' '
 
-def line_filter(line):
-    """Filter out empty, configuration, and selector rule lines; keep comments and filter later."""
-    return not ( not bool(line) or bool(configuration_re.search(line)) or bool(selector_re.search(line)) )
 def exception_filter(line):
     return bool(exception_re.search(line))
-def line_hostpathoptions_rule(line):
-    opts = option_re.sub('\\2', line)
-    line = exception_re.sub('\\1',line)
-    line = option_re.sub('\\1',line)
-    return line, opts
 def line_hostpath_rule(line):
    line = exception_re.sub('\\1',line)
    line = domain_anch_re.sub('\\1',line)
@@ -1207,7 +1194,6 @@ def rule_tokenizer(rule):
     rule = line_hostpath_rule(rule)
     host_part = re_sub(host_path_parts_re,'\\1',rule)
     path_part = re_sub(host_path_parts_re,'\\2',rule)
-    domain_part = re_sub(domain_part_re,'\\1',host_part) if not bool(ipv4_re.search(host_part)) else '	'
     toks = ' '.join([punct_delete(host_part,punct_re=hostpunct_deletepreserve_reprog), punct_delete(path_part)]).strip()
     toks = re_sub(whitespace_reprog,whitespace_replace,toks)
     return toks
@@ -1244,9 +1230,9 @@ def feature_vector_append_column(rule,opts,col,feature_vector={}):
     # option tokens (1-grams)
     if bool(opts):
         grams = ['option: ' + x for x in re.split(r'\s+',rule_tokenizer(opts))]
-        feature_vector_append_grams(grams, col, feature_vector, weight=0.5)
+        feature_vector_append_grams(grams, col, feature_vector, weight=min(0.5,1/np.sqrt(len(grams))))
     # regex tokens used to relate for short, unique rules
-    if True and len(toks) == 1:
+    if True and len(toks) <= 2:
         grams = []
         for regex in high_weight_regex:
             if bool(regex.search(rule)): grams.append('regex: ' + regex.pattern)
@@ -1358,12 +1344,6 @@ def easylist_to_jsre(pat):
         bos = domain_anchor_replace
     pat = bos + re.sub(r'(\W[^*]*)', re_wildcard, pat)
     return pat
-
-# Wildcard regex's use named groups. Limit their number to to an assumed maximum
-# e.g. Python's re limit is 100
-def wildcard_test(rule,wildcard_named_group_limit):
-    # assume no more than a couple wildcards in EasyList rules, backoff n_wildcard by 2
-    return not re_test(wildcard_re,rule) or n_wildcard <= max(1,wildcard_named_group_limit-2)
 
 def ordered_unique_all_js_var_lists():
     global good_da_host_exact
