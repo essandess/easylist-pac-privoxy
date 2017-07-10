@@ -61,13 +61,13 @@ class EasyListPAC:
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
         parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
-                            default=29999)
+                            default=19999)
         parser.add_argument('-rg', '--good-rule-max', help="Maximum number of good rules (-1 for unlimited)",
-                            type=int, default=1999)
+                            type=int, default=999)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
-                            default=5999)
+                            default=4999)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
-                            default=5999)
+                            default=4999)
         parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
         parser.add_argument('-x', '--Extra_EasyList_URLs', help="Limit the number of wildcards", type=str, nargs='+', default=[])
         parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
@@ -221,22 +221,35 @@ e.g. non-domain specific popups or images."""
         self.good_columns = self.good_columns[good_pridx]
         self.good_signal = self.good_signal[good_pridx]
         self.good_rules = [self.good_rules[k] for k in self.good_columns]
-        self.good_columns = np.arange(0,len(self.good_rules),dtype=self.good_columns.dtype) # rules are now ordered
         bad_pridx = np.array([e[0] for e in sorted(enumerate(self.bad_signal),key=lambda e: e[1],reverse=True)],dtype=int)[:self.bad_rule_max]
         self.bad_columns = self.bad_columns[bad_pridx]
         self.bad_signal = self.bad_signal[bad_pridx]
         self.bad_rules = [self.bad_rules[k] for k in self.bad_columns]
-        self.bad_columns = np.arange(0,len(self.bad_rules),dtype=self.bad_columns.dtype) # rules are now ordered
+
+        # include hardcoded rules
+        for rule in include_these_good_rules:
+            if rule not in self.good_rules: self.good_rules.append(rule)
+        for rule in include_these_bad_rules:
+            if rule not in self.bad_rules: self.bad_rules.append(rule)
+
+        # rules are now ordered
+        self.good_columns = np.arange(0,len(self.good_rules),dtype=self.good_columns.dtype)
+        self.bad_columns = np.arange(0,len(self.bad_rules),dtype=self.bad_columns.dtype)
+
         return
 
     def logreg_priorities(self):
         """Rule prioritization using logistic regression on bootstrap preferences."""
         self.good_fv_json = {}
+        self.good_column_hash = {}
         for col, (rule,opts) in enumerate(zip(self.good_rules,self.good_opts)):
             feature_vector_append_column(rule, opts, col, self.good_fv_json)
+            self.good_column_hash[rule] = col
         self.bad_fv_json = {}
+        self.bad_column_hash = {}
         for col, (rule,opts) in enumerate(zip(self.bad_rules,self.bad_opts)):
             feature_vector_append_column(rule, opts, col, self.bad_fv_json)
+            self.bad_column_hash[rule] = col
 
         self.good_fv_mat, self.good_row_hash = fv_to_mat(self.good_fv_json, self.good_rules)
         self.bad_fv_mat, self.bad_row_hash = fv_to_mat(self.bad_fv_json, self.bad_rules)
@@ -1223,12 +1236,12 @@ def feature_vector_append_column(rule,opts,col,feature_vector={}):
         # 1- and 2-grams
         grams = [toks[k], toks[k] + ' ' + toks[k + 1]] if k < len(toks) - 1 else [toks[k]]
         feature_vector_append_grams(grams, col, feature_vector, weight=1/np.sqrt(len(toks)))
-    if len(toks) <= 4:
+    if bool(opts):
+        # option tokens (1-grams)
+        grams = ['option: ' + x for x in re.split(r'\s+', option_tokenizer(opts))]
+        feature_vector_append_grams(grams, col, feature_vector, weight=min(0.5, 1.e-1/np.sqrt(len(grams))))
+    if len(toks) <= 3:
         """Add information from available options and high weight regex matches."""
-        if bool(opts):
-            # option tokens (1-grams)
-            grams = ['option: ' + x for x in re.split(r'\s+', option_tokenizer(opts))]
-            feature_vector_append_grams(grams, col, feature_vector, weight=min(0.5, 1/np.sqrt(len(grams))))
         # regex tokens used to relate for short, unique rules
         grams = []
         for regex in high_weight_regex:
@@ -1576,6 +1589,14 @@ boote-forum.de
 comunio.de
 planetsnow.de'''.split('\n')))
 
+# include these rules, no matter their priority
+# necessary to include desired rules that fall below the threshold for a reasonably-sized PAC
+include_these_good_rules = []
+include_these_bad_rules = [x for x in """\
+/securepubads.
+||google.com/pagead""".split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x))]
+
+# regex's for highly weighted rules
 high_weight_regex_strings = """\
 trac?k
 beacon
