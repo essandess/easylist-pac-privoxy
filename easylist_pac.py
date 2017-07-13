@@ -19,17 +19,40 @@ __author__ = 'stsmith'
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import argparse as ap, copy, datetime, functools as fnt, os, re, shutil, sys, time, urllib.request, warnings
+import argparse as ap, copy, datetime, functools as fnt, os, re, sys, time, urllib.request, warnings
 
 try:
-    import matplotlib.pyplot as plt, multiprocessing as mp, numpy as np, scipy.sparse as sps
+    machine_learning_flag = True
+    import multiprocessing as mp, numpy as np, scipy.sparse as sps
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
-    machine_learning_flag = True
 except ImportError as e:
     machine_learning_flag = False
     print(e)
     warnings.warn("Install scikit-learn for more accurate EasyList rule selection.")
+
+try:
+    plot_flag = True
+    import matplotlib as mpl, matplotlib.pyplot as plt
+    # Legible plot style defaults
+    # http://matplotlib.org/api/matplotlib_configuration_api.html
+    # http://matplotlib.org/users/customizing.html
+    mpl.rcParams['figure.figsize'] = (10.0, 5.0)
+    mpl.rc('font', **{'family': 'sans-serif', 'weight': 'bold', 'size': 14})
+    mpl.rc('axes', **{'titlesize': 20, 'titleweight': 'bold', 'labelsize': 16, 'labelweight': 'bold'})
+    mpl.rc('legend', **{'fontsize': 14})
+    mpl.rc('figure', **{'titlesize': 16, 'titleweight': 'bold'})
+    mpl.rc('lines', **{'linewidth': 2.5, 'markersize': 18, 'markeredgewidth': 0})
+    mpl.rc('mathtext',
+           **{'fontset': 'custom', 'rm': 'sans:bold', 'bf': 'sans:bold', 'it': 'sans:italic', 'sf': 'sans:bold',
+              'default': 'it'})
+    # plt.rc('text',usetex=False) # [default] usetex should be False
+    mpl.rcParams['text.latex.preamble'] = [r'\\usepackage{amsmath,sfmath} \\boldmath']
+except ImportError as e:
+    plot_flag = False
+    print(e)
+    warnings.warn("Install matplotlib to plot rule priorities.")
+
 
 class EasyListPAC:
     '''Create a Proxy Auto Configuration file from EasyList rule sets.'''
@@ -42,10 +65,12 @@ class EasyListPAC:
         if self.debug:
             print("Good rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.good_rules,self.good_signal))))
             print("\nBad rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.bad_rules,self.bad_signal))))
-            if True:
+            if plot_flag:
                 # plt.plot(np.arange(len(self.good_signal)), self.good_signal, '.')
                 # plt.show()
                 plt.plot(np.arange(len(self.bad_signal)), self.bad_signal, '.')
+                plt.xlabel('Rule index')
+                plt.ylabel('Bad rule distance (logit)')
                 plt.show()
             return
         self.parse_easylist_rules()
@@ -101,9 +126,9 @@ class EasyListPAC:
             file_utc = file_to_utc(fname_full) if os.path.isfile(os.path.join(self.easylist_dir, fname)) else 0.
             resp = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': user_agent}))
             url_utc = last_modified_to_utc(last_modified_resp(resp))
-            if url_utc > file_utc:  # download the newer file
-                with open(fname_full, 'wb') as out_file:
-                    shutil.copyfileobj(resp, out_file)
+            if (url_utc > file_utc) or (os.path.getsize(fname_full) == 0):  # download the newer file
+                with open(fname_full, mode='w', encoding='utf-8') as out_file:
+                    out_file.write(resp.read().decode('utf-8'))
             self.file_list.append(fname_full)
 
     def parse_and_filter_rule_files(self):
