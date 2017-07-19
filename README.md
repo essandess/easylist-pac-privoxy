@@ -101,7 +101,9 @@ The new file [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pa
 
 ## Privoxy
 
-Under development. See [here](../../../../skroll/privoxy-adblock/issues/11) for related issues.
+The repo [adblock2privoxy](../../../adblock2privoxy) is used to achieve nearly full EasyList rule capability, complete with element hiding.
+
+Also see [here](../../../../skroll/privoxy-adblock/issues/11) for related issues.
 
 ## Public Service Announcement 
 
