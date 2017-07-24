@@ -13,9 +13,9 @@ A combination of a `proxy.pac` file with Privoxy and a webserver for CSS rules t
 --------------------- | -------------- | --------- | ------- | -----------
 **EasyList rules**    |        ✅      |     ✅    |    ✅   |     ✅
 **Element hiding**    |        ✅      |     ✅    |    ❌   |     ✅
-**Client-level**      |        ✅      |     ✅    |    ✅   |     ✅
 **HTTP**              |        ✅      |     ✅    |    ✅   |     ✅
 **HTTPS**             |        ✅      |     ✅    |    ❌   |     ❌
+**Client-level**      |        ✅      |     ✅    |    ✅   |     ✅
 **Kernel-level**      |        ❌      |     ✅    |    ✅   |     ✅
 **Network-level**     |        ❌      |     ✅    |    ✅   |     ✅
 **Large rulesets**    |        ✅      |     ❌    |    ✅   |     ✅
