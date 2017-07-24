@@ -9,16 +9,16 @@ Provide tracker and ad blocking at the kernel and network layers using the crowd
 
 A combination of a `proxy.pac` file with Privoxy and a webserver for CSS rules that perform element blocking is used to implement all the features of EasyList blocking rules.
 
-*Blocking capability* | Browser Plugin | proxy.pac | Privoxy | Privoxy+CSS
---------------------- | -------------- | --------- | ------- | -----------
-**EasyList rules**    |        ✅      |     ✅    |    ✅   |     ✅
-**Element hiding**    |        ✅      |     ❌    |    ❌   |     ✅
-**HTTP**              |        ✅      |     ✅    |    ✅   |     ✅
-**HTTPS**             |        ✅      |     ✅    |    ❌   |     ❌
-**Client-level**      |        ✅      |     ✅    |    ✅   |     ✅
-**Kernel-level**      |        ❌      |     ✅    |    ✅   |     ✅
-**Network-level**     |        ❌      |     ✅    |    ✅   |     ✅
-**Large rulesets**    |        ✅      |     ❌    |    ✅   |     ✅
+*Blocking capability*       | Browser Plugin | proxy.pac | Privoxy | Privoxy+CSS
+---------------------       | -------------- | --------- | ------- | -----------
+**EasyList regex rules**    |        ✅      |     ✅    |    ✅   |     ✅
+**EasyList element hiding** |        ✅      |     ❌    |    ❌   |     ✅
+**HTTP**                    |        ✅      |     ✅    |    ✅   |     ✅
+**HTTPS**                   |        ✅      |     ✅    |    ❌   |     ❌
+**Client-level**            |        ✅      |     ✅    |    ✅   |     ✅
+**Kernel-level**            |        ❌      |     ✅    |    ✅   |     ✅
+**Network-level**           |        ❌      |     ✅    |    ✅   |     ✅
+**Large rulesets**          |        ✅      |     ❌    |    ✅   |     ✅
 
 
 ## Proxy Auto Configuration (PAC)
