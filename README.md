@@ -7,6 +7,8 @@ Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rule
 
 Provide tracker and ad blocking at the kernel and network layers using the crowd-sourced EasyList blocking rulesets used by client-based browser plugins. This proxy configuration provides EasyList blocking rules for all devices on the LAN or VPN, beyond the capabilities of client-specific plugins.
 
+A combination of a `proxy.pac` file with Privoxy and a webserver for CSS rules that perform element blocking is used to implement all the features of EasyList blocking rules.
+
 *Blocking capability* | Browser Plugin | proxy.pac | Privoxy | Privoxy+CSS
 --------------------- | -------------- | --------- | ------- | -----------
 **EasyList rules**    |        ✅      |     ✅    |    ✅   |     ✅
