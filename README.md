@@ -12,7 +12,7 @@ A combination of a `proxy.pac` file with Privoxy and a webserver for CSS rules t
 *Blocking capability* | Browser Plugin | proxy.pac | Privoxy | Privoxy+CSS
 --------------------- | -------------- | --------- | ------- | -----------
 **EasyList rules**    |        ✅      |     ✅    |    ✅   |     ✅
-**Element hiding**    |        ✅      |     ✅    |    ❌   |     ✅
+**Element hiding**    |        ✅      |     ❌    |    ❌   |     ✅
 **HTTP**              |        ✅      |     ✅    |    ✅   |     ✅
 **HTTPS**             |        ✅      |     ✅    |    ❌   |     ❌
 **Client-level**      |        ✅      |     ✅    |    ✅   |     ✅
