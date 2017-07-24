@@ -3,6 +3,22 @@ EasyList Tracker and Adblock Rules to Proxy Auto Configuration (PAC) File and Pr
 
 Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rules to efficient network-level blocks in a [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file for automatic proxy network configurations and [Privoxy](http://www.privoxy.org) proxy servers.
 
+## Purpose
+
+Provide tracker and ad blocking at the kernel and network layers using the crowd-sourced EasyList blocking rulesets used by client-based browser plugins. This proxy configuration provides EasyList blocking rules for all devices on the LAN or VPN, beyond the capabilities of client-specific plugins.
+
+*Blocking capability* | Browser Plugin | proxy.pac | Privoxy | Privoxy+CSS
+--------------------- | -------------- | --------- | ------- | -----------
+**EasyList rules**    |        ✅      |     ✅    |    ✅   |     ✅
+**Element hiding**    |        ✅      |     ✅    |    ❌   |     ✅
+**Client-level**      |        ✅      |     ✅    |    ✅   |     ✅
+**HTTP**              |        ✅      |     ✅    |    ✅   |     ✅
+**HTTPS**             |        ✅      |     ✅    |    ❌   |     ❌
+**Kernel-level**      |        ❌      |     ✅    |    ✅   |     ✅
+**Network-level**     |        ❌      |     ✅    |    ✅   |     ✅
+**Large rulesets**    |        ✅      |     ❌    |    ✅   |     ✅
+
+
 ## Proxy Auto Configuration (PAC)
 
 ### To Use: GitHub Host
