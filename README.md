@@ -121,7 +121,23 @@ The new file [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pa
 
 The repo [adblock2privoxy](../../../adblock2privoxy) is used to achieve nearly full EasyList rule capability, complete with element hiding.
 
-Also see [here](../../../../skroll/privoxy-adblock/issues/11) for related issues.
+After installing [adblock2privoxy](../../../adblock2privoxy), an example production run with regular updates looks like:
+
+```
+adblock2privoxy -p /usr/local/etc/adblock2privoxy/privoxy -w /usr/local/etc/adblock2privoxy/css -d 10.0.1.3:8119 \
+  https://easylist.to/easylist/easyprivacy.txt  \
+  https://easylist.to/easylist/easylist.txt  \
+  https://easylist.to/easylist/fanboy-annoyance.txt  \
+  https://easylist.to/easylist/fanboy-social.txt  \
+  https://easylist-downloads.adblockplus.org/antiadblockfilters.txt  \
+  https://easylist-downloads.adblockplus.org/malwaredomains_full.txt  \
+  https://easylist-downloads.adblockplus.org/malwaredomains_full.txt  \
+  https://raw.githubusercontent.com/Dawsey21/Lists/master/adblock-list.txt
+
+# then every few days
+adblock2privoxy -t /usr/local/etc/adblock2privoxy/privoxy/ab2p.task
+# restart privoxy, e.g. sudo port unload privoxy ; sudo port load privoxy
+```
 
 ## Public Service Announcement 
 
