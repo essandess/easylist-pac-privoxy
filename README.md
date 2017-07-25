@@ -131,7 +131,6 @@ adblock2privoxy -p /usr/local/etc/adblock2privoxy/privoxy -w /usr/local/etc/adbl
   https://easylist.to/easylist/fanboy-social.txt  \
   https://easylist-downloads.adblockplus.org/antiadblockfilters.txt  \
   https://easylist-downloads.adblockplus.org/malwaredomains_full.txt  \
-  https://easylist-downloads.adblockplus.org/malwaredomains_full.txt  \
   https://raw.githubusercontent.com/Dawsey21/Lists/master/adblock-list.txt
 
 # then every few days
