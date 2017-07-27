@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#coding: utf-8
+# -*- coding: utf-8 -*-
 __author__ = 'stsmith'
 
 # easylist_pac: Convert EasyList Tracker and Adblocking rules to an efficient Proxy Auto Configuration file
@@ -52,7 +52,6 @@ except ImportError as e:
     plot_flag = False
     print(e)
     warnings.warn("Install matplotlib to plot rule priorities.")
-
 
 class EasyListPAC:
     '''Create a Proxy Auto Configuration file from EasyList rule sets.'''
@@ -140,7 +139,7 @@ class EasyListPAC:
         self.good_rules_include_flag = []
         self.bad_rules_include_flag = []
         for file in self.file_list:
-            with open(file, 'r') as fd:
+            with open(file, 'r', encoding='utf-8') as fd:
                 self.easylist_append_rules(fd)
 
     def easylist_append_rules(self, fd):
@@ -621,7 +620,7 @@ e.g. non-domain specific popups or images."""
                   'bad_url_regex']:
             print("{}: {:d} rules".format(l, len(globals()[l])), flush=True)
 
-        with open(os.path.join(self.easylist_dir, 'proxy.pac'), 'w') as fd:
+        with open(os.path.join(self.easylist_dir, 'proxy.pac'), 'w', encoding='utf-8') as fd:
             fd.write(self.proxy_pac)
 
     def proxy_pac_init(self):
@@ -648,7 +647,7 @@ else
 '''.format(self.pac_proxy)
 
         if os.path.isfile(self.orig_pac_file):
-            with open(self.orig_pac_file, 'r') as fd:
+            with open(self.orig_pac_file, 'r', encoding='utf-8') as fd:
                 self.original_FindProxyForURL_function = fd.read()
         else:
             self.original_FindProxyForURL_function = self.default_FindProxyForURL_function
