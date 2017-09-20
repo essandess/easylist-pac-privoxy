@@ -19,11 +19,11 @@ __author__ = 'stsmith'
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import argparse as ap, copy, datetime, functools as fnt, os, re, sys, time, urllib.request, warnings
+import argparse as ap, copy, datetime, functools as fnt, numpy as np, os, re, sys, time, urllib.request, warnings
 
 try:
     machine_learning_flag = True
-    import multiprocessing as mp, numpy as np, scipy.sparse as sps
+    import multiprocessing as mp, scipy.sparse as sps
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
 except ImportError as e:
@@ -85,13 +85,13 @@ class EasyListPAC:
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
         parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
-                            default=19999)
+                            default=21999)
         parser.add_argument('-rg', '--good-rule-max', help="Maximum number of good rules (-1 for unlimited)",
                             type=int, default=999)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
-                            default=4999)
+                            default=5999)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
-                            default=4999)
+                            default=5999)
         parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
         parser.add_argument('-x', '--Extra_EasyList_URLs', help="Limit the number of wildcards", type=str, nargs='+', default=[])
         parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
@@ -115,9 +115,10 @@ class EasyListPAC:
         return self.args
 
     def easylists_download_latest(self):
-        easyprivacy_url = 'https://easylist.to/easylist/easyprivacy.txt'
         easylist_url = 'https://easylist.to/easylist/easylist.txt'
-        self.download_list = [easyprivacy_url, easylist_url] + self.extra_easylist_urls
+        easyprivacy_url = 'https://easylist.to/easylist/easyprivacy.txt'
+        fanboy_annoyance_url = 'https://easylist.to/easylist/fanboy-annoyance.txt'
+        self.download_list = [easyprivacy_url, fanboy_annoyance_url, easylist_url] + self.extra_easylist_urls
         self.file_list = []
         for url in self.download_list:
             fname = os.path.basename(url)
@@ -321,8 +322,8 @@ e.g. non-domain specific popups or images."""
     def logreg_test_in_training(self):
         """fast, initial method: test vectors in the training data"""
 
-        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l2', solver='liblinear', tol=0.01, n_jobs=mp.cpu_count())  # or n_jobs=-1
-        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l2', solver='liblinear', tol=0.01, n_jobs=mp.cpu_count())  # or n_jobs=-1
+        self.good_fv_logreg = LogisticRegression(C=self.C, penalty='l2', solver='liblinear', tol=0.01)
+        self.bad_fv_logreg = LogisticRegression(C=self.C, penalty='l2', solver='liblinear', tol=0.01)
 
         good_x_test = self.good_X_all[self.good_columns]
         good_X = self.good_X_all
