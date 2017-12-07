@@ -61,6 +61,8 @@ class EasyListPAC:
         self.easylists_download_latest()
         self.parse_and_filter_rule_files()
         self.prioritize_rules()
+        if not self.my_extra_rules_off:
+            self.easylist_append_rules(my_extra_rules)
         if self.debug:
             print("Good rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.good_rules,self.good_signal))))
             print("\nBad rules and strengths:\n" + '\n'.join('{: 5d}:\t{}\t\t[{:2.1f}]'.format(i,r,s) for (i,(r,s)) in enumerate(zip(self.bad_rules,self.bad_signal))))
@@ -82,6 +84,7 @@ class EasyListPAC:
         parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, default='127.0.0.1:80')
         parser.add_argument('-d', '--download-dir', help="Download directory", type=str, default='~/Downloads')
         parser.add_argument('-g', '--debug', help="Debug: Just print rules", action='store_true')
+        parser.add_argument('-moff', '--my_extra_rules_turnoff_flag', help="Turn off adding my extra rules", default=False, action='store_true')
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
         parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
@@ -93,7 +96,7 @@ class EasyListPAC:
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
                             default=3999)
         parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
-        parser.add_argument('-x', '--Extra_EasyList_URLs', help="Limit the number of wildcards", type=str, nargs='+', default=[])
+        parser.add_argument('-x', '--Extra_EasyList_URLs', help="Extra Easylsit URLs", type=str, nargs='+', default=[])
         parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
         parser.add_argument('-@@', '--exceptions_include_flag', help="Include exception rules", action='store_true')
         args = parser.parse_args()
@@ -101,6 +104,7 @@ class EasyListPAC:
         self.blackhole_ip_port = args.blackhole
         self.easylist_dir = os.path.expanduser(args.download_dir)
         self.debug = args.debug
+        self.my_extra_rules_off = args.my_extra_rules_turnoff_flag
         self.proxy_host_port = args.proxy
         self.orig_pac_file = os.path.join(self.easylist_dir, args.PAC_original)
         # n.b. negative limits are set to no limits using [:None] slicing trick
@@ -145,58 +149,70 @@ class EasyListPAC:
 
     def easylist_append_rules(self, fd):
         """Append EasyList rules from file to good and bad lists."""
-        ignore_rules_flag = False
         for line in fd:
             line = line.rstrip()
-            line_orig = line
-            # configuration lines and selector rules should already be filtered out
-            if re_test(configuration_re, line) or re_test(selector_re, line): continue
-            exception_flag = exception_filter(line)  # block default; pass if True
-            line = exception_re.sub('\\1', line)
-            option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
-            # delete all easylist options **prior** to regex and selector cases
-            # ignore domain limits for now
-            opts = ''  # default: no options in the rule
-            if re_test(option_re, line):
-                opts = option_re.sub('\\2', line)
-                # domain-specific and other option exceptions: ignore
-                # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
-                line = option_re.sub('\\1', line)  # delete all the options and continue
-            # ignore these cases
-            # comment case: ignore
-            if re_test(comment_re, line):
-                if re_test(commentname_sections_ignore_re, line):
-                    ignored_rules_comment_start = comment_re.sub('', line)
-                    if not ignore_rules_flag:
-                        ignored_rules_count = 0
-                        ignore_rules_flag = True
-                        print('Ignore rules following comment ', end='', flush=True)
-                    print('"{}"… '.format(ignored_rules_comment_start), end='', flush=True)
-                else:
-                    if ignore_rules_flag: print('\n {:d} rules ignored.'.format(ignored_rules_count), flush=True)
+            try:
+                self.easylist_append_one_rule(line)
+            except self.RuleIgnored as e:
+                if self.debug: print(e,flush=True)
+                continue
+
+    class RuleIgnored(Exception):
+        pass
+
+    def easylist_append_one_rule(self, line):
+        """Append EasyList rules from line to good and bad lists."""
+        ignore_rules_flag = False
+        ignored_rules_count = 0
+        line_orig = line
+        # configuration lines and selector rules should already be filtered out
+        if re_test(configuration_re, line) or re_test(selector_re, line): raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        exception_flag = exception_filter(line)  # block default; pass if True
+        line = exception_re.sub('\\1', line)
+        option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
+        # delete all easylist options **prior** to regex and selector cases
+        # ignore domain limits for now
+        opts = ''  # default: no options in the rule
+        if re_test(option_re, line):
+            opts = option_re.sub('\\2', line)
+            # domain-specific and other option exceptions: ignore
+            # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
+            line = option_re.sub('\\1', line)  # delete all the options and continue
+        # ignore these cases
+        # comment case: ignore
+        if re_test(comment_re, line):
+            if re_test(commentname_sections_ignore_re, line):
+                ignored_rules_comment_start = comment_re.sub('', line)
+                if not ignore_rules_flag:
                     ignored_rules_count = 0
-                    ignore_rules_flag = False
-                continue
-            if ignore_rules_flag:
-                ignored_rules_count += 1
+                    ignore_rules_flag = True
+                    print('Ignore rules following comment ', end='', flush=True)
+                print('"{}"… '.format(ignored_rules_comment_start), end='', flush=True)
+            else:
+                if ignore_rules_flag: print('\n {:d} rules ignored.'.format(ignored_rules_count), flush=True)
+                ignored_rules_count = 0
+                ignore_rules_flag = False
+            raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        if ignore_rules_flag:
+            ignored_rules_count += 1
+            self.append_rule(exception_flag, line, opts, False)
+            raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        # blank url case: ignore
+        if re_test(httpempty_re, line): raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        # blank line case: ignore
+        if not bool(line): raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        # block default or pass exception
+        if exception_flag:
+            option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options within exceptions
+            if not self.exceptions_include_flag:
                 self.append_rule(exception_flag, line, opts, False)
-                continue
-            # blank url case: ignore
-            if re_test(httpempty_re, line): continue
-            # blank line case: ignore
-            if not bool(line): continue
-            # block default or pass exception
-            if exception_flag:
-                option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options within exceptions
-                if not self.exceptions_include_flag:
-                    self.append_rule(exception_flag, line, opts, False)
-                    continue
-            # specific options: ignore
-            if re_test(option_exception_re, opts):
-                self.append_rule(exception_flag, line, opts, False)
-                continue
-            # add all remaining rules
-            self.append_rule(exception_flag, line, opts, True)
+                raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        # specific options: ignore
+        if re_test(option_exception_re, opts):
+            self.append_rule(exception_flag, line, opts, False)
+            raise self.RuleIgnored("Rule '{}' not added.".format(line))
+        # add all remaining rules
+        self.append_rule(exception_flag, line, opts, True)
 
     def append_rule(self,exception_flag,rule, opts, include_rule_flag):
         if not bool(rule): return  # last chance to reject blank lines -- shouldn't happen
@@ -1160,6 +1176,10 @@ else:
 
 # print(re_sub('(ab)|(a)', r'(1:\1 2:\2)', 'abc'))
 # prints '(1:ab 2:)c'
+
+# My extra rules
+my_extra_rules = ['||outbrain.com^',
+                  '||taboola.com^']
 
 # EasyList regular expressions
 
