@@ -710,8 +710,9 @@ else
 
 var normal = "DIRECT";
 // var blackhole_ip_port = "127.0.0.1:80";  // test code
-// var blackhole_ip_port = "8.8.8.8:53";    // GOOG DNS blackhole; do not use: causes long waits on some sites
-var blackhole_ip_port = "{}";    // deployment code; use the same server as proxy.pac if possible
+// var blackhole_ip_port = "8.8.8.8:53";    // GOOG DNS blackhole; do not use: no longer works with iOS 11—causes long waits on some sites
+var blackhole_ip_port = "{}";    // on iOS a working blackhole requires return code 200;
+// e.g. use the adblock2privoxy nginx server as a blackhole
 var blackhole = "PROXY " + blackhole_ip_port;
 
 // The hostnames must be consistent with EasyList format.
