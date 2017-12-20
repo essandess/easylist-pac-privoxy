@@ -79,9 +79,9 @@ class EasyListPAC:
 
     def parseArgs(self):
         # blackhole specification in arguments
-        # best choise is the LAN IP address of the http://hostname/proxy.pac web server, e.g. 192.168.0.2:80
+        # best choice is the LAN IP address of the http://hostname/proxy.pac web server or a dedicated blackhole server, e.g. 192.168.0.2:8119
         parser = ap.ArgumentParser()
-        parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, default='127.0.0.1:80')
+        parser.add_argument('-b', '--blackhole', help="Blackhole IP:port", type=str, default='127.0.0.1:8119')
         parser.add_argument('-d', '--download-dir', help="Download directory", type=str, default='~/Downloads')
         parser.add_argument('-g', '--debug', help="Debug: Just print rules", action='store_true')
         parser.add_argument('-moff', '--my_extra_rules_turnoff_flag', help="Turn off adding my extra rules", default=False, action='store_true')
@@ -709,7 +709,7 @@ else
 // Define the blackhole proxy for blocked adware and trackware
 
 var normal = "DIRECT";
-// var blackhole_ip_port = "127.0.0.1:80";  // test code
+// var blackhole_ip_port = "127.0.0.1:8119";  // test code
 // var blackhole_ip_port = "8.8.8.8:53";    // GOOG DNS blackhole; do not use: no longer works with iOS 11—causes long waits on some sites
 var blackhole_ip_port = "{}";    // on iOS a working blackhole requires return code 200;
 // e.g. use the adblock2privoxy nginx server as a blackhole
