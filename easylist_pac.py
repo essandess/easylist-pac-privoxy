@@ -88,13 +88,13 @@ class EasyListPAC:
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
         parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
-                            default=5999)
+                            default=9999)
         parser.add_argument('-rg', '--good-rule-max', help="Maximum number of good rules (-1 for unlimited)",
                             type=int, default=999)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
-                            default=1999)
+                            default=4999)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
-                            default=1999)
+                            default=4999)
         parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
         parser.add_argument('-x', '--Extra_EasyList_URLs', help="Extra Easylsit URLs", type=str, nargs='+', default=[])
         parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
@@ -655,13 +655,13 @@ if (
    shExpMatch(host, "127.*") ||
    dnsDomainIs(host, ".LOCAL") ||
    dnsDomainIs(host, ".local") ||
-   (url.substring(0,3) == "ftp")
+   (url.substring(0,4) == "ftp:")
 )
         return "DIRECT";
 else
-        return "{}";
+        return EasyListFindProxyForURL(url, host);
 }}
-'''.format(self.pac_proxy)
+'''
 
         if os.path.isfile(self.orig_pac_file):
             with open(self.orig_pac_file, 'r', encoding='utf-8') as fd:
@@ -669,8 +669,8 @@ else
         else:
             self.original_FindProxyForURL_function = self.default_FindProxyForURL_function
 
-        # change the function name to MyFindProxyForURL
-        self.original_FindProxyForURL_function = re.sub(r'function[\s]+FindProxyForURL', 'function MyFindProxyForURL',
+        # change 'return "PROXY ..."' to 'return EasyListFindProxyForURL(url, host)'
+        self.original_FindProxyForURL_function = re.sub(r'return[\s]+"PROXY[^"]+"', 'return EasyListFindProxyForURL(url, host)',
                                                self.original_FindProxyForURL_function)
 
         #  proxy.pac preamble
@@ -709,8 +709,9 @@ else
 // Define the blackhole proxy for blocked adware and trackware
 
 var normal = "DIRECT";
-// var blackhole_ip_port = "127.0.0.1:8119";  // test code
-// var blackhole_ip_port = "8.8.8.8:53";    // GOOG DNS blackhole; do not use: no longer works with iOS 11—causes long waits on some sites
+var proxy = "{}";                  // e.g. 127.0.0.1:3128
+// var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole
+// var blackhole_ip_port = "8.8.8.8:53";      // GOOG DNS blackhole; do not use: no longer works with iOS 11—causes long waits on some sites
 var blackhole_ip_port = "{}";    // on iOS a working blackhole requires return code 200;
 // e.g. use the adblock2privoxy nginx server as a blackhole
 var blackhole = "PROXY " + blackhole_ip_port;
@@ -728,7 +729,7 @@ var blackhole = "PROXY " + blackhole_ip_port;
 
 // Too many rules (>~ 10k) bog down the browser; make reasonable exclusions here:
 
-'''.format(time.strftime("%a, %d %b %Y %X GMT", time.gmtime()),self.calling_command,self.blackhole_ip_port)
+'''.format(time.strftime("%a, %d %b %Y %X GMT", time.gmtime()),self.calling_command,self.pac_proxy,self.blackhole_ip_port)
 
         self.proxy_pac_postamble = '''
 // Add any good networks here. Format is network folowed by a comma and
@@ -839,7 +840,8 @@ var use_pass_rules_parts_flag = true;  // use the pass rules for url parts, then
 var alert_flag = false;                // use for short-circuit '&&' to print debugging statements
 var debug_flag = false;               // use for short-circuit '&&' to print debugging statements
 
-function FindProxyForURL(url, host)
+// EasyList filtering for FindProxyForURL(url, host)
+function EasyListFindProxyForURL(url, host)
 {
     var host_is_ipv4 = is_ipv4_address(host);
     var host_ipv4_address;
@@ -907,7 +909,7 @@ function FindProxyForURL(url, host)
             tmpNet = GoodNetworks_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
                 alert_flag && alert("GoodNetworks_Array PASS: " + host_ipv4_address);
-                return MyFindProxyForURL(url, host);
+                return proxy;
             }
         }
 
@@ -947,7 +949,7 @@ function FindProxyForURL(url, host)
         if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host)))
             && !hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
                 alert_flag && alert("HTTPS PASS: " + host + ", " + host_noserver);
-            return MyFindProxyForURL(url, host);
+            return proxy;
         }
 
         //////////////////////////////////////////////////////////
@@ -983,7 +985,7 @@ function FindProxyForURL(url, host)
                     (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
                     (good_url_parts_flag && good_url_parts_RegExp.test(url)) ||
                     (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
-            return MyFindProxyForURL(url, host);
+            return proxy;
         }
 
         //////////////////////////////////////////////////////////
@@ -1023,7 +1025,7 @@ function FindProxyForURL(url, host)
 
     // default pass
     alert_flag && alert("Default PASS: " + url + ", " + host);
-    return MyFindProxyForURL(url, host);
+    return proxy;
 }
 
 // User-supplied FindProxyForURL()
