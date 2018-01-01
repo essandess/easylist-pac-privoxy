@@ -1043,7 +1043,7 @@ Strategies to convert EasyList rules to Javascript tests:
 In general:
 1. Preference for performance over 1:1 EasyList functionality
 2. Limit number of rules to ~O(10k) to avoid computational burden on mobile devices
-3. Exact matches: use Object hashing (very fast); use efficient NDA RegExp's for all else
+3. Exact matches: use Object hashing (very fast); use efficient NFA RegExp's for all else
 4. Divide and conquer specific cases to avoid large RegExp's
 5. Based on testing code performance on an iPhone: mobile Safari, Chrome with System Activity Monitor.app
 6. Backstop these proxy.pac rules with Privoxy rules and a browser plugin
