@@ -168,16 +168,16 @@ class EasyListPAC:
         # configuration lines and selector rules should already be filtered out
         if re_test(configuration_re, line) or re_test(selector_re, line): raise self.RuleIgnored("Rule '{}' not added.".format(line))
         exception_flag = exception_filter(line)  # block default; pass if True
-        line = exception_re.sub('\\1', line)
+        line = exception_re.sub(r'\1', line)
         option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
         # delete all easylist options **prior** to regex and selector cases
         # ignore domain limits for now
         opts = ''  # default: no options in the rule
         if re_test(option_re, line):
-            opts = option_re.sub('\\2', line)
+            opts = option_re.sub(r'\2', line)
             # domain-specific and other option exceptions: ignore
             # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
-            line = option_re.sub('\\1', line)  # delete all the options and continue
+            line = option_re.sub(r'\1', line)  # delete all the options and continue
         # ignore these cases
         # comment case: ignore
         if re_test(comment_re, line):
@@ -491,14 +491,14 @@ e.g. non-domain specific popups or images."""
         rule = rule.rstrip()
         rule_orig = rule
         exception_flag = exception_filter(rule)  # block default; pass if True
-        rule = exception_re.sub('\\1', rule)
+        rule = exception_re.sub(r'\1', rule)
         option_exception_re = not3dimppuposgh_option_exception_re  # ignore these options by default
         opts = ''  # default: no options in the rule
         if re_test(option_re, rule):
-            opts = option_re.sub('\\2', rule)
+            opts = option_re.sub(r'\2', rule)
             # domain-specific and other option exceptions: ignore
             # too many rules (>~ 10k) bog down the browser; make reasonable exclusions here
-            rule = option_re.sub('\\1', rule)  # delete all the options and continue
+            rule = option_re.sub(r'\1', rule)  # delete all the options and continue
         # ignore these cases
         # comment case: ignore
         if re_test(comment_re, rule): return
@@ -516,7 +516,7 @@ e.g. non-domain specific popups or images."""
         # regex case
         if re_test(regex_re, rule):
             if regex_ignore_test(rule): return
-            rule = regex_re.sub('\\1', rule)
+            rule = regex_re.sub(r'\1', rule)
             if exception_flag:
                 good_url_regex.append(rule)
             else:
@@ -525,17 +525,17 @@ e.g. non-domain specific popups or images."""
                 bad_url_regex.append(rule)
             return
         # now that regex's are handled, delete unnecessary wildcards, e.g. /.../*
-        rule = wildcard_begend_re.sub('\\1', rule)
+        rule = wildcard_begend_re.sub(r'\1', rule)
         # domain anchors, || or '|http://a.b' -> domain anchor 'a.b' for regex efficiency in JS
         if re_test(domain_anch_re, rule) or re_test(scheme_anchor_re, rule):
             # strip off initial || or |scheme://
             if re_test(domain_anch_re, rule):
-                rule = domain_anch_re.sub('\\1', rule)
+                rule = domain_anch_re.sub(r'\1', rule)
             elif re_test(scheme_anchor_re, rule):
                 rule = scheme_anchor_re.sub("", rule)
             # host subcase
             if re_test(da_hostonly_re, rule):
-                rule = da_hostonly_re.sub('\\1', rule)
+                rule = da_hostonly_re.sub(r'\1', rule)
                 if not re_test(wild_anch_sep_exc_re, rule):  # exact subsubcase
                     if not re_test(badregex_regex_filters_re, rule):
                         return  # limit bad regex's to those in the filter
@@ -555,7 +555,7 @@ e.g. non-domain specific popups or images."""
                     return
             # hostpath subcase
             if re_test(da_hostpath_re, rule):
-                rule = da_hostpath_re.sub('\\1', rule)
+                rule = da_hostpath_re.sub(r'\1', rule)
                 if not re_test(wild_sep_exc_noanch_re, rule) and re_test(pathend_re, rule):  # exact subsubcase
                     rule = re.sub(r'\|$', '', rule)  # strip EOL anchors
                     if not re_test(badregex_regex_filters_re, rule):
@@ -646,7 +646,7 @@ e.g. non-domain specific popups or images."""
         # define a default, user-supplied FindProxyForURL function
         self.default_FindProxyForURL_function = '''\
 function FindProxyForURL(url, host)
-{{
+{
 if (
    isPlainHostName(host) ||
    shExpMatch(host, "10.*") ||
@@ -660,7 +660,7 @@ if (
         return "DIRECT";
 else
         return EasyListFindProxyForURL(url, host);
-}}
+}
 '''
 
         if os.path.isfile(self.orig_pac_file):
@@ -794,8 +794,8 @@ var bad_schemes_RegExp = RegExp("^(?:ftp|sftp|tftp|ftp-data|rsync|finger|gopher)
 // perl -lane 'BEGIN{$l=0;} {!/^#/ && do{$ll=length($F[0]); if($ll>$l){$l=$ll;}};} END{print $l;}' /etc/services
 var schemepart_RegExp = RegExp("^([\\\\w*+-]{2,15}):\\\\/{0,2}","i");
 var hostpart_RegExp = RegExp("^((?:[\\\\w-]+\\\\.)+[a-zA-Z0-9-]{2,24}\\\\.?)", "i");
-var querypart_RegExp = RegExp("^((?:[\\\\w-]+\\\\.)+[a-zA-Z0-9-]{2,24}\\\\.?[\\\\w~%.\\\\/^*-]+)(\\\\??[\\\\S]*?)$", "i");
-var domainpart_RegExp = RegExp("^(?:[\\\\w-]+\\\\.)*((?:[\\\\w-]+\\\\.)[a-zA-Z0-9-]{2,24}\\\\.?)", "i");
+var querypart_RegExp = RegExp("^((?:[\\\\w-]+\\\\.)+[a-zA-Z0-9-]{2,24}\\\\.?[\\\\w~%.\\\\/^*-]*)(\\\\??\\\\S*?)$", "i");
+var domainpart_RegExp = RegExp("^(?:[\\\\w-]+\\\\.)*((?:[\\\\w-]+\\\\.)[a-zA-Z0-9-]{2,24})\\\\.?", "i");
 
 //////////////////////////////////////////////////
 // Define the is_ipv4_address function and vars //
@@ -1213,11 +1213,11 @@ scheme_anchor_re = re.compile(r'^(\|?(?:[\w*+-]{1,15})?://)');  # e.g. '|http://
 # (Almost) fully-qualified domain name extraction (with EasyList wildcards)
 # Example case: banner.3ddownloads.com^
 da_hostonly_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?)(?:$|[/^?])$')
-da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]+?)\??$')
+da_hostpath_re = re.compile(r'^((?:[\w*-]+\.)+[a-zA-Z0-9*-]{1,24}\.?[\w~%./^*-]*?)\??$')
 
 ipv4_re = re.compile(r'(?:\d{1,3}\.){3}\d{1,3}')
 
-host_path_parts_re = re.compile(r'^(?:https?://)?((?:\d{1,3}\.){3}\d{1,3}|(?:[\w-]+\.)+[a-zA-Z0-9-]{2,24}\.?)?([\S]+)?',re.IGNORECASE)
+host_path_parts_re = re.compile(r'^(?:https?://)?((?:\d{1,3}\.){3}\d{1,3}|(?:[\w-]+\.)+[a-zA-Z0-9-]{2,24})?\.?(\S+)?',re.IGNORECASE)
 
 punct_str = r'][{}()<>.,;:?/~!#$%^&*_=+`\'"|\s-'
 punct_class = r'[{}]'.format(punct_str)
@@ -1239,9 +1239,9 @@ whitespace_replace = ' '
 def exception_filter(line):
     return bool(exception_re.search(line))
 def line_hostpath_rule(line):
-   line = exception_re.sub('\\1',line)
-   line = domain_anch_re.sub('\\1',line)
-   line = option_re.sub('\\1',line)
+   line = exception_re.sub(r'\1',line)
+   line = domain_anch_re.sub(r'\1',line)
+   line = option_re.sub(r'\1',line)
    return line
 def punct_delete(line,punct_re=punct_deletepreserve_reprog):
     res = line
@@ -1250,14 +1250,14 @@ def punct_delete(line,punct_re=punct_deletepreserve_reprog):
     return res
 def rule_tokenizer(rule):
     rule = line_hostpath_rule(rule)
-    host_part = re_sub(host_path_parts_re,'\\1',rule)
-    path_part = re_sub(host_path_parts_re,'\\2',rule)
+    host_part = re_sub(host_path_parts_re,r'\1',rule)
+    path_part = re_sub(host_path_parts_re,r'\2',rule)
     toks = ' '.join([punct_delete(host_part,punct_re=hostpunct_deletepreserve_reprog), punct_delete(path_part)]).strip()
     toks = re_sub(whitespace_reprog,whitespace_replace,toks)
     return toks
 easylist_name_opts_re = re.compile(r'^~?\b(third\-party|domain|script|image|stylesheet|object(?!-subrequest)|object\-subrequest|xmlhttprequest|subdocument|ping|websocket|webrtc|document|elemhide|generichide|genericblock|other|sitekey|match-case|collapse|donottrack|popup|media|font)(?:=.+?)?$')
 def option_tokenizer(opts):
-    toks = ' '.join([easylist_name_opts_re.sub('\\1',o) for o in opts.split(',')])
+    toks = ' '.join([easylist_name_opts_re.sub(r'\1',o) for o in opts.split(',')])
     return toks
 
 # use or not use regular expression rules of any kind
@@ -1399,7 +1399,7 @@ def easylist_to_jsre(pat):
     domain_anchor_replace = "^"
     bos = ''
     if re_test(domain_anch_re,pat):
-        pat = domain_anch_re.sub('\\1',pat)
+        pat = domain_anch_re.sub(r'\1',pat)
         bos = domain_anchor_replace
     pat = bos + re.sub(r'(\W[^*]*)', re_wildcard, pat)
     return pat
