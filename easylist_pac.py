@@ -88,13 +88,13 @@ class EasyListPAC:
         parser.add_argument('-p', '--proxy', help="Proxy host:port", type=str, default='')
         parser.add_argument('-P', '--PAC-original', help="Original proxy.pac file", type=str, default='proxy.pac.orig')
         parser.add_argument('-rb', '--bad-rule-max', help="Maximum number of bad rules (-1 for unlimited)", type=int,
-                            default=9999)
+                            default=1999)
         parser.add_argument('-rg', '--good-rule-max', help="Maximum number of good rules (-1 for unlimited)",
-                            type=int, default=999)
+                            type=int, default=299)
         parser.add_argument('-th', '--truncate_hash', help="Truncate hash object length to maximum number", type=int,
-                            default=4999)
+                            default=1099)
         parser.add_argument('-tr', '--truncate_regex', help="Truncate regex rules to maximum number", type=int,
-                            default=4999)
+                            default=1099)
         parser.add_argument('-w', '--sliding-window', help="Sliding window training and test (slow)", action='store_true')
         parser.add_argument('-x', '--Extra_EasyList_URLs', help="Extra Easylsit URLs", type=str, nargs='+', default=[])
         parser.add_argument('-*', '--wildcard-limit', help="Limit the number of wildcards", type=int, default=999)
@@ -660,7 +660,7 @@ if (
         return "DIRECT";
 else
         return EasyListFindProxyForURL(url, host);
-}
+}   
 '''
 
         if os.path.isfile(self.orig_pac_file):
@@ -875,9 +875,6 @@ function EasyListFindProxyForURL(url, host)
     // Short circuit to blackhole for good_da_host_exceptions
     if ( hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
         alert_flag && alert("good_da_host_exceptions_JSON blackhole!");
-        // Redefine url and host to avoid leaking information to the blackhole
-        url = "http://127.0.0.1:80";
-        host = "127.0.0.1";
         return blackhole;
     }
 
@@ -899,9 +896,6 @@ function EasyListFindProxyForURL(url, host)
             tmpNet = GoodNetworks_Exceptions_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
                 alert_flag && alert("GoodNetworks_Exceptions_Array Blackhole: " + host_ipv4_address);
-                // Redefine url and host to avoid leaking information to the blackhole
-                url = "http://127.0.0.1:80";
-                host = "127.0.0.1";
                 return blackhole;
             }
         }
@@ -922,9 +916,6 @@ function EasyListFindProxyForURL(url, host)
             tmpNet = BadNetworks_Array[i].split(/,\s*/);
             if (isInNet(host_ipv4_address, tmpNet[0], tmpNet[1])) {
                 alert_flag && alert("BadNetworks_Array Blackhole: " + host_ipv4_address);
-                // Redefine url and host to avoid leaking information to the blackhole
-                url = "http://127.0.0.1:80";
-                host = "127.0.0.1";
                 return blackhole;
             }
         }
@@ -958,9 +949,6 @@ function EasyListFindProxyForURL(url, host)
 
         if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ) {
             alert_flag && alert("HTTPS blackhole: " + host + ", " + host_noserver);
-            // Redefine url and host to avoid leaking information to the blackhole
-            url = "http://127.0.0.1:80";
-            host = "127.0.0.1";
             return blackhole;
         }
     }
@@ -1016,9 +1004,6 @@ function EasyListFindProxyForURL(url, host)
             (bad_url_parts_flag && bad_url_parts_RegExp.test(url)) ||
             (bad_url_regex_flag && bad_url_regex_RegExp.test(url)) ) {
             alert_flag && alert("Blackhole: " + url + ", " + host);
-            // Redefine url and host to avoid leaking information to the blackhole
-            url = "http://127.0.0.1:80";
-            host = "127.0.0.1";
             return blackhole;
         }
     }
