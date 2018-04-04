@@ -122,7 +122,8 @@ class EasyListPAC:
         easylist_url = 'https://easylist.to/easylist/easylist.txt'
         easyprivacy_url = 'https://easylist.to/easylist/easyprivacy.txt'
         fanboy_annoyance_url = 'https://easylist.to/easylist/fanboy-annoyance.txt'
-        self.download_list = [fanboy_annoyance_url, easyprivacy_url, easylist_url] + self.extra_easylist_urls
+        fanboy_antifacebook = 'https://raw.githubusercontent.com/ryanbr/fanboy-adblock/master/fanboy-antifacebook.txt'
+        self.download_list = [fanboy_antifacebook, fanboy_annoyance_url, easyprivacy_url, easylist_url] + self.extra_easylist_urls
         self.file_list = []
         for url in self.download_list:
             fname = os.path.basename(url)
@@ -1127,7 +1128,11 @@ var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
 
 # global variables and functions
 
-last_modified_resp = lambda req: req.headers.get_all("Last-Modified")[0]
+def last_modified_resp(req):
+    header_dict = dict(req.getheaders())
+    lm = header_dict.get("Last-Modified") if "Last-Modified" in header_dict else \
+        header_dict.get("Date","Sun, 01 Apr 2018 00:00:00 GMT")
+    return lm
 last_modified_to_utc = lambda lm: time.mktime(datetime.datetime.strptime(lm,"%a, %d %b %Y %X GMT").timetuple())
 file_to_utc = lambda f: time.mktime(datetime.datetime.utcfromtimestamp(os.path.getmtime(f)).timetuple())
 
@@ -1629,7 +1634,11 @@ planetsnow.de'''.split('\n')))
 include_these_good_rules = []
 include_these_bad_rules = [x for x in """\
 /securepubads.
-||google.com/pagead""".split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x))]
+||google.com/pagead
+||facebook.com/plugins/*
+||connect.facebook.com
+||connect.facebook.net
+||platform.twitter.com""".split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x))]
 
 # regex's for highly weighted rules
 high_weight_regex_strings = """\
