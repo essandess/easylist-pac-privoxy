@@ -25,22 +25,6 @@ A combination of a `proxy.pac` file with Privoxy and a webserver for CSS rules t
 
 ## Proxy Auto Configuration (PAC)
 
-### To Use: GitHub Host
-
-Set your network Proxy Auto Configuration setting to:
-
-> `https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac`
-
-***Advantages***
-
-* Works on any mobile or desktop device on any WiFi network worldwide.
-* GitHub server; private web server not necessary.
-
-***Disadvantages***
-
-* Does not work on mobile data networks.
-* Reliance on a third-party (me) for pass/block rule sets, updates, and `proxy.pac` integrity.
-
 ### To Use: Localhost
 
 Download the [proxy.pac](https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac) file.
@@ -83,6 +67,23 @@ This is the best option.
 ***Disadvantages***
 
 * Necessity of VPN server.
+
+### To Use: GitHub Host
+
+Set your network Proxy Auto Configuration setting to:
+
+> `https://raw.githubusercontent.com/essandess/easylist-pac-privoxy/master/proxy.pac`
+
+***Advantages***
+
+* Works on any mobile or desktop device on any WiFi network worldwide.
+* GitHub server; private web server not necessary.
+
+***Disadvantages***
+
+* Does not work on mobile data networks.
+* Does not work on iOS without an open blackhole with HTTP return code 200 for blackholed sites.
+* Reliance on a third-party (me) for pass/block rule sets, updates, and `proxy.pac` integrity.
 
 ## Details
 
