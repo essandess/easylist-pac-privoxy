@@ -1631,6 +1631,7 @@ planetsnow.de'''.split('\n')))
 
 # include these rules, no matter their priority
 # necessary to include desired rules that fall below the threshold for a reasonably-sized PAC
+# Refs: https://guardianapp.com/ios-app-location-report-sep2018.html
 include_these_good_rules = []
 include_these_bad_rules = [x for x in """\
 /securepubads.
@@ -1638,7 +1639,23 @@ include_these_bad_rules = [x for x in """\
 ||facebook.com/plugins/*
 ||connect.facebook.com
 ||connect.facebook.net
-||platform.twitter.com""".split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x))]
+||platform.twitter.com
+||api.areametrics.com
+||in.cuebiq.com
+||et.intake.factual.com
+||api.factual.com
+||api.beaconsinspace.com
+||api.huq.io
+||m2m-api.inmarket.com
+||mobileapi.mobiquitynetworks.com
+||sdk.revealmobile.com
+||api.safegraph.com
+||incoming-data-sense360.s3.amazonaws.com
+||ios-quinoa-personal-identify-prod.sense360eng.com
+||ios-quinoa-events-prod.sense360eng.com
+||ios-quinoa-high-frequency-events-prod.sense360eng.com
+||v1.blueberry.cloud.databerries.com
+||pie.wirelessregistry.com""".split('\n') if not bool(re.search(r'^\s*?(?:#|$)',x))]
 
 # regex's for highly weighted rules
 high_weight_regex_strings = """\
