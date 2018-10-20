@@ -54,7 +54,7 @@ Set your network Proxy Auto Configuration setting to:
 
 ### To Use: VPN
 
-Configure an [OpenVPN](../../../essandess/osx-openvpn-server) to use the `proxy.pac` file hosted on your LAN.
+Configure an [OpenVPN Server](../../../essandess/macos-openvpn-server) to use the `proxy.pac` file hosted on your LAN.
 
 This is the best option.
 
