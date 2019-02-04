@@ -1085,7 +1085,7 @@ var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
     def js_init_regexp(self,array_name,domain_anchor=False):
         global n_wildcard
         n_wildcard = 1
-        domain_anchor_replace = "^" if domain_anchor else ""
+        domain_anchor_replace = "^(?:[\\w-]+\\.)*?" if domain_anchor else ""
         match_nothing_regexp = "/^$/"
 
         # no wildcard sorting
@@ -1386,7 +1386,7 @@ def easylist_to_jsre(pat):
         res = '(?=([\\s\\S]*?' + tr(mg[1:]) + '))\\' + '{:d}'.format(n_wildcard)
         n_wildcard += 1
         return res
-    domain_anchor_replace = "^"
+    domain_anchor_replace = "^(?:[\\w-]+\\.)*?"
     bos = ''
     if re_test(domain_anch_re,pat):
         pat = domain_anch_re.sub(r'\1',pat)
