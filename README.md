@@ -52,6 +52,24 @@ Set your network Proxy Auto Configuration setting to:
 * Does not work on mobile data networks.
 * No internet access unless port forwarding to host is used.
 
+## Path stripping/inclusion in `FindProxyForURL`
+
+Many Easylist rules use URL path information to determine of the request should be blocked or not. Becasue the full URL with 
+its path is necessarily visible to the browser, this information can be passed to the Proxy Autoconfig file, even if the URL 
+uses HTTPS, which is an advantage of using a PAC file for filtering.
+
+However, this behavior presents a security vulnerability if the OS is configured to use a malicious PAC file. This issue can 
+affect any browser, including [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=593759) and
+[Safari](https://blog.checkpoint.com/2017/04/27/osx-malware-catching-wants-read-https-traffic/).
+
+Recent versions of Chrome and Firefox are configured to only send the domain name to the `FindProxyForURL` function, which 
+closes this potential security vulnerability, but also prevents blocks based on URL path information.
+
+To allow this blocking capability:
+* **Chrome**: Set the policy `PacHttpsUrlStrippingEnabled` to be `false`. In macOS:
+> `defaults write com.google.Chrome PacHttpsUrlStrippingEnabled -bool false`
+* **Firefox**: Set the configuration variable `network.proxy.autoconfig_url.include_path` to be `true` using the Firefox link [about:config](about:config).
+
 ### To Use: VPN
 
 Configure an [OpenVPN Server](../../../essandess/macos-openvpn-server) to use the `proxy.pac` file hosted on your LAN.
