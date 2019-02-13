@@ -830,7 +830,7 @@ var hasOwnProperty = function(obj, prop) {
 // Done Setting Up //
 /////////////////////
 
-// debug with Chrome at chrome://net-internals/#events
+// debug with Chrome at chrome://net-export
 // alert("Debugging message.")
 
 //////////////////////////////////
@@ -925,7 +925,7 @@ function EasyListFindProxyForURL(url, host)
     //////////////////////////////////////////////////////////////////////////////
     // HTTPS: https scheme can only use domain information                      //
     // unless PacHttpsUrlStrippingEnabled == false [Chrome] or                  //
-    // network.proxy.autoconfig_url.include_path == true [firefox]              //
+    // network.proxy.autoconfig_url.include_path == true [Firefox, about:config]              //
     // E.g. on macOS:                                                           //
     // defaults write com.google.Chrome PacHttpsUrlStrippingEnabled -bool false //
     // Check setting at page chrome://policy                                    //
