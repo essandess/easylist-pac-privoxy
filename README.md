@@ -70,7 +70,7 @@ To allow this blocking capability:
 > `defaults write com.google.Chrome PacHttpsUrlStrippingEnabled -bool false`
 * **Firefox**: Set the configuration variable `network.proxy.autoconfig_url.include_path` to be `true` using the Firefox link [about:config](about:config).
 
-### To Use: VPN
+## To Use: VPN
 
 Configure an [OpenVPN Server](../../../essandess/macos-openvpn-server) to use the `proxy.pac` file hosted on your LAN.
 
@@ -86,7 +86,7 @@ This is the best option.
 
 * Necessity of VPN server.
 
-### To Use: GitHub Host
+## To Use: GitHub Host
 
 Set your network Proxy Auto Configuration setting to:
 
