@@ -654,9 +654,28 @@ if (
    shExpMatch(host, "172.16.*") ||
    shExpMatch(host, "192.168.*") ||
    shExpMatch(host, "127.*") ||
-   dnsDomainIs(host, ".LOCAL") ||
-   dnsDomainIs(host, ".local") ||
-   (url.substring(0,4) == "ftp:")
+   dnsDomainIs(host, ".local") || dnsDomainIs(host, ".LOCAL")
+   /*
+       Fix iOS 13 PAC file issue with Mail.app
+       See: https://forums.developer.apple.com/thread/121928
+   */
+   ||
+   // Apple
+   (host == "imap.mail.me.com") || (host == "smtp.mail.me.com") ||
+   dnsDomainIs(host, "imap.mail.me.com") || dnsDomainIs(host, "smtp.mail.me.com") ||
+   (host == "p03-imap.mail.me.com") || (host == "p03-smtp.mail.me.com") ||
+   dnsDomainIs(host, "p03-imap.mail.me.com") || dnsDomainIs(host, "p03-smtp.mail.me.com") ||
+   (host == "p66-imap.mail.me.com") || (host == "p66-smtp.mail.me.com") ||
+   dnsDomainIs(host, "p66-imap.mail.me.com") || dnsDomainIs(host, "p66-smtp.mail.me.com") ||
+   // Google
+   (host == "imap.gmail.com") || (host == "smtp.gmail.com") ||
+   dnsDomainIs(host, "imap.gmail.com") || dnsDomainIs(host, "smtp.gmail.com") ||
+   // Yahoo
+   (host == "imap.mail.yahoo.com") || (host == "smtp.mail.yahoo.com") ||
+   dnsDomainIs(host, "imap.mail.yahoo.com") || dnsDomainIs(host, "smtp.mail.yahoo.com") ||
+   // Comcast
+   (host == "imap.comcast.net") || (host == "smtp.comcast.net") ||
+   dnsDomainIs(host, "imap.comcast.net") || dnsDomainIs(host, "smtp.comcast.net")
 )
         return "DIRECT";
 else
