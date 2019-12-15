@@ -676,6 +676,12 @@ if (
    // Comcast
    (host == "imap.comcast.net") || (host == "smtp.comcast.net") ||
    dnsDomainIs(host, "imap.comcast.net") || dnsDomainIs(host, "smtp.comcast.net")
+   /*
+       Proxy bypass hostnames
+   */
+   ||
+   // Apple Mobile Software Update
+   (host == "mesu.apple.com") || dnsDomainIs(host, "mesu.apple.com")
 )
         return "DIRECT";
 else
