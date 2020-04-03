@@ -655,11 +655,16 @@ if (
    shExpMatch(host, "192.168.*") ||
    shExpMatch(host, "127.*") ||
    dnsDomainIs(host, ".local") || dnsDomainIs(host, ".LOCAL")
+)
+        return "DIRECT";
+else if (
+   /*
+       Proxy bypass hostnames
+   */
    /*
        Fix iOS 13 PAC file issue with Mail.app
        See: https://forums.developer.apple.com/thread/121928
    */
-   ||
    // Apple
    (host == "imap.mail.me.com") || (host == "smtp.mail.me.com") ||
    dnsDomainIs(host, "imap.mail.me.com") || dnsDomainIs(host, "smtp.mail.me.com") ||
@@ -675,18 +680,16 @@ if (
    dnsDomainIs(host, "imap.mail.yahoo.com") || dnsDomainIs(host, "smtp.mail.yahoo.com") ||
    // Comcast
    (host == "imap.comcast.net") || (host == "smtp.comcast.net") ||
-   dnsDomainIs(host, "imap.comcast.net") || dnsDomainIs(host, "smtp.comcast.net")
-   /*
-       Proxy bypass hostnames
-   */
-   ||
+   dnsDomainIs(host, "imap.comcast.net") || dnsDomainIs(host, "smtp.comcast.net") ||
    // Apple Mobile Software Update
-   (host == "mesu.apple.com") || dnsDomainIs(host, "mesu.apple.com")
+   (host == "mesu.apple.com") || dnsDomainIs(host, "mesu.apple.com") ||
+   // Zoom
+   dnsDomainIs(host, ".zoom.us")
 )
-        return "DIRECT";
+        return "PROXY localhost:3128";
 else
-        return EasyListFindProxyForURL(url, host);
-}   
+        return "PROXY localhost:3128";
+}
 '''
 
         if os.path.isfile(self.orig_pac_file):
@@ -695,8 +698,17 @@ else
         else:
             self.original_FindProxyForURL_function = self.default_FindProxyForURL_function
 
-        # change 'return "PROXY ..."' to 'return EasyListFindProxyForURL(url, host)'
-        self.original_FindProxyForURL_function = re.sub(r'return[\s]+"PROXY[^"]+"', 'return EasyListFindProxyForURL(url, host)',
+        # change last 'return "PROXY ..."' to 'return EasyListFindProxyForURL(url, host)'
+        def re_sub_last(pattern, repl, string, **kwargs): 
+            '''re.sub on the last match in a string'''
+            # ensure that pattern is grouped
+            # (note that (?:) is not caught)
+            pattern_grouped = pattern if bool(re.match(r'\(.+\)',pattern)) else r'({})'.format(pattern)
+            spl = re.split(pattern_grouped, string, **kwargs) 
+            if len(spl) == 1: return string 
+            spl[-2] = re.sub(pattern, repl, spl[-2], **kwargs)
+            return ''.join(spl)
+        self.original_FindProxyForURL_function = re_sub_last(r'return[\s]+"PROXY[^"]+"', 'return EasyListFindProxyForURL(url, host)',
                                                self.original_FindProxyForURL_function)
 
         #  proxy.pac preamble
