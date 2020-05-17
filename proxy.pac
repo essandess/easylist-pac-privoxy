@@ -235,6 +235,10 @@ var good_da_host_exceptions_exact_flag = 39 > 0 ? true : false;  // test for non
 // 2050 rules:
 var bad_da_host_JSON = { "jobthread.com": null,
 "ads.trafficjunky.net": null,
+"rpc-php.trafficfactory.biz": null,
+"trafficfactory.biz": null,
+"cdnegc.trafficfactory.biz": null,
+"static.realsrv.com": null,
 "as.2020mustang.com": null,
 "2020mustang.com": null,
 "vz-cdn2.trafficjunky.net": null,
