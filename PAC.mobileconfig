@@ -29,7 +29,7 @@
 			<true/>
 
 			<key>ProxyPACFallbackAllowed</key>
-			<false/>
+			<true/>
 
 			<key>ProxyPACURL</key>
 			<!-- REPLACE URL_TO_YOUR_PAC_FILE WITH THE LINK -->
