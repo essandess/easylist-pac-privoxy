@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Global HTTP Proxy</string>
+
+			<key>PayloadDisplayName</key>
+			<string>Global HTTP Proxy</string>
+
+			<key>PayloadIdentifier</key>
+			<!-- REPLACE GENERATED_UUID_01 -->
+			<string>com.apple.proxy.http.global.228ca89e-9826-11ea-bb37-0242ac130002</string>
+
+			<key>PayloadType</key>
+			<string>com.apple.proxy.http.global</string>
+
+			<!-- REPLACE GENERATED_UUID_01 -->
+			<key>PayloadUUID</key>
+			<string>228ca89e-9826-11ea-bb37-0242ac130002</string>
+
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+
+			<key>ProxyCaptiveLoginAllowed</key>
+			<true/>
+
+			<key>ProxyPACFallbackAllowed</key>
+			<false/>
+
+			<key>ProxyPACURL</key>
+			<!-- REPLACE URL_TO_YOUR_PAC_FILE WITH THE LINK -->
+			<string>https://raw.githubusercontent.com/joseclark95/easylist-pac-privoxy/master/proxy.pac</string>
+
+			<key>ProxyType</key>
+			<string>Auto</string>
+		</dict>
+	</array>
+
+	<key>PayloadDisplayName</key>
+	<!-- ADD A NAME FOR YOUR PROFILE -->
+	<string>Jclarks blocker</string>
+	
+	<key>PayloadIdentifier</key>
+	<!-- CREATE AN IDENTIFIER FOR YOUR PROFILE AND REPLACE GENERATED_UUID_02 -->
+	<string>your.adblock.proxy.name.228cab00-9826-11ea-bb37-0242ac130002</string>
+	
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+
+	<key>PayloadType</key>
+	<string>Configuration</string>
+
+	<key>PayloadUUID</key>
+	<!-- REPLACE GENERATED_UUID_03 -->
+	<string>228cabf0-9826-11ea-bb37-0242ac130002</string>
+
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
