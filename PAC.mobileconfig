@@ -37,6 +37,9 @@
 
 			<key>ProxyType</key>
 			<string>Auto</string>
+			
+			<key>ProxyPACFallbackAllowed</key>
+			<true/>
 		</dict>
 	</array>
 
