@@ -681,8 +681,55 @@ else if (
    // Comcast
    (host == "imap.comcast.net") || (host == "smtp.comcast.net") ||
    dnsDomainIs(host, "imap.comcast.net") || dnsDomainIs(host, "smtp.comcast.net") ||
-   // Apple Mobile Software Update
+   // Apple Enterprise Network Domains; https://support.apple.com/en-us/HT210060
+   (host == "albert.apple.com") || dnsDomainIs(host, "albert.apple.com") ||
+   (host == "captive.apple.com") || dnsDomainIs(host, "captive.apple.com") ||
+   (host == "gs.apple.com") || dnsDomainIs(host, "gs.apple.com") ||
+   (host == "humb.apple.com") || dnsDomainIs(host, "humb.apple.com") ||
+   (host == "static.ips.apple.com") || dnsDomainIs(host, "static.ips.apple.com") ||
+   (host == "tbsc.apple.com") || dnsDomainIs(host, "tbsc.apple.com") ||
+   (host == "time-ios.apple.com") || dnsDomainIs(host, "time-ios.apple.com") ||
+   (host == "time.apple.com") || dnsDomainIs(host, "time.apple.com") ||
+   (host == "time-macos.apple.com") || dnsDomainIs(host, "time-macos.apple.com") ||
+   dnsDomainIs(host, ".push.apple.com") ||
+   (host == "gdmf.apple.com") || dnsDomainIs(host, "gdmf.apple.com") ||
+   (host == "deviceenrollment.apple.com") || dnsDomainIs(host, "deviceenrollment.apple.com") ||
+   (host == "deviceservices-external.apple.com") || dnsDomainIs(host, "deviceservices-external.apple.com") ||
+   (host == "identity.apple.com") || dnsDomainIs(host, "identity.apple.com") ||
+   (host == "iprofiles.apple.com") || dnsDomainIs(host, "iprofiles.apple.com") ||
+   (host == "mdmenrollment.apple.com") || dnsDomainIs(host, "mdmenrollment.apple.com") ||
+   (host == "setup.icloud.com") || dnsDomainIs(host, "setup.icloud.com") ||
+   (host == "appldnld.apple.com") || dnsDomainIs(host, "appldnld.apple.com") ||
+   (host == "gg.apple.com") || dnsDomainIs(host, "gg.apple.com") ||
+   (host == "gnf-mdn.apple.com") || dnsDomainIs(host, "gnf-mdn.apple.com") ||
+   (host == "gnf-mr.apple.com") || dnsDomainIs(host, "gnf-mr.apple.com") ||
+   (host == "gs.apple.com") || dnsDomainIs(host, "gs.apple.com") ||
+   (host == "ig.apple.com") || dnsDomainIs(host, "ig.apple.com") ||
    (host == "mesu.apple.com") || dnsDomainIs(host, "mesu.apple.com") ||
+   (host == "oscdn.apple.com") || dnsDomainIs(host, "oscdn.apple.com") ||
+   (host == "osrecovery.apple.com") || dnsDomainIs(host, "osrecovery.apple.com") ||
+   (host == "skl.apple.com") || dnsDomainIs(host, "skl.apple.com") ||
+   (host == "swcdn.apple.com") || dnsDomainIs(host, "swcdn.apple.com") ||
+   (host == "swdist.apple.com") || dnsDomainIs(host, "swdist.apple.com") ||
+   (host == "swdownload.apple.com") || dnsDomainIs(host, "swdownload.apple.com") ||
+   (host == "swpost.apple.com") || dnsDomainIs(host, "swpost.apple.com") ||
+   (host == "swscan.apple.com") || dnsDomainIs(host, "swscan.apple.com") ||
+   (host == "updates-http.cdn-apple.com") || dnsDomainIs(host, "updates-http.cdn-apple.com") ||
+   (host == "updates.cdn-apple.com") || dnsDomainIs(host, "updates.cdn-apple.com") ||
+   (host == "xp.apple.com") || dnsDomainIs(host, "xp.apple.com") ||
+   dnsDomainIs(host, ".itunes.apple.com") ||
+   dnsDomainIs(host, ".apps.apple.com") ||
+   dnsDomainIs(host, ".mzstatic.com") ||
+   (host == "ppq.apple.com") || dnsDomainIs(host, "ppq.apple.com") ||
+   (host == "lcdn-registration.apple.com") || dnsDomainIs(host, "lcdn-registration.apple.com") ||
+   (host == "crl.apple.com") || dnsDomainIs(host, "crl.apple.com") ||
+   (host == "crl.entrust.net") || dnsDomainIs(host, "crl.entrust.net") ||
+   (host == "crl3.digicert.com") || dnsDomainIs(host, "crl3.digicert.com") ||
+   (host == "crl4.digicert.com") || dnsDomainIs(host, "crl4.digicert.com") ||
+   (host == "ocsp.apple.com") || dnsDomainIs(host, "ocsp.apple.com") ||
+   (host == "ocsp.digicert.com") || dnsDomainIs(host, "ocsp.digicert.com") ||
+   (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
+   (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    // Zoom
    dnsDomainIs(host, ".zoom.us")
 )
@@ -1475,7 +1522,52 @@ ordered_unique_nonempty = lambda listable: fnt.reduce(lambda l, x: l.append(x) o
 # initial values prepended before EasyList rules
 # pass updates and services from these domains
 # handle organization-specific ad and tracking servers in later commit
+# https://support.apple.com/en-us/HT210060
 good_da_host_exact = ['apple.com',
+                      'albert.apple.com',
+                      'captive.apple.com',
+                      'gs.apple.com',
+                      'humb.apple.com',
+                      'static.ips.apple.com',
+                      'tbsc.apple.com',
+                      'time-ios.apple.com',
+                      'time.apple.com',
+                      'time-macos.apple.com',
+                      'gdmf.apple.com',
+                      'deviceenrollment.apple.com',
+                      'deviceservices-external.apple.com',
+                      'identity.apple.com',
+                      'iprofiles.apple.com',
+                      'mdmenrollment.apple.com',
+                      'setup.icloud.com',
+                      'appldnld.apple.com',
+                      'gg.apple.com',
+                      'gnf-mdn.apple.com',
+                      'gnf-mr.apple.com',
+                      'gs.apple.com',
+                      'ig.apple.com',
+                      'mesu.apple.com',
+                      'oscdn.apple.com',
+                      'osrecovery.apple.com',
+                      'skl.apple.com',
+                      'swcdn.apple.com',
+                      'swdist.apple.com',
+                      'swdownload.apple.com',
+                      'swpost.apple.com',
+                      'swscan.apple.com',
+                      'updates-http.cdn-apple.com',
+                      'updates.cdn-apple.com',
+                      'xp.apple.com',
+                      'ppq.apple.com',
+                      'lcdn-registration.apple.com',
+                      'crl.apple.com',
+                      'crl.entrust.net',
+                      'crl3.digicert.com',
+                      'crl4.digicert.com',
+                      'ocsp.apple.com',
+                      'ocsp.digicert.com',
+                      'ocsp.entrust.net',
+                      'ocsp.verisign.net',
                       'icloud.com',
                       'apple-dns.net',
                       'swcdn.apple.com',
@@ -1544,7 +1636,10 @@ good_da_host_exact = ['apple.com',
                       'mt-ingestion-service-st11.itunes.apple.com',
                       'mt-ingestion-service-st11.itunes-apple.com.akadns.net',
                       'microsoft.com', 'mozilla.com', 'mozilla.org']
-good_da_host_regex = []
+good_da_host_regex = ['||push.apple.com^',
+                      '||itunes.apple.com^',
+                      '||apps.apple.com^',
+                      '||mzstatic.com^']
 good_da_hostpath_exact = []
 good_da_hostpath_regex = []
 good_da_regex = []
