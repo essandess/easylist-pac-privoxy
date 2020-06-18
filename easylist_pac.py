@@ -820,8 +820,12 @@ var blackhole = "PROXY " + blackhole_ip_port;
 // Add any good networks here. Format is network folowed by a comma and
 // optional white space, and then the netmask.
 // LAN, loopback, Apple (direct and Akamai e.g. e4805.a.akamaiedge.net), Microsoft (updates and services)
+// Apple Enterprise Network; https://support.apple.com/en-us/HT210060
 var GoodNetworks_Array = [ "10.0.0.0,     255.0.0.0",
 "172.16.0.0,        255.240.0.0",
+"17.248.128.0,      255.255.192.0",
+"17.250.64.0,       255.255.192.0",
+"17.248.192.0,      255.255.224.0",
 "192.168.0.0,       255.255.0.0",
 "127.0.0.0,         255.0.0.0",
 "17.0.0.0,          255.0.0.0",
