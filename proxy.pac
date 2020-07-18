@@ -235,9 +235,6 @@ var good_da_host_exceptions_exact_flag = 39 > 0 ? true : false;  // test for non
 // 2050 rules:
 var bad_da_host_JSON = { "jobthread.com": null,
 "ads.trafficjunky.net": null,
-"i4.ytimg.com": null,
-"yt3.ggpht.com": null,
-"i.ytimg.com": null,
 "adcolony.com": null,
 "blkditsup.com": null,
 "evtubescms.phncdn.com": null,
