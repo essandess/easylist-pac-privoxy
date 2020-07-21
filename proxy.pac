@@ -2437,7 +2437,9 @@ var bad_da_host_JSON = { "jobthread.com": null,
 "adsmetadata.startappservice.com": null,
 "req.startappservice.com": null,
 "a.bf0fbc97d53e2a6dda37d7611fa78d2f119f18176f46db0cf9cf28c7.com": null,
-"z.moatads.com": null };
+"z.moatads.com": null,
+"inapps.appsflyer.com": null,
+"tagan.adlightning.com": null };
 var bad_da_host_exact_flag = 2050 > 0 ? true : false;  // test for non-zero number of rules
     
 // 9 rules as an efficient NFA RegExp:
