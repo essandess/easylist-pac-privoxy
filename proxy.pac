@@ -2439,7 +2439,20 @@ var bad_da_host_JSON = { "jobthread.com": null,
 "a.bf0fbc97d53e2a6dda37d7611fa78d2f119f18176f46db0cf9cf28c7.com": null,
 "z.moatads.com": null,
 "inapps.appsflyer.com": null,
-"tagan.adlightning.com": null };
+"tagan.adlightning.com": null,
+"app-analytics.snapchat.com": null,
+"api.tapstream.com": null,
+"dpm.demdex.net": null,
+"ssl.google-analytics.com": null,
+"api.iterable.com": null,
+"onesignal.com": null,
+"app.adjust.com": null,
+"firebase-settings.crashlytics.com": null,
+"api.leanplum.com": null,
+"cdn-settings.segment.com": null,
+"api.segment.io": null,
+"mobile-service.segment.com": null,
+"kvinit-prod.api.kochava.com": null };
 var bad_da_host_exact_flag = 2050 > 0 ? true : false;  // test for non-zero number of rules
     
 // 9 rules as an efficient NFA RegExp:
