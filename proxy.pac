@@ -17364,7 +17364,26 @@ var bad_da_host_JSON = { "jobthread.com": null,
 "d.turn.com": null,
 "cdn.livefyre.com": null,
 "u.acuityplatform.com": null,
-"adserve.atedra.com": null };
+"adserve.atedra.com": null,
+"cdn.atedra.com": null,
+"s1.hpjcc.com": null,
+"camonster.com":null,
+"s.opoxv.com": null,
+"as.catsnbootsncats2020.com": null,
+"adsmediabox.com": null,
+"go.eroadvertising.com": null,
+"cdn.adme-net.com": null,
+"networkmanag.com": null,
+"stat.networkmanag.com": null,
+"impactslam.com": null,
+"cdn.impactslam.com": null,
+"doublepimpads.com": null,
+"cdn.hrahdmon.com": null,
+"hrahdmon.com": null,
+"www.nudevista.com": null,
+"a99.nudevista.com": null,
+"a98.nudevista.com": null,
+"a97.nudevista.com": null };
 var bad_da_host_exact_flag = 2050 > 0 ? true : false;  // test for non-zero number of rules
     
 // 9 rules as an efficient NFA RegExp:
