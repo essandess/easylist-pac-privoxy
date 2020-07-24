@@ -17013,8 +17013,8 @@ var bad_da_host_JSON = { "jobthread.com": null,
 "fmscash.com": null,
 "ggwcash.com": null,
 "gl-cash.com": null,
-"imglnka.com": null,
-"imglnkb.com": null,
+"www.imglnka.com": null,
+"www.imglnkb.com": null,
 "itmcash.com": null,
 "livecam.com": null,
 "luvcash.com": null,
@@ -17380,7 +17380,11 @@ var bad_da_host_JSON = { "jobthread.com": null,
 "www.nudevista.com": null,
 "a99.nudevista.com": null,
 "a98.nudevista.com": null,
-"a97.nudevista.com": null };
+"a97.nudevista.com": null,
+"n1272serv.xyz": null,
+"c.d1272serve.xyz": null,
+"www.imglnkc.com": null,
+"www.imglnke.com": null };
 var bad_da_host_exact_flag = 2050 > 0 ? true : false;  // test for non-zero number of rules
     
 // 9 rules as an efficient NFA RegExp:
