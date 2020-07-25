@@ -42,7 +42,7 @@
 
 	<key>PayloadDisplayName</key>
 	<!-- ADD A NAME FOR YOUR PROFILE -->
-	<string>Jclarks blocker</string>
+	<string>Jclark's ad blocker</string>
 	
 	<key>PayloadIdentifier</key>
 	<!-- CREATE AN IDENTIFIER FOR YOUR PROFILE AND REPLACE GENERATED_UUID_02 -->
