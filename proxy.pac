@@ -17388,7 +17388,13 @@ var bad_da_host_JSON = { "jobthread.com": null,
 "n1272serv.xyz": null,
 "c.d1272serve.xyz": null,
 "www.imglnkc.com": null,
-"www.imglnke.com": null };
+"www.imglnke.com": null,
+"hb-api.omnitagjs.com": null,
+"bid.videostep.com": null,
+"mp.4dex.io": null,
+"c.4dex.io": null,
+"intake.pbstck.com": null,
+"boot.pubstack.io": null };
 var bad_da_host_exact_flag = 2050 > 0 ? true : false;  // test for non-zero number of rules
     
 // 9 rules as an efficient NFA RegExp:
