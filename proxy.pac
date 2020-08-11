@@ -236,8 +236,6 @@ var good_da_host_exceptions_exact_flag = 39 > 0 ? true : false;  // test for non
 var bad_da_host_JSON = { "jobthread.com": null,
 "1-1ads.com": null,
 "101com.com": null,
-"apt.fouadraheb.com": null,
-"fouadraheb.com": null,
 "mopinion.com": null,
 "sessions.bugsnag.com": null,
 "browser.sentry-cdn.com": null,
