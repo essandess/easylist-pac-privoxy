@@ -4,7 +4,7 @@ __author__ = 'stsmith'
 
 # easylist_pac: Convert EasyList Tracker and Adblocking rules to an efficient Proxy Auto Configuration file
 
-# Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
+# Copyright (C) 2017-2020 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -617,8 +617,8 @@ e.g. non-domain specific popups or images."""
                     + self.js_init_regexp('bad_da_regex', True) \
                     + self.js_init_regexp('good_url_parts') \
                     + self.js_init_regexp('bad_url_parts') \
-                    + self.js_init_regexp('good_url_regex') \
-                    + self.js_init_regexp('bad_url_regex') \
+                    + self.js_init_regexp('good_url_regex', regex_flag=True) \
+                    + self.js_init_regexp('bad_url_regex', regex_flag=True) \
                     + self.proxy_pac_postamble
 
         for l in ['good_da_host_exact',
@@ -962,8 +962,8 @@ function EasyListFindProxyForURL(url, host)
     }
 
     // Short circuit to blackhole for good_da_host_exceptions
-    if ( hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
-        alert_flag && alert("good_da_host_exceptions_JSON blackhole!");
+    if ( hasOwnProperty(good_da_host_exceptions_exact_JSON,host) ) {
+        alert_flag && alert("good_da_host_exceptions_exact_JSON blackhole!");
         return blackhole;
     }
 
@@ -1026,8 +1026,8 @@ function EasyListFindProxyForURL(url, host)
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
 
-        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host)))
-            && !hasOwnProperty(good_da_host_exceptions_JSON,host) ) {
+        if ( (good_da_host_exact_flag && (hasOwnProperty(good_da_host_exact_JSON,host_noserver)||hasOwnProperty(good_da_host_exact_JSON,host)))
+            && !hasOwnProperty(good_da_host_exceptions_exact_JSON,host) ) {
                 alert_flag && alert("HTTPS PASS: " + host + ", " + host_noserver);
             return proxy;
         }
@@ -1036,7 +1036,7 @@ function EasyListFindProxyForURL(url, host)
         // BLOCK LIST:	stuff matched here here will be blocked //
         //////////////////////////////////////////////////////////
 
-        if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ) {
+        if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_exact_JSON,host_noserver)||hasOwnProperty(bad_da_host_exact_JSON,host))) ) {
             alert_flag && alert("HTTPS blackhole: " + host + ", " + host_noserver);
             return blackhole;
         }
@@ -1052,14 +1052,14 @@ function EasyListFindProxyForURL(url, host)
         // PASS LIST:   domains matched here will always be allowed.         //
         ///////////////////////////////////////////////////////////////////////
 
-        if ( !hasOwnProperty(good_da_host_exceptions_JSON,host)
-            && ((good_da_host_exact_flag && (hasOwnProperty(good_da_host_JSON,host_noserver)||hasOwnProperty(good_da_host_JSON,host))) ||  // fastest test first
+        if ( !hasOwnProperty(good_da_host_exceptions_exact_JSON,host)
+            && ((good_da_host_exact_flag && (hasOwnProperty(good_da_host_exact_JSON,host_noserver)||hasOwnProperty(good_da_host_exact_JSON,host))) ||  // fastest test first
                 (use_pass_rules_parts_flag &&
-                    (good_da_hostpath_exact_flag && (hasOwnProperty(good_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(good_da_hostpath_JSON,url_noquery)) ) ||
+                    (good_da_hostpath_exact_flag && (hasOwnProperty(good_da_hostpath_exact_JSON,url_noservernoquery)||hasOwnProperty(good_da_hostpath_exact_JSON,url_noquery)) ) ||
                     // test logic: only do the slower test if the host has a (non)suspect fqdn
-                    (good_da_host_regex_flag && (good_da_host_RegExp.test(host_noserver)||good_da_host_RegExp.test(host))) ||
-                    (good_da_hostpath_regex_flag && (good_da_hostpath_RegExp.test(url_noservernoquery)||good_da_hostpath_RegExp.test(url_noquery))) ||
-                    (good_da_regex_flag && (good_da_RegExp.test(url_noserver)||good_da_RegExp.test(url_noscheme))) ||
+                    (good_da_host_regex_flag && (good_da_host_regex_RegExp.test(host_noserver)||good_da_host_regex_RegExp.test(host))) ||
+                    (good_da_hostpath_regex_flag && (good_da_hostpath_regex_RegExp.test(url_noservernoquery)||good_da_hostpath_regex_RegExp.test(url_noquery))) ||
+                    (good_da_regex_flag && (good_da_regex_RegExp.test(url_noserver)||good_da_regex_RegExp.test(url_noscheme))) ||
                     (good_url_parts_flag && good_url_parts_RegExp.test(url)) ||
                     (good_url_regex_flag && good_url_regex_RegExp.test(url)))) ) {
             return proxy;
@@ -1070,26 +1070,26 @@ function EasyListFindProxyForURL(url, host)
         //////////////////////////////////////////////////////////
         // Debugging results
         if (debug_flag && alert_flag) {
-            alert("hasOwnProperty(bad_da_host_JSON," + host_noserver + "): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_JSON,host_noserver)));
-            alert("hasOwnProperty(bad_da_host_JSON," + host + "): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_JSON,host)));
-            alert("hasOwnProperty(bad_da_hostpath_JSON," + url_noservernoquery + "): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_JSON,url_noservernoquery)));
-            alert("hasOwnProperty(bad_da_hostpath_JSON," + url_noquery + "): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_JSON,url_noquery)));
-            alert("bad_da_host_RegExp.test(" + host_noserver + "): " + (bad_da_host_regex_flag && bad_da_host_RegExp.test(host_noserver)));
-            alert("bad_da_host_RegExp.test(" + host + "): " + (bad_da_host_regex_flag && bad_da_host_RegExp.test(host)));
-            alert("bad_da_hostpath_RegExp.test(" + url_noservernoquery + "): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_RegExp.test(url_noservernoquery)));
-            alert("bad_da_hostpath_RegExp.test(" + url_noquery + "): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_RegExp.test(url_noquery)));
-            alert("bad_da_RegExp.test(" + url_noserver + "): " + (bad_da_regex_flag && bad_da_RegExp.test(url_noserver)));
-            alert("bad_da_RegExp.test(" + url_noscheme + "): " + (bad_da_regex_flag && bad_da_RegExp.test(url_noscheme)));
+            alert("hasOwnProperty(bad_da_host_exact_JSON," + host_noserver + "): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_exact_JSON,host_noserver)));
+            alert("hasOwnProperty(bad_da_host_exact_JSON," + host + "): " + (bad_da_host_exact_flag && hasOwnProperty(bad_da_host_exact_JSON,host)));
+            alert("hasOwnProperty(bad_da_hostpath_exact_JSON," + url_noservernoquery + "): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_exact_JSON,url_noservernoquery)));
+            alert("hasOwnProperty(bad_da_hostpath_exact_JSON," + url_noquery + "): " + (bad_da_hostpath_exact_flag && hasOwnProperty(bad_da_hostpath_exact_JSON,url_noquery)));
+            alert("bad_da_host_regex_RegExp.test(" + host_noserver + "): " + (bad_da_host_regex_flag && bad_da_host_regex_RegExp.test(host_noserver)));
+            alert("bad_da_host_regex_RegExp.test(" + host + "): " + (bad_da_host_regex_flag && bad_da_host_regex_RegExp.test(host)));
+            alert("bad_da_hostpath_regex_RegExp.test(" + url_noservernoquery + "): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_regex_RegExp.test(url_noservernoquery)));
+            alert("bad_da_hostpath_regex_RegExp.test(" + url_noquery + "): " + (bad_da_hostpath_regex_flag && bad_da_hostpath_regex_RegExp.test(url_noquery)));
+            alert("bad_da_regex_RegExp.test(" + url_noserver + "): " + (bad_da_regex_flag && bad_da_regex_RegExp.test(url_noserver)));
+            alert("bad_da_regex_RegExp.test(" + url_noscheme + "): " + (bad_da_regex_flag && bad_da_regex_RegExp.test(url_noscheme)));
             alert("bad_url_parts_RegExp.test(" + url + "): " + (bad_url_parts_flag && bad_url_parts_RegExp.test(url)));
             alert("bad_url_regex_RegExp.test(" + url + "): " + (bad_url_regex_flag && bad_url_regex_RegExp.test(url)));
         }
 
-        if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_JSON,host_noserver)||hasOwnProperty(bad_da_host_JSON,host))) ||  // fastest test first
-            (bad_da_hostpath_exact_flag && (hasOwnProperty(bad_da_hostpath_JSON,url_noservernoquery)||hasOwnProperty(bad_da_hostpath_JSON,url_noquery)) ) ||
+        if ( (bad_da_host_exact_flag && (hasOwnProperty(bad_da_host_exact_JSON,host_noserver)||hasOwnProperty(bad_da_host_exact_JSON,host))) ||  // fastest test first
+            (bad_da_hostpath_exact_flag && (hasOwnProperty(bad_da_hostpath_exact_JSON,url_noservernoquery)||hasOwnProperty(bad_da_hostpath_exact_JSON,url_noquery)) ) ||
             // test logic: only do the slower test if the host has a (non)suspect fqdn
-            (bad_da_host_regex_flag && (bad_da_host_RegExp.test(host_noserver)||bad_da_host_RegExp.test(host))) ||
-            (bad_da_hostpath_regex_flag && (bad_da_hostpath_RegExp.test(url_noservernoquery)||bad_da_hostpath_RegExp.test(url_noquery))) ||
-            (bad_da_regex_flag && (bad_da_RegExp.test(url_noserver)||bad_da_RegExp.test(url_noscheme))) ||
+            (bad_da_host_regex_flag && (bad_da_host_regex_RegExp.test(host_noserver)||bad_da_host_regex_RegExp.test(host))) ||
+            (bad_da_hostpath_regex_flag && (bad_da_hostpath_regex_RegExp.test(url_noservernoquery)||bad_da_hostpath_regex_RegExp.test(url_noquery))) ||
+            (bad_da_regex_flag && (bad_da_regex_RegExp.test(url_noserver)||bad_da_regex_RegExp.test(url_noscheme))) ||
             (bad_url_parts_flag && bad_url_parts_RegExp.test(url)) ||
             (bad_url_regex_flag && bad_url_regex_RegExp.test(url)) ) {
             alert_flag && alert("Blackhole: " + url + ", " + host);
@@ -1168,9 +1168,9 @@ bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 // {:d} rules:
 var {}_JSON = {}{}{};
 var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
-'''.format(len(obj),re.sub(r'_exact$','',object_name),'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
+'''.format(len(obj),object_name,'{ ',",\n".join('"{}": null'.format(x) for x in obj),' }',object_name,len(obj))
 
-    def js_init_regexp(self,array_name,domain_anchor=False):
+    def js_init_regexp(self,array_name,domain_anchor=False,regex_flag=False):
         global n_wildcard
         n_wildcard = 1
         domain_anchor_replace = "^(?:[\\w-]+\\.)*?" if domain_anchor else ""
@@ -1202,7 +1202,12 @@ var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
             warnings.warn("Truncating regex alternatives rule set '{}' from {:d} to {:d}.".format(array_name,len(arr),self.truncate_alternatives_max))
             arr = arr[:self.truncate_alternatives_max]
 
-        arr = [easylist_to_jsre(x) for x in arr]
+        if not regex_flag:
+            arr = [easylist_to_jsre(x) for x in arr]
+        else:
+            # ensure that '/' is escaped
+            arr = [re.sub(r'([^\\])/','\\1\/',x) for x in arr]
+
         arr_regexp = "/" + domain_anchor_replace + "(?:" + "|".join(arr) + ")/i"
         if len(arr) == 0: arr_regexp = match_nothing_regexp
 
@@ -1211,7 +1216,7 @@ var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
 // {:d} rules as an efficient NFA RegExp:
 var {}_RegExp = {};
 var {}_flag = {} > 0 ? true : false;  // test for non-zero number of rules
-'''.format(len(arr),re.sub(r'_regex$','',array_name),arr_regexp,array_name,len(arr))
+'''.format(len(arr),array_name,arr_regexp,array_name,len(arr))
     # end of EasyListPAC definition
 
 # global variables and functions
@@ -1466,7 +1471,7 @@ def easylist_to_jsre(pat):
             res = '\\' + mg
         return res
     def tr(pat):
-        return re.sub(r'[-\/.?:!+^|$()[\]{}]', re_easylist, pat)
+        return re.sub(r'[][\-/.?:!+^|$(){}]', re_easylist, pat)
     def re_wildcard(match):
         global n_wildcard
         mg = match.group()
