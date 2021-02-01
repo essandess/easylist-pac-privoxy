@@ -235,6 +235,7 @@ var good_da_host_exceptions_exact_flag = 39 > 0 ? true : false;  // test for non
 // 2050 rules:
 var bad_da_host_JSON = { "jobthread.com": null,
 "1-1ads.com": null,
+"etahub.com": null,
 "ai.phncdn.com.rncdn1.com": null,
 "cs851.wpc.rncdn4.com": null,
 "vip0x08e.ssl.rncdn5.com": null,
