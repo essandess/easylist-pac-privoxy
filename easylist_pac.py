@@ -47,7 +47,7 @@ try:
            **{'fontset': 'custom', 'rm': 'sans:bold', 'bf': 'sans:bold', 'it': 'sans:italic', 'sf': 'sans:bold',
               'default': 'it'})
     # plt.rc('text',usetex=False) # [default] usetex should be False
-    mpl.rcParams['text.latex.preamble'] = [r'\\usepackage{amsmath,sfmath} \\boldmath']
+    mpl.rcParams['text.latex.preamble'] = r'\\usepackage{amsmath,sfmath} \\boldmath'
 except ImportError as e:
     plot_flag = False
     print(e)
