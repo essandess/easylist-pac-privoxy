@@ -5,6 +5,21 @@ Converts [EasyList](https://easylist.to/index.html) tracker and ad blocking rule
 
 Easily incorporates multiple blocking rulesets into both PAC and Privoxy formats, including [easyprivacy.txt](https://easylist.to/easylist/easyprivacy.txt), [easylist.txt](https://easylist.to/easylist/easylist.txt), [fanboy-annoyance.txt](https://easylist.to/easylist/fanboy-annoyance.txt), [fanboy-social.txt](https://easylist.to/easylist/fanboy-social.txt), [antiadblockfilters.txt](https://easylist-downloads.adblockplus.org/antiadblockfilters.txt), [malwaredomains_full.txt](https://easylist-downloads.adblockplus.org/malwaredomains_full.txt), and the anti-spamware list [adblock-list.txt](https://raw.githubusercontent.com/Dawsey21/Lists/master/adblock-list.txt).
 
+## Deprecation Warning
+
+The PAC-based approach used in this repo to block content no longer works with several common browsers: iOS Safari (#21), and Google Chrome (policy `PacHttpsUrlStrippingEnabled` disabled). Therefore, it is recommended that this approach be replaced wiht Privoxy configured for HTTPS Inspection:
+```bash
+sudo port install privoxy
+port notes privoxy
+```
+
+Or:
+```bash
+sudo port install macos-fortress-proxy
+port notes privoxy
+```
+
+
 ## Purpose
 
 Provide tracker and ad blocking at the kernel and network layers using the crowd-sourced EasyList blocking rulesets used by client-based browser plugins. This proxy configuration provides EasyList blocking rules for all devices on the LAN or VPN, beyond the capabilities of client-specific plugins.
